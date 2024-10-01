@@ -101,4 +101,92 @@ document.addEventListener('DOMContentLoaded', function() {
                 break;
             case 'section4':
                 progress.style.width = '100%';
-                steps[3].classList.add('active');
+                                steps[3].classList.add('active');
+                break;
+        }
+    }
+
+    function nextSection(currentSection, nextSection) {
+        document.getElementById(currentSection).classList.add('hidden');
+        document.getElementById(nextSection).classList.remove('hidden');
+        if (nextSection !== 'section1') {
+            document.getElementById('results').classList.add('hidden');
+        }
+        updateProgressBar(nextSection);
+        window.scrollTo(0, 0);
+    }
+
+    document.getElementById('calculatePointsBtn').addEventListener('click', function() {
+        calculatePoints();
+        document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    document.getElementById('continueBtn').addEventListener('click', function() {
+        nextSection('section1', 'section2');
+    });
+
+    document.getElementById('continueToSection3Btn').addEventListener('click', function() {
+        nextSection('section2', 'section3');
+    });
+
+    document.getElementById('calculateValuationBtn').addEventListener('click', function() {
+        calculateFinalValuation();
+    });
+
+    document.getElementById('backToSection1').addEventListener('click', function(e) {
+        e.preventDefault();
+        nextSection('section2', 'section1');
+    });
+
+    document.getElementById('backToSection2').addEventListener('click', function(e) {
+        e.preventDefault();
+        nextSection('section3', 'section2');
+    });
+
+    document.getElementById('backToSection3').addEventListener('click', function(e) {
+        e.preventDefault();
+        nextSection('section4', 'section3');
+    });
+
+    // Handle custom input for home airport
+    document.getElementById('homeAirport').addEventListener('change', function() {
+        const customInput = document.getElementById('customHomeAirport');
+        if (this.value === 'custom') {
+            customInput.classList.remove('hidden');
+        } else {
+            customInput.classList.add('hidden');
+        }
+    });
+
+    // Format currency inputs
+    const currencyInputs = document.querySelectorAll('.input-wrapper input[type="text"]:not(#travelFrequency)');
+    currencyInputs.forEach(input => {
+        input.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/[^\d]/g, '');
+            if (value) {
+                value = parseInt(value, 10);
+                e.target.value = value.toLocaleString('en-US', {
+                    style: 'currency',
+                    currency: 'USD',
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0
+                });
+            }
+        });
+    });
+
+    // Ensure travel frequency input only accepts numbers
+    const travelFrequencyInput = document.getElementById('travelFrequency');
+    travelFrequencyInput.addEventListener('input', function(e) {
+        this.value = this.value.replace(/[^\d]/g, '');
+    });
+
+    // Update slider values in real-time
+    const sliders = document.querySelectorAll('.slider');
+    sliders.forEach(slider => {
+        const valueDisplay = document.getElementById(`${slider.id}Value`);
+        slider.addEventListener('input', function() {
+            valueDisplay.textContent = this.value;
+        });
+    });
+});
