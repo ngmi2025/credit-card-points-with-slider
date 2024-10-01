@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 break;
             case 'section4':
                 progress.style.width = '100%';
-                                steps[3].classList.add('active');
+                steps[3].classList.add('active');
                 break;
         }
     }
