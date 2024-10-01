@@ -21,11 +21,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('results').classList.remove('hidden');
     }
 
-    function getSliderValue(value) {
-        const percentages = [0, 0.2, 0.4, 0.6, 0.8, 1];
-        return percentages[value];
-    }
-
     function calculateSection2Value() {
         const credits = [
             { id: 'airlineCredit', value: 200 },
@@ -39,8 +34,8 @@ document.addEventListener('DOMContentLoaded', function() {
         ];
 
         return credits.reduce((total, credit) => {
-            const sliderValue = document.getElementById(credit.id).value;
-            return total + credit.value * getSliderValue(sliderValue);
+            const sliderValue = parseInt(document.getElementById(credit.id).value);
+            return total + sliderValue;
         }, 0);
     }
 
@@ -49,8 +44,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const perks = ['loungeAccess', 'partnerStatus', 'fhrAndIap', 'cardProtections'];
         
         return perks.reduce((total, perkId) => {
-            const sliderValue = document.getElementById(perkId).value;
-            return total + travelFrequency * 40 * getSliderValue(sliderValue);
+            const sliderValue = parseInt(document.getElementById(perkId).value);
+            return total + travelFrequency * 40 * (sliderValue / 4);
         }, 0);
     }
 
@@ -107,82 +102,3 @@ document.addEventListener('DOMContentLoaded', function() {
             case 'section4':
                 progress.style.width = '100%';
                 steps[3].classList.add('active');
-                break;
-        }
-    }
-
-    function nextSection(currentSection, nextSection) {
-        document.getElementById(currentSection).classList.add('hidden');
-        document.getElementById(nextSection).classList.remove('hidden');
-        if (nextSection !== 'section1') {
-            document.getElementById('results').classList.add('hidden');
-        }
-        updateProgressBar(nextSection);
-        window.scrollTo(0, 0);
-    }
-
-    document.getElementById('calculatePointsBtn').addEventListener('click', function() {
-        calculatePoints();
-        document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
-    });
-
-    document.getElementById('continueBtn').addEventListener('click', function() {
-        nextSection('section1', 'section2');
-    });
-
-    document.getElementById('continueToSection3Btn').addEventListener('click', function() {
-        nextSection('section2', 'section3');
-    });
-
-    document.getElementById('calculateValuationBtn').addEventListener('click', function() {
-        calculateFinalValuation();
-    });
-
-    document.getElementById('backToSection1').addEventListener('click', function(e) {
-        e.preventDefault();
-        nextSection('section2', 'section1');
-    });
-
-    document.getElementById('backToSection2').addEventListener('click', function(e) {
-        e.preventDefault();
-        nextSection('section3', 'section2');
-    });
-
-    document.getElementById('backToSection3').addEventListener('click', function(e) {
-        e.preventDefault();
-        nextSection('section4', 'section3');
-    });
-
-    // Handle custom input for home airport
-    document.getElementById('homeAirport').addEventListener('change', function() {
-        const customInput = document.getElementById('customHomeAirport');
-        if (this.value === 'custom') {
-            customInput.classList.remove('hidden');
-        } else {
-            customInput.classList.add('hidden');
-        }
-    });
-
-    // Format currency inputs
-    const currencyInputs = document.querySelectorAll('.input-wrapper input[type="text"]:not(#travelFrequency)');
-    currencyInputs.forEach(input => {
-        input.addEventListener('input', function(e) {
-            let value = e.target.value.replace(/[^\d]/g, '');
-            if (value) {
-                value = parseInt(value, 10);
-                e.target.value = value.toLocaleString('en-US', {
-                    style: 'currency',
-                    currency: 'USD',
-                    minimumFractionDigits: 0,
-                    maximumFractionDigits: 0
-                });
-            }
-        });
-    });
-
-    // Ensure travel frequency input only accepts numbers
-    const travelFrequencyInput = document.getElementById('travelFrequency');
-    travelFrequencyInput.addEventListener('input', function(e) {
-        this.value = this.value.replace(/[^\d]/g, '');
-    });
-});
