@@ -21,6 +21,11 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('results').classList.remove('hidden');
     }
 
+    function getSliderValue(value) {
+        const percentages = [0, 0.2, 0.4, 0.6, 0.8, 1];
+        return percentages[value];
+    }
+
     function calculateSection2Value() {
         const credits = [
             { id: 'airlineCredit', value: 200 },
@@ -34,13 +39,8 @@ document.addEventListener('DOMContentLoaded', function() {
         ];
 
         return credits.reduce((total, credit) => {
-            const usage = document.getElementById(credit.id).value;
-            switch (usage) {
-                case '0': return total;
-                case '0.5': return total + credit.value * 0.5;
-                case '1': return total + credit.value;
-                default: return total;
-            }
+            const sliderValue = document.getElementById(credit.id).value;
+            return total + credit.value * getSliderValue(sliderValue);
         }, 0);
     }
 
@@ -49,13 +49,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const perks = ['loungeAccess', 'partnerStatus', 'fhrAndIap', 'cardProtections'];
         
         return perks.reduce((total, perkId) => {
-            const usage = document.getElementById(perkId).value;
-            switch (usage) {
-                case '0': return total;
-                case '0.5': return total + travelFrequency * 40 * 0.5;
-                case '1': return total + travelFrequency * 40;
-                default: return total;
-            }
+            const sliderValue = document.getElementById(perkId).value;
+            return total + travelFrequency * 40 * getSliderValue(sliderValue);
         }, 0);
     }
 
