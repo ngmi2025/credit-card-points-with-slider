@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Card Value Calculator | UpgradedPoints.com</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Credit Card Value Calculator</h1>
+        <p class="intro">Discover the true value of your credit card based on your personal usage and preferences.</p>
+        
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+            <div class="step-labels">
+                <span class="step active">Travel Profile</span>
+                <span class="step">Card Benefits</span>
+                <span class="step">Credit Card Perks</span>
+                <span class="step">Results</span>
+            </div>
+        </div>
+
+        <div id="calculator">
+            <div class="section" id="section1">
+                <h2>Travel Profile</h2>
+                <div class="question-group">
+                    <label for="travelFrequency">How many times do you travel per year?</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="travelFrequency" inputmode="numeric" placeholder="Enter number of trips" required>
+                    </div>
+                </div>
+                <div class="question-group">
+                    <label for="homeAirport">What is your home airport?</label>
+                    <div class="input-group">
+                        <select id="homeAirport" required>
+                            <option value="">Select an option</option>
+                            <option value="ATL">Atlanta (ATL)</option>
+                            <option value="BOS">Boston (BOS)</option>
+                            <option value="CLT">Charlotte (CLT)</option>
+                            <option value="ORD">Chicago (ORD)</option>
+                            <option value="DFW">Dallas/Fort Worth (DFW)</option>
+                            <option value="DEN">Denver (DEN)</option>
+                            <option value="DTW">Detroit (DTW)</option>
+                            <option value="FLL">Fort Lauderdale (FLL)</option>
+                            <option value="IAH">Houston (IAH)</option>
+                            <option value="LAS">Las Vegas (LAS)</option>
+                            <option value="LAX">Los Angeles (LAX)</option>
+                            <option value="MIA">Miami (MIA)</option>
+                            <option value="MSP">Minneapolis (MSP)</option>
+                            <option value="EWR">Newark (EWR)</option>
+                            <option value="JFK">New York (JFK)</option>
+                            <option value="MCO">Orlando (MCO)</option>
+                            <option value="PHL">Philadelphia (PHL)</option>
+                            <option value="PHX">Phoenix (PHX)</option>
+                            <option value="SFO">San Francisco (SFO)</option>
+                            <option value="SEA">Seattle (SEA)</option>
+                            <option value="custom">Other (specify)</option>
+                        </select>
+                        <input type="text" id="customHomeAirport" class="hidden custom-input" placeholder="Enter airport">
+                    </div>
+                </div>
+                <div class="question-group">
+                    <label for="flightSpend">Spending on flights with airlines or Amex Travel / year</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="flightSpend" inputmode="numeric" placeholder="0" required>
+                    </div>
+                </div>
+                <div class="question-group">
+                    <label for="hotelSpend">Spending on prepaid hotels through Amex Travel / year</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="hotelSpend" inputmode="numeric" placeholder="0" required>
+                    </div>
+                </div>
+                <div class="question-group">
+                    <label for="otherSpend">Spending on all other purchases / year</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="otherSpend" inputmode="numeric" placeholder="0" required>
+                    </div>
+                </div>
+                <div class="button-container">
+                    <button id="calculatePointsBtn" class="cta-button">Calculate Points</button>
+                </div>
+
+                <div id="results" class="hidden">
+                    <h2>Results</h2>
+                    <div class="question-group">
+                        <label for="totalPoints">Total Points Earned:</label>
+                        <input type="text" id="totalPoints" readonly>
+                    </div>
+                    <div class="question-group">
+                        <label for="welcomeBonus">Current Welcome Bonus Offer:</label>
+                        <input type="text" id="welcomeBonus" readonly>
+                    </div>
+                    <div class="question-group">
+                        <label for="amexValuation">Amex Platinum Card Valuation:</label>
+                        <input type="text" id="amexValuation" readonly>
+                    </div>
+                    <div class="button-container">
+                        <button id="continueBtn" class="cta-button">Continue</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section hidden" id="section2">
+                <a href="#" id="backToSection1" class="back-link">← Back to previous section</a>
+                <h2>Card Benefits</h2>
+                <p class="subheading">How much do you value the following credits:</p>
+                
+                <div class="question-group">
+                    <label for="airlineCredit">$200 Airline Fee Credit</label>
+                    <div class="input-group">
+                        <select id="airlineCredit" required>
+                            <option value="">Select an option</option>
+                            <option value="0">I won't use it</option>
+                            <option value="0.5">I'll use some of it</option>
+                            <option value="1">I'll use all of it</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <label for="uberCredit">$200 Uber Credit</label>
+                    <div class="input-group">
+                        <select id="uberCredit" required>
+                            <option value="">Select an option</option>
+                            <option value="0">I won't use it</option>
+                            <option value="0.5">I'll use some of it</option>
+                            <option value="1">I'll use all of it</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <label for="saksCredit">$100 Saks Fifth Avenue Credit</label>
+                    <div class="input-group">
+                        <select id="saksCredit" required>
+                            <option value="">Select an option</option>
+                            <option value="0">I won't use it</option>
+                            <option value="0.5">I'll use some of it</option>
+                            <option value="1">I'll use all of it</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <label for="equinoxCredit">$300 Equinox Credit</label>
+                    <div class="input-group">
+                        <select id="equinoxCredit" required>
+                            <option value="">Select an option</option>
+                            <option value="0">I won't use it</option>
+                            <option value="0.5">I'll use some of it</option>
+                            <option value="1">I'll use all of it</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <label for="entertainmentCredit">$240 Digital Entertainment Credit</label>
+                    <div class="input-group">
+                        <select id="entertainmentCredit" required>
+                            <option value="">Select an option</option>
+                            <option value="0">I won't use it</option>
+                            <option value="0.5">I'll use some of it</option>
+                            <option value="1">I'll use all of it</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <label for="clearCredit">$189 CLEAR Credit</label>
+                    <div class="input-group">
+                        <select id="clearCredit" required>
+                            <option value="">Select an option</option>
+                            <option value="0">I won't use it</option>
+                            <option value="0.5">I'll use some of it</option>
+                            <option value="1">I'll use all of it</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <label for="globalEntryCredit">$100 Global Entry Credit</label>
+                    <div class="input-group">
+                        <select id="globalEntryCredit" required>
+                            <option value="">Select an option</option>
+                            <option value="0">I won't use it</option>
+                            <option value="0.5">I'll use some of it</option>
+                            <option value="1">I'll use all of it</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <label for="soulCycleCredit">$300 SoulCycle At-Home Bike Credit</label>
+                    <div class="input-group">
+                        <select id="soulCycleCredit" required>
+                            <option value="">Select an option</option>
+                            <option value="0">I won't use it</option>
+                            <option value="0.5">I'll use some of it</option>
+                            <option value="1">I'll use all of it</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="button-container">
+                    <button id="continueToSection3Btn" class="cta-button">Continue</button>
+                </div>
+            </div>
+
+            <div class="section hidden" id="section3">
+                <a href="#" id="backToSection2" class="back-link">← Back to previous section</a>
+                <h2>Credit Card Perks</h2>
+                <p class="subheading">How much do you value the following perks:</p>
+                
+                <div class="question-group">
+                    <label for="loungeAccess">
+                        <span class="question-title">Amex Platinum Airport Lounge Access</span>
+                        <span class="question-description">This includes: Amex Centurion lounges, Priority Pass, Delta Sky Clubs, Plaza Premium Lounges, Escape Lounges – The Centurion Studio Partner, select Lufthansa lounges, and select Virgin Clubhouses</span>
+                    </label>
+                    <div class="input-group">
+                        <select id="loungeAccess" required>
+                            <option value="">Select an option</option>
+                            <option value="0">I won't use it</option>
+                            <option value="0.5">I'll use some of it</option>
+                            <option value="1">I'll use all of it</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <label for="partnerStatus">
+                        <span class="question-title">Partner Elite Status</span>
+                        <span class="question-description">This includes: Marriott Gold Elite status, Hilton Honors Gold status, National Emerald Club Executive status, Avis Preferred, Hertz President's Circle status</span>
+                    </label>
+                    <div class="input-group">
+                        <select id="partnerStatus" required>
+                            <option value="">Select an option</option>
+                            <option value="0">I won't use it</option>
+                            <option value="0.5">I'll use some of it</option>
+                            <option value="1">I'll use all of it</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <label for="fhrAndIap">
+                        <span class="question-title">Amex Fine Hotels and Resorts Access and the Amex International Airline Program?</span>
+                    </label>
+                    <div class="input-group">
+                        <select id="fhrAndIap" required>
+                            <option value="">Select an option</option>
+                            <option value="0">I won't use it</option>
+                            <option value="0.5">I'll use some of it</option>
+                            <option value="1">I'll use all of it</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <label for="cardProtections">
+                        <span class="question-title">Amex Platinum Card Protections</span>
+                        <span class="question-description">This includes: Trip Delay Insurance, Trip Cancellation Insurance, Rental Car Insurance, Cell Phone Protection, Purchase Protection, Return Protection and Extended Warranty Protection</span>
+                    </label>
+                    <div class="input-group">
+                        <select id="cardProtections" required>
+                            <option value="">Select an option</option>
+                            <option value="0">I won't use it</option>
+                            <option value="0.5">I'll use some of it</option>
+                            <option value="1">I'll use all of it</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="button-container">
+                    <button id="calculateValuationBtn" class="cta-button">Calculate Valuation</button>
+                </div>
+            </div>
+
+            <div class="section hidden" id="section4">
+                <a href="#" id="backToSection3" class="back-link">← Back to previous section</a>
+                <h2>Final Valuation</h2>
+                <div class="question-group">
+                    <label for="yearlyValue">The value you get from this card per year:</label>
+                    <input type="text" id="yearlyValue" readonly>
+                </div>
+                <div class="question-group">
+                    <label for="signupBonusValue">The value you get from the sign-up bonus points:</label>
+                    <input type="text" id="signupBonusValue" readonly>
+                </div>
+                <div class="question-group">
+                    <label for="annualFee">Annual Credit Card Fee:</label>
+                    <input type="text" id="annualFee" readonly>
+                </div>
+                <div class="question-group">
+                    <label for="firstYearValue">1st year value to you:</label>
+                    <input type="text" id="firstYearValue" readonly>
+                </div>
+                <div class="question-group">
+                    <label for="secondYearValue">2nd year onwards annual value to you:</label>
+                    <input type="text" id="secondYearValue" readonly>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
