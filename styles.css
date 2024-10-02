@@ -289,6 +289,10 @@ input[type="number"] {
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-top: 20px;
+    margin-left: auto;
+    display: block;
+    font-weight: normal;
+    text-transform: none;
 }
 
 .apply-now-button:hover {
@@ -306,8 +310,9 @@ input[type="number"] {
     margin-top: 20px;
 }
 
-.apply-now-button {
-    margin-left: auto;
+#results .question-group input[readonly], 
+#section4 .question-group input[readonly] {
+    text-align: right;
 }
 
 @media (max-width: 767px) {
@@ -345,8 +350,6 @@ input[type="number"] {
 
     .input-group select,
     .input-wrapper input[type="text"],
-    #results .question-group input[readonly],
-    #section4 .question-group input[readonly],
     .cta-button {
         width: 100%;
         font-size: 16px;
@@ -355,8 +358,18 @@ input[type="number"] {
         box-sizing: border-box;
         font-weight: normal;
         text-transform: none;
-        font-weight: normal;
-        text-transform: none;
+    }
+
+    #results .question-group input[readonly],
+    #section4 .question-group input[readonly] {
+        width: 100%;
+        font-size: 16px;
+        padding: 12px;
+        margin: 0;
+        box-sizing: border-box;
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
     }
 
     .button-container {
