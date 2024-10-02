@@ -137,6 +137,14 @@ h1 {
     box-sizing: border-box;
 }
 
+.input-group select {
+    color: var(--text-color);
+}
+
+.input-group select option:first-child {
+    color: var(--text-color);
+}
+
 .input-wrapper input[type="text"] {
     text-align: left;
 }
@@ -379,13 +387,32 @@ input[type="number"] {
     #results .question-group, #section4 .question-group {
         flex-direction: column;
         align-items: flex-start;
+        padding-bottom: 15px;
+        margin-bottom: 15px;
     }
 
     #results .question-group label, #section4 .question-group label {
-        margin-bottom: 10px;
+        margin-bottom: 5px;
+        margin-right: 0;
     }
 
     #results .question-group input[readonly], #section4 .question-group input[readonly] {
         width: 100%;
+        flex-basis: auto;
+    }
+
+    #results, #section4 {
+        padding: 20px;
+    }
+
+    .slider-container {
+        padding-right: 0;
+    }
+
+    .slider-value {
+        position: static;
+        display: block;
+        text-align: right;
+        margin-top: 5px;
     }
 }
