@@ -252,7 +252,7 @@ input[type="number"] {
 
 .question-title {
     display: block;
-    font-weight: bold;
+    font-weight: normal;
     margin-bottom: 5px;
 }
 
