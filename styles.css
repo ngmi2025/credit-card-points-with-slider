@@ -46,19 +46,17 @@ h1 {
 
 .progress-bar {
     width: 100%;
-    background-color: #e0e0e0;
-    border-radius: 10px;
+    background-color: var(--primary-color);
+    border-radius: 0;
     margin-bottom: 30px;
-    position: relative;
-    overflow: hidden;
-    height: 20px;
+    height: 10px;
 }
 
 .progress {
     width: 25%;
     height: 100%;
     background-color: var(--primary-color);
-    border-radius: 10px;
+    border-radius: 0;
     transition: width 0.3s ease;
 }
 
@@ -161,7 +159,7 @@ input[type="number"] {
 
 .button-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     margin-top: 20px;
 }
 
@@ -176,6 +174,7 @@ input[type="number"] {
     transition: background-color 0.3s ease;
     font-weight: normal;
     text-transform: none;
+    margin-left: 10px;
 }
 
 .cta-button:hover {
@@ -187,10 +186,10 @@ input[type="number"] {
 }
 
 .back-link {
-    display: inline-block;
-    margin-bottom: 20px;
     color: var(--primary-color);
     text-decoration: none;
+    display: inline-block;
+    margin-bottom: 20px;
 }
 
 .back-link:hover {
@@ -275,8 +274,7 @@ input[type="number"] {
 }
 
 .valuation-subheading {
-    color: var(--primary-color);
-    margin-bottom: 15px;
+    display: none;
 }
 
 .apply-now-button {
@@ -303,16 +301,43 @@ input[type="number"] {
     position: relative;
 }
 
-#section4 .button-container {
+#section4 .question-group {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
-    margin-top: 20px;
+    align-items: center;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 15px 0;
 }
 
-#results .question-group input[readonly], 
+#section4 .question-group:last-child {
+    border-bottom: none;
+}
+
+#section4 .question-group label {
+    flex: 1;
+    margin-right: 20px;
+    font-weight: normal;
+}
+
 #section4 .question-group input[readonly] {
+    width: 200px;
     text-align: right;
+    background-color: #f0f0f0;
+    border: none;
+    padding: 10px;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+#section4 .question-group input[readonly].negative {
+    color: red;
+}
+
+#section4 .button-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    margin-top: 20px;
 }
 
 @media (max-width: 767px) {
@@ -360,41 +385,28 @@ input[type="number"] {
         text-transform: none;
     }
 
-    #results .question-group input[readonly],
-    #section4 .question-group input[readonly] {
-        width: 100%;
-        font-size: 16px;
-        padding: 12px;
-        margin: 0;
-        box-sizing: border-box;
-        background-color: #f0f0f0;
-        border: 1px solid #ccc;
-        border-radius: 5px;
+    .button-container {
+        flex-direction: column;
+        align-items: flex-end;
     }
 
-    .button-container {
-        justify-content: center;
+    .cta-button, .apply-now-button {
+        margin-left: 0;
+        margin-top: 10px;
     }
 
     select {
         background-position-x: 95%;
     }
 
-    #results .question-group, #section4 .question-group {
+    #section4 .question-group {
         flex-direction: column;
         align-items: flex-start;
-        padding-bottom: 15px;
-        margin-bottom: 15px;
     }
 
-    #results .question-group label, #section4 .question-group label {
-        margin-bottom: 5px;
-        margin-right: 0;
-    }
-
-    #results .question-group input[readonly], #section4 .question-group input[readonly] {
+    #section4 .question-group input[readonly] {
         width: 100%;
-        flex-basis: auto;
+        margin-top: 10px;
     }
 
     #results, #section4 {
@@ -403,7 +415,7 @@ input[type="number"] {
 
     .slider-container {
         padding-right: 0;
-        padding-bottom: 30px; /* Add space for the value below */
+        padding-bottom: 30px;
     }
 
     .slider-value {
@@ -415,7 +427,6 @@ input[type="number"] {
         margin-top: 10px;
     }
 
-    /* Remove the top $0 value */
     .slider-container:first-of-type .slider-value {
         display: none;
     }
