@@ -259,6 +259,7 @@ input[type="number"] {
     width: 100%;
     margin-bottom: 10px;
     position: relative;
+    padding-right: 60px; /* Make room for the value */
 }
 
 .slider {
@@ -315,10 +316,11 @@ input[type="number"] {
 .slider-labels span:nth-child(5) { left: 100%; transform: translateX(-100%); }
 
 .slider-value {
-    text-align: right;
+    position: absolute;
+    right: 0;
+    top: 0;
     font-weight: bold;
     color: var(--primary-color);
-    margin-top: 5px;
 }
 
 @media (max-width: 767px) {
@@ -345,6 +347,7 @@ input[type="number"] {
     .slider-container {
         width: 100%;
         margin-right: 0;
+        flex-basis: auto;
     }
 
     .input-group,
@@ -371,5 +374,18 @@ input[type="number"] {
 
     select {
         background-position-x: 95%;
+    }
+
+    #results .question-group, #section4 .question-group {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #results .question-group label, #section4 .question-group label {
+        margin-bottom: 10px;
+    }
+
+    #results .question-group input[readonly], #section4 .question-group input[readonly] {
+        width: 100%;
     }
 }
