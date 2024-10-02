@@ -407,12 +407,15 @@ input[type="number"] {
 
     .slider-container {
         padding-right: 0;
+        padding-bottom: 30px; /* Add space for the value below */
     }
 
     .slider-value {
-        position: static;
-        display: block;
-        text-align: right;
-        margin-top: 5px;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        text-align: center;
+        margin-top: 10px;
     }
 }
