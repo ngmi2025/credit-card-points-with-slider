@@ -331,6 +331,33 @@ input[type="number"] {
     color: var(--primary-color);
 }
 
+.section-intro {
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 15px;
+}
+
+.valuation-subheading {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.apply-now-button {
+    background-color: #1EAE75;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.apply-now-button:hover {
+    background-color: #168f5f;
+}
+
 @media (max-width: 767px) {
     body {
         font-size: 16px;
@@ -417,5 +444,10 @@ input[type="number"] {
         bottom: 0;
         text-align: center;
         margin-top: 10px;
+    }
+
+    /* Remove the top $0 value */
+    .slider-container:first-of-type .slider-value {
+        display: none;
     }
 }
