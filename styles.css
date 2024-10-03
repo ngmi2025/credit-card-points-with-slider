@@ -396,7 +396,7 @@ input[type="number"] {
     }
 
     h1 {
-        font-size: 1.8em;
+        font-size: 1.5em;
         line-height: 1.2;
     }
 
@@ -449,6 +449,7 @@ input[type="number"] {
     .cta-button, .apply-now-button {
         margin-left: 0;
         margin-top: 10px;
+        width: 100%;
     }
 
     select {
@@ -463,6 +464,7 @@ input[type="number"] {
     #section4 .question-group input[readonly] {
         width: 100%;
         margin-top: 10px;
+        box-sizing: border-box;
     }
 
     #results, #section4 {
@@ -476,6 +478,7 @@ input[type="number"] {
     #results .question-group input[readonly], #section4 .question-group input[readonly] {
         width: 100%;
         margin-top: 5px;
+        box-sizing: border-box;
     }
 
     .slider-container {
@@ -504,5 +507,11 @@ input[type="number"] {
     .apply-now-button {
         margin-left: 0;
         margin-top: 10px;
+        width: 100%;
+    }
+
+    /* Hide the $0 at the top of the Card Benefits section */
+    #section2 .question-group:first-child {
+        display: none;
     }
 }
