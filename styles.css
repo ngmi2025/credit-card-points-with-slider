@@ -340,6 +340,48 @@ input[type="number"] {
     margin-top: 20px;
 }
 
+/* Points Calculation Results styling */
+#results {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+#results h2 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+#results .question-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 15px 0;
+}
+
+#results .question-group:last-child {
+    border-bottom: none;
+}
+
+#results .question-group label {
+    flex: 1;
+    margin-right: 20px;
+    font-weight: normal;
+}
+
+#results .question-group input[readonly] {
+    width: 200px;
+    text-align: right;
+    background-color: transparent;
+    border: none;
+    padding: 10px;
+    font-size: 1em;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
 @media (max-width: 767px) {
     body {
         font-size: 16px;
@@ -351,6 +393,20 @@ input[type="number"] {
     
     .section {
         padding: 20px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+        line-height: 1.2;
+    }
+
+    .intro {
+        font-size: 0.9em;
+        line-height: 1.4;
+    }
+
+    .step-labels {
+        display: none;
     }
 
     .question-group {
@@ -410,7 +466,16 @@ input[type="number"] {
     }
 
     #results, #section4 {
-        padding: 20px;
+        padding: 15px;
+    }
+
+    #results .question-group, #section4 .question-group {
+        padding: 10px 0;
+    }
+
+    #results .question-group input[readonly], #section4 .question-group input[readonly] {
+        width: 100%;
+        margin-top: 5px;
     }
 
     .slider-container {
@@ -433,7 +498,7 @@ input[type="number"] {
 
     #section4 .button-container {
         flex-direction: column;
-        align-items: stretch;
+        align-items: flex-end;
     }
 
     .apply-now-button {
