@@ -44,9 +44,10 @@ h1 {
     color: var(--secondary-text-color);
 }
 
+/* Progress bar styles */
 .progress-bar {
     width: 100%;
-    background-color: var(--primary-color);
+    background-color: #e0e0e0;
     border-radius: 0;
     margin-bottom: 30px;
     height: 10px;
@@ -106,8 +107,8 @@ h1 {
 .question-group {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
-    padding-bottom: 20px;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
     border-bottom: 1px solid var(--border-color);
 }
 
@@ -139,22 +140,8 @@ h1 {
     color: var(--text-color);
 }
 
-.input-group select option:first-child {
-    color: var(--text-color);
-}
-
 .input-wrapper input[type="text"] {
     text-align: left;
-}
-
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-input[type="number"] {
-    -moz-appearance: textfield;
 }
 
 .button-container {
@@ -182,37 +169,21 @@ input[type="number"] {
     display: none;
 }
 
-.back-link {
-    display: inline-block;
-    margin-bottom: 20px;
-    color: var(--primary-color);
-    text-decoration: none;
-}
-
-.back-link:hover {
-    text-decoration: underline;
-}
-
+/* Slider styles */
 .slider-container {
     position: relative;
-    width: 100%;
-    padding-bottom: 30px;
+    padding-bottom: 20px;
 }
 
 .slider {
     -webkit-appearance: none;
     width: 100%;
-    height: 10px;
+    height: 5px;
     border-radius: 5px;
     background: #d3d3d3;
     outline: none;
     opacity: 0.7;
-    -webkit-transition: .2s;
     transition: opacity .2s;
-}
-
-.slider:hover {
-    opacity: 1;
 }
 
 .slider::-webkit-slider-thumb {
@@ -247,34 +218,18 @@ input[type="number"] {
     transform: translateX(-50%);
     bottom: 0;
     font-size: 0.9em;
-    color: var(--primary-color);
-    font-weight: bold;
+    color: var(--text-color);
 }
 
-.apply-now-button {
-    background-color: var(--secondary-color);
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 1em;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-    margin-left: 10px;
-}
-
-.apply-now-button:hover {
-    background-color: #d67e17;
-}
-
-#results {
+/* Results and Final Valuation styles */
+#results, #section4 {
     background-color: #f9f9f9;
     padding: 20px;
     border-radius: 5px;
     margin-top: 20px;
 }
 
-#results .question-group {
+#results .question-group, #section4 .question-group {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -282,17 +237,17 @@ input[type="number"] {
     padding: 15px 0;
 }
 
-#results .question-group:last-child {
+#results .question-group:last-child, #section4 .question-group:last-child {
     border-bottom: none;
 }
 
-#results .question-group label {
+#results .question-group label, #section4 .question-group label {
     flex: 1;
     margin-right: 20px;
     font-weight: normal;
 }
 
-#results .question-group input[readonly] {
+#results .question-group input[readonly], #section4 .question-group input[readonly] {
     width: 200px;
     text-align: right;
     background-color: transparent;
@@ -301,6 +256,23 @@ input[type="number"] {
     font-size: 1em;
     font-weight: bold;
     color: var(--text-color);
+}
+
+.apply-now-button {
+    background-color: var(--success-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    align-self: flex-end;
+    margin-top: 20px;
+}
+
+.apply-now-button:hover {
+    background-color: #2e7d32;
 }
 
 @media (max-width: 767px) {
@@ -421,21 +393,6 @@ input[type="number"] {
         bottom: 0;
         text-align: center;
         margin-top: 10px;
-    }
-
-    .slider-container:first-of-type .slider-value {
-        display: none;
-    }
-
-    #section4 .button-container {
-        flex-direction: column;
-        align-items: flex-end;
-    }
-
-    .apply-now-button {
-        align-self: flex-end;
-        width: auto;
-        margin-left: auto;
     }
 
     #section2 .question-group:first-child {
