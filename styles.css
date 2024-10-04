@@ -472,13 +472,16 @@ input[type="number"] {
     }
 
     #results .question-group, #section4 .question-group {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         padding: 10px 0;
     }
 
     #results .question-group input[readonly], #section4 .question-group input[readonly] {
-        width: 100%;
-        margin-top: 5px;
-        box-sizing: border-box;
+        width: auto;
+        margin-top: 0;
+        text-align: right;
     }
 
     .slider-container {
@@ -510,7 +513,7 @@ input[type="number"] {
         width: 100%;
     }
 
-    /* Hide the $0 at the top of the Card Benefits section */
+    /* Hide $0 at the top of section 2 */
     #section2 .question-group:first-child {
         display: none;
     }
