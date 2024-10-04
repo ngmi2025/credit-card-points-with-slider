@@ -169,12 +169,9 @@ input[type="number"] {
     border: none;
     padding: 10px 20px;
     font-size: 1em;
-    border-radius: 5px;
     cursor: pointer;
+    border-radius: 5px;
     transition: background-color 0.3s ease;
-    font-weight: normal;
-    text-transform: none;
-    margin-left: 10px;
 }
 
 .cta-button:hover {
@@ -186,10 +183,10 @@ input[type="number"] {
 }
 
 .back-link {
-    color: var(--primary-color);
-    text-decoration: none;
     display: inline-block;
     margin-bottom: 20px;
+    color: var(--primary-color);
+    text-decoration: none;
 }
 
 .back-link:hover {
@@ -199,6 +196,7 @@ input[type="number"] {
 .slider-container {
     position: relative;
     width: 100%;
+    padding-bottom: 30px;
 }
 
 .slider {
@@ -220,16 +218,16 @@ input[type="number"] {
 .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     background: var(--primary-color);
     cursor: pointer;
 }
 
 .slider::-moz-range-thumb {
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     background: var(--primary-color);
     cursor: pointer;
@@ -238,119 +236,42 @@ input[type="number"] {
 .slider-labels {
     display: flex;
     justify-content: space-between;
-    margin-top: 5px;
+    margin-top: 10px;
     font-size: 0.8em;
     color: var(--secondary-text-color);
-    position: relative;
 }
-
-.slider-labels span {
-    position: absolute;
-    transform: translateX(-50%);
-}
-
-.slider-labels span:nth-child(1) { left: 0; }
-.slider-labels span:nth-child(2) { left: calc(25% + 6px); }
-.slider-labels span:nth-child(3) { left: 50%; }
-.slider-labels span:nth-child(4) { left: calc(75% - 6px); }
-.slider-labels span:nth-child(5) { left: 100%; transform: translateX(-100%); }
 
 .slider-value {
     position: absolute;
-    right: 0;
-    top: 0;
-    font-weight: bold;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    font-size: 0.9em;
     color: var(--primary-color);
-}
-
-.section-intro {
     font-weight: bold;
-    color: #000;
-    margin-bottom: 15px;
-}
-
-.question-title {
-    font-weight: normal;
-}
-
-.valuation-subheading {
-    display: none;
 }
 
 .apply-now-button {
-    background-color: #1EAE75;
+    background-color: var(--secondary-color);
     color: white;
     border: none;
     padding: 10px 20px;
     font-size: 1em;
-    border-radius: 5px;
     cursor: pointer;
+    border-radius: 5px;
     transition: background-color 0.3s ease;
-    margin-top: 20px;
-    margin-left: auto;
-    display: block;
-    font-weight: normal;
-    text-transform: none;
+    margin-left: 10px;
 }
 
 .apply-now-button:hover {
-    background-color: #168f5f;
+    background-color: #d67e17;
 }
 
-#section4 {
-    position: relative;
-}
-
-#section4 .question-group {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #e0e0e0;
-    padding: 15px 0;
-}
-
-#section4 .question-group:last-child {
-    border-bottom: none;
-}
-
-#section4 .question-group label {
-    flex: 1;
-    margin-right: 20px;
-    font-weight: normal;
-}
-
-#section4 .question-group input[readonly] {
-    width: 200px;
-    text-align: right;
-    background-color: #f0f0f0;
-    border: none;
-    padding: 10px;
-    font-size: 1em;
-    font-weight: bold;
-}
-
-#section4 .question-group input[readonly].negative {
-    color: red;
-}
-
-#section4 .button-container {
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-    margin-top: 20px;
-}
-
-/* Points Calculation Results styling */
 #results {
     background-color: #f9f9f9;
     padding: 20px;
     border-radius: 5px;
     margin-top: 20px;
-}
-
-#results h2 {
-    color: var(--primary-color);
-    margin-bottom: 20px;
 }
 
 #results .question-group {
@@ -396,7 +317,7 @@ input[type="number"] {
     }
 
     h1 {
-        font-size: 1.5em;
+        font-size: 1.3em;
         line-height: 1.2;
     }
 
@@ -457,13 +378,16 @@ input[type="number"] {
     }
 
     #section4 .question-group {
-        flex-direction: column;
-        align-items: flex-start;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
     }
 
     #section4 .question-group input[readonly] {
-        width: 100%;
-        margin-top: 10px;
+        width: auto;
+        max-width: 50%;
+        margin-top: 0;
+        text-align: right;
         box-sizing: border-box;
     }
 
@@ -472,7 +396,7 @@ input[type="number"] {
     }
 
     #results .question-group, #section4 .question-group {
-        display: flex;
+        flex-direction: row;
         justify-content: space-between;
         align-items: center;
         padding: 10px 0;
@@ -480,6 +404,7 @@ input[type="number"] {
 
     #results .question-group input[readonly], #section4 .question-group input[readonly] {
         width: auto;
+        max-width: 50%;
         margin-top: 0;
         text-align: right;
     }
@@ -508,13 +433,17 @@ input[type="number"] {
     }
 
     .apply-now-button {
-        margin-left: 0;
-        margin-top: 10px;
-        width: 100%;
+        align-self: flex-end;
+        width: auto;
+        margin-left: auto;
     }
 
-    /* Hide $0 at the top of section 2 */
     #section2 .question-group:first-child {
-        display: none;
+        display: none !important;
+    }
+
+    #backToTravelProfile {
+        display: inline-block;
+        margin-bottom: 15px;
     }
 }
