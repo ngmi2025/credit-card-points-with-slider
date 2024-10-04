@@ -148,10 +148,12 @@ document.addEventListener('DOMContentLoaded', function() {
         nextSection('section4', 'section3');
     });
 
-    // New event listener for "Back to Travel Profile" link
-    document.getElementById('backToTravelProfile').addEventListener('click', function(e) {
-        e.preventDefault();
-        window.location.href = 'travel-profile.html'; // Replace with the actual URL of your travel profile page
+    // Updated event listener for "Back to Travel Profile" link
+    document.body.addEventListener('click', function(e) {
+        if (e.target && e.target.id === 'backToTravelProfile') {
+            e.preventDefault();
+            window.location.href = 'travel-profile.html'; // Replace with the actual URL
+        }
     });
 
     // Handle custom input for home airport
