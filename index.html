@@ -10,16 +10,17 @@
     <div class="container">
         <h1>Credit Card Value Calculator</h1>
         <p class="intro">Discover the true value of your credit card based on your personal usage and preferences.</p>
-        
+
         <div class="progress-bar">
             <div class="progress" id="progress"></div>
             <div class="step-labels">
-                <span class="step active"></span>
-                <span class="step"></span>
-                <span class="step"></span>
-                <span class="step"></span>
+                <span class="step active">Travel Profile</span>
+                <span class="step">Card Benefits</span>
+                <span class="step">Credit Card Perks</span>
+                <span class="step">Results</span>
             </div>
         </div>
+
         <div id="calculator">
             <div class="section" id="section1">
                 <h2>Travel Profile</h2>
@@ -105,132 +106,76 @@
                 <h2>Card Benefits</h2>
                 <p class="section-intro">How much do you value the following credits:</p>
                 <div class="question-group">
-                    <label for="airlineCredit">
-                        <span class="question-title">$200 Airline Fee Credit</span>
-                    </label>
+                    <label for="airlineCredit">$200 Airline Fee Credit</label>
                     <div class="slider-container">
                         <input type="range" id="airlineCredit" min="0" max="200" step="50" value="0" class="slider">
                         <div class="slider-labels">
-                            <span>$0</span>
-                            <span>$50</span>
-                            <span>$100</span>
-                            <span>$150</span>
-                            <span>$200</span>
+                            <span>$0</span><span>$50</span><span>$100</span><span>$150</span><span>$200</span>
                         </div>
                     </div>
-                    <div class="slider-value hidden">$<span id="airlineCreditValue">0</span></div>
                 </div>
                 <div class="question-group">
-                    <label for="uberCredit">
-                        <span class="question-title">$200 Uber Credit</span>
-                    </label>
+                    <label for="uberCredit">$200 Uber Credit</label>
                     <div class="slider-container">
                         <input type="range" id="uberCredit" min="0" max="200" step="50" value="0" class="slider">
                         <div class="slider-labels">
-                            <span>$0</span>
-                            <span>$50</span>
-                            <span>$100</span>
-                            <span>$150</span>
-                            <span>$200</span>
+                            <span>$0</span><span>$50</span><span>$100</span><span>$150</span><span>$200</span>
                         </div>
                     </div>
-                    <div class="slider-value hidden">$<span id="uberCreditValue">0</span></div>
                 </div>
                 <div class="question-group">
-                    <label for="saksCredit">
-                        <span class="question-title">$100 Saks Fifth Avenue Credit</span>
-                    </label>
+                    <label for="saksCredit">$100 Saks Fifth Avenue Credit</label>
                     <div class="slider-container">
                         <input type="range" id="saksCredit" min="0" max="100" step="25" value="0" class="slider">
                         <div class="slider-labels">
-                            <span>$0</span>
-                            <span>$25</span>
-                            <span>$50</span>
-                            <span>$75</span>
-                            <span>$100</span>
+                            <span>$0</span><span>$25</span><span>$50</span><span>$75</span><span>$100</span>
                         </div>
                     </div>
-                    <div class="slider-value hidden">$<span id="saksCreditValue">0</span></div>
                 </div>
                 <div class="question-group">
-                    <label for="equinoxCredit">
-                        <span class="question-title">$300 Equinox Credit</span>
-                    </label>
+                    <label for="equinoxCredit">$300 Equinox Credit</label>
                     <div class="slider-container">
                         <input type="range" id="equinoxCredit" min="0" max="300" step="75" value="0" class="slider">
                         <div class="slider-labels">
-                            <span>$0</span>
-                            <span>$75</span>
-                            <span>$150</span>
-                            <span>$225</span>
-                            <span>$300</span>
+                            <span>$0</span><span>$75</span><span>$150</span><span>$225</span><span>$300</span>
                         </div>
                     </div>
-                    <div class="slider-value hidden">$<span id="equinoxCreditValue">0</span></div>
                 </div>
                 <div class="question-group">
-                    <label for="entertainmentCredit">
-                        <span class="question-title">$240 Entertainment Credit</span>
-                    </label>
+                    <label for="entertainmentCredit">$240 Entertainment Credit</label>
                     <div class="slider-container">
                         <input type="range" id="entertainmentCredit" min="0" max="240" step="60" value="0" class="slider">
                         <div class="slider-labels">
-                            <span>$0</span>
-                            <span>$60</span>
-                            <span>$120</span>
-                            <span>$180</span>
-                            <span>$240</span>
+                            <span>$0</span><span>$60</span><span>$120</span><span>$180</span><span>$240</span>
                         </div>
                     </div>
-                    <div class="slider-value hidden">$<span id="entertainmentCreditValue">0</span></div>
                 </div>
                 <div class="question-group">
-                    <label for="clearCredit">
-                        <span class="question-title">$189 CLEAR Credit</span>
-                    </label>
+                    <label for="clearCredit">$189 CLEAR Credit</label>
                     <div class="slider-container">
                         <input type="range" id="clearCredit" min="0" max="189" step="47.25" value="0" class="slider">
                         <div class="slider-labels">
-                            <span>$0</span>
-                            <span>$47</span>
-                            <span>$95</span>
-                            <span>$142</span>
-                            <span>$189</span>
+                            <span>$0</span><span>$47</span><span>$95</span><span>$142</span><span>$189</span>
                         </div>
                     </div>
-                    <div class="slider-value hidden">$<span id="clearCreditValue">0</span></div>
                 </div>
                 <div class="question-group">
-                    <label for="globalEntryCredit">
-                        <span class="question-title">$100 Global Entry Credit</span>
-                    </label>
+                    <label for="globalEntryCredit">$100 Global Entry Credit</label>
                     <div class="slider-container">
                         <input type="range" id="globalEntryCredit" min="0" max="100" step="25" value="0" class="slider">
                         <div class="slider-labels">
-                            <span>$0</span>
-                            <span>$25</span>
-                            <span>$50</span>
-                            <span>$75</span>
-                            <span>$100</span>
+                            <span>$0</span><span>$25</span><span>$50</span><span>$75</span><span>$100</span>
                         </div>
                     </div>
-                    <div class="slider-value hidden">$<span id="globalEntryCreditValue">0</span></div>
                 </div>
                 <div class="question-group">
-                    <label for="soulCycleCredit">
-                        <span class="question-title">$300 SoulCycle Credit</span>
-                    </label>
+                    <label for="soulCycleCredit">$300 SoulCycle At-Home Bike Credit</label>
                     <div class="slider-container">
                         <input type="range" id="soulCycleCredit" min="0" max="300" step="75" value="0" class="slider">
                         <div class="slider-labels">
-                            <span>$0</span>
-                            <span>$75</span>
-                            <span>$150</span>
-                            <span>$225</span>
-                            <span>$300</span>
+                            <span>$0</span><span>$75</span><span>$150</span><span>$225</span><span>$300</span>
                         </div>
                     </div>
-                    <div class="slider-value hidden">$<span id="soulCycleCreditValue">0</span></div>
                 </div>
                 <div class="button-container">
                     <button id="continueToSection3Btn" class="cta-button">Continue</button>
@@ -241,63 +186,41 @@
                 <a href="#" id="backToSection2" class="back-link">← Back to Card Benefits</a>
                 <h2>Credit Card Perks</h2>
                 <p class="section-intro">How much do you value the following perks:</p>
+
+                <!-- Slider section for Credit Card Perks -->
                 <div class="question-group">
-                    <label for="loungeAccess">
-                        <span class="question-title">Amex Platinum Airport Lounge Access</span>
-                    </label>
+                    <label for="loungeAccess">Amex Platinum Airport Lounge Access</label>
                     <div class="slider-container">
-                        <input type="range" id="loungeAccess" min="0" max="4" value="0" class="slider">
+                        <input type="range" id="loungeAccess" min="0" max="4" step="1" value="0" class="slider">
                         <div class="slider-labels">
-                            <span>None</span>
-                            <span>25%</span>
-                            <span>50%</span>
-                            <span>75%</span>
-                            <span>All</span>
+                            <span>None</span><span>25%</span><span>50%</span><span>75%</span><span>All</span>
                         </div>
                     </div>
                 </div>
                 <div class="question-group">
-                    <label for="partnerStatus">
-                        <span class="question-title">Partner Elite Status</span>
-                    </label>
+                    <label for="partnerStatus">Partner Elite Status (e.g. Marriott, Hilton)</label>
                     <div class="slider-container">
-                        <input type="range" id="partnerStatus" min="0" max="4" value="0" class="slider">
+                        <input type="range" id="partnerStatus" min="0" max="4" step="1" value="0" class="slider">
                         <div class="slider-labels">
-                            <span>None</span>
-                            <span>25%</span>
-                            <span>50%</span>
-                            <span>75%</span>
-                            <span>All</span>
+                            <span>None</span><span>25%</span><span>50%</span><span>75%</span><span>All</span>
                         </div>
                     </div>
                 </div>
                 <div class="question-group">
-                    <label for="fhrAndIap">
-                        <span class="question-title">Amex Fine Hotels and Resorts Access and Amex International Airline Program</span>
-                    </label>
+                    <label for="fhrAndIap">Amex Fine Hotels and Resorts Access</label>
                     <div class="slider-container">
-                        <input type="range" id="fhrAndIap" min="0" max="4" value="0" class="slider">
+                        <input type="range" id="fhrAndIap" min="0" max="4" step="1" value="0" class="slider">
                         <div class="slider-labels">
-                            <span>None</span>
-                            <span>25%</span>
-                            <span>50%</span>
-                            <span>75%</span>
-                            <span>All</span>
+                            <span>None</span><span>25%</span><span>50%</span><span>75%</span><span>All</span>
                         </div>
                     </div>
                 </div>
                 <div class="question-group">
-                    <label for="cardProtections">
-                        <span class="question-title">Amex Platinum Card Protections</span>
-                    </label>
+                    <label for="cardProtections">Amex Platinum Card Protections</label>
                     <div class="slider-container">
-                        <input type="range" id="cardProtections" min="0" max="4" value="0" class="slider">
+                        <input type="range" id="cardProtections" min="0" max="4" step="1" value="0" class="slider">
                         <div class="slider-labels">
-                            <span>None</span>
-                            <span>25%</span>
-                            <span>50%</span>
-                            <span>75%</span>
-                            <span>All</span>
+                            <span>None</span><span>25%</span><span>50%</span><span>75%</span><span>All</span>
                         </div>
                     </div>
                 </div>
@@ -309,7 +232,6 @@
             <div class="section hidden" id="section4">
                 <a href="#" id="backToSection3" class="back-link">← Back to Credit Card Perks</a>
                 <h2>Final Valuation</h2>
-                <h3 class="valuation-subheading">Here's what the credit card is worth to you</h3>
                 <div class="question-group">
                     <label for="yearlyValue">The value you get from this card per year:</label>
                     <input type="text" id="yearlyValue" readonly>
@@ -330,7 +252,9 @@
                     <label for="secondYearValue">2nd year onwards annual value to you:</label>
                     <input type="text" id="secondYearValue" readonly>
                 </div>
-                <button class="apply-now-button">Apply now</button>
+                <div class="button-container">
+                    <button class="cta-button">Apply now</button>
+                </div>
             </div>
         </div>
     </div>
@@ -338,3 +262,4 @@
     <script src="script.js"></script>
 </body>
 </html>
+                   
