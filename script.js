@@ -193,8 +193,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const sliders = document.querySelectorAll('.slider');
     sliders.forEach(slider => {
         const valueDisplay = document.getElementById(`${slider.id}Value`);
+        const valueContainer = valueDisplay.parentElement;
         slider.addEventListener('input', function() {
             valueDisplay.textContent = this.value;
+            valueContainer.classList.remove('hidden');
         });
     });
 });
