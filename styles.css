@@ -49,7 +49,8 @@ h1 {
     background-color: #e0e0e0;
     border-radius: 10px;
     margin-bottom: 30px;
-    height: 20px;
+    height: 10px;
+    position: relative;
 }
 
 .progress {
@@ -63,35 +64,22 @@ h1 {
 .step-labels {
     display: flex;
     justify-content: space-between;
-    margin-top: 10px;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
 }
 
 .step {
-    font-size: 0.9em;
-    color: var(--secondary-text-color);
-    position: relative;
-    text-align: center;
-    flex: 1;
+    width: 20px;
+    height: 20px;
+    background-color: #e0e0e0;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
 }
 
 .step.active {
-    color: var(--primary-color);
-    font-weight: bold;
-}
-
-.step::before {
-    content: '';
-    position: absolute;
-    top: -25px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 10px;
-    height: 10px;
-    background-color: var(--secondary-text-color);
-    border-radius: 50%;
-}
-
-.step.active::before {
     background-color: var(--primary-color);
 }
 
@@ -168,16 +156,6 @@ h1 {
     background-color: #005fa3;
 }
 
-.apply-now-button {
-    background-color: var(--success-color);
-    align-self: flex-end;
-    margin-left: auto;
-}
-
-.apply-now-button:hover {
-    background-color: #2e7d32;
-}
-
 .hidden {
     display: none;
 }
@@ -231,6 +209,12 @@ h1 {
     bottom: 5px;
     font-size: 0.9em;
     color: var(--text-color);
+    transition: opacity 0.3s ease-in-out;
+    opacity: 1;
+}
+
+.slider-value.hidden {
+    opacity: 0;
 }
 
 #results, #section4 {
