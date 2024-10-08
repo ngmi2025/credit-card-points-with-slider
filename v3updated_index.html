@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Card Value Calculator | UpgradedPoints.com</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Credit Card Value Calculator</h1>
+        <p class="intro">Discover the true value of your credit card based on your personal usage and preferences.</p>
+        
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+            <div class="step-labels">
+                <span class="step active">Travel Profile</span>
+                <span class="step">Card Benefits</span>
+                <span class="step">Credit Card Perks</span>
+                <span class="step">Results</span>
+            </div>
+        </div>
+
+        <div id="calculator">
+            <div class="section" id="section1">
+                <h2>Travel Profile</h2>
+                <div class="question-group">
+                    <label for="travelFrequency">How many times do you travel per year?</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="travelFrequency" inputmode="numeric" placeholder="Enter number of trips" required>
+                    </div>
+                </div>
+                <div class="question-group">
+                    <label for="homeAirport">What is your home airport?</label>
+                    <div class="input-group">
+                        <select id="homeAirport" required>
+                            <option value="">Select an option</option>
+                            <option value="ATL">Atlanta (ATL)</option>
+                            <option value="BOS">Boston (BOS)</option>
+                            <!-- Other options here -->
+                            <option value="custom">Other (specify)</option>
+                        </select>
+                    </div>
+                    <div id="customHomeAirport" class="input-wrapper hidden">
+                        <input type="text" placeholder="Enter your home airport">
+                    </div>
+                </div>
+                <!-- Travel profile other inputs -->
+                <div class="button-container">
+                    <button id="calculatePointsBtn" class="cta-button">Calculate Points</button>
+                </div>
+            </div>
+
+            <div class="section hidden" id="section2">
+                <a href="#" id="backToSection1" class="back-link">← Back to Travel Profile</a>
+                <h2>Card Benefits</h2>
+                <p class="section-intro">How much do you value the following credits:</p>
+
+                <!-- Slider sections integrated here -->
+                <div class="question-group">
+                    <label for="airlineCredit">
+                        <span class="question-title">$200 Airline Fee Credit</span>
+                    </label>
+                    <div class="slider-container">
+                        <input type="range" id="airlineCredit" min="0" max="200" step="50" value="0" class="slider">
+                        <div class="slider-labels">
+                            <span>$0</span>
+                            <span>$50</span>
+                            <span>$100</span>
+                            <span>$150</span>
+                            <span>$200</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Other sliders... -->
+                <div class="button-container">
+                    <button id="continueToSection3Btn" class="cta-button">Continue</button>
+                </div>
+            </div>
+
+            <div class="section hidden" id="section3">
+                <a href="#" id="backToSection2" class="back-link">← Back to Card Benefits</a>
+                <h2>Credit Card Perks</h2>
+                <p class="section-intro">How much do you value the following perks:</p>
+
+                <!-- Slider section for Credit Card Perks -->
+                <div class="question-group">
+                    <label for="loungeAccess">
+                        <span class="question-title">Amex Platinum Airport Lounge Access</span>
+                    </label>
+                    <div class="slider-container">
+                        <input type="range" id="loungeAccess" min="0" max="4" value="0" class="slider">
+                        <div class="slider-labels">
+                            <span>None</span>
+                            <span>25%</span>
+                            <span>50%</span>
+                            <span>75%</span>
+                            <span>All</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Other sliders... -->
+                <div class="button-container">
+                    <button id="calculateValuationBtn" class="cta-button">Calculate Valuation</button>
+                </div>
+            </div>
+
+            <div class="section hidden" id="section4">
+                <a href="#" id="backToSection3" class="back-link">← Back to Credit Card Perks</a>
+                <h2>Final Valuation</h2>
+                <div class="question-group">
+                    <label for="yearlyValue">The value you get from this card per year:</label>
+                    <input type="text" id="yearlyValue" readonly>
+                </div>
+                <div class="button-container">
+                    <button class="cta-button">Apply now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
