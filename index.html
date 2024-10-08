@@ -10,14 +10,14 @@
     <div class="container">
         <h1>Credit Card Value Calculator</h1>
         <p class="intro">Discover the true value of your credit card based on your personal usage and preferences.</p>
-
+        
         <div class="progress-bar">
             <div class="progress" id="progress"></div>
             <div class="step-labels">
-                <span class="step active">Travel Profile</span>
-                <span class="step">Card Benefits</span>
-                <span class="step">Credit Card Perks</span>
-                <span class="step">Results</span>
+                <span class="step active"></span>
+                <span class="step"></span>
+                <span class="step"></span>
+                <span class="step"></span>
             </div>
         </div>
 
@@ -102,9 +102,9 @@
             </div>
 
             <div class="section hidden" id="section2">
-                <a href="#" id="backToSection1" class="back-link">← Back to Travel Profile</a>
+                <a href="#" id="backToSection1" class="back-link">← Back to previous section</a>
                 <h2>Card Benefits</h2>
-                <p class="section-intro">How much do you value the following credits:</p>
+                <p class="section-intro"><b>How much do you value the following credits:</b></p>
                 <div class="question-group">
                     <label for="airlineCredit">$200 Airline Fee Credit</label>
                     <div class="slider-container">
@@ -113,6 +113,7 @@
                             <span>$0</span><span>$50</span><span>$100</span><span>$150</span><span>$200</span>
                         </div>
                     </div>
+                    <div class="slider-value hidden">$<span id="airlineCreditValue">0</span></div>
                 </div>
                 <div class="question-group">
                     <label for="uberCredit">$200 Uber Credit</label>
@@ -122,6 +123,7 @@
                             <span>$0</span><span>$50</span><span>$100</span><span>$150</span><span>$200</span>
                         </div>
                     </div>
+                    <div class="slider-value hidden">$<span id="uberCreditValue">0</span></div>
                 </div>
                 <div class="question-group">
                     <label for="saksCredit">$100 Saks Fifth Avenue Credit</label>
@@ -131,6 +133,7 @@
                             <span>$0</span><span>$25</span><span>$50</span><span>$75</span><span>$100</span>
                         </div>
                     </div>
+                    <div class="slider-value hidden">$<span id="saksCreditValue">0</span></div>
                 </div>
                 <div class="question-group">
                     <label for="equinoxCredit">$300 Equinox Credit</label>
@@ -140,6 +143,7 @@
                             <span>$0</span><span>$75</span><span>$150</span><span>$225</span><span>$300</span>
                         </div>
                     </div>
+                    <div class="slider-value hidden">$<span id="equinoxCreditValue">0</span></div>
                 </div>
                 <div class="question-group">
                     <label for="entertainmentCredit">$240 Entertainment Credit</label>
@@ -149,6 +153,7 @@
                             <span>$0</span><span>$60</span><span>$120</span><span>$180</span><span>$240</span>
                         </div>
                     </div>
+                    <div class="slider-value hidden">$<span id="entertainmentCreditValue">0</span></div>
                 </div>
                 <div class="question-group">
                     <label for="clearCredit">$189 CLEAR Credit</label>
@@ -158,6 +163,7 @@
                             <span>$0</span><span>$47</span><span>$95</span><span>$142</span><span>$189</span>
                         </div>
                     </div>
+                    <div class="slider-value hidden">$<span id="clearCreditValue">0</span></div>
                 </div>
                 <div class="question-group">
                     <label for="globalEntryCredit">$100 Global Entry Credit</label>
@@ -167,6 +173,7 @@
                             <span>$0</span><span>$25</span><span>$50</span><span>$75</span><span>$100</span>
                         </div>
                     </div>
+                    <div class="slider-value hidden">$<span id="globalEntryCreditValue">0</span></div>
                 </div>
                 <div class="question-group">
                     <label for="soulCycleCredit">$300 SoulCycle At-Home Bike Credit</label>
@@ -176,6 +183,7 @@
                             <span>$0</span><span>$75</span><span>$150</span><span>$225</span><span>$300</span>
                         </div>
                     </div>
+                    <div class="slider-value hidden">$<span id="soulCycleCreditValue">0</span></div>
                 </div>
                 <div class="button-container">
                     <button id="continueToSection3Btn" class="cta-button">Continue</button>
@@ -183,11 +191,9 @@
             </div>
 
             <div class="section hidden" id="section3">
-                <a href="#" id="backToSection2" class="back-link">← Back to Card Benefits</a>
+                <a href="#" id="backToSection2" class="back-link">← Back to previous section</a>
                 <h2>Credit Card Perks</h2>
-                <p class="section-intro">How much do you value the following perks:</p>
-
-                <!-- Slider section for Credit Card Perks -->
+                <p class="section-intro"><b>How much do you value the following perks:</b></p>
                 <div class="question-group">
                     <label for="loungeAccess">Amex Platinum Airport Lounge Access</label>
                     <div class="slider-container">
@@ -230,7 +236,7 @@
             </div>
 
             <div class="section hidden" id="section4">
-                <a href="#" id="backToSection3" class="back-link">← Back to Credit Card Perks</a>
+                <a href="#" id="backToSection3" class="back-link">← Back to previous section</a>
                 <h2>Final Valuation</h2>
                 <div class="question-group">
                     <label for="yearlyValue">The value you get from this card per year:</label>
@@ -262,4 +268,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-                   
