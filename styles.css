@@ -231,11 +231,20 @@ input[type="number"] {
 }
 
 .apply-now-btn {
-    background-color: var(--success-color);
+    background-color: var(--success-color) !important;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 
-.cta-button:hover {
-    background-color: #005fa3;
+.apply-now-btn:hover {
+    background-color: #34a853;
 }
 
 .error {
@@ -288,12 +297,12 @@ input[type="number"] {
     box-sizing: border-box;
 }
 
-.value-check.negative {
-    color: var(--error-color);
+#section4 .question-group input.value-check.negative {
+    color: var(--error-color) !important;
 }
 
-.value-check.positive {
-    color: var(--text-color);
+#section4 .question-group input.value-check.positive {
+    color: var(--text-color) !important;
 }
 
 .subheading {
