@@ -157,4 +157,9 @@ document.addEventListener('DOMContentLoaded', function() {
         e.preventDefault();
         nextSection('section4', 'section3');
     });
+
+    // Update the labels for Credit Card Perks sliders
+    document.querySelectorAll('#section3 .slider-labels').forEach(labelGroup => {
+        labelGroup.innerHTML = '<span>Never</span><span>Sometimes</span><span>Always</span>';
+    });
 });
