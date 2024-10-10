@@ -78,11 +78,12 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateValueField(fieldId, value) {
         const field = document.getElementById(fieldId);
         field.value = '$' + Math.round(value);
-        field.classList.remove('positive', 'negative');
+        
+        // Set inline styles for color to prevent being overridden
         if (value >= 0) {
-            field.classList.add('positive');
+            field.style.color = '#333'; // Black for positive values
         } else {
-            field.classList.add('negative');
+            field.style.color = '#d32f2f'; // Red for negative values
         }
     }
 
