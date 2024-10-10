@@ -354,12 +354,13 @@ input[type="number"] {
     }
     
     .section {
-        padding: 20px;
+        padding: 15px;
     }
 
     .question-group {
         flex-direction: column;
         align-items: flex-start;
+        margin-bottom: 15px;
     }
 
     .question-group label,
@@ -384,7 +385,7 @@ input[type="number"] {
     .cta-button {
         width: 100%;
         font-size: 16px;
-        padding: 12px;
+        padding: 10px;
         margin: 0;
         box-sizing: border-box;
     }
@@ -395,5 +396,13 @@ input[type="number"] {
 
     select {
         background-position-x: 95%;
+    }
+
+    .progress-bar {
+        height: 15px;
+    }
+
+    .slider-container input[type="range"] {
+        height: 6px;
     }
 }
