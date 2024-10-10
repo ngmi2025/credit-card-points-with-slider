@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', function() {
     const WELCOME_BONUS = 80000;
     const POINT_VALUE = 0.022;
@@ -156,5 +155,38 @@ document.addEventListener('DOMContentLoaded', function() {
             valueDisplay.textContent = this.value;
             valueContainer.classList.remove('hidden');
         });
+    });
+
+    // Handle custom input for home airport
+    document.getElementById('homeAirport').addEventListener('change', function() {
+        const customInput = document.getElementById('customHomeAirport');
+        if (this.value === 'custom') {
+            customInput.classList.remove('hidden');
+        } else {
+            customInput.classList.add('hidden');
+        }
+    });
+
+    // Format currency inputs
+    const currencyInputs = document.querySelectorAll('.input-wrapper input[type="text"]:not(#travelFrequency)');
+    currencyInputs.forEach(input => {
+        input.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/[^\d]/g, '');
+            if (value) {
+                value = parseInt(value, 10);
+                e.target.value = value.toLocaleString('en-US', {
+                    style: 'currency',
+                    currency: 'USD',
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0
+                });
+            }
+        });
+    });
+
+    // Ensure travel frequency input only accepts numbers
+    const travelFrequencyInput = document.getElementById('travelFrequency');
+    travelFrequencyInput.addEventListener('input', function(e) {
+        this.value = this.value.replace(/[^\d]/g, '');
     });
 });
