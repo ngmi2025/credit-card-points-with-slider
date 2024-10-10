@@ -44,11 +44,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // Calculate Section 3 using slider values
     function calculateSection3Value() {
         const travelFrequency = parseInt(document.getElementById('travelFrequency').value) || 0;
-        const perks = ['loungeAccess', 'partnerStatus', 'fhrAndIap', 'cardProtections'];
+        const perks = [
+            { id: 'loungeAccess', value: 100 },
+            { id: 'partnerStatus', value: 200 },
+            { id: 'fhrAndIap', value: 150 },
+            { id: 'cardProtections', value: 120 }
+        ];
         
-        return perks.reduce((total, perkId) => {
-            const sliderValue = parseInt(document.getElementById(perkId).value);
-            return total + travelFrequency * 40 * (sliderValue / 4);
+        return perks.reduce((total, perk) => {
+            const sliderValue = parseInt(document.getElementById(perk.id).value);
+            return total + travelFrequency * (perk.value * (sliderValue / 4));
         }, 0);
     }
 
