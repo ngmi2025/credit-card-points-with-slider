@@ -103,43 +103,58 @@
                 </div>
             </div>
 
-            <!-- Slider section isolated to prevent styling conflicts -->
-            <div class="slider-section hidden" id="section2">
+            <div class="section hidden" id="section2">
                 <a href="#" id="backToSection1" class="back-link">← Back to previous section</a>
                 <h2>Card Benefits</h2>
                 <p class="subheading">How much do you value the following credits:</p>
                 
                 <div class="question-group">
                     <label for="airlineCredit">$200 Airline Fee Credit</label>
-                    <div class="slider-container">
-                        <input type="range" id="airlineCredit" min="0" max="200" step="50" value="0" class="slider">
-                        <div class="slider-labels">
-                            <span>$0</span><span>$50</span><span>$100</span><span>$150</span><span>$200</span>
-                        </div>
+                    <div class="input-wrapper">
+                        <input type="text" id="airlineCredit" inputmode="numeric" placeholder="$0" required>
                     </div>
-                    <div class="slider-value hidden">$<span id="airlineCreditValue">0</span></div>
                 </div>
-
                 <div class="question-group">
                     <label for="uberCredit">$200 Uber Credit</label>
-                    <div class="slider-container">
-                        <input type="range" id="uberCredit" min="0" max="200" step="50" value="0" class="slider">
-                        <div class="slider-labels">
-                            <span>$0</span><span>$50</span><span>$100</span><span>$150</span><span>$200</span>
-                        </div>
+                    <div class="input-wrapper">
+                        <input type="text" id="uberCredit" inputmode="numeric" placeholder="$0" required>
                     </div>
-                    <div class="slider-value hidden">$<span id="uberCreditValue">0</span></div>
                 </div>
-
                 <div class="question-group">
                     <label for="saksCredit">$100 Saks Fifth Avenue Credit</label>
-                    <div class="slider-container">
-                        <input type="range" id="saksCredit" min="0" max="100" step="25" value="0" class="slider">
-                        <div class="slider-labels">
-                            <span>$0</span><span>$25</span><span>$50</span><span>$75</span><span>$100</span>
-                        </div>
+                    <div class="input-wrapper">
+                        <input type="text" id="saksCredit" inputmode="numeric" placeholder="$0" required>
                     </div>
-                    <div class="slider-value hidden">$<span id="saksCreditValue">0</span></div>
+                </div>
+                <div class="question-group">
+                    <label for="equinoxCredit">$300 Equinox Credit</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="equinoxCredit" inputmode="numeric" placeholder="$0" required>
+                    </div>
+                </div>
+                <div class="question-group">
+                    <label for="entertainmentCredit">$240 Entertainment Credit</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="entertainmentCredit" inputmode="numeric" placeholder="$0" required>
+                    </div>
+                </div>
+                <div class="question-group">
+                    <label for="clearCredit">$189 CLEAR Credit</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="clearCredit" inputmode="numeric" placeholder="$0" required>
+                    </div>
+                </div>
+                <div class="question-group">
+                    <label for="globalEntryCredit">$100 Global Entry Credit</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="globalEntryCredit" inputmode="numeric" placeholder="$0" required>
+                    </div>
+                </div>
+                <div class="question-group">
+                    <label for="soulCycleCredit">$300 SoulCycle At-Home Bike Credit</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="soulCycleCredit" inputmode="numeric" placeholder="$0" required>
+                    </div>
                 </div>
                 
                 <div class="button-container">
@@ -157,11 +172,8 @@
                         <span class="question-title">Amex Platinum Airport Lounge Access</span>
                         <span class="question-description">This includes: Amex Centurion lounges, Priority Pass, Delta Sky Clubs, Plaza Premium Lounges, Escape Lounges – The Centurion Studio Partner, select Lufthansa lounges, and select Virgin Clubhouses</span>
                     </label>
-                    <div class="slider-container">
-                        <input type="range" id="loungeAccess" min="0" max="4" step="1" value="0" class="slider">
-                        <div class="slider-labels">
-                            <span>None</span><span>25%</span><span>50%</span><span>75%</span><span>All</span>
-                        </div>
+                    <div class="input-wrapper">
+                        <input type="text" id="loungeAccess" inputmode="numeric" placeholder="$0" required>
                     </div>
                 </div>
 
@@ -170,46 +182,10 @@
                         <span class="question-title">Partner Elite Status (e.g. Marriott, Hilton)</span>
                         <span class="question-description">This includes: Marriott Gold Elite status, Hilton Honors Gold status, National Emerald Club Executive status, Avis Preferred, Hertz President's Circle status</span>
                     </label>
-                    <div class="slider-container">
-                        <input type="range" id="partnerStatus" min="0" max="4" step="1" value="0" class="slider">
-                        <div class="slider-labels">
-                            <span>None</span><span>25%</span><span>50%</span><span>75%</span><span>All</span>
-                        </div>
+                    <div class="input-wrapper">
+                        <input type="text" id="partnerStatus" inputmode="numeric" placeholder="$0" required>
                     </div>
                 </div>
                 
                 <div class="button-container">
                     <button id="calculateValuationBtn" class="cta-button">Calculate Valuation</button>
-                </div>
-            </div>
-
-            <div class="section hidden" id="section4">
-                <a href="#" id="backToSection3" class="back-link">← Back to previous section</a>
-                <h2>Final Valuation</h2>
-                <div class="question-group">
-                    <label for="yearlyValue">The value you get from this card per year:</label>
-                    <input type="text" id="yearlyValue" readonly>
-                </div>
-                <div class="question-group">
-                    <label for="signupBonusValue">The value you get from the sign-up bonus points:</label>
-                    <input type="text" id="signupBonusValue" readonly>
-                </div>
-                <div class="question-group">
-                    <label for="annualFee">Annual Credit Card Fee:</label>
-                    <input type="text" id="annualFee" readonly>
-                </div>
-                <div class="question-group">
-                    <label for="firstYearValue">1st year value to you:</label>
-                    <input type="text" id="firstYearValue" readonly>
-                </div>
-                <div class="question-group">
-                    <label for="secondYearValue">2nd year onwards annual value to you:</label>
-                    <input type="text" id="secondYearValue" readonly>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
-</body>
-</html>
