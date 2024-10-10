@@ -24,12 +24,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Final Valuation Calculation
     function calculateFinalValuation() {
+        const airlineCredit = parseFloat(document.getElementById('airlineCredit').value.replace(/[^\d.-]/g, '')) || 0;
+        const uberCredit = parseFloat(document.getElementById('uberCredit').value.replace(/[^\d.-]/g, '')) || 0;
+        const saksCredit = parseFloat(document.getElementById('saksCredit').value.replace(/[^\d.-]/g, '')) || 0;
+        const equinoxCredit = parseFloat(document.getElementById('equinoxCredit').value.replace(/[^\d.-]/g, '')) || 0;
+        const entertainmentCredit = parseFloat(document.getElementById('entertainmentCredit').value.replace(/[^\d.-]/g, '')) || 0;
+        const clearCredit = parseFloat(document.getElementById('clearCredit').value.replace(/[^\d.-]/g, '')) || 0;
+        const globalEntryCredit = parseFloat(document.getElementById('globalEntryCredit').value.replace(/[^\d.-]/g, '')) || 0;
+        const soulCycleCredit = parseFloat(document.getElementById('soulCycleCredit').value.replace(/[^\d.-]/g, '')) || 0;
+        const loungeAccess = parseFloat(document.getElementById('loungeAccess').value.replace(/[^\d.-]/g, '')) || 0;
+        const partnerStatus = parseFloat(document.getElementById('partnerStatus').value.replace(/[^\d.-]/g, '')) || 0;
+
         const totalPoints = parseInt(document.getElementById('totalPoints').value.replace(/[^\d.-]/g, '')) || 0;
         const pointsValue = totalPoints * POINT_VALUE;
-        const section2Value = calculateSection2Value();
-        const section3Value = calculateSection3Value();
+        const cardBenefits = airlineCredit + uberCredit + saksCredit + equinoxCredit + entertainmentCredit + clearCredit + globalEntryCredit + soulCycleCredit;
+        const cardPerks = loungeAccess + partnerStatus;
 
-        const yearlyValue = pointsValue + section2Value + section3Value;
+        const yearlyValue = pointsValue + cardBenefits + cardPerks;
         const signupBonusValue = WELCOME_BONUS * POINT_VALUE;
         const firstYearValue = yearlyValue + signupBonusValue - ANNUAL_FEE;
         const secondYearValue = yearlyValue - ANNUAL_FEE;
