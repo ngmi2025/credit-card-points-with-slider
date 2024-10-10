@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Credit Card Value Calculator | UpgradedPoints.com</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="https://upgradedpoints.com/favicon-32x32.png?v=cdbc42571be2a0d394ebfd58d92208e7" type="image/png">
 </head>
 <body>
     <div class="container">
@@ -64,19 +63,19 @@
                 <div class="question-group">
                     <label for="flightSpend">Spending on flights with airlines or Amex Travel / year</label>
                     <div class="input-wrapper">
-                        <input type="text" id="flightSpend" inputmode="numeric" placeholder="$0" required>
+                        <input type="text" id="flightSpend" inputmode="numeric" placeholder="0" required>
                     </div>
                 </div>
                 <div class="question-group">
                     <label for="hotelSpend">Spending on prepaid hotels through Amex Travel / year</label>
                     <div class="input-wrapper">
-                        <input type="text" id="hotelSpend" inputmode="numeric" placeholder="$0" required>
+                        <input type="text" id="hotelSpend" inputmode="numeric" placeholder="0" required>
                     </div>
                 </div>
                 <div class="question-group">
                     <label for="otherSpend">Spending on all other purchases / year</label>
                     <div class="input-wrapper">
-                        <input type="text" id="otherSpend" inputmode="numeric" placeholder="$0" required>
+                        <input type="text" id="otherSpend" inputmode="numeric" placeholder="0" required>
                     </div>
                 </div>
                 <div class="button-container">
@@ -110,50 +109,97 @@
                 
                 <div class="question-group">
                     <label for="airlineCredit">$200 Airline Fee Credit</label>
-                    <div class="input-wrapper">
-                        <input type="text" id="airlineCredit" inputmode="numeric" placeholder="$0" required>
+                    <div class="input-group">
+                        <select id="airlineCredit" required>
+                            <option value="">Select an option</option>
+                            <option value="0">I won't use it</option>
+                            <option value="0.5">I'll use some of it</option>
+                            <option value="1">I'll use all of it</option>
+                        </select>
                     </div>
                 </div>
+
                 <div class="question-group">
                     <label for="uberCredit">$200 Uber Credit</label>
-                    <div class="input-wrapper">
-                        <input type="text" id="uberCredit" inputmode="numeric" placeholder="$0" required>
+                    <div class="input-group">
+                        <select id="uberCredit" required>
+                            <option value="">Select an option</option>
+                            <option value="0">I won't use it</option>
+                            <option value="0.5">I'll use some of it</option>
+                            <option value="1">I'll use all of it</option>
+                        </select>
                     </div>
                 </div>
+
                 <div class="question-group">
                     <label for="saksCredit">$100 Saks Fifth Avenue Credit</label>
-                    <div class="input-wrapper">
-                        <input type="text" id="saksCredit" inputmode="numeric" placeholder="$0" required>
+                    <div class="input-group">
+                        <select id="saksCredit" required>
+                            <option value="">Select an option</option>
+                            <option value="0">I won't use it</option>
+                            <option value="0.5">I'll use some of it</option>
+                            <option value="1">I'll use all of it</option>
+                        </select>
                     </div>
                 </div>
+
                 <div class="question-group">
                     <label for="equinoxCredit">$300 Equinox Credit</label>
-                    <div class="input-wrapper">
-                        <input type="text" id="equinoxCredit" inputmode="numeric" placeholder="$0" required>
+                    <div class="input-group">
+                        <select id="equinoxCredit" required>
+                            <option value="">Select an option</option>
+                            <option value="0">I won't use it</option>
+                            <option value="0.5">I'll use some of it</option>
+                            <option value="1">I'll use all of it</option>
+                        </select>
                     </div>
                 </div>
+
                 <div class="question-group">
-                    <label for="entertainmentCredit">$240 Entertainment Credit</label>
-                    <div class="input-wrapper">
-                        <input type="text" id="entertainmentCredit" inputmode="numeric" placeholder="$0" required>
+                    <label for="entertainmentCredit">$240 Digital Entertainment Credit</label>
+                    <div class="input-group">
+                        <select id="entertainmentCredit" required>
+                            <option value="">Select an option</option>
+                            <option value="0">I won't use it</option>
+                            <option value="0.5">I'll use some of it</option>
+                            <option value="1">I'll use all of it</option>
+                        </select>
                     </div>
                 </div>
+
                 <div class="question-group">
                     <label for="clearCredit">$189 CLEAR Credit</label>
-                    <div class="input-wrapper">
-                        <input type="text" id="clearCredit" inputmode="numeric" placeholder="$0" required>
+                    <div class="input-group">
+                        <select id="clearCredit" required>
+                            <option value="">Select an option</option>
+                            <option value="0">I won't use it</option>
+                            <option value="0.5">I'll use some of it</option>
+                            <option value="1">I'll use all of it</option>
+                        </select>
                     </div>
                 </div>
+
                 <div class="question-group">
                     <label for="globalEntryCredit">$100 Global Entry Credit</label>
-                    <div class="input-wrapper">
-                        <input type="text" id="globalEntryCredit" inputmode="numeric" placeholder="$0" required>
+                    <div class="input-group">
+                        <select id="globalEntryCredit" required>
+                            <option value="">Select an option</option>
+                            <option value="0">I won't use it</option>
+                            <option value="0.5">I'll use some of it</option>
+                            <option value="1">I'll use all of it</option>
+                        </select>
                     </div>
                 </div>
+
                 <div class="question-group">
                     <label for="soulCycleCredit">$300 SoulCycle At-Home Bike Credit</label>
-                    <div class="input-wrapper">
-                        <input type="text" id="soulCycleCredit" inputmode="numeric" placeholder="$0" required>
+                    <div class="input-group">
+                        <select id="soulCycleCredit" required>
+                            <option value="">Select an option</option>
+                            <option value="0">I won't use it</option>
+                            <option value="0.5">I'll use some of it</option>
+                            <option value="1">I'll use all of it</option>
+                        </select>
                     </div>
                 </div>
                 
@@ -172,18 +218,57 @@
                         <span class="question-title">Amex Platinum Airport Lounge Access</span>
                         <span class="question-description">This includes: Amex Centurion lounges, Priority Pass, Delta Sky Clubs, Plaza Premium Lounges, Escape Lounges – The Centurion Studio Partner, select Lufthansa lounges, and select Virgin Clubhouses</span>
                     </label>
-                    <div class="input-wrapper">
-                        <input type="text" id="loungeAccess" inputmode="numeric" placeholder="$0" required>
+                    <div class="input-group">
+                        <select id="loungeAccess" required>
+                            <option value="">Select an option</option>
+                            <option value="0">I won't use it</option>
+                            <option value="0.5">I'll use some of it</option>
+                            <option value="1">I'll use all of it</option>
+                        </select>
                     </div>
                 </div>
 
                 <div class="question-group">
                     <label for="partnerStatus">
-                        <span class="question-title">Partner Elite Status (e.g. Marriott, Hilton)</span>
+                        <span class="question-title">Partner Elite Status</span>
                         <span class="question-description">This includes: Marriott Gold Elite status, Hilton Honors Gold status, National Emerald Club Executive status, Avis Preferred, Hertz President's Circle status</span>
                     </label>
-                    <div class="input-wrapper">
-                        <input type="text" id="partnerStatus" inputmode="numeric" placeholder="$0" required>
+                    <div class="input-group">
+                        <select id="partnerStatus" required>
+                            <option value="">Select an option</option>
+                            <option value="0">I won't use it</option>
+                            <option value="0.5">I'll use some of it</option>
+                            <option value="1">I'll use all of it</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <label for="fhrAndIap">
+                        <span class="question-title">Amex Fine Hotels and Resorts Access and the Amex International Airline Program?</span>
+                    </label>
+                    <div class="input-group">
+                        <select id="fhrAndIap" required>
+                            <option value="">Select an option</option>
+                            <option value="0">I won't use it</option>
+                            <option value="0.5">I'll use some of it</option>
+                            <option value="1">I'll use all of it</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <label for="cardProtections">
+                        <span class="question-title">Amex Platinum Card Protections</span>
+                        <span class="question-description">This includes: Trip Delay Insurance, Trip Cancellation Insurance, Rental Car Insurance, Cell Phone Protection, Purchase Protection, Return Protection and Extended Warranty Protection</span>
+                    </label>
+                    <div class="input-group">
+                        <select id="cardProtections" required>
+                            <option value="">Select an option</option>
+                            <option value="0">I won't use it</option>
+                            <option value="0.5">I'll use some of it</option>
+                            <option value="1">I'll use all of it</option>
+                        </select>
                     </div>
                 </div>
                 
