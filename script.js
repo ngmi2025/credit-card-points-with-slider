@@ -27,12 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const credits = [
             { id: 'airlineCredit', value: 200 },
             { id: 'uberCredit', value: 200 },
-            { id: 'saksCredit', value: 100 },
-            { id: 'equinoxCredit', value: 300 },
-            { id: 'entertainmentCredit', value: 240 },
-            { id: 'clearCredit', value: 189 },
-            { id: 'globalEntryCredit', value: 100 },
-            { id: 'soulCycleCredit', value: 300 }
+            { id: 'saksCredit', value: 100 }
         ];
 
         return credits.reduce((total, credit) => {
@@ -46,9 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const travelFrequency = parseInt(document.getElementById('travelFrequency').value) || 0;
         const perks = [
             { id: 'loungeAccess', value: 100 },
-            { id: 'partnerStatus', value: 200 },
-            { id: 'fhrAndIap', value: 150 },
-            { id: 'cardProtections', value: 120 }
+            { id: 'partnerStatus', value: 200 }
         ];
         
         return perks.reduce((total, perk) => {
