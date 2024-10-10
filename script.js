@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const POINT_VALUE = 0.022;
     const ANNUAL_FEE = 595;
 
-    // Points Calculation for Section 1
     function calculatePoints() {
         const flightSpend = parseFloat(document.getElementById('flightSpend').value.replace(/[^\d.-]/g, '')) || 0;
         const hotelSpend = parseFloat(document.getElementById('hotelSpend').value.replace(/[^\d.-]/g, '')) || 0;
@@ -22,41 +21,75 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('results').classList.remove('hidden');
     }
 
-    // Final Valuation Calculation
-    function calculateFinalValuation() {
-        const airlineCredit = parseFloat(document.getElementById('airlineCredit').value.replace(/[^\d.-]/g, '')) || 0;
-        const uberCredit = parseFloat(document.getElementById('uberCredit').value.replace(/[^\d.-]/g, '')) || 0;
-        const saksCredit = parseFloat(document.getElementById('saksCredit').value.replace(/[^\d.-]/g, '')) || 0;
-        const equinoxCredit = parseFloat(document.getElementById('equinoxCredit').value.replace(/[^\d.-]/g, '')) || 0;
-        const entertainmentCredit = parseFloat(document.getElementById('entertainmentCredit').value.replace(/[^\d.-]/g, '')) || 0;
-        const clearCredit = parseFloat(document.getElementById('clearCredit').value.replace(/[^\d.-]/g, '')) || 0;
-        const globalEntryCredit = parseFloat(document.getElementById('globalEntryCredit').value.replace(/[^\d.-]/g, '')) || 0;
-        const soulCycleCredit = parseFloat(document.getElementById('soulCycleCredit').value.replace(/[^\d.-]/g, '')) || 0;
-        const loungeAccess = parseFloat(document.getElementById('loungeAccess').value.replace(/[^\d.-]/g, '')) || 0;
-        const partnerStatus = parseFloat(document.getElementById('partnerStatus').value.replace(/[^\d.-]/g, '')) || 0;
+    function calculateSection2Value() {
+        const credits = [
+            { id: 'airlineCredit', value: 200 },
+            { id: 'uberCredit', value: 200 },
+            { id: 'saksCredit', value: 100 },
+            { id: 'equinoxCredit', value: 300 },
+            { id: 'entertainmentCredit', value: 240 },
+            { id: 'clearCredit', value: 189 },
+            { id: 'globalEntryCredit', value: 100 },
+            { id: 'soulCycleCredit', value: 300 }
+        ];
 
+        return credits.reduce((total, credit) => {
+            const usage = document.getElementById(credit.id).value;
+            switch (usage) {
+                case '0': return total;
+                case '0.5': return total + credit.value * 0.5;
+                case '1': return total + credit.value;
+                default: return total;
+            }
+        }, 0);
+    }
+
+    function calculateSection3Value() {
+        const travelFrequency = parseInt(document.getElementById('travelFrequency').value) || 0;
+        const perks = ['loungeAccess', 'partnerStatus', 'fhrAndIap', 'cardProtections'];
+        
+        return perks.reduce((total, perkId) => {
+            const usage = document.getElementById(perkId).value;
+            switch (usage) {
+                case '0': return total;
+                case '0.5': return total + travelFrequency * 40 * 0.5;
+                case '1': return total + travelFrequency * 40;
+                default: return total;
+            }
+        }, 0);
+    }
+
+    function calculateFinalValuation() {
         const totalPoints = parseInt(document.getElementById('totalPoints').value.replace(/[^\d.-]/g, '')) || 0;
         const pointsValue = totalPoints * POINT_VALUE;
-        const cardBenefits = airlineCredit + uberCredit + saksCredit + equinoxCredit + entertainmentCredit + clearCredit + globalEntryCredit + soulCycleCredit;
-        const cardPerks = loungeAccess + partnerStatus;
+        const section2Value = calculateSection2Value();
+        const section3Value = calculateSection3Value();
 
-        const yearlyValue = pointsValue + cardBenefits + cardPerks;
+        const yearlyValue = pointsValue + section2Value + section3Value;
         const signupBonusValue = WELCOME_BONUS * POINT_VALUE;
         const firstYearValue = yearlyValue + signupBonusValue - ANNUAL_FEE;
         const secondYearValue = yearlyValue - ANNUAL_FEE;
 
         document.getElementById('yearlyValue').value = '$' + Math.round(yearlyValue);
+        document.getElementById('yearlyValue').style.color = 'black';
+
         document.getElementById('signupBonusValue').value = '$' + Math.round(signupBonusValue);
+        document.getElementById('signupBonusValue').style.color = 'black';
+
         document.getElementById('annualFee').value = '$' + ANNUAL_FEE;
+        document.getElementById('annualFee').style.color = 'red';
+
         document.getElementById('firstYearValue').value = '$' + Math.round(firstYearValue);
+        document.getElementById('firstYearValue').style.color = firstYearValue >= 0 ? 'black' : 'red';
+
         document.getElementById('secondYearValue').value = '$' + Math.round(secondYearValue);
+        document.getElementById('secondYearValue').style.color = secondYearValue >= 0 ? 'black' : 'red';
 
         document.getElementById('section3').classList.add('hidden');
         document.getElementById('section4').classList.remove('hidden');
         updateProgressBar('section4');
     }
 
-    // Progress Bar Update
     function updateProgressBar(currentSection) {
         const progress = document.getElementById('progress');
         const steps = document.querySelectorAll('.step');
@@ -83,7 +116,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Section Navigation
     function nextSection(currentSection, nextSection) {
         document.getElementById(currentSection).classList.add('hidden');
         document.getElementById(nextSection).classList.remove('hidden');
@@ -94,7 +126,6 @@ document.addEventListener('DOMContentLoaded', function() {
         window.scrollTo(0, 0);
     }
 
-    // Event Listeners
     document.getElementById('calculatePointsBtn').addEventListener('click', function() {
         calculatePoints();
         document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
@@ -144,7 +175,9 @@ document.addEventListener('DOMContentLoaded', function() {
             let value = e.target.value.replace(/[^\d]/g, '');
             if (value) {
                 value = parseInt(value, 10);
-                e.target.value = '$' + value.toLocaleString('en-US', {
+                e.target.value = value.toLocaleString('en-US', {
+                    style: 'currency',
+                    currency: 'USD',
                     minimumFractionDigits: 0,
                     maximumFractionDigits: 0
                 });
