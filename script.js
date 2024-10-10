@@ -63,15 +63,27 @@ document.addEventListener('DOMContentLoaded', function() {
         const firstYearValue = yearlyValue + signupBonusValue - ANNUAL_FEE;
         const secondYearValue = yearlyValue - ANNUAL_FEE;
 
-        document.getElementById('yearlyValue').value = '$' + Math.round(yearlyValue);
-        document.getElementById('signupBonusValue').value = '$' + Math.round(signupBonusValue);
-        document.getElementById('annualFee').value = '$' + ANNUAL_FEE;
-        document.getElementById('firstYearValue').value = '$' + Math.round(firstYearValue);
-        document.getElementById('secondYearValue').value = '$' + Math.round(secondYearValue);
+        updateValueField('yearlyValue', yearlyValue);
+        updateValueField('signupBonusValue', signupBonusValue);
+        updateValueField('annualFee', ANNUAL_FEE);
+        updateValueField('firstYearValue', firstYearValue);
+        updateValueField('secondYearValue', secondYearValue);
 
         document.getElementById('section3').classList.add('hidden');
         document.getElementById('section4').classList.remove('hidden');
         updateProgressBar('section4');
+    }
+
+    // Update the value field color based on positive or negative value
+    function updateValueField(fieldId, value) {
+        const field = document.getElementById(fieldId);
+        field.value = '$' + Math.round(value);
+        field.classList.remove('positive', 'negative');
+        if (value >= 0) {
+            field.classList.add('positive');
+        } else {
+            field.classList.add('negative');
+        }
     }
 
     // Progress Bar Update
