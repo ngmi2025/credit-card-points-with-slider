@@ -122,12 +122,12 @@ h1 {
     margin-right: 20px;
 }
 
-.input-group, .input-wrapper {
+.input-group, .input-wrapper, .slider-container {
     flex: 0 0 250px;
     width: 250px;
 }
 
-.input-group select, .input-wrapper input[type="text"] {
+.input-group select, .input-wrapper input[type="text"], .slider-container input[type="range"] {
     width: 100%;
     padding: 10px;
     border: 1px solid var(--border-color);
@@ -135,6 +135,53 @@ h1 {
     font-size: 1em;
     height: 40px;
     box-sizing: border-box;
+}
+
+.slider-container input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 8px;
+    background: var(--border-color);
+    outline: none;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.slider-container input[type="range"]:hover {
+    opacity: 1;
+}
+
+.slider-container input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--primary-color);
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.slider-container input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: var(--primary-color);
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.slider-container .slider-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+    font-size: 0.8em;
+    color: var(--secondary-text-color);
+}
+
+.slider-value {
+    margin-top: 5px;
+    font-size: 0.9em;
+    font-weight: bold;
+    color: var(--primary-color);
 }
 
 .input-wrapper input[type="text"] {
@@ -275,18 +322,21 @@ input[type="number"] {
 
     .question-group label,
     .input-group,
-    .input-wrapper {
+    .input-wrapper,
+    .slider-container {
         width: 100%;
         margin-right: 0;
     }
 
     .input-group,
-    .input-wrapper {
+    .input-wrapper,
+    .slider-container {
         margin-top: 10px;
     }
 
     .input-group select,
     .input-wrapper input[type="text"],
+    .slider-container input[type="range"],
     #results .question-group input[readonly],
     #section4 .question-group input[readonly],
     .cta-button {
