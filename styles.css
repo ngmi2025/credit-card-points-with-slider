@@ -232,7 +232,7 @@ input[type="number"] {
 
 .apply-now-btn {
     background-color: var(--success-color) !important;
-    color: white;
+    color: white !important;
     border: none;
     padding: 10px 20px;
     font-size: 1em;
@@ -244,7 +244,7 @@ input[type="number"] {
 }
 
 .apply-now-btn:hover {
-    background-color: #34a853;
+    background-color: #34a853 !important;
 }
 
 .error {
