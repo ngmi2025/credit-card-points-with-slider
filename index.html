@@ -6,7 +6,6 @@
     <title>Credit Card Value Calculator | UpgradedPoints.com</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="https://upgradedpoints.com/favicon-32x32.png?v=cdbc42571be2a0d394ebfd58d92208e7" type="image/png">
-
 </head>
 <body>
     <div class="container">
@@ -141,6 +140,61 @@
                     </div>
                     <div class="slider-value hidden">$<span id="saksCreditValue">0</span></div>
                 </div>
+
+                <div class="question-group">
+                    <label for="equinoxCredit">$300 Equinox Credit</label>
+                    <div class="slider-container">
+                        <input type="range" id="equinoxCredit" min="0" max="300" step="75" value="0" class="slider">
+                        <div class="slider-labels">
+                            <span>$0</span><span>$75</span><span>$150</span><span>$225</span><span>$300</span>
+                        </div>
+                    </div>
+                    <div class="slider-value hidden">$<span id="equinoxCreditValue">0</span></div>
+                </div>
+
+                <div class="question-group">
+                    <label for="entertainmentCredit">$240 Entertainment Credit</label>
+                    <div class="slider-container">
+                        <input type="range" id="entertainmentCredit" min="0" max="240" step="60" value="0" class="slider">
+                        <div class="slider-labels">
+                            <span>$0</span><span>$60</span><span>$120</span><span>$180</span><span>$240</span>
+                        </div>
+                    </div>
+                    <div class="slider-value hidden">$<span id="entertainmentCreditValue">0</span></div>
+                </div>
+
+                <div class="question-group">
+                    <label for="clearCredit">$189 CLEAR Credit</label>
+                    <div class="slider-container">
+                        <input type="range" id="clearCredit" min="0" max="189" step="47.25" value="0" class="slider">
+                        <div class="slider-labels">
+                            <span>$0</span><span>$47</span><span>$95</span><span>$142</span><span>$189</span>
+                        </div>
+                    </div>
+                    <div class="slider-value hidden">$<span id="clearCreditValue">0</span></div>
+                </div>
+
+                <div class="question-group">
+                    <label for="globalEntryCredit">$100 Global Entry Credit</label>
+                    <div class="slider-container">
+                        <input type="range" id="globalEntryCredit" min="0" max="100" step="25" value="0" class="slider">
+                        <div class="slider-labels">
+                            <span>$0</span><span>$25</span><span>$50</span><span>$75</span><span>$100</span>
+                        </div>
+                    </div>
+                    <div class="slider-value hidden">$<span id="globalEntryCreditValue">0</span></div>
+                </div>
+
+                <div class="question-group">
+                    <label for="soulCycleCredit">$300 SoulCycle At-Home Bike Credit</label>
+                    <div class="slider-container">
+                        <input type="range" id="soulCycleCredit" min="0" max="300" step="75" value="0" class="slider">
+                        <div class="slider-labels">
+                            <span>$0</span><span>$75</span><span>$150</span><span>$225</span><span>$300</span>
+                        </div>
+                    </div>
+                    <div class="slider-value hidden">$<span id="soulCycleCreditValue">0</span></div>
+                </div>
                 
                 <div class="button-container">
                     <button id="continueToSection3Btn" class="cta-button">Continue</button>
@@ -159,6 +213,44 @@
                     </label>
                     <div class="slider-container">
                         <input type="range" id="loungeAccess" min="0" max="4" step="1" value="0" class="slider">
+                        <div class="slider-labels">
+                            <span>None</span><span>25%</span><span>50%</span><span>75%</span><span>All</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <label for="partnerStatus">
+                        <span class="question-title">Partner Elite Status (e.g. Marriott, Hilton)</span>
+                        <span class="question-description">This includes: Marriott Gold Elite status, Hilton Honors Gold status, National Emerald Club Executive status, Avis Preferred, Hertz President's Circle status</span>
+                    </label>
+                    <div class="slider-container">
+                        <input type="range" id="partnerStatus" min="0" max="4" step="1" value="0" class="slider">
+                        <div class="slider-labels">
+                            <span>None</span><span>25%</span><span>50%</span><span>75%</span><span>All</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <label for="fhrAndIap">
+                        <span class="question-title">Amex Fine Hotels and Resorts Access and the Amex International Airline Program?</span>
+                    </label>
+                    <div class="slider-container">
+                        <input type="range" id="fhrAndIap" min="0" max="4" step="1" value="0" class="slider">
+                        <div class="slider-labels">
+                            <span>None</span><span>25%</span><span>50%</span><span>75%</span><span>All</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <label for="cardProtections">
+                        <span class="question-title">Amex Platinum Card Protections</span>
+                        <span class="question-description">This includes: Trip Delay Insurance, Trip Cancellation Insurance, Rental Car Insurance, Cell Phone Protection, Purchase Protection, Return Protection and Extended Warranty Protection</span>
+                    </label>
+                    <div class="slider-container">
+                        <input type="range" id="cardProtections" min="0" max="4" step="1" value="0" class="slider">
                         <div class="slider-labels">
                             <span>None</span><span>25%</span><span>50%</span><span>75%</span><span>All</span>
                         </div>
