@@ -182,12 +182,20 @@ h1 {
     margin-top: 5px;
     font-size: 0.8em;
     color: var(--secondary-text-color);
+    width: 100%;
 }
 
 .slider-container .slider-labels span {
     flex: 1;
     text-align: center;
-    position: relative;
+}
+
+.slider-container .slider-labels span:first-child {
+    text-align: left;
+}
+
+.slider-container .slider-labels span:last-child {
+    text-align: right;
 }
 
 .slider-value {
