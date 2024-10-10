@@ -179,9 +179,7 @@ document.addEventListener('DOMContentLoaded', function() {
             let value = e.target.value.replace(/[^\d]/g, '');
             if (value) {
                 value = parseInt(value, 10);
-                e.target.value = value.toLocaleString('en-US', {
-                    style: 'currency',
-                    currency: 'USD',
+                e.target.value = '$' + value.toLocaleString('en-US', {
                     minimumFractionDigits: 0,
                     maximumFractionDigits: 0
                 });
