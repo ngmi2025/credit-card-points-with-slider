@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const POINT_VALUE = 0.022;
     const ANNUAL_FEE = 595;
 
+    // Points Calculation for Section 1
     function calculatePoints() {
         const flightSpend = parseFloat(document.getElementById('flightSpend').value.replace(/[^\d.-]/g, '')) || 0;
         const hotelSpend = parseFloat(document.getElementById('hotelSpend').value.replace(/[^\d.-]/g, '')) || 0;
@@ -21,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('results').classList.remove('hidden');
     }
 
+    // Calculate Section 2 using slider values
     function calculateSection2Value() {
         const credits = [
             { id: 'airlineCredit', value: 200 },
@@ -34,31 +36,23 @@ document.addEventListener('DOMContentLoaded', function() {
         ];
 
         return credits.reduce((total, credit) => {
-            const usage = document.getElementById(credit.id).value;
-            switch (usage) {
-                case '0': return total;
-                case '0.5': return total + credit.value * 0.5;
-                case '1': return total + credit.value;
-                default: return total;
-            }
+            const sliderValue = parseInt(document.getElementById(credit.id).value);
+            return total + sliderValue;
         }, 0);
     }
 
+    // Calculate Section 3 using slider values
     function calculateSection3Value() {
         const travelFrequency = parseInt(document.getElementById('travelFrequency').value) || 0;
         const perks = ['loungeAccess', 'partnerStatus', 'fhrAndIap', 'cardProtections'];
         
         return perks.reduce((total, perkId) => {
-            const usage = document.getElementById(perkId).value;
-            switch (usage) {
-                case '0': return total;
-                case '0.5': return total + travelFrequency * 40 * 0.5;
-                case '1': return total + travelFrequency * 40;
-                default: return total;
-            }
+            const sliderValue = parseInt(document.getElementById(perkId).value);
+            return total + travelFrequency * 40 * (sliderValue / 4);
         }, 0);
     }
 
+    // Final Valuation Calculation
     function calculateFinalValuation() {
         const totalPoints = parseInt(document.getElementById('totalPoints').value.replace(/[^\d.-]/g, '')) || 0;
         const pointsValue = totalPoints * POINT_VALUE;
@@ -71,25 +65,17 @@ document.addEventListener('DOMContentLoaded', function() {
         const secondYearValue = yearlyValue - ANNUAL_FEE;
 
         document.getElementById('yearlyValue').value = '$' + Math.round(yearlyValue);
-        document.getElementById('yearlyValue').style.color = 'black';
-
         document.getElementById('signupBonusValue').value = '$' + Math.round(signupBonusValue);
-        document.getElementById('signupBonusValue').style.color = 'black';
-
         document.getElementById('annualFee').value = '$' + ANNUAL_FEE;
-        document.getElementById('annualFee').style.color = 'red';
-
         document.getElementById('firstYearValue').value = '$' + Math.round(firstYearValue);
-        document.getElementById('firstYearValue').style.color = firstYearValue >= 0 ? 'black' : 'red';
-
         document.getElementById('secondYearValue').value = '$' + Math.round(secondYearValue);
-        document.getElementById('secondYearValue').style.color = secondYearValue >= 0 ? 'black' : 'red';
 
         document.getElementById('section3').classList.add('hidden');
         document.getElementById('section4').classList.remove('hidden');
         updateProgressBar('section4');
     }
 
+    // Progress Bar Update
     function updateProgressBar(currentSection) {
         const progress = document.getElementById('progress');
         const steps = document.querySelectorAll('.step');
@@ -116,6 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // Section Navigation
     function nextSection(currentSection, nextSection) {
         document.getElementById(currentSection).classList.add('hidden');
         document.getElementById(nextSection).classList.remove('hidden');
@@ -126,6 +113,7 @@ document.addEventListener('DOMContentLoaded', function() {
         window.scrollTo(0, 0);
     }
 
+    // Event Listeners
     document.getElementById('calculatePointsBtn').addEventListener('click', function() {
         calculatePoints();
         document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
@@ -158,36 +146,14 @@ document.addEventListener('DOMContentLoaded', function() {
         nextSection('section4', 'section3');
     });
 
-    // Handle custom input for home airport
-    document.getElementById('homeAirport').addEventListener('change', function() {
-        const customInput = document.getElementById('customHomeAirport');
-        if (this.value === 'custom') {
-            customInput.classList.remove('hidden');
-        } else {
-            customInput.classList.add('hidden');
-        }
-    });
-
-    // Format currency inputs
-    const currencyInputs = document.querySelectorAll('.input-wrapper input[type="text"]:not(#travelFrequency)');
-    currencyInputs.forEach(input => {
-        input.addEventListener('input', function(e) {
-            let value = e.target.value.replace(/[^\d]/g, '');
-            if (value) {
-                value = parseInt(value, 10);
-                e.target.value = value.toLocaleString('en-US', {
-                    style: 'currency',
-                    currency: 'USD',
-                    minimumFractionDigits: 0,
-                    maximumFractionDigits: 0
-                });
-            }
+    // Update slider values in real-time
+    const sliders = document.querySelectorAll('.slider');
+    sliders.forEach(slider => {
+        const valueDisplay = document.getElementById(`${slider.id}Value`);
+        const valueContainer = valueDisplay.parentElement;
+        slider.addEventListener('input', function() {
+            valueDisplay.textContent = this.value;
+            valueContainer.classList.remove('hidden');
         });
-    });
-
-    // Ensure travel frequency input only accepts numbers
-    const travelFrequencyInput = document.getElementById('travelFrequency');
-    travelFrequencyInput.addEventListener('input', function(e) {
-        this.value = this.value.replace(/[^\d]/g, '');
     });
 });
