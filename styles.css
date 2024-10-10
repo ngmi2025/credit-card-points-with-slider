@@ -136,6 +136,7 @@ input[type="text"], select {
     border-radius: 4px;
     box-sizing: border-box;
     font-size: 1em;
+    height: 52px; /* Ensure consistent height for dropdown and text input fields */
 }
 
 input[type="text"]::placeholder {
@@ -271,6 +272,8 @@ input[type="text"]::placeholder {
     font-weight: bold;
     text-align: right;
     color: var(--primary-color);
+    height: 40px;
+    padding: 5px 10px;
 }
 
 @media (max-width: 767px) {
