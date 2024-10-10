@@ -29,7 +29,6 @@ document.addEventListener('DOMContentLoaded', function() {
             { id: 'uberCredit', value: 200 },
             { id: 'saksCredit', value: 100 },
             { id: 'equinoxCredit', value: 300 },
-            { id: 'entertainmentCredit', value: 240 },
             { id: 'clearCredit', value: 189 },
             { id: 'globalEntryCredit', value: 100 },
             { id: 'soulCycleCredit', value: 300 }
@@ -144,16 +143,5 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('backToSection3').addEventListener('click', function(e) {
         e.preventDefault();
         nextSection('section4', 'section3');
-    });
-
-    // Update slider values in real-time
-    const sliders = document.querySelectorAll('.slider');
-    sliders.forEach(slider => {
-        const valueDisplay = document.getElementById(`${slider.id}Value`);
-        const valueContainer = valueDisplay.parentElement;
-        slider.addEventListener('input', function() {
-            valueDisplay.textContent = this.value;
-            valueContainer.classList.remove('hidden');
-        });
     });
 });
