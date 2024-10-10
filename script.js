@@ -22,34 +22,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('results').classList.remove('hidden');
     }
 
-    // Calculate Section 2 using slider values
-    function calculateSection2Value() {
-        const credits = [
-            { id: 'airlineCredit', value: 200 },
-            { id: 'uberCredit', value: 200 },
-            { id: 'saksCredit', value: 100 }
-        ];
-
-        return credits.reduce((total, credit) => {
-            const sliderValue = parseInt(document.getElementById(credit.id).value);
-            return total + sliderValue;
-        }, 0);
-    }
-
-    // Calculate Section 3 using slider values
-    function calculateSection3Value() {
-        const travelFrequency = parseInt(document.getElementById('travelFrequency').value) || 0;
-        const perks = [
-            { id: 'loungeAccess', value: 100 },
-            { id: 'partnerStatus', value: 200 }
-        ];
-        
-        return perks.reduce((total, perk) => {
-            const sliderValue = parseInt(document.getElementById(perk.id).value);
-            return total + travelFrequency * (perk.value * (sliderValue / 4));
-        }, 0);
-    }
-
     // Final Valuation Calculation
     function calculateFinalValuation() {
         const totalPoints = parseInt(document.getElementById('totalPoints').value.replace(/[^\d.-]/g, '')) || 0;
@@ -142,17 +114,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('backToSection3').addEventListener('click', function(e) {
         e.preventDefault();
         nextSection('section4', 'section3');
-    });
-
-    // Update slider values in real-time
-    const sliders = document.querySelectorAll('.slider');
-    sliders.forEach(slider => {
-        const valueDisplay = document.getElementById(`${slider.id}Value`);
-        const valueContainer = valueDisplay.parentElement;
-        slider.addEventListener('input', function() {
-            valueDisplay.textContent = this.value;
-            valueContainer.classList.remove('hidden');
-        });
     });
 
     // Handle custom input for home airport
