@@ -26,23 +26,23 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('section1').style.display = 'block';
 
     // Points Calculation for Section 1
-    function calculatePoints() {
-        const flightSpend = parseFloat(document.getElementById('flightSpend').value.replace(/[^\d.-]/g, '')) || 0;
-        const hotelSpend = parseFloat(document.getElementById('hotelSpend').value.replace(/[^\d.-]/g, '')) || 0;
-        const otherSpend = parseFloat(document.getElementById('otherSpend').value.replace(/[^\d.-]/g, '')) || 0;
+function calculatePoints() {
+    const flightSpend = parseFloat(document.getElementById('flightSpend').value.replace(/[^\d.-]/g, '')) || 0;
+    const hotelSpend = parseFloat(document.getElementById('hotelSpend').value.replace(/[^\d.-]/g, '')) || 0;
+    const otherSpend = parseFloat(document.getElementById('otherSpend').value.replace(/[^\d.-]/g, '')) || 0;
 
-        const travelPoints = (flightSpend + hotelSpend) * 5;
-        const otherPoints = otherSpend;
-        const totalPoints = travelPoints + otherPoints;
+    const travelPoints = (flightSpend + hotelSpend) * 5;
+    const otherPoints = otherSpend;
+    const totalPoints = travelPoints + otherPoints;
 
-        const totalValuation = (WELCOME_BONUS + totalPoints) * POINT_VALUE;
+    const totalValuation = (WELCOME_BONUS + totalPoints) * POINT_VALUE;
 
-        document.getElementById('totalPoints').value = Math.round(totalPoints).toLocaleString() + ' points';
-        document.getElementById('welcomeBonus').value = WELCOME_BONUS.toLocaleString() + ' points';
-        document.getElementById('amexValuation').value = '$' + Math.round(totalValuation);
+    document.getElementById('totalPoints').value = Math.round(totalPoints).toLocaleString() + ' points';
+    document.getElementById('welcomeBonus').value = WELCOME_BONUS.toLocaleString() + ' points';
+    document.getElementById('amexValuation').value = '$' + Math.round(totalValuation).toLocaleString();
 
-        document.getElementById('results').style.display = 'block';
-    }
+    document.getElementById('results').style.display = 'block';
+}
 
     // Calculate Section 2 using slider values
     function calculateSection2Value() {
