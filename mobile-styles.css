@@ -22,14 +22,15 @@ body {
 
 .container {
     width: 100%;
-    padding: 0;
+    padding: 20px 10px 0; /* Increased top padding */
     background-color: var(--background-color);
     box-shadow: none;
     border-radius: 0;
 }
 
 h1 {
-    font-size: 24px;
+     font-size: 24px;
+    margin-top: 10px; /* Added top margin */
     margin-bottom: 15px;
     text-align: center;
     color: var(--primary-color);
