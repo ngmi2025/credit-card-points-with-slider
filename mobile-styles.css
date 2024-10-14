@@ -93,7 +93,7 @@ h1 {
 .question-group label {
     display: block;
     margin-bottom: 10px;
-    font-weight: bold;
+    font-weight: normal;
     font-size: 16px;
     color: var(--text-color);
 }
@@ -126,13 +126,14 @@ h1 {
     opacity: 1;
     transition: opacity .2s;
     border-radius: 3px;
+    margin: 10px 0; /* Add vertical margin */
 }
 
 .slider-container input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 20px;
-    height: 20px;
+    width: 24px; /* Increased from 20px */
+    height: 24px; /* Increased from 20px */
     background: var(--primary-color);
     cursor: pointer;
     border-radius: 50%;
@@ -140,8 +141,8 @@ h1 {
 }
 
 .slider-container input[type="range"]::-moz-range-thumb {
-    width: 20px;
-    height: 20px;
+    width: 24px; /* Increased from 20px */
+    height: 24px; /* Increased from 20px */
     background: var(--primary-color);
     cursor: pointer;
     border-radius: 50%;
@@ -250,9 +251,18 @@ select {
 /* Specific adjustments for section 3 */
 #section3 .slider-labels {
     justify-content: space-between;
+    margin: 5px -10px 0; /* Negative margin to align with edges */
 }
 
 #section3 .slider-labels span {
     text-align: center;
     flex: 1;
+}
+
+#section3 .slider-labels span:first-child {
+    text-align: left;
+}
+
+#section3 .slider-labels span:last-child {
+    text-align: right;
 }
