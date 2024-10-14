@@ -3,6 +3,19 @@ document.addEventListener('DOMContentLoaded', function() {
     const POINT_VALUE = 0.022;
     const ANNUAL_FEE = 595;
 
+    function formatCurrency(input) {
+    // Remove existing formatting
+    let value = input.value.replace(/[^\d]/g, '');
+    
+    // Format the number
+    if (value) {
+        value = parseInt(value, 10).toLocaleString('en-US');
+    }
+    
+    // Add the dollar sign
+    input.value = value ? '$' + value : '';
+}
+
     function hideAllSections() {
         document.querySelectorAll('.section').forEach(section => {
             section.style.display = 'none';
@@ -70,11 +83,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const yearlyValue = pointsValue + section2Value + section3Value;
         const signupBonusValue = WELCOME_BONUS * POINT_VALUE;
-        const firstYearValue = yearlyValue + signupBonusValue - ANNUAL_FEE;
-        const secondYearValue = yearlyValue - ANNUAL_FEE;
-
-        document.getElementById('firstYearSavings').textContent = '$' + Math.round(firstYearValue);
-        document.getElementById('secondYearSavings').textContent = '$' + Math.round(secondYearValue);
+    const firstYearSavings = document.getElementById('firstYearSavings');
+    const secondYearSavings = document.getElementById('secondYearSavings');
+    
+    firstYearSavings.textContent = '$' + Math.round(firstYearValue).toLocaleString();
+    secondYearSavings.textContent = '$' + Math.round(secondYearValue).toLocaleString();
+    
+    firstYearSavings.style.color = firstYearValue >= 0 ? '#3EB564' : '#d32f2f';
+    secondYearSavings.style.color = secondYearValue >= 0 ? '#3EB564' : '#d32f2f';
         document.getElementById('annualFee').textContent = '$' + ANNUAL_FEE;
         document.getElementById('signupBonusValue').textContent = '$' + Math.round(signupBonusValue);
         document.getElementById('secondYearValue').textContent = '$' + Math.round(secondYearValue);
