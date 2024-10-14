@@ -335,3 +335,26 @@ input[type="number"] {
     color: var(--secondary-text-color);
     margin-bottom: 10px;
 }
+#section4 {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 30px;
+}
+
+.savings-summary, .card-details, .yearly-breakdown {
+    margin-bottom: 30px;
+}
+
+.savings-item, .detail-item, .breakdown-item {
+    font-size: 18px;
+}
+
+.savings-value {
+    font-size: 28px;
+}
+
+.apply-now-btn {
+    max-width: 300px;
+    margin: 0 auto;
+    display: block;
+}
