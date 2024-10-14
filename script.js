@@ -175,6 +175,20 @@ document.addEventListener('DOMContentLoaded', function() {
         nextSection('section4', 'section3');
     });
 
+// Format currency inputs
+['flightSpend', 'hotelSpend', 'otherSpend'].forEach(id => {
+    const input = document.getElementById(id);
+    input.addEventListener('focus', function() {
+        if (this.value === '$0') this.value = '';
+    });
+    input.addEventListener('blur', function() {
+        formatCurrency(this);
+        if (this.value === '') this.value = '$0';
+    });
+    // Initialize with $0
+    input.value = '$0';
+});
+    
     // Update the labels for Credit Card Perks sliders
     document.querySelectorAll('#section3 .slider-labels').forEach(labelGroup => {
         labelGroup.innerHTML = '<span>Never</span><span>Sometimes</span><span>Always</span>';
