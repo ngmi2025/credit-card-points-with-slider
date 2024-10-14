@@ -4,11 +4,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const ANNUAL_FEE = 595;
 
     function hideAllSections() {
-        document.querySelectorAll('.section').forEach(section => section.classList.add('hidden'));
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.display = 'none';
+        });
     }
 
     hideAllSections();
-    document.getElementById('section1').classList.remove('hidden');
+    document.getElementById('section1').style.display = 'block';
 
     // Points Calculation for Section 1
     function calculatePoints() {
@@ -26,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('welcomeBonus').value = WELCOME_BONUS.toLocaleString() + ' points';
         document.getElementById('amexValuation').value = '$' + Math.round(totalValuation);
 
-        document.getElementById('results').classList.remove('hidden');
+        document.getElementById('results').style.display = 'block';
     }
 
     // Calculate Section 2 using slider values
@@ -60,6 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Final Valuation Calculation
     function calculateFinalValuation() {
+        console.log("Calculating final valuation");
         const totalPoints = parseInt(document.getElementById('totalPoints').value.replace(/[^\d.-]/g, '')) || 0;
         const pointsValue = totalPoints * POINT_VALUE;
         const section2Value = calculateSection2Value();
@@ -70,28 +73,17 @@ document.addEventListener('DOMContentLoaded', function() {
         const firstYearValue = yearlyValue + signupBonusValue - ANNUAL_FEE;
         const secondYearValue = yearlyValue - ANNUAL_FEE;
 
-        updateValueField('yearlyValue', yearlyValue);
-        updateValueField('signupBonusValue', signupBonusValue);
-        updateValueField('annualFee', ANNUAL_FEE);
-        updateValueField('firstYearValue', firstYearValue);
-        updateValueField('secondYearValue', secondYearValue);
+        document.getElementById('firstYearSavings').textContent = '$' + Math.round(firstYearValue);
+        document.getElementById('secondYearSavings').textContent = '$' + Math.round(secondYearValue);
+        document.getElementById('annualFee').textContent = '$' + ANNUAL_FEE;
+        document.getElementById('signupBonusValue').textContent = '$' + Math.round(signupBonusValue);
+        document.getElementById('secondYearValue').textContent = '$' + Math.round(secondYearValue);
 
         hideAllSections();
-        document.getElementById('section4').classList.remove('hidden');
+        document.getElementById('section4').style.display = 'block';
         updateProgressBar('section4');
         window.scrollTo(0, 0);
-    }
-
-    // Update the value field color based on positive or negative value
-    function updateValueField(fieldId, value) {
-        const field = document.getElementById(fieldId);
-        field.value = '$' + Math.round(value);
-        
-        if (value >= 0) {
-            field.style.color = '#333'; // Black for positive values
-        } else {
-            field.style.color = '#d32f2f'; // Red for negative values
-        }
+        console.log("Final valuation calculated and displayed");
     }
 
     // Progress Bar Update
@@ -124,9 +116,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Section Navigation
     function nextSection(currentSection, nextSection) {
         hideAllSections();
-        document.getElementById(nextSection).classList.remove('hidden');
+        document.getElementById(nextSection).style.display = 'block';
         if (nextSection !== 'section1') {
-            document.getElementById('results').classList.add('hidden');
+            document.getElementById('results').style.display = 'none';
         }
         updateProgressBar(nextSection);
         window.scrollTo(0, 0);
@@ -148,6 +140,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.getElementById('calculateValuationBtn').addEventListener('click', function(e) {
         e.preventDefault();
+        console.log("Calculate Valuation button clicked");
         calculateFinalValuation();
     });
 
