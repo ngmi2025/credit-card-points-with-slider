@@ -83,6 +83,8 @@ function calculatePoints() {
 
         const yearlyValue = pointsValue + section2Value + section3Value;
         const signupBonusValue = WELCOME_BONUS * POINT_VALUE;
+        const firstYearValue = yearlyValue + signupBonusValue - ANNUAL_FEE;
+const secondYearValue = yearlyValue - ANNUAL_FEE;
     const firstYearSavings = document.getElementById('firstYearSavings');
     const secondYearSavings = document.getElementById('secondYearSavings');
     
