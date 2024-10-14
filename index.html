@@ -218,33 +218,51 @@
                 </div>
             </div>
 
-            <div class="section hidden" id="section4">
-                <a href="#" id="backToSection3" class="back-link">← Back to previous section</a>
-                <h2>Final Valuation</h2>
-                <div class="question-group">
-                    <label for="yearlyValue">The value you get from this card per year:</label>
-                    <input type="text" id="yearlyValue" readonly>
-                </div>
-                <div class="question-group">
-                    <label for="signupBonusValue">The value you get from the sign-up bonus points:</label>
-                    <input type="text" id="signupBonusValue" readonly>
-                </div>
-                <div class="question-group">
-                    <label for="annualFee">Annual Credit Card Fee:</label>
-                    <input type="text" id="annualFee" readonly>
-                </div>
-                <div class="question-group">
-                    <label for="firstYearValue">1st year value to you:</label>
-                    <input type="text" id="firstYearValue" readonly>
-                </div>
-                <div class="question-group">
-                    <label for="secondYearValue">2nd year onwards annual value to you:</label>
-                    <input type="text" id="secondYearValue" readonly>
-                </div>
-                <div class="button-container">
-<button class="apply-now-btn" style="background-color: #3EB564; color: white;">Apply now</button>
-                </div>
-            </div>
+           <div class="section" id="section4">
+    <a href="#" id="backToSection3" class="back-link">← Back to previous section</a>
+    <h2>Final Valuation</h2>
+    
+    <div class="savings-summary">
+        <h3>Your Savings:</h3>
+        <div class="savings-item">
+            <span class="savings-label">1st Year:</span>
+            <span id="firstYearSavings" class="savings-value positive">+$1,365</span>
+        </div>
+        <div class="savings-item">
+            <span class="savings-label">2nd Year Onwards:</span>
+            <span id="secondYearSavings" class="savings-value negative">-$395</span>
+        </div>
+    </div>
+
+    <div class="card-details">
+        <h3>Card Details:</h3>
+        <div class="detail-item">
+            <span class="detail-label">Annual Fee:</span>
+            <span id="annualFee" class="detail-value">$595</span>
+        </div>
+        <div class="detail-item">
+            <span class="detail-label">Sign-up Bonus Value:</span>
+            <span id="signupBonusValue" class="detail-value">$1,760</span>
+        </div>
+    </div>
+
+    <div class="yearly-breakdown">
+        <h3>Yearly Breakdown:</h3>
+        <div class="breakdown-item">
+            <span class="breakdown-label">1st Year Total Value:</span>
+            <span id="firstYearValue" class="breakdown-value">$1,960</span>
+            <p class="breakdown-note">(Card benefits: $<span id="yearlyValue">200</span> + Sign-up bonus: $<span id="signupBonusValue2">1,760</span>)</p>
+        </div>
+        <div class="breakdown-item">
+            <span class="breakdown-label">2nd Year Onwards Value:</span>
+            <span id="secondYearValue" class="breakdown-value">$200</span>
+        </div>
+    </div>
+
+    <div class="button-container">
+        <button class="apply-now-btn">APPLY NOW</button>
+    </div>
+</div>
         </div>
     </div>
 
