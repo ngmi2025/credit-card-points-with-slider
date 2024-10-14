@@ -3,6 +3,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const POINT_VALUE = 0.022;
     const ANNUAL_FEE = 595;
 
+    function hideAllSections() {
+        document.querySelectorAll('.section').forEach(section => section.classList.add('hidden'));
+    }
+
+    hideAllSections();
+    document.getElementById('section1').classList.remove('hidden');
+
     // Points Calculation for Section 1
     function calculatePoints() {
         const flightSpend = parseFloat(document.getElementById('flightSpend').value.replace(/[^\d.-]/g, '')) || 0;
@@ -69,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
         updateValueField('firstYearValue', firstYearValue);
         updateValueField('secondYearValue', secondYearValue);
 
-        document.getElementById('section3').classList.add('hidden');
+        hideAllSections();
         document.getElementById('section4').classList.remove('hidden');
         updateProgressBar('section4');
     }
@@ -116,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Section Navigation
     function nextSection(currentSection, nextSection) {
-        document.getElementById(currentSection).classList.add('hidden');
+        hideAllSections();
         document.getElementById(nextSection).classList.remove('hidden');
         if (nextSection !== 'section1') {
             document.getElementById('results').classList.add('hidden');
