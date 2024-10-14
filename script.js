@@ -79,6 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
         hideAllSections();
         document.getElementById('section4').classList.remove('hidden');
         updateProgressBar('section4');
+        window.scrollTo(0, 0);
     }
 
     // Update the value field color based on positive or negative value
@@ -86,7 +87,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const field = document.getElementById(fieldId);
         field.value = '$' + Math.round(value);
         
-        // Set inline styles for color to prevent being overridden
         if (value >= 0) {
             field.style.color = '#333'; // Black for positive values
         } else {
@@ -146,7 +146,8 @@ document.addEventListener('DOMContentLoaded', function() {
         nextSection('section2', 'section3');
     });
 
-    document.getElementById('calculateValuationBtn').addEventListener('click', function() {
+    document.getElementById('calculateValuationBtn').addEventListener('click', function(e) {
+        e.preventDefault();
         calculateFinalValuation();
     });
 
