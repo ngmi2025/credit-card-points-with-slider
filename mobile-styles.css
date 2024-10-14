@@ -43,7 +43,32 @@ h1 {
 }
 
 .progress-bar {
-    /* ... (keep existing styles) ... */
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+    height: 10px;
+}
+
+.progress {
+    width: 25%;
+    height: 100%;
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    transition: width 0.3s ease;
+}
+
+.step-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+
+.step {
+    font-size: 12px;
+    color: var(--secondary-text-color);
 }
 
 .section {
@@ -55,7 +80,7 @@ h1 {
 }
 
 .question-group {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     padding-bottom: 20px;
     border-bottom: 1px solid var(--border-color);
 }
@@ -66,15 +91,17 @@ h1 {
 
 .question-group label {
     display: block;
-    margin-bottom: 5px;
-    font-weight: normal; /* Changed from bold to normal */
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    color: var(--text-color);
 }
 
-.input-group, .input-wrapper, .slider-container {
+.input-group, .input-wrapper {
     width: 100%;
 }
 
-.input-group select, .input-wrapper input[type="text"], .slider-container input[type="range"] {
+.input-group select, .input-wrapper input[type="text"] {
     width: 100%;
     padding: 10px;
     border: 1px solid var(--border-color);
@@ -85,10 +112,48 @@ h1 {
 }
 
 .slider-container {
-    padding-top: 10px;
+    width: 100%;
+    margin-top: 10px;
 }
 
-/* ... (keep existing slider styles) ... */
+.slider-container input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 6px;
+    background: #e0e0e0;
+    outline: none;
+    opacity: 1;
+    transition: opacity .2s;
+    border-radius: 3px;
+}
+
+.slider-container input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--primary-color);
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 0 0 2px rgba(0,0,0,0.2);
+}
+
+.slider-container input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: var(--primary-color);
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 0 0 2px rgba(0,0,0,0.2);
+}
+
+.slider-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--secondary-text-color);
+}
 
 .button-container {
     margin-top: 20px;
@@ -166,7 +231,6 @@ h1 {
     display: none;
 }
 
-/* Ensure inputs and selects have consistent styling */
 input[type="text"], input[type="number"], select {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -174,11 +238,20 @@ input[type="text"], input[type="number"], select {
     font-size: 16px;
 }
 
-/* Style for dropdown arrow in select elements */
 select {
     background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
     background-repeat: no-repeat;
     background-position-x: 100%;
     background-position-y: 5px;
     padding-right: 30px;
+}
+
+/* Specific adjustments for section 3 */
+#section3 .slider-labels {
+    justify-content: space-between;
+}
+
+#section3 .slider-labels span {
+    text-align: center;
+    flex: 1;
 }
