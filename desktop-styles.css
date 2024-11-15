@@ -146,13 +146,14 @@ h1 {
 .slider-container input[type="range"] {
     -webkit-appearance: none;
     appearance: none;
-    height: 8px;
+    height: 4px; /* Reduced from 8px */
     background: var(--border-color);
     outline: none;
     opacity: 0.8;
     transition: opacity 0.2s;
-    margin-bottom: 5px;
-    width: 100%; /* just keep it at 100% */
+    margin: 18px 0; /* Added vertical margin to center the track */
+    width: 100%;
+    position: relative; /* Added for better positioning */
 }
 
 .slider-container input[type="range"]:hover {
@@ -167,7 +168,9 @@ h1 {
     background: var(--primary-color);
     cursor: pointer;
     border-radius: 50%;
-    margin-top: -6px; /* Center the thumb vertically */
+    margin-top: -8px; /* Adjusted from -6px to center the thumb */
+    position: relative; /* Added for better positioning */
+    z-index: 2; /* Ensure thumb stays above track */
 }
 
 .slider-container input[type="range"]::-moz-range-thumb {
@@ -176,7 +179,9 @@ h1 {
     background: var(--primary-color);
     cursor: pointer;
     border-radius: 50%;
-    border: none; /* Remove default border in Firefox */
+    border: none;
+    position: relative; /* Added for better positioning */
+    z-index: 2; /* Ensure thumb stays above track */
 }
 
 .slider-container .slider-labels {
