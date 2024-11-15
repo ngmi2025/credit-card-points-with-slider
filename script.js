@@ -209,11 +209,30 @@ function calculateFinalValuation() {
     }
 
     // Event Listeners
-    document.getElementById('calculatePointsBtn').addEventListener('click', function() {
-        calculatePoints();
-        document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
-    });
-
+   document.getElementById('calculatePointsBtn').addEventListener('click', function(e) {
+    // Check if travel frequency has a value
+    const travelFrequency = document.getElementById('travelFrequency').value;
+    
+    if (!travelFrequency || travelFrequency === '0') {
+        // Prevent calculation
+        e.preventDefault();
+        
+        // Add error class to the input
+        document.getElementById('travelFrequency').classList.add('error');
+        
+        // You can either show an alert
+        alert('Please enter how many times you travel per year');
+        
+        return;
+    }
+    
+    // Remove error class if it exists
+    document.getElementById('travelFrequency').classList.remove('error');
+    
+    // Continue with calculation
+    calculatePoints();
+    document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+});
     document.getElementById('continueBtn').addEventListener('click', function() {
         nextSection('section1', 'section2');
     });
