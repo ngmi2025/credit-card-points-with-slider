@@ -45,25 +45,39 @@ function calculatePoints() {
 }
 
     // Calculate Section 2 using slider values
-    function calculateSection2Value() {
-        const credits = [
-            { id: 'airlineCredit', value: 200 },
-            { id: 'uberCredit', value: 200 },
-            { id: 'saksCredit', value: 100 },
-            { id: 'equinoxCredit', value: 300 },
-            { id: 'clearCredit', value: 189 },
-            { id: 'globalEntryCredit', value: 100 },
-            { id: 'soulCycleCredit', value: 300 },
-               { id: 'entertainmentCredit', value: 240 },
+function calculateSection2Value(isFirstYear = true) {
+    const credits = [
+        { id: 'airlineCredit', value: 200 },
+        { id: 'uberCredit', value: 200 },
+        { id: 'saksCredit', value: 100 },
+        { id: 'equinoxCredit', value: 300 },
+        { id: 'clearCredit', value: 189 },
+        { id: 'globalEntryCredit', value: 100, isGlobalEntry: true },
+        { id: 'soulCycleCredit', value: 300 },
+        { id: 'entertainmentCredit', value: 240 },
         { id: 'walmartCredit', value: 155 },
         { id: 'hotelCredit', value: 200 }
-        ];
+    ];
 
-        return credits.reduce((total, credit) => {
-            const sliderValue = parseInt(document.getElementById(credit.id).value);
-            return total + sliderValue;
-        }, 0);
-    }
+    return credits.reduce((total, credit) => {
+        const sliderValue = parseInt(document.getElementById(credit.id).value);
+        
+        // Special handling for Global Entry
+        if (credit.isGlobalEntry) {
+            if (isFirstYear) {
+                // Store the first year usage for later calculation
+                window.globalEntryFirstYearUsage = sliderValue;
+                return total + sliderValue;
+            } else {
+                // Calculate remaining value for subsequent years
+                const remainingValue = 100 - window.globalEntryFirstYearUsage;
+                return total + (remainingValue > 0 ? remainingValue : 0);
+            }
+        }
+        
+        return total + sliderValue;
+    }, 0);
+}
 
     // Calculate Section 3 using slider values
     function calculateSection3Value() {
