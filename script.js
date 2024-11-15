@@ -53,7 +53,10 @@ function calculatePoints() {
             { id: 'equinoxCredit', value: 300 },
             { id: 'clearCredit', value: 189 },
             { id: 'globalEntryCredit', value: 100 },
-            { id: 'soulCycleCredit', value: 300 }
+            { id: 'soulCycleCredit', value: 300 },
+               { id: 'entertainmentCredit', value: 240 },
+        { id: 'walmartCredit', value: 155 },
+        { id: 'hotelCredit', value: 200 }
         ];
 
         return credits.reduce((total, credit) => {
