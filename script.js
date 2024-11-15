@@ -150,9 +150,15 @@ function calculateFinalValuation() {
     
     firstYearSavings.style.color = firstYearValue >= 0 ? '#3EB564' : '#d32f2f';
     secondYearSavings.style.color = secondYearValue >= 0 ? '#3EB564' : '#d32f2f';
+    
     document.getElementById('annualFee').textContent = '$' + ANNUAL_FEE;
     document.getElementById('signupBonusValue').textContent = '$' + Math.round(signupBonusValue);
     document.getElementById('secondYearValue').textContent = '$' + Math.round(secondYearValue);
+    
+    // Add these new lines for the breakdown
+    document.getElementById('cardBenefitsValue').textContent = Math.round(section2Value + section3Value).toLocaleString();
+    document.getElementById('signupBonusBreakdown').textContent = Math.round(signupBonusValue).toLocaleString();
+    document.getElementById('firstYearValue').textContent = '$' + Math.round(firstYearValue).toLocaleString();
 
     hideAllSections();
     document.getElementById('section4').style.display = 'block';
