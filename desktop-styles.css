@@ -141,7 +141,6 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    padding: 0 10px; /* Add this line */
 }
 
 .slider-container input[type="range"] {
@@ -153,8 +152,7 @@ h1 {
     opacity: 0.8;
     transition: opacity 0.2s;
     margin-bottom: 5px;
-    width: 100%; /* Change this */
-    margin: 0; /* Change this */
+    width: 100%; /* just keep it at 100% */
 }
 
 .slider-container input[type="range"]:hover {
