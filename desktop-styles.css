@@ -367,12 +367,15 @@ input[type="number"] {
 }
 
 .value-breakdown {
-    font-size: 0.9em;
-    color: var(--primary-color);
+    font-size: 0.8em; /* Made smaller */
+    color: var(--secondary-text-color); /* Changed to grey */
     margin-top: 5px;
     text-align: right;
+    display: flex; /* Added to make items side by side */
+    justify-content: flex-end; /* Align to the right */
+    gap: 15px; /* Space between the two values */
 }
 
 .value-breakdown div {
-    margin-bottom: 2px;
+    margin-bottom: 0; /* Remove bottom margin since they're side by side now */
 }
