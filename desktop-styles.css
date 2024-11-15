@@ -146,14 +146,15 @@ h1 {
 .slider-container input[type="range"] {
     -webkit-appearance: none;
     appearance: none;
-    height: 4px; /* Reduced from 8px */
+    height: 8px; /* Back to 8px for thicker track */
     background: var(--border-color);
     outline: none;
     opacity: 0.8;
     transition: opacity 0.2s;
-    margin: 18px 0; /* Added vertical margin to center the track */
+    margin: 15px 0; /* Adjusted for better centering */
     width: 100%;
-    position: relative; /* Added for better positioning */
+    position: relative;
+    border-radius: 4px; /* Optional: adds rounded corners to track */
 }
 
 .slider-container input[type="range"]:hover {
@@ -168,9 +169,9 @@ h1 {
     background: var(--primary-color);
     cursor: pointer;
     border-radius: 50%;
-    margin-top: -8px; /* Adjusted from -6px to center the thumb */
-    position: relative; /* Added for better positioning */
-    z-index: 2; /* Ensure thumb stays above track */
+    margin-top: -6px; /* This centers the thumb on the track: (20px - 8px) / 2 = 6px */
+    position: relative;
+    z-index: 2;
 }
 
 .slider-container input[type="range"]::-moz-range-thumb {
@@ -180,8 +181,8 @@ h1 {
     cursor: pointer;
     border-radius: 50%;
     border: none;
-    position: relative; /* Added for better positioning */
-    z-index: 2; /* Ensure thumb stays above track */
+    position: relative;
+    z-index: 2;
 }
 
 .slider-container .slider-labels {
