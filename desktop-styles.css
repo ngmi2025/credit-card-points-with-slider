@@ -141,6 +141,7 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: stretch;
+    padding: 0 10px; /* Add this line */
 }
 
 .slider-container input[type="range"] {
@@ -152,8 +153,8 @@ h1 {
     opacity: 0.8;
     transition: opacity 0.2s;
     margin-bottom: 5px;
-    width: calc(100% - 20px); /* Adjust width to account for thumb */
-    margin: 0 10px; /* Add margin to center the slider */
+    width: 100%; /* Change this */
+    margin: 0; /* Change this */
 }
 
 .slider-container input[type="range"]:hover {
@@ -382,17 +383,4 @@ input[type="number"] {
 
 .value-breakdown div {
     margin-bottom: 0; /* Remove bottom margin since they're side by side now */
-}
-.slider-container input[type="range"]::-webkit-slider-runnable-track {
-    width: 100%;
-    height: 8px;
-    background: var(--border-color);
-    border-radius: 4px;
-}
-
-.slider-container input[type="range"]::-moz-range-track {
-    width: 100%;
-    height: 8px;
-    background: var(--border-color);
-    border-radius: 4px;
 }
