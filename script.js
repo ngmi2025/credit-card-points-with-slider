@@ -79,16 +79,29 @@ function calculateSection2Value(isFirstYear = true) {
     }, 0);
 }
 
-    // Calculate Section 3 using slider values
-    function calculateSection3Value() {
-        const travelFrequency = parseInt(document.getElementById('travelFrequency').value) || 0;
-        const perks = ['loungeAccess', 'partnerStatus', 'fhrAndIap', 'cardProtections'];
+function calculateSection3Value() {
+    // Get the number of trips per year from section 1's numeric input
+    const travelFrequency = parseInt(document.getElementById('travelFrequency').value.replace(/[^\d.-]/g, '')) || 0;
+    
+    // Array of perk IDs from the sliders in section 3
+    const perks = ['loungeAccess', 'partnerStatus', 'fhrAndIap', 'cardProtections'];
+    
+    // Calculate total value of all perks
+    return perks.reduce((total, perkId) => {
+        // Get slider value (0-4) representing Never to Always
+        const sliderValue = parseInt(document.getElementById(perkId).value);
         
-        return perks.reduce((total, perkId) => {
-            const sliderValue = parseInt(document.getElementById(perkId).value);
-            return total + travelFrequency * 40 * (sliderValue / 4);
-        }, 0);
-    }
+        // Calculate value for this perk:
+        // - Number of trips × $40 (value per use) × usage percentage (slider value / 4)
+        // For example: 10 trips × $40 × (4/4) = $400 for "Always" usage
+        const perkValue = travelFrequency * 40 * (sliderValue / 4);
+        
+        // Add debugging log to see individual perk calculations
+        console.log(`${perkId}: ${travelFrequency} trips × $40 × ${sliderValue}/4 = $${perkValue}`);
+        
+        return total + perkValue;
+    }, 0);
+}
 
 function calculateFinalValuation() {
     console.log("Calculating final valuation");
