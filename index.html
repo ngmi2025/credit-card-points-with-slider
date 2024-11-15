@@ -150,15 +150,22 @@
                         </div>
                     </div>
                 </div>
-                <div class="question-group">
-                    <label for="globalEntryCredit">$100 Global Entry Credit</label>
-                    <div class="slider-container">
-                        <input type="range" id="globalEntryCredit" min="0" max="100" step="25" value="0" class="slider">
-                        <div class="slider-labels">
-                            <span>$0</span><span>$25</span><span>$50</span><span>$75</span><span>$100</span>
-                        </div>
-                    </div>
-                </div>
+<div class="question-group">
+    <label for="globalEntryCredit">
+        $100 Global Entry Credit
+        <span class="credit-note">(One-time credit of up to $100 available every 4 years)</span>
+    </label>
+    <div class="slider-container">
+        <input type="range" id="globalEntryCredit" min="0" max="100" step="25" value="0" class="slider">
+        <div class="slider-labels">
+            <span>$0</span><span>$25</span><span>$50</span><span>$75</span><span>$100</span>
+        </div>
+        <div class="value-breakdown">
+            <div>First year value: $<span id="globalEntryCreditFirst">0</span></div>
+            <div>Remaining value: $<span id="globalEntryCreditRemaining">100</span></div>
+        </div>
+    </div>
+</div
                 <div class="question-group">
     <label for="entertainmentCredit">$240 Digital Entertainment Credit</label>
     <div class="slider-container">
