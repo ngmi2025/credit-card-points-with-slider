@@ -146,15 +146,14 @@ h1 {
 .slider-container input[type="range"] {
     -webkit-appearance: none;
     appearance: none;
-    height: 8px; /* Back to 8px for thicker track */
-    background: var(--border-color);
+    height: 12px; /* Back to thicker track */
+    background: #e0e0e0; /* Lighter grey for track */
     outline: none;
-    opacity: 0.8;
-    transition: opacity 0.2s;
-    margin: 15px 0; /* Adjusted for better centering */
+    opacity: 1; /* Full opacity */
+    border-radius: 6px;
+    margin: 18px 0;
     width: 100%;
     position: relative;
-    border-radius: 4px; /* Optional: adds rounded corners to track */
 }
 
 .slider-container input[type="range"]:hover {
@@ -164,25 +163,29 @@ h1 {
 .slider-container input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 20px;
-    height: 20px;
+    width: 24px; /* Slightly larger thumb */
+    height: 24px;
     background: var(--primary-color);
     cursor: pointer;
     border-radius: 50%;
-    margin-top: -6px; /* This centers the thumb on the track: (20px - 8px) / 2 = 6px */
-    position: relative;
-    z-index: 2;
+    margin-top: -6px; /* Centers the thumb: (24px - 8px) / 2 = 8px */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Optional: adds subtle shadow */
 }
 
 .slider-container input[type="range"]::-moz-range-thumb {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     background: var(--primary-color);
     cursor: pointer;
     border-radius: 50%;
     border: none;
-    position: relative;
-    z-index: 2;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.slider-container input[type="range"]::-moz-range-track {
+    height: 12px;
+    background: #e0e0e0;
+    border-radius: 6px;
 }
 
 .slider-container .slider-labels {
