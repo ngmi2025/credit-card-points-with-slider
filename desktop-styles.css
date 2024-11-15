@@ -348,8 +348,9 @@ input[type="number"] {
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     margin-top: 20px;
-    max-width: 600px;
-    margin: 0 auto;
+    /* Remove max-width and margin: 0 auto to match other sections */
+    width: 100%;
+    box-sizing: border-box;
 }
 
 #section4 h2 {
@@ -398,14 +399,13 @@ input[type="number"] {
 
 /* Update apply now button */
 .apply-now-btn {
-    width: 100%;
+    width: auto; /* Change from 100% */
     max-width: 300px;
     padding: 15px;
     font-size: 18px;
-    margin: 20px auto;
+    margin: 20px 0 20px auto; /* Change from margin: 20px auto */
     display: block;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    /* Add these essential styles back */
     background-color: var(--success-color) !important;
     color: white !important;
     border: none;
