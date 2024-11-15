@@ -80,30 +80,34 @@ function calculateSection2Value(isFirstYear = true) {
 }
 
 function calculateSection3Value() {
-    // Get the number of trips per year from section 1's numeric input
     const travelFrequency = parseInt(document.getElementById('travelFrequency').value.replace(/[^\d.-]/g, '')) || 0;
     
-    // Array of perk IDs from the sliders in section 3
-    const perks = ['loungeAccess', 'partnerStatus', 'fhrAndIap', 'cardProtections'];
+    const perks = [
+        { id: 'loungeAccess', valuePerUse: 50 },     // Lounge access worth $50 per visit
+        { id: 'partnerStatus', valuePerUse: 40 },    // Status benefits worth $40 per trip
+        { id: 'fhrAndIap', valuePerUse: 100 },       // FHR benefits worth $100 per stay
+        { id: 'cardProtections', valuePerUse: 30 }    // Protections worth $30 per trip
+    ];
     
-    // Calculate total value of all perks
-    return perks.reduce((total, perkId) => {
-        // Get slider value (0-4) representing Never to Always
-        const sliderValue = parseInt(document.getElementById(perkId).value);
+    return perks.reduce((total, perk) => {
+        const sliderValue = parseInt(document.getElementById(perk.id).value);
+        const perkValue = travelFrequency * perk.valuePerUse * (sliderValue / 4);
         
-        // Calculate value for this perk:
-        // - Number of trips × $40 (value per use) × usage percentage (slider value / 4)
-        // For example: 10 trips × $40 × (4/4) = $400 for "Always" usage
-        const perkValue = travelFrequency * 40 * (sliderValue / 4);
-        
-        // Add debugging log to see individual perk calculations
-        console.log(`${perkId}: ${travelFrequency} trips × $40 × ${sliderValue}/4 = $${perkValue}`);
+        console.log(`${perk.id}: ${travelFrequency} trips × $${perk.valuePerUse} × ${sliderValue}/4 = $${perkValue}`);
         
         return total + perkValue;
     }, 0);
 }
 
 function calculateFinalValuation() {
+     const travelFrequency = parseInt(document.getElementById('travelFrequency').value.replace(/[^\d.-]/g, ''));
+    
+    if (!travelFrequency) {
+        alert('Please enter your travel frequency in section 1');
+        nextSection('section4', 'section1');
+        return;
+    }
+    
     console.log("Calculating final valuation");
     const totalPoints = parseInt(document.getElementById('totalPoints').value.replace(/[^\d.-]/g, '')) || 0;
     const pointsValue = totalPoints * POINT_VALUE;
@@ -252,6 +256,13 @@ function calculateFinalValuation() {
     // Initialize with $0
     input.value = '$0';
 });
+    document.getElementById('travelFrequency').addEventListener('blur', function() {
+    let value = this.value.replace(/[^\d]/g, '');
+    if (value === '') value = '0';
+    // Ensure value is not negative
+    value = Math.max(0, parseInt(value));
+    this.value = value;
+});
  // Add the new Global Entry slider event listener here
 document.getElementById('globalEntryCredit').addEventListener('input', function() {
     const value = parseInt(this.value);
@@ -261,6 +272,6 @@ document.getElementById('globalEntryCredit').addEventListener('input', function(
 });   
     // Update the labels for Credit Card Perks sliders
     document.querySelectorAll('#section3 .slider-labels').forEach(labelGroup => {
-        labelGroup.innerHTML = '<span>Never</span><span>Sometimes</span><span>Always</span>';
+    labelGroup.innerHTML = '<span>Never</span><span>Rarely</span><span>Sometimes</span><span>Often</span><span>Always</span>';
     });
 });
