@@ -90,18 +90,45 @@ function calculateSection2Value(isFirstYear = true) {
         }, 0);
     }
 
-    // Final Valuation Calculation
-    function calculateFinalValuation() {
-        console.log("Calculating final valuation");
-        const totalPoints = parseInt(document.getElementById('totalPoints').value.replace(/[^\d.-]/g, '')) || 0;
-        const pointsValue = totalPoints * POINT_VALUE;
-        const section2Value = calculateSection2Value();
-        const section3Value = calculateSection3Value();
+function calculateFinalValuation() {
+    console.log("Calculating final valuation");
+    const totalPoints = parseInt(document.getElementById('totalPoints').value.replace(/[^\d.-]/g, '')) || 0;
+    const pointsValue = totalPoints * POINT_VALUE;
+    const section2Value = calculateSection2Value();
+    const section3Value = calculateSection3Value();
 
-        const yearlyValue = pointsValue + section2Value + section3Value;
-        const signupBonusValue = WELCOME_BONUS * POINT_VALUE;
-        const firstYearValue = yearlyValue + signupBonusValue - ANNUAL_FEE;
-const secondYearValue = yearlyValue - ANNUAL_FEE;
+    // Add debugging logs
+    console.log({
+        points: {
+            totalPoints,
+            pointsValue
+        },
+        credits: {
+            section2Value
+        },
+        perks: {
+            section3Value,
+            travelFrequency: parseInt(document.getElementById('travelFrequency').value) || 0,
+            loungeValue: parseInt(document.getElementById('loungeAccess').value),
+            statusValue: parseInt(document.getElementById('partnerStatus').value),
+            fhrValue: parseInt(document.getElementById('fhrAndIap').value),
+            protectionsValue: parseInt(document.getElementById('cardProtections').value)
+        }
+    });
+
+    const yearlyValue = pointsValue + section2Value + section3Value;
+    const signupBonusValue = WELCOME_BONUS * POINT_VALUE;
+    const firstYearValue = yearlyValue + signupBonusValue - ANNUAL_FEE;
+    const secondYearValue = yearlyValue - ANNUAL_FEE;
+
+    // Add value debugging logs
+    console.log({
+        yearlyValue,
+        signupBonusValue,
+        firstYearValue,
+        secondYearValue
+    });
+
     const firstYearSavings = document.getElementById('firstYearSavings');
     const secondYearSavings = document.getElementById('secondYearSavings');
     
@@ -110,16 +137,15 @@ const secondYearValue = yearlyValue - ANNUAL_FEE;
     
     firstYearSavings.style.color = firstYearValue >= 0 ? '#3EB564' : '#d32f2f';
     secondYearSavings.style.color = secondYearValue >= 0 ? '#3EB564' : '#d32f2f';
-        document.getElementById('annualFee').textContent = '$' + ANNUAL_FEE;
-        document.getElementById('signupBonusValue').textContent = '$' + Math.round(signupBonusValue);
-        document.getElementById('secondYearValue').textContent = '$' + Math.round(secondYearValue);
+    document.getElementById('annualFee').textContent = '$' + ANNUAL_FEE;
+    document.getElementById('signupBonusValue').textContent = '$' + Math.round(signupBonusValue);
+    document.getElementById('secondYearValue').textContent = '$' + Math.round(secondYearValue);
 
-        hideAllSections();
-        document.getElementById('section4').style.display = 'block';
-        updateProgressBar('section4');
-        window.scrollTo(0, 0);
-        console.log("Final valuation calculated and displayed");
-    }
+    hideAllSections();
+    document.getElementById('section4').style.display = 'block';
+    updateProgressBar('section4');
+    window.scrollTo(0, 0);
+}
 
     // Progress Bar Update
     function updateProgressBar(currentSection) {
