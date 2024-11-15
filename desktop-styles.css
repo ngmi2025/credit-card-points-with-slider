@@ -127,7 +127,7 @@ h1 {
     width: 250px;
 }
 
-.input-group select, .input-wrapper input[type="text"], .slider-container input[type="range"] {
+.input-group select, .input-wrapper input[type="text"] {
     width: 100%;
     padding: 10px;
     border: 1px solid var(--border-color);
