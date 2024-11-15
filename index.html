@@ -209,53 +209,59 @@
                 </div>
             </div>
 
-            <div class="section hidden" id="section3">
-                <a href="#" id="backToSection2" class="back-link">← Back to previous section</a>
-                <h2>Credit Card Perks</h2>
-                  <div class="question-group">
-                <p class="section-intro"><b>How often would you use the following while traveling?</b></p>
-                <div class="question-group">
-                    <label for="loungeAccess">Amex Platinum Airport Lounge Access</label>
-                    <div class="slider-container">
-                        <input type="range" id="loungeAccess" min="0" max="4" step="1" value="0" class="slider">
-                        <div class="slider-labels">
-                            <span>None</span><span>25%</span><span>50%</span><span>75%</span><span>All</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="question-group">
-                    <label for="partnerStatus">Partner Elite Status (e.g. Marriott, Hilton)</label>
-                    <div class="slider-container">
-                        <input type="range" id="partnerStatus" min="0" max="4" step="1" value="0" class="slider">
-                        <div class="slider-labels">
-                            <span>None</span><span>25%</span><span>50%</span><span>75%</span><span>All</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="question-group">
-                    <label for="fhrAndIap">Amex Fine Hotels and Resorts Access</label>
-                    <div class="slider-container">
-                        <input type="range" id="fhrAndIap" min="0" max="4" step="1" value="0" class="slider">
-                        <div class="slider-labels">
-                            <span>None</span><span>25%</span><span>50%</span><span>75%</span><span>All</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="question-group">
-                    <label for="cardProtections">Amex Platinum Card Protections</label>
-                    <div class="slider-container">
-                        <input type="range" id="cardProtections" min="0" max="4" step="1" value="0" class="slider">
-                        <div class="slider-labels">
-                            <span>None</span><span>25%</span><span>50%</span><span>75%</span><span>All</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="button-container">
-                    <button id="calculateValuationBtn" class="cta-button">Calculate Valuation</button>
-                </div>
+<!-- Section 3 -->
+<div class="section hidden" id="section3">
+    <a href="#" id="backToSection2" class="back-link">← Back to previous section</a>
+    <h2>Credit Card Perks</h2>
+    <p class="section-intro"><b>How often would you use the following while traveling?</b></p>
+    
+    <div class="question-group">
+        <label for="loungeAccess">Amex Platinum Airport Lounge Access</label>
+        <div class="slider-container">
+            <input type="range" id="loungeAccess" min="0" max="4" step="1" value="0" class="slider">
+            <div class="slider-labels">
+                <span>None</span><span>25%</span><span>50%</span><span>75%</span><span>All</span>
             </div>
+        </div>
+    </div>
 
-           <div class="section" id="section4">
+    <div class="question-group">
+        <label for="partnerStatus">Partner Elite Status (e.g. Marriott, Hilton)</label>
+        <div class="slider-container">
+            <input type="range" id="partnerStatus" min="0" max="4" step="1" value="0" class="slider">
+            <div class="slider-labels">
+                <span>None</span><span>25%</span><span>50%</span><span>75%</span><span>All</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="question-group">
+        <label for="fhrAndIap">Amex Fine Hotels and Resorts Access</label>
+        <div class="slider-container">
+            <input type="range" id="fhrAndIap" min="0" max="4" step="1" value="0" class="slider">
+            <div class="slider-labels">
+                <span>None</span><span>25%</span><span>50%</span><span>75%</span><span>All</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="question-group">
+        <label for="cardProtections">Amex Platinum Card Protections</label>
+        <div class="slider-container">
+            <input type="range" id="cardProtections" min="0" max="4" step="1" value="0" class="slider">
+            <div class="slider-labels">
+                <span>None</span><span>25%</span><span>50%</span><span>75%</span><span>All</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="button-container">
+        <button id="calculateValuationBtn" class="cta-button">Calculate Valuation</button>
+    </div>
+</div>
+
+<!-- Section 4 -->
+<div class="section hidden" id="section4">
     <a href="#" id="backToSection3" class="back-link">← Back to previous section</a>
     <h2>Final Valuation</h2>
     
@@ -263,11 +269,11 @@
         <h3>Your Savings:</h3>
         <div class="savings-item">
             <span class="savings-label">1st Year:</span>
-            <span id="firstYearSavings" class="savings-value positive">+$1,365</span>
+            <span id="firstYearSavings" class="savings-value positive"></span>
         </div>
         <div class="savings-item">
             <span class="savings-label">2nd Year Onwards:</span>
-            <span id="secondYearSavings" class="savings-value negative">-$395</span>
+            <span id="secondYearSavings" class="savings-value"></span>
         </div>
     </div>
 
@@ -275,26 +281,26 @@
         <h3>Card Details:</h3>
         <div class="detail-item">
             <span class="detail-label">Annual Fee:</span>
-            <span id="annualFee" class="detail-value">$595</span>
+            <span id="annualFee" class="detail-value"></span>
         </div>
         <div class="detail-item">
             <span class="detail-label">Sign-up Bonus Value:</span>
-            <span id="signupBonusValue" class="detail-value">$1,760</span>
+            <span id="signupBonusValue" class="detail-value"></span>
         </div>
     </div>
 
     <div class="yearly-breakdown">
         <h3>Yearly Breakdown:</h3>
- <div class="breakdown-item">
-  <div class="breakdown-label">1st Year Total Value:</div>
-  <div class="breakdown-value">$1,960</div>
-</div>
-<div class="breakdown-note">
-  (Card benefits: $200 + Sign-up bonus: $1,760)
-</div>
+        <div class="breakdown-item">
+            <div class="breakdown-label">1st Year Total Value:</div>
+            <div id="firstYearValue" class="breakdown-value"></div>
+        </div>
+        <div class="breakdown-note">
+            (Card benefits: $<span id="cardBenefitsValue">0</span> + Sign-up bonus: $<span id="signupBonusBreakdown">0</span>)
+        </div>
         <div class="breakdown-item">
             <span class="breakdown-label">2nd Year Onwards Value:</span>
-            <span id="secondYearValue" class="breakdown-value">$200</span>
+            <span id="secondYearValue" class="breakdown-value"></span>
         </div>
     </div>
 
