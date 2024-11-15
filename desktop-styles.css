@@ -232,24 +232,6 @@ input[type="number"] {
     text-transform: uppercase;
     font-weight: bold;
 }
-
-.apply-now-btn {
-    background-color: var(--success-color) !important;
-    color: white !important;
-    border: none;
-    padding: 10px 20px;
-    font-size: 1em;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    text-transform: uppercase;
-    font-weight: bold;
-}
-
-.apply-now-btn:hover {
-    background-color: #34a853 !important;
-}
-
 .error {
     border-color: var(--error-color) !important;
 }
@@ -338,29 +320,6 @@ input[type="number"] {
     color: var(--secondary-text-color);
     margin-bottom: 10px;
 }
-#section4 {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 30px;
-}
-
-.savings-summary, .card-details, .yearly-breakdown {
-    margin-bottom: 30px;
-}
-
-.savings-item, .detail-item, .breakdown-item {
-    font-size: 18px;
-}
-
-.savings-value {
-    font-size: 28px;
-}
-
-.apply-now-btn {
-    max-width: 300px;
-    margin: 0 auto;
-    display: block;
-}
 .credit-note {
     display: block;
     font-size: 0.8em;
@@ -381,4 +340,82 @@ input[type="number"] {
 
 .value-breakdown div {
     margin-bottom: 0; /* Remove bottom margin since they're side by side now */
+}
+/* Update section4 styles */
+#section4 {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-top: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#section4 h2 {
+    color: var(--primary-color);
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Update savings items styles */
+.savings-item, .detail-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+.breakdown-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+.savings-label, .detail-label, .breakdown-label {
+    font-weight: bold;
+}
+
+.savings-value {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.savings-value.positive {
+    color: var(--success-color);
+}
+
+.savings-value.negative {
+    color: var(--error-color);
+}
+
+/* Update apply now button */
+.apply-now-btn {
+    width: 100%;
+    max-width: 300px;
+    padding: 15px;
+    font-size: 18px;
+    margin: 20px auto;
+    display: block;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    /* Add these essential styles back */
+    background-color: var(--success-color) !important;
+    color: white !important;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.apply-now-btn:hover {
+    background-color: #34a853 !important;
+    transform: translateY(-2px);
 }
