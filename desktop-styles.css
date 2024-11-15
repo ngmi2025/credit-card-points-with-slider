@@ -358,3 +358,21 @@ input[type="number"] {
     margin: 0 auto;
     display: block;
 }
+.credit-note {
+    display: block;
+    font-size: 0.8em;
+    color: var(--secondary-text-color);
+    font-weight: normal;
+    margin-top: 2px;
+}
+
+.value-breakdown {
+    font-size: 0.9em;
+    color: var(--primary-color);
+    margin-top: 5px;
+    text-align: right;
+}
+
+.value-breakdown div {
+    margin-bottom: 2px;
+}
