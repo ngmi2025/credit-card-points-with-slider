@@ -207,7 +207,13 @@ const secondYearValue = yearlyValue - ANNUAL_FEE;
     // Initialize with $0
     input.value = '$0';
 });
-    
+ // Add the new Global Entry slider event listener here
+document.getElementById('globalEntryCredit').addEventListener('input', function() {
+    const value = parseInt(this.value);
+    const remaining = 100 - value;
+    document.getElementById('globalEntryCreditFirst').textContent = value;
+    document.getElementById('globalEntryCreditRemaining').textContent = remaining > 0 ? remaining : 0;
+});   
     // Update the labels for Credit Card Perks sliders
     document.querySelectorAll('#section3 .slider-labels').forEach(labelGroup => {
         labelGroup.innerHTML = '<span>Never</span><span>Sometimes</span><span>Always</span>';
