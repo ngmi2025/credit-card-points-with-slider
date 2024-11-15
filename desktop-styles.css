@@ -152,6 +152,8 @@ h1 {
     opacity: 0.8;
     transition: opacity 0.2s;
     margin-bottom: 5px;
+    width: calc(100% - 20px); /* Adjust width to account for thumb */
+    margin: 0 10px; /* Add margin to center the slider */
 }
 
 .slider-container input[type="range"]:hover {
@@ -166,6 +168,7 @@ h1 {
     background: var(--primary-color);
     cursor: pointer;
     border-radius: 50%;
+    margin-top: -6px; /* Center the thumb vertically */
 }
 
 .slider-container input[type="range"]::-moz-range-thumb {
@@ -174,6 +177,7 @@ h1 {
     background: var(--primary-color);
     cursor: pointer;
     border-radius: 50%;
+    border: none; /* Remove default border in Firefox */
 }
 
 .slider-container .slider-labels {
@@ -378,4 +382,17 @@ input[type="number"] {
 
 .value-breakdown div {
     margin-bottom: 0; /* Remove bottom margin since they're side by side now */
+}
+.slider-container input[type="range"]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 8px;
+    background: var(--border-color);
+    border-radius: 4px;
+}
+
+.slider-container input[type="range"]::-moz-range-track {
+    width: 100%;
+    height: 8px;
+    background: var(--border-color);
+    border-radius: 4px;
 }
