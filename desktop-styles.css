@@ -338,17 +338,20 @@ input[type="number"] {
 }
 
 .value-breakdown {
-    font-size: 0.8em; /* Made smaller */
-    color: var(--secondary-text-color); /* Changed to grey */
+    font-size: 0.8em;
+    color: var(--secondary-text-color);
     margin-top: 5px;
     text-align: right;
-    display: flex; /* Added to make items side by side */
-    justify-content: flex-end; /* Align to the right */
-    gap: 15px; /* Space between the two values */
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    white-space: nowrap; /* Add this to prevent line breaks */
 }
 
 .value-breakdown div {
-    margin-bottom: 0; /* Remove bottom margin since they're side by side now */
+    margin-bottom: 0;
+    display: inline-flex; /* Change to inline-flex */
+    align-items: center; /* Center items vertically */
 }
 /* Update section4 styles */
 #section4 {
