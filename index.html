@@ -85,22 +85,33 @@
                 </div>
                 <div id="results" class="hidden">
                     <h2>Results</h2>
-                    <div class="question-group">
-    <label for="totalPoints">Total Points Earned:</label>
-    <input type="text" id="totalPoints" readonly>
-    <p class="disclaimer">You earn 5 points per $1 on flights (capped at $500,000 annually) and prepaid hotels booked through Amex Travel, plus 1 point per $1 on all other purchases.</p>
+              <div class="question-group">
+    <div class="title-container">
+        <label for="totalPoints">Total Points Earned:</label>
+        <span class="disclaimer">You earn 5 points per $1 on flights (capped at $500,000 annually) and prepaid hotels booked through Amex Travel, plus 1 point per $1 on all other purchases.</span>
+    </div>
+    <div class="input-wrapper">
+        <input type="text" id="totalPoints" readonly>
+    </div>
 </div>
 <div class="question-group">
-    <label for="welcomeBonus">Welcome Bonus:</label>
-    <input type="text" id="welcomeBonus" readonly>
-    <p class="disclaimer">Earn 80,000 Membership Rewards® Points after you spend $8,000 on eligible purchases on your new Card in your first 6 months of Card Membership.</p>
+    <div class="title-container">
+        <label for="welcomeBonus">Welcome Bonus:</label>
+        <span class="disclaimer">Earn 80,000 Membership Rewards® Points after you spend $8,000 on eligible purchases on your new Card in your first 6 months of Card Membership.</span>
+    </div>
+    <div class="input-wrapper">
+        <input type="text" id="welcomeBonus" readonly>
+    </div>
 </div>
 <div class="question-group">
-    <label for="amexValuation">UP's Valuation:</label>
-    <input type="text" id="amexValuation" readonly>
-    <p class="disclaimer">The UP Valuation reflects the estimated dollar value of your total points, including both yearly spend points and the welcome bonus. This value is <a href="https://upgradedpoints.com/travel/points-and-miles-valuations/" target="_blank">calculated by UP</a> after analyzing redemption options, transfer partners, award availability, and how much UP would pay to buy these points.</p>
+    <div class="title-container">
+        <label for="amexValuation">UP's Valuation:</label>
+        <span class="disclaimer">The UP Valuation reflects the estimated dollar value of your total points, including both yearly spend points and the welcome bonus. This value is <a href="https://upgradedpoints.com/travel/points-and-miles-valuations/" target="_blank">calculated by UP</a> after analyzing redemption options, transfer partners, award availability, and how much UP would pay to buy these points.</span>
+    </div>
+    <div class="input-wrapper">
+        <input type="text" id="amexValuation" readonly>
+    </div>
 </div>
-
                     <div class="button-container">
                         <button id="continueBtn" class="cta-button">Continue</button>
                     </div>
