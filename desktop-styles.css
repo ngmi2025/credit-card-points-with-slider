@@ -113,18 +113,28 @@ h1 {
     flex: 1;
     margin-right: 20px;
 }
+
 .question-group {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center; /* Aligns items vertically */
     margin-bottom: 20px;
     padding-bottom: 20px;
     border-bottom: 1px solid var(--border-color);
 }
 
+.input-wrapper {
+    flex: 0 0 250px; /* Fixed width for input fields */
+    text-align: right; /* Aligns input text to the right */
+}
 
-.input-group, .input-wrapper, .slider-container {
-    flex: 0 0 250px;
+.input-group {
+    flex: 0 0 250px; /* Fixed width for dropdowns */
+    text-align: left; /* Aligns dropdowns text to the left */
+}
+
+.slider-container {
+    flex: 0 0 250px; /* Keeps sliders consistent */
     width: 250px;
 }
 
@@ -311,11 +321,14 @@ input[type="number"] {
 }
 
 .disclaimer {
-    color: var(--secondary-text-color); /* Dark grey */
-    font-size: 0.75rem; /* Small text */
-    margin-top: 5px;
-    line-height: 1.2; /* Slightly tighter spacing */
+    font-size: 0.7rem; /* Smaller text size */
+    color: var(--secondary-text-color); /* Grey text */
+    line-height: 1.2; /* Compact spacing */
+    margin-top: 5px; /* Adds spacing between label and disclaimer */
+    display: block; /* Stacks disclaimer under label */
+    text-align: left; /* Aligns disclaimer to the left */
 }
+
 .subheading {
     font-weight: bold;
     color: #333;
@@ -452,6 +465,6 @@ input[type="number"] {
     transform: translateY(-2px);
 }
 .title-container {
-    flex: 1;
-    margin-right: 20px;
+    flex: 1; /* Allows container to take space */
+    margin-right: 20px; /* Adds spacing between label and input */
 }
