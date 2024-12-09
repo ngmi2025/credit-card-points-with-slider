@@ -359,6 +359,23 @@ select {
     padding-right: 30px;
 }
 
+.disclaimer {
+    color: var(--secondary-text-color); /* Matches secondary text color */
+    font-size: 0.85rem; /* Small, readable text size */
+    margin-top: 5px; /* Adds spacing between the disclaimer and element above */
+    line-height: 1.2; /* Slightly tighter spacing for small text */
+}
+
+.disclaimer a {
+    color: var(--secondary-text-color); /* Matches the text color for consistency */
+    text-decoration: underline; /* Indicates it's a link */
+}
+
+.disclaimer a:hover {
+    color: var(--primary-color); /* Adds a hover effect for better UX */
+    text-decoration: none; /* Optionally remove underline on hover */
+}
+
 
 .credit-note {
     display: block;
