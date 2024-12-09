@@ -105,14 +105,6 @@ h1 {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-.question-group {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid var(--border-color);
-}
-
 .question-group:last-child {
     border-bottom: none;
 }
@@ -121,6 +113,15 @@ h1 {
     flex: 1;
     margin-right: 20px;
 }
+.question-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
 
 .input-group, .input-wrapper, .slider-container {
     flex: 0 0 250px;
@@ -299,13 +300,6 @@ input[type="number"] {
     color: var(--text-color) !important;
 }
 
-.disclaimer {
-    color: var(--secondary-text-color); /* Matches secondary text color */
-    font-size: 0.85rem; /* Small, readable text size */
-    margin-top: 5px; /* Adds spacing between the disclaimer and element above */
-    line-height: 1.2; /* Slightly tighter spacing for small text */
-}
-
 .disclaimer a {
     color: var(--secondary-text-color); /* Matches the text color for consistency */
     text-decoration: underline; /* Indicates it's a link */
@@ -316,6 +310,12 @@ input[type="number"] {
     text-decoration: none; /* Optionally remove underline on hover */
 }
 
+.disclaimer {
+    color: var(--secondary-text-color); /* Dark grey */
+    font-size: 0.75rem; /* Small text */
+    margin-top: 5px;
+    line-height: 1.2; /* Slightly tighter spacing */
+}
 .subheading {
     font-weight: bold;
     color: #333;
@@ -450,4 +450,8 @@ input[type="number"] {
 .apply-now-btn:hover {
     background-color: #34a853 !important;
     transform: translateY(-2px);
+}
+.title-container {
+    flex: 1;
+    margin-right: 20px;
 }
