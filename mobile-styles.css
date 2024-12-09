@@ -224,7 +224,7 @@ h1 {
 
 #results .question-group label {
     margin-bottom: 5px;
-    font-weight: normal;
+    font-weight: bold;
 }
 
 #results .question-group input[readonly] {
@@ -363,6 +363,7 @@ select {
     color: var(--secondary-text-color); /* Matches secondary text color */
     font-size: 0.85rem; /* Small, readable text size */
     margin-top: 5px; /* Adds spacing between the disclaimer and element above */
+    margin-bottom: 5px; /* Adjust as needed */
     line-height: 1.2; /* Slightly tighter spacing for small text */
 }
 
@@ -398,3 +399,15 @@ select {
 .value-breakdown div {
     margin-bottom: 0; /* Remove bottom margin since they're side by side now */
 }
+
+@media screen and (max-width: 767px) {
+    .disclaimer {
+        font-size: 0.7rem; /* Slightly larger for readability */
+        line-height: 1.4; /* Improve readability */
+    }
+
+    /* Add more spacing around input fields */
+    #results .question-group input[readonly] {
+        margin-top: 5px;
+        margin-bottom: 10px;
+    }
