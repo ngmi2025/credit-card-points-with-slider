@@ -337,22 +337,25 @@
         <div class="savings-item">
             <span class="savings-label">1st Year:</span>
             <span id="firstYearSavings" class="savings-value positive"></span>
+            <span class="disclaimer">This value represents your total benefits (points earned from spending + Welcome Offer value + card benefits) minus the annual fee of $595</span>
         </div>
         <div class="savings-item">
             <span class="savings-label">2nd Year Onwards:</span>
             <span id="secondYearSavings" class="savings-value"></span>
+            <span class="disclaimer">This value represents your annual benefits (points earned from spending + card benefits) minus the annual fee of $595</span>
         </div>
     </div>
 
     <div class="card-details">
         <h3>Card Details:</h3>
         <div class="detail-item">
-            <span class="detail-label">Annual Fee:</span>
+            <span class="detail-label">Annual Fee: <a href="https://www.americanexpress.com/us/credit-cards/card-application/apply/prospect/terms/platinum-card/25330-10-0" target="_blank" class="rates-fees-link">Rates & Fees</a></span>
             <span id="annualFee" class="detail-value"></span>
         </div>
         <div class="detail-item">
-            <span class="detail-label">Sign-up Bonus Value:</span>
+            <span class="detail-label">Welcome Offer Value:</span>
             <span id="signupBonusValue" class="detail-value"></span>
+            <span class="disclaimer">80,000 Membership Rewards® Points valued at $0.022 per point = $1,760</span>
         </div>
     </div>
 
@@ -361,13 +364,21 @@
         <div class="breakdown-item">
             <div class="breakdown-label">1st Year Total Value:</div>
             <div id="firstYearValue" class="breakdown-value"></div>
-        </div>
-        <div class="breakdown-note">
-            (Card benefits: $<span id="cardBenefitsValue">0</span> + Sign-up bonus: $<span id="signupBonusBreakdown">0</span>)
+            <div class="breakdown-note">
+                Calculated from: Points from spending ($<span id="pointsSpendingValue"></span>) + 
+                Card benefits ($<span id="cardBenefitsValue"></span>) + 
+                Welcome Offer ($<span id="signupBonusBreakdown"></span>) - 
+                Annual fee ($595)
+            </div>
         </div>
         <div class="breakdown-item">
             <span class="breakdown-label">2nd Year Onwards Value:</span>
             <span id="secondYearValue" class="breakdown-value"></span>
+            <div class="breakdown-note">
+                Calculated from: Points from spending ($<span id="pointsSpendingValueSecondYear"></span>) + 
+                Card benefits ($<span id="cardBenefitsValueSecondYear"></span>) - 
+                Annual fee ($595)
+            </div>
         </div>
     </div>
 
