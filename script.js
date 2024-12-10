@@ -187,8 +187,6 @@ document.addEventListener('DOMContentLoaded', function() {
         firstYearSavings.style.color = firstYearValue >= 0 ? '#3EB564' : '#d32f2f';
         secondYearSavings.style.color = secondYearValue >= 0 ? '#3EB564' : '#d32f2f';
 
-         document.getElementById('firstYearSavings').textContent = '$' + Math.round(firstYearValue).toLocaleString();
-    document.getElementById('secondYearSavings').textContent = '$' + Math.round(secondYearValue).toLocaleString();
     document.getElementById('annualFee').textContent = '$' + ANNUAL_FEE;
     document.getElementById('signupBonusValue').textContent = '$' + Math.round(signupBonusValue).toLocaleString();
     document.getElementById('firstYearValue').textContent = '$' + Math.round(firstYearValue).toLocaleString();
