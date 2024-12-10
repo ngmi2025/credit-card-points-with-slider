@@ -193,24 +193,26 @@
     </div>
 </div>
 <div class="question-group">
-    <div class="title-container">
-        <label for="globalEntryCredit">
-            $120 Global Entry Credit or $85 TSA PreCheck Credit
-            <span class="credit-note">(Choose one option: $120 for Global Entry or $85 for TSA PreCheck)</span>
+    <label for="globalEntryOrPreCheck">
+        $120 Global Entry Credit or $85 TSA PreCheck Credit
+        <span class="credit-note">(Choose one option: $120 for Global Entry or $85 for TSA PreCheck)</span>
+    </label>
+    <div class="radio-group">
+        <label>
+            <input type="radio" name="globalEntryOrPreCheck" value="120" checked>
+            Global Entry ($120)
         </label>
-        <span class="disclaimer">
-            Receive either a statement credit every 4 years after you apply for Global Entry ($120) or a statement credit every 4.5 years after you apply for a five-year membership for TSA PreCheck (up to $85 through a TSA PreCheck official enrollment provider) and pay the application fee with your Amex Platinum card. If approved for Global Entry, at no additional charge, you will receive access to TSA PreCheck.
-        </span>
+        <label>
+            <input type="radio" name="globalEntryOrPreCheck" value="85">
+            TSA PreCheck ($85)
+        </label>
     </div>
-    <div class="slider-container">
-        <input type="range" id="globalEntryCredit" min="0" max="120" step="25" value="0" class="slider">
-        <div class="slider-labels">
-            <span>$0</span><span>$30</span><span>$60</span><span>$90</span><span>$120</span>
-        </div>
-        <div class="value-breakdown">
-            <div>First year value: $<span id="globalEntryCreditFirst">0</span></div>
-            <div>Remaining value: $<span id="globalEntryCreditRemaining">120</span></div>
-        </div>
+    <div class="disclaimer">
+        Receive either a statement credit every 4 years after you apply for Global Entry ($120) or a statement credit every 4.5 years after you apply for a five-year membership for TSA PreCheck (up to $85 through a TSA PreCheck official enrollment provider) and pay the application fee with your Amex Platinum card. If approved for Global Entry, at no additional charge, you will receive access to TSA PreCheck.
+    </div>
+    <div class="value-breakdown">
+        <div>First year value: $<span id="globalEntryCreditFirst">0</span></div>
+        <div>Remaining value: $<span id="globalEntryCreditRemaining">120</span></div>
     </div>
 </div>
 <div class="question-group">
