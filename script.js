@@ -158,17 +158,18 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 0);
     }
 
-    function calculateFinalValuation() {
-        const travelFrequency = parseInt(document.getElementById('travelFrequency').value.replace(/[^ -\u007F]+/g, ''));
+  function calculateFinalValuation() {
+    const travelFrequency = parseInt(document.getElementById('travelFrequency').value.replace(/[^ -\u007F]+/g, ''));
 
-        if (!travelFrequency) {
-            alert('Please enter your travel frequency in section 1');
-            nextSection('section4', 'section1');
-            return;
-        }
+    if (!travelFrequency) {
+        alert('Please enter your travel frequency in section 1');
+        nextSection('section4', 'section1');
+        return;
+    }
 
-        console.log("Calculating final valuation");
-    const totalPoints = parseInt(document.getElementById('totalPoints').value.replace(/[^ -\u007F]+/g, '')) || 0;
+    console.log("Calculating final valuation");
+    // Get total points from spending (removing any commas and 'points' text)
+    const totalPoints = parseInt(document.getElementById('totalPoints').value.replace(/[^0-9]/g, '')) || 0;
     const pointsValue = totalPoints * POINT_VALUE;
     const section2Value = calculateSection2Value();
     const section3Value = calculateSection3Value();
@@ -178,32 +179,46 @@ document.addEventListener('DOMContentLoaded', function() {
     const firstYearValue = yearlyValue + signupBonusValue - ANNUAL_FEE;
     const secondYearValue = yearlyValue - ANNUAL_FEE;
 
-        const firstYearSavings = document.getElementById('firstYearSavings');
-        const secondYearSavings = document.getElementById('secondYearSavings');
+    // Update all values in Section 4
+    const firstYearSavings = document.getElementById('firstYearSavings');
+    const secondYearSavings = document.getElementById('secondYearSavings');
 
-        firstYearSavings.textContent = '$' + Math.round(firstYearValue).toLocaleString();
-        secondYearSavings.textContent = '$' + Math.round(secondYearValue).toLocaleString();
+    firstYearSavings.textContent = '$' + Math.round(firstYearValue).toLocaleString();
+    secondYearSavings.textContent = '$' + Math.round(secondYearValue).toLocaleString();
 
-        firstYearSavings.style.color = firstYearValue >= 0 ? '#3EB564' : '#d32f2f';
-        secondYearSavings.style.color = secondYearValue >= 0 ? '#3EB564' : '#d32f2f';
+    // Set colors based on positive/negative values
+    firstYearSavings.style.color = firstYearValue >= 0 ? '#3EB564' : '#d32f2f';
+    secondYearSavings.style.color = secondYearValue >= 0 ? '#3EB564' : '#d32f2f';
 
-    document.getElementById('annualFee').textContent = '$' + ANNUAL_FEE;
+    // Update all the breakdown values
+    document.getElementById('annualFee').textContent = '$' + ANNUAL_FEE.toLocaleString();
     document.getElementById('signupBonusValue').textContent = '$' + Math.round(signupBonusValue).toLocaleString();
     document.getElementById('firstYearValue').textContent = '$' + Math.round(firstYearValue).toLocaleString();
     document.getElementById('secondYearValue').textContent = '$' + Math.round(secondYearValue).toLocaleString();
-
-     document.getElementById('pointsSpendingValue').textContent = Math.round(pointsValue).toLocaleString();
+    document.getElementById('pointsSpendingValue').textContent = Math.round(pointsValue).toLocaleString();
     document.getElementById('pointsSpendingValueSecondYear').textContent = Math.round(pointsValue).toLocaleString();
     document.getElementById('cardBenefitsValue').textContent = Math.round(section2Value + section3Value).toLocaleString();
     document.getElementById('cardBenefitsValueSecondYear').textContent = Math.round(section2Value + section3Value).toLocaleString();
     document.getElementById('signupBonusBreakdown').textContent = Math.round(signupBonusValue).toLocaleString();
 
-        hideAllSections();
-        document.getElementById('section4').style.display = 'block';
-        updateProgressBar('section4');
-        window.scrollTo(0, 0);
-    }
+    // Show section 4 and scroll to top
+    hideAllSections();
+    document.getElementById('section4').style.display = 'block';
+    updateProgressBar('section4');
+    window.scrollTo(0, 0);
 
+    // Debug logging
+    console.log({
+        totalPoints,
+        pointsValue,
+        section2Value,
+        section3Value,
+        yearlyValue,
+        signupBonusValue,
+        firstYearValue,
+        secondYearValue
+    });
+}
     function updateProgressBar(currentSection) {
         const progress = document.getElementById('progress');
         const steps = document.querySelectorAll('.step');
