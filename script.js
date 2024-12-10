@@ -168,15 +168,15 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         console.log("Calculating final valuation");
-        const totalPoints = parseInt(document.getElementById('totalPoints').value.replace(/[^ -\u007F]+/g, '')) || 0;
-        const pointsValue = totalPoints * POINT_VALUE;
-        const section2Value = calculateSection2Value();
-        const section3Value = calculateSection3Value();
+    const totalPoints = parseInt(document.getElementById('totalPoints').value.replace(/[^ -\u007F]+/g, '')) || 0;
+    const pointsValue = totalPoints * POINT_VALUE;
+    const section2Value = calculateSection2Value();
+    const section3Value = calculateSection3Value();
 
-        const yearlyValue = pointsValue + section2Value + section3Value;
-        const signupBonusValue = WELCOME_BONUS * POINT_VALUE;
-        const firstYearValue = yearlyValue + signupBonusValue - ANNUAL_FEE;
-        const secondYearValue = yearlyValue - ANNUAL_FEE;
+    const yearlyValue = pointsValue + section2Value + section3Value;
+    const signupBonusValue = WELCOME_BONUS * POINT_VALUE;
+    const firstYearValue = yearlyValue + signupBonusValue - ANNUAL_FEE;
+    const secondYearValue = yearlyValue - ANNUAL_FEE;
 
         const firstYearSavings = document.getElementById('firstYearSavings');
         const secondYearSavings = document.getElementById('secondYearSavings');
@@ -187,13 +187,18 @@ document.addEventListener('DOMContentLoaded', function() {
         firstYearSavings.style.color = firstYearValue >= 0 ? '#3EB564' : '#d32f2f';
         secondYearSavings.style.color = secondYearValue >= 0 ? '#3EB564' : '#d32f2f';
 
-        document.getElementById('annualFee').textContent = '$' + ANNUAL_FEE;
-        document.getElementById('signupBonusValue').textContent = '$' + Math.round(signupBonusValue);
-        document.getElementById('secondYearValue').textContent = '$' + Math.round(secondYearValue);
+         document.getElementById('firstYearSavings').textContent = '$' + Math.round(firstYearValue).toLocaleString();
+    document.getElementById('secondYearSavings').textContent = '$' + Math.round(secondYearValue).toLocaleString();
+    document.getElementById('annualFee').textContent = '$' + ANNUAL_FEE;
+    document.getElementById('signupBonusValue').textContent = '$' + Math.round(signupBonusValue).toLocaleString();
+    document.getElementById('firstYearValue').textContent = '$' + Math.round(firstYearValue).toLocaleString();
+    document.getElementById('secondYearValue').textContent = '$' + Math.round(secondYearValue).toLocaleString();
 
-        document.getElementById('cardBenefitsValue').textContent = Math.round(section2Value + section3Value).toLocaleString();
-        document.getElementById('signupBonusBreakdown').textContent = Math.round(signupBonusValue).toLocaleString();
-        document.getElementById('firstYearValue').textContent = '$' + Math.round(firstYearValue).toLocaleString();
+     document.getElementById('pointsSpendingValue').textContent = Math.round(pointsValue).toLocaleString();
+    document.getElementById('pointsSpendingValueSecondYear').textContent = Math.round(pointsValue).toLocaleString();
+    document.getElementById('cardBenefitsValue').textContent = Math.round(section2Value + section3Value).toLocaleString();
+    document.getElementById('cardBenefitsValueSecondYear').textContent = Math.round(section2Value + section3Value).toLocaleString();
+    document.getElementById('signupBonusBreakdown').textContent = Math.round(signupBonusValue).toLocaleString();
 
         hideAllSections();
         document.getElementById('section4').style.display = 'block';
