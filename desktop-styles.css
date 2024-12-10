@@ -368,18 +368,19 @@ input[type="number"] {
 }
 
 .value-breakdown {
-    font-size: 0.8em;
-    color: var(--secondary-text-color);
-    margin-top: 5px;
+    font-size: 0.7rem; /* Match disclaimer font size */
+    color: var(--secondary-text-color); /* Match disclaimer text color */
+    line-height: 1.2; /* Match disclaimer line height */
+    margin-top: 5px; /* Match disclaimer spacing */
+    text-align: left; /* Align text to the left */
     display: flex;
-    justify-content: flex-end;
-    gap: 20px; /* Increased gap between the two values */
-    white-space: nowrap; /* Prevent line breaks */
+    justify-content: flex-end; /* Keep values aligned to the right */
+    gap: 20px; /* Add spacing between values */
 }
 
 .value-breakdown div {
-    display: inline-flex;
-    align-items: center;
+    display: inline-flex; /* Align text and values horizontally */
+    align-items: center; /* Vertically align items */
 }
 
 /* Optional: Add some spacing between the text and the value */
