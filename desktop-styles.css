@@ -472,10 +472,13 @@ input[type="number"] {
 .calculation-note {
     display: block;
     color: #666;
-    font-size: 0.9em;
-    margin-top: 5px;
+    font-size: 0.7em;
+    margin-top: 8px;
+    line-height: 1.4;
 }
-
 .savings-header, .detail-header, .breakdown-header {
-    margin-bottom: 5px;
+    margin-bottom: 4px;
+}
+.savings-item, .detail-item, .breakdown-item {
+    margin-bottom: 20px;
 }
