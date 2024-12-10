@@ -117,7 +117,7 @@ h1 {
 .question-group {
     display: flex;
     justify-content: space-between;
-    align-items: center; /* Aligns items vertically */
+    align-items: center; /* Aligns radio buttons and slider vertically */
     margin-bottom: 20px;
     padding-bottom: 20px;
     border-bottom: 1px solid var(--border-color);
@@ -321,11 +321,11 @@ input[type="number"] {
 }
 
 .disclaimer {
-    font-size: 0.7rem; /* Smaller text size */
+    font-size: 0.7rem; /* Matches the smaller text size */
     color: var(--secondary-text-color); /* Grey text */
     line-height: 1.2; /* Compact spacing */
-    margin-top: 5px; /* Adds spacing between label and disclaimer */
-    display: block; /* Stacks disclaimer under label */
+    margin-top: 5px; /* Adds spacing between radio buttons and disclaimer */
+    display: block; /* Stacks disclaimer under the radio buttons */
     text-align: left; /* Aligns disclaimer to the left */
 }
 
@@ -368,14 +368,13 @@ input[type="number"] {
 }
 
 .value-breakdown {
-    font-size: 0.7rem; /* Match disclaimer font size */
-    color: var(--secondary-text-color); /* Match disclaimer text color */
-    line-height: 1.2; /* Match disclaimer line height */
-    margin-top: 5px; /* Match disclaimer spacing */
-    text-align: left; /* Align text to the left */
-    display: flex;
-    justify-content: flex-end; /* Keep values aligned to the right */
-    gap: 20px; /* Add spacing between values */
+    font-size: 0.7rem; /* Matches disclaimer text size */
+    color: var(--secondary-text-color); /* Matches disclaimer text color */
+    line-height: 1.2; /* Matches disclaimer line height */
+    margin-top: 5px; /* Consistent spacing with the disclaimer */
+    display: flex; /* Aligns breakdown values horizontally */
+    justify-content: flex-end; /* Keeps values aligned to the right */
+    gap: 20px; /* Adds spacing between values */
 }
 
 .value-breakdown div {
@@ -385,7 +384,7 @@ input[type="number"] {
 
 /* Optional: Add some spacing between the text and the value */
 .value-breakdown span {
-    margin-left: 4px;
+    margin-left: 4px; /* Adds spacing between labels and values */
 }
 /* Update section4 styles */
 #section4 {
@@ -466,6 +465,7 @@ input[type="number"] {
     transform: translateY(-2px);
 }
 .title-container {
-    flex: 1; /* Allows container to take space */
-    margin-right: 20px; /* Adds spacing between label and input */
+    flex: 1; /* Occupies remaining space */
+    margin-right: 20px; /* Spacing between title and slider */
+    text-align: left; /* Aligns content to the left */
 }
