@@ -27,19 +27,30 @@ document.addEventListener('DOMContentLoaded', function() {
         radio.addEventListener('change', function () {
             const selectedValue = parseInt(this.value);
             const slider = document.getElementById('globalEntrySlider');
-            const sliderLabels = document.querySelector('.slider-labels');
+            const sliderLabels = slider.nextElementSibling;
 
-            slider.max = selectedValue;
+            // Update slider max value and step based on selection
+            if (selectedValue === 85) { // TSA PreCheck
+                slider.max = 85;
+                slider.step = 21.25; // Divides $85 into 4 equal steps
+            } else { // Global Entry
+                slider.max = 120;
+                slider.step = 30; // Divides $120 into 4 equal steps
+            }
+            
+            // Reset slider value
             slider.value = 0;
 
+            // Update slider labels
             sliderLabels.innerHTML = '';
-            const steps = selectedValue / 4; 
+            const steps = selectedValue / 4;
             for (let i = 0; i <= selectedValue; i += steps) {
                 const label = document.createElement('span');
                 label.textContent = `$${Math.round(i)}`;
                 sliderLabels.appendChild(label);
             }
 
+            // Update credit values
             document.getElementById('globalEntryCreditFirst').textContent = '0';
             document.getElementById('globalEntryCreditRemaining').textContent = selectedValue;
         });
@@ -237,7 +248,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         document.getElementById('travelFrequency').classList.remove('error');
         try {
-            calculatePoints(); // Ensure the function executes without errors
+            calculatePoints();
             document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
         } catch (error) {
             console.error("Error calculating points:", error);
