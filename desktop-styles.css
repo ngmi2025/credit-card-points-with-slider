@@ -634,12 +634,12 @@ select.credit-select {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: 10px;
+    font-size: 12px;
     background-color: white;
 }
 
 select.credit-select option {
-    font-size: 10px;
+    font-size: 12px;
 }
 
 .input-group {
