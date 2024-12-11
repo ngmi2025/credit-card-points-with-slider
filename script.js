@@ -140,7 +140,6 @@ document.getElementById('section1').classList.remove('hidden');
             { id: 'loungeAccess', valuePerUse: 50 },
             { id: 'partnerStatus', valuePerUse: 40 },
             { id: 'fhrAndIap', valuePerUse: 100 },
-            { id: 'cardProtections', valuePerUse: 30 }
         ];
 
         return perks.reduce((total, perk) => {
