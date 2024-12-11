@@ -260,17 +260,101 @@ input[type="number"] {
     display: none;
 }
 
+/* Results Section Styling */
 #results {
-    background-color: #f9f9f9;
-    margin-top: 30px;
+    background-color: #fff;
     padding: 30px;
-    border-top: 3px solid var(--primary-color);
-    border-radius: 5px;
+    border-radius: 12px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+    margin-bottom: 30px;
 }
 
 #results h2 {
-    margin-top: 0;
     color: var(--primary-color);
+    font-size: 28px;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 15px;
+}
+
+.result-group {
+    margin-bottom: 25px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.result-group:last-child {
+    border-bottom: none;
+}
+
+.result-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+.result-description {
+    color: var(--secondary-text-color);
+    font-size: 0.9em;
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+.result-value {
+    background-color: #f8f9fa;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--text-color);
+    width: 100%;
+    box-sizing: border-box;
+    display: block;
+}
+
+.result-value.points {
+    color: var(--primary-color);
+}
+
+.result-value.currency {
+    color: var(--success-color);
+}
+
+.result-description a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.2s ease;
+}
+
+.result-description a:hover {
+    border-bottom-color: var(--primary-color);
+}
+
+.continue-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-top: 30px;
+    width: auto;
+    min-width: 200px;
+    display: block;
+    margin-left: auto;
+}
+
+.continue-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,119,190,0.2);
 }
 
 .disclaimer a {
