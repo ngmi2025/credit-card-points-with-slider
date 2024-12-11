@@ -1,11 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
-     const calculateBtn = document.getElementById('calculateValuationBtn');
     console.log("Calculate button found:", calculateBtn);
     const WELCOME_BONUS = 80000;
     const POINT_VALUE = 0.022;
     const ANNUAL_FEE = 595;
 
-    let globalEntryFirstYearUsage = 0;
+    let globalEntryFirstYearUsage = 0;x
 
     function formatCurrency(input) {
         let value = input.value.replace(/[^0-9.-]+/g, '');
@@ -17,8 +16,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function hideAllSections() {
         document.querySelectorAll('.section').forEach(section => {
-            section.style.display = 'none';
-        });
+    section.classList.add('hidden');
+});
     }
 
     hideAllSections();
@@ -103,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('welcomeBonus').value = WELCOME_BONUS.toLocaleString() + ' points';
         document.getElementById('amexValuation').value = '$' + Math.round(totalValuation).toLocaleString();
 
-        document.getElementById('results').style.display = 'block';
+        document.getElementById('results').classList.remove('hidden');
         console.log('Results displayed');
     }
 
@@ -260,10 +259,10 @@ function calculateFinalValuation() {
 
     function nextSection(currentSectionId, nextSectionId) {
         hideAllSections();
-        document.getElementById(nextSectionId).style.display = 'block';
-        if (nextSectionId !== 'section1') {
-            document.getElementById('results').style.display = 'none';
-        }
+document.getElementById(nextSectionId).classList.remove('hidden');
+if (nextSectionId !== 'section1') {
+    document.getElementById('results').classList.add('hidden');
+}
         window.scrollTo(0, 0);
     }
 
