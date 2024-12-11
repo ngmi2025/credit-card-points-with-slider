@@ -266,13 +266,12 @@ input[type="number"] {
 }
 
 /* Results Section Styling */
-/* Results Section Styling - replace the existing #results styles with these */
 #results {
-    background-color: #fff;
+    background-color: #f9f9f9;
     padding: 30px;
     border-radius: 12px;
     margin-top: 40px;
-    border: 1px solid #e0e0e0;
+    border: 2px solid #e0e0e0;
 }
 
 #results h2 {
@@ -314,7 +313,7 @@ input[type="number"] {
 }
 
 #results .result-value {
-    background-color: #f8f9fa;
+    background-color: #f2f2f2;
     border-radius: 4px;
     padding: 12px 15px; /* Adjust padding to match other input heights */
     font-size: 1.1rem;
