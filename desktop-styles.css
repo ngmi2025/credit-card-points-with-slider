@@ -453,6 +453,29 @@ input[type="number"] {
     padding-bottom: 15px;
 }
 
+#section4 .savings-value, #section4 .breakdown-value {
+    background-color: #f2f2f2;
+    border-radius: 4px;
+    padding: 12px 15px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-align: left;
+    width: 250px;
+    height: 40px;
+    border: 1px solid #e0e0e0;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+#section4 .savings-value.positive {
+    color: var(--success-color);
+}
+
+#section4 .savings-value.negative {
+    color: var(--error-color);
+}
 .savings-item {
     background-color: #f8f9fa;
     border-radius: 10px;
@@ -479,30 +502,6 @@ input[type="number"] {
     font-size: 18px;
     font-weight: 600;
     color: var(--text-color);
-}
-
-.savings-value, .breakdown-value {
-    background-color: #f2f2f2;
-    border-radius: 4px;
-    padding: 12px 15px;
-    font-size: 1.1rem;
-    font-weight: 700;
-    text-align: left;
-    width: 250px;
-    height: 40px;
-    border: 1px solid #e0e0e0;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    margin-left: auto;
-}
-
-.savings-value.positive {
-    color: var(--success-color);
-}
-
-.savings-value.negative {
-    color: var(--error-color);
 }
 
 .card-details {
