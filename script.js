@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    console.log("Calculate button found:", calculateBtn);
     const WELCOME_BONUS = 80000;
     const POINT_VALUE = 0.022;
     const ANNUAL_FEE = 595;
@@ -20,8 +19,8 @@ document.addEventListener('DOMContentLoaded', function() {
 });
     }
 
-    hideAllSections();
-    document.getElementById('section1').style.display = 'block';
+hideAllSections();
+document.getElementById('section1').classList.remove('hidden');
 
     // Event listener for radio buttons
     document.querySelectorAll('input[name="globalEntryOrPreCheck"]').forEach(radio => {
@@ -226,8 +225,8 @@ function calculateFinalValuation() {
     secondYearSavings.style.color = secondYearValue >= 0 ? '#3EB564' : '#d32f2f';
 
     // Show section 4
-    hideAllSections();
-    document.getElementById('section4').style.display = 'block';
+hideAllSections();
+document.getElementById('section4').classList.remove('hidden');
     updateProgressBar('section4');
     window.scrollTo(0, 0);
 }
