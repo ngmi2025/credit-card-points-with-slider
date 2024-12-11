@@ -527,7 +527,7 @@ select {
     padding: 10px; /* slightly larger touch target for mobile */
     border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: 16px; /* slightly larger for better readability on mobile */
+    font-size: 12px; /* slightly larger for better readability on mobile */
     background-color: white;
 }
 
