@@ -476,14 +476,22 @@ input[type="number"] {
 #section4 .savings-value.negative {
     color: var(--error-color);
 }
-.savings-item {
-    background-color: #f8f9fa;
-    border-radius: 10px;
-    padding: 20px;
+#section4 .savings-item {
     margin-bottom: 20px;
-    transition: all 0.3s ease;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     display: block;
     animation: fadeIn 0.5s ease-out;
+}
+
+#section4 .breakdown-value.positive {
+    color: var(--success-color);
+}
+
+#section4 .breakdown-value.negative {
+    color: var(--error-color);
 }
 
 .savings-item:hover {
