@@ -92,16 +92,14 @@ document.getElementById('section1').classList.remove('hidden');
 
     const totalValuation = (WELCOME_BONUS + totalPoints) * POINT_VALUE;
 
-    // Update these lines to target the correct elements
-    const resultGroups = document.querySelectorAll('.result-group');
-    resultGroups[0].querySelector('.result-value').textContent = Math.round(totalPoints).toLocaleString() + ' points';
-    resultGroups[1].querySelector('.result-value').textContent = WELCOME_BONUS.toLocaleString() + ' points';
-    resultGroups[2].querySelector('.result-value').textContent = '$' + Math.round(totalValuation).toLocaleString();
+    // Update values using IDs
+    document.getElementById('totalPointsValue').textContent = Math.round(totalPoints).toLocaleString() + ' points';
+    document.getElementById('welcomeBonusValue').textContent = WELCOME_BONUS.toLocaleString() + ' points';
+    document.getElementById('valuationValue').textContent = '$' + Math.round(totalValuation).toLocaleString();
 
     document.getElementById('results').classList.remove('hidden');
     console.log('Results displayed');
 }
-
     // Calculate Section 2 Value
     function calculateSection2Value(isFirstYear = true) {
         const credits = [
