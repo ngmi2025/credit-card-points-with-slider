@@ -629,16 +629,17 @@ input[type="number"] {
         transform: translateY(0);
     }
 }
-.credit-select {
+select.credit-select {
     width: 100%;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: 12px;
+    font-size: 10px;
     background-color: white;
 }
-.credit-select option {
-    font-size: 10px; /* or make this 10px to match */
+
+select.credit-select option {
+    font-size: 8px;
 }
 
 .input-group {
