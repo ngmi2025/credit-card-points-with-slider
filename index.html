@@ -330,23 +330,27 @@
     <a href="#" id="backToSection3" class="back-link">← Back to previous section</a>
     <h2>Final Valuation</h2>
     
-    <div class="savings-summary">
-        <h3>Your Savings:</h3>
-        <div class="savings-item">
-            <div class="savings-header">
-                <span class="savings-label">1st Year:</span>
-                <span id="firstYearSavings" class="savings-value positive"></span>
-            </div>
-            <div class="calculation-note">This value represents your total benefits (points earned from spending + Welcome Offer value + card benefits) minus the annual fee of $595</div>
+   <div class="savings-summary">
+    <h3>Your Savings:</h3>
+    <div class="savings-item">
+        <div class="savings-header">
+            <span class="savings-label">1st Year:</span>
+            <span id="firstYearSavings" class="savings-value positive">$1,165</span>
         </div>
-        <div class="savings-item">
-            <div class="savings-header">
-                <span class="savings-label">2nd Year Onwards:</span>
-                <span id="secondYearSavings" class="savings-value"></span>
-            </div>
-            <div class="calculation-note">This value represents your annual benefits (points earned from spending + card benefits) minus the annual fee of $595</div>
+        <div class="calculation-note">
+            This value represents your total benefits (points earned from spending + Welcome Offer value + card benefits) minus the annual fee of $595
         </div>
     </div>
+    <div class="savings-item">
+        <div class="savings-header">
+            <span class="savings-label">2nd Year Onwards:</span>
+            <span id="secondYearSavings" class="savings-value negative">$-595</span>
+        </div>
+        <div class="calculation-note">
+            This value represents your annual benefits (points earned from spending + card benefits) minus the annual fee of $595
+        </div>
+    </div>
+</div>
 
     <div class="card-details">
         <h3>Card Details:</h3>
@@ -366,23 +370,27 @@
         </div>
     </div>
 
-    <div class="yearly-breakdown">
-        <h3>Yearly Breakdown:</h3>
-        <div class="breakdown-item">
-            <div class="breakdown-header">
-                <span class="breakdown-label">1st Year Total Value:</span>
-                <span id="firstYearValue" class="breakdown-value"></span>
-            </div>
-            <div class="calculation-note">Calculated from: Points from spending ($<span id="pointsSpendingValue"></span>) + Card benefits ($<span id="cardBenefitsValue"></span>) + Welcome Offer ($<span id="signupBonusBreakdown"></span>) - Annual fee ($595)</div>
+ <div class="yearly-breakdown">
+    <h3>Yearly Breakdown:</h3>
+    <div class="breakdown-item">
+        <div class="breakdown-header">
+            <span class="breakdown-label">1st Year Total Value:</span>
+            <span id="firstYearValue" class="breakdown-value positive">$1,165</span>
         </div>
-        <div class="breakdown-item">
-            <div class="breakdown-header">
-                <span class="breakdown-label">2nd Year Onwards Value:</span>
-                <span id="secondYearValue" class="breakdown-value"></span>
-            </div>
-            <div class="calculation-note">Calculated from: Points from spending ($<span id="pointsSpendingValueSecondYear"></span>) + Card benefits ($<span id="cardBenefitsValueSecondYear"></span>) - Annual fee ($595)</div>
+        <div class="calculation-note">
+            Calculated from: Points from spending ($<span id="pointsSpendingValue"></span>) + Card benefits ($<span id="cardBenefitsValue"></span>) + Welcome Offer ($<span id="signupBonusBreakdown"></span>) - Annual fee ($595)
         </div>
     </div>
+    <div class="breakdown-item">
+        <div class="breakdown-header">
+            <span class="breakdown-label">2nd Year Onwards Value:</span>
+            <span id="secondYearValue" class="breakdown-value negative">$-595</span>
+        </div>
+        <div class="calculation-note">
+            Calculated from: Points from spending ($<span id="pointsSpendingValueSecondYear"></span>) + Card benefits ($<span id="cardBenefitsValueSecondYear"></span>) - Annual fee ($595)
+        </div>
+    </div>
+</div>
 
     <div class="button-container">
         <button class="apply-now-btn">APPLY NOW</button>
