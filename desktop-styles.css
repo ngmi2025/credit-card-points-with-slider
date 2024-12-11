@@ -322,10 +322,6 @@ input[type="number"] {
     float: right;
 }
 
-.button-container {
-    margin-top: 20px; /* Added padding above button */
-}
-
 .disclaimer a {
     color: var(--secondary-text-color); /* Matches the text color for consistency */
     text-decoration: underline; /* Indicates it's a link */
