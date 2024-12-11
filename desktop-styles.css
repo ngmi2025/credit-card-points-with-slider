@@ -265,22 +265,20 @@ input[type="number"] {
     background-color: #fff;
     padding: 30px;
     border-radius: 12px;
-    box-shadow: 0 2px 15px rgba(0,0,0,0.08);
-    margin-bottom: 30px;
+    margin-top: 40px; /* Added padding above */
+    border: 1px solid #e0e0e0; /* Light grey border */
 }
 
 #results h2 {
     color: var(--primary-color);
     font-size: 28px;
     margin-bottom: 30px;
-    border-bottom: 2px solid #f0f0f0;
-    padding-bottom: 15px;
 }
 
 .result-group {
     margin-bottom: 25px;
     padding-bottom: 25px;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid #f0f0f0;
 }
 
 .result-group:last-child {
@@ -290,48 +288,33 @@ input[type="number"] {
 .result-title {
     font-size: 20px;
     font-weight: 700;
-    color: var(--text-color);
+    color: #333;
     margin-bottom: 10px;
 }
 
 .result-description {
     color: var(--secondary-text-color);
-    font-size: 0.9em;
+    font-size: 0.8em; /* Smaller text size */
     margin-bottom: 12px;
     line-height: 1.5;
 }
 
 .result-value {
     background-color: #f8f9fa;
-    padding: 12px 15px;
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
+    padding: 10px;
+    border-radius: 5px;
     font-weight: 700;
-    font-size: 20px;
-    color: var(--text-color);
-    width: 100%;
+    font-size: 1em;
+    color: #333;
+    border: 1px solid #e0e0e0;
+    text-align: right;
+    width: 250px; /* Match input size */
+    display: inline-block;
     box-sizing: border-box;
-    display: block;
 }
 
-.result-value.points {
-    color: var(--primary-color);
-}
-
-.result-value.currency {
-    color: var(--success-color);
-}
-
-.result-description a {
-    color: var(--primary-color);
-    text-decoration: none;
-    font-weight: 600;
-    border-bottom: 2px solid transparent;
-    transition: border-color 0.2s ease;
-}
-
-.result-description a:hover {
-    border-bottom-color: var(--primary-color);
+.button-container {
+    margin-top: 20px; /* Added padding above button */
 }
 
 .continue-btn {
@@ -339,17 +322,13 @@ input[type="number"] {
     color: white;
     border: none;
     padding: 15px 30px;
-    font-size: 18px;
-    border-radius: 8px;
+    font-size: 16px;
+    border-radius: 4px;
     cursor: pointer;
-    transition: all 0.3s ease;
     text-transform: uppercase;
     font-weight: bold;
-    margin-top: 30px;
-    width: auto;
-    min-width: 200px;
-    display: block;
-    margin-left: auto;
+    float: right;
+    min-width: 150px;
 }
 
 .continue-btn:hover {
