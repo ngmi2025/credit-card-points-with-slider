@@ -317,6 +317,10 @@ input[type="number"] {
     display: inline-block;
     box-sizing: border-box;
 }
+#results .cta-button {
+    margin-top: 30px;
+    float: right;
+}
 
 .button-container {
     margin-top: 20px; /* Added padding above button */
