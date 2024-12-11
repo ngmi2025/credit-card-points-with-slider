@@ -522,17 +522,17 @@ select {
         font-size: 14px;
     }
 }
-.credit-select {
+select.credit-select {
     width: 100%;
-    padding: 10px; /* slightly larger touch target for mobile */
+    padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: 12px; /* slightly larger for better readability on mobile */
+    font-size: 10px;
     background-color: white;
 }
 
-.credit-select option {
-    font-size: 12px; /* slightly larger for mobile */
+select.credit-select option {
+    font-size: 8px;
 }
 
 .input-group {
