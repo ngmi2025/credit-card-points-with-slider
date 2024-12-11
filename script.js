@@ -3,8 +3,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const POINT_VALUE = 0.022;
     const ANNUAL_FEE = 595;
 
-    let globalEntryFirstYearUsage = 0;
-
     function formatCurrency(input) {
         let value = input.value.replace(/[^0-9.-]+/g, '');
         if (value) {
@@ -21,56 +19,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 hideAllSections();
 document.getElementById('section1').classList.remove('hidden');
-
-    // Event listener for radio buttons
-    document.querySelectorAll('input[name="globalEntryOrPreCheck"]').forEach(radio => {
-        radio.addEventListener('change', function () {
-            const selectedValue = parseInt(this.value);
-            const slider = document.getElementById('globalEntrySlider');
-            const sliderLabels = slider.nextElementSibling;
-
-            // Update slider max value and step based on selection
-            if (selectedValue === 85) { // TSA PreCheck
-                slider.max = 85;
-                slider.step = 21.25; // Divides $85 into 4 equal steps
-            } else { // Global Entry
-                slider.max = 120;
-                slider.step = 30; // Divides $120 into 4 equal steps
-            }
-            
-            // Reset slider value
-            slider.value = 0;
-
-            // Update slider labels
-            sliderLabels.innerHTML = '';
-            const steps = selectedValue / 4;
-            for (let i = 0; i <= selectedValue; i += steps) {
-                const label = document.createElement('span');
-                label.textContent = `$${Math.round(i)}`;
-                sliderLabels.appendChild(label);
-            }
-
-            // Update credit values
-            document.getElementById('globalEntryCreditFirst').textContent = '0';
-            document.getElementById('globalEntryCreditRemaining').textContent = selectedValue;
-        });
-    });
-
-    // Event listener for the slider
-    document.getElementById('globalEntrySlider').addEventListener('input', function () {
-        const selectedRadio = document.querySelector('input[name="globalEntryOrPreCheck"]:checked');
-        const selectedValue = selectedRadio ? parseInt(selectedRadio.value) : 0;
-        const sliderValue = parseInt(this.value);
-
-        // Calculate the remaining value
-        const remaining = selectedValue - sliderValue;
-
-        // Update displayed values
-        document.getElementById('globalEntryCreditFirst').textContent = sliderValue;
-        document.getElementById('globalEntryCreditRemaining').textContent = remaining > 0 ? remaining : 0;
-
-        console.log(`Slider Input: Slider Value = ${sliderValue}, Remaining = ${remaining}`);
-    });
 
     // Points Calculation for Section 1
 function calculatePoints() {
@@ -108,37 +56,32 @@ function calculatePoints() {
     console.log('Results displayed');
 }
     // Calculate Section 2 Value
-    function calculateSection2Value(isFirstYear = true) {
-        const credits = [
-            { id: 'airlineCredit', value: 200 },
-            { id: 'uberCredit', value: 200 },
-            { id: 'saksCredit', value: 100 },
-            { id: 'equinoxCredit', value: 300 },
-            { id: 'clearCredit', value: 199 },
-            { id: 'soulCycleCredit', value: 300 },
-            { id: 'entertainmentCredit', value: 240 },
-            { id: 'walmartCredit', value: 155 },
-            { id: 'hotelCredit', value: 200 }
-        ];
+function calculateSection2Value(isFirstYear = true) {
+    const credits = [
+        { id: 'airlineCredit', value: 200 },
+        { id: 'uberCredit', value: 200 },
+        { id: 'saksCredit', value: 100 },
+        { id: 'equinoxCredit', value: 300 },
+        { id: 'clearCredit', value: 199 },
+        { id: 'soulCycleCredit', value: 300 },
+        { id: 'entertainmentCredit', value: 240 },
+        { id: 'walmartCredit', value: 155 },
+        { id: 'hotelCredit', value: 200 }
+    ];
 
-        const globalEntryOrPreCheck = parseInt(document.querySelector('input[name="globalEntryOrPreCheck"]:checked')?.value || 0);
+    let total = credits.reduce((sum, credit) => {
+        const sliderValue = parseInt(document.getElementById(credit.id)?.value || 0);
+        return sum + sliderValue;
+    }, 0);
 
-        return credits.reduce((total, credit) => {
-            const sliderValue = parseInt(document.getElementById(credit.id)?.value || 0);
-
-            if (credit.id === 'globalEntryCredit') {
-                if (isFirstYear) {
-                    globalEntryFirstYearUsage = globalEntryOrPreCheck;
-                    return total + globalEntryOrPreCheck;
-                } else {
-                    const remainingValue = globalEntryOrPreCheck - globalEntryFirstYearUsage;
-                    return total + (remainingValue > 0 ? remainingValue : 0);
-                }
-            }
-
-            return total + sliderValue;
-        }, 0);
+    // Add Global Entry/TSA PreCheck value
+    const globalEntryValue = parseInt(document.getElementById('globalEntryCredit').value) || 0;
+    if (isFirstYear) {
+        total += globalEntryValue;
     }
+
+    return total;
+}
 
     function calculateSection3Value() {
         const travelFrequency = parseInt(document.getElementById('travelFrequency').value.replace(/[^ -\u007F]+/g, '')) || 0;
@@ -206,7 +149,6 @@ function calculateFinalValuation() {
             loungeValue: parseInt(document.getElementById('loungeAccess').value),
             statusValue: parseInt(document.getElementById('partnerStatus').value),
             fhrValue: parseInt(document.getElementById('fhrAndIap').value),
-            protectionsValue: parseInt(document.getElementById('cardProtections').value)
         }
     });
 
