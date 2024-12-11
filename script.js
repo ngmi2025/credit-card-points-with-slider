@@ -73,37 +73,33 @@ document.getElementById('section1').classList.remove('hidden');
     });
 
     // Points Calculation for Section 1
-    function calculatePoints() {
-        const flightSpend = parseFloat(document.getElementById('flightSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
-        const hotelSpend = parseFloat(document.getElementById('hotelSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
-        const otherSpend = parseFloat(document.getElementById('otherSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
+  function calculatePoints() {
+    const flightSpend = parseFloat(document.getElementById('flightSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
+    const hotelSpend = parseFloat(document.getElementById('hotelSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
+    const otherSpend = parseFloat(document.getElementById('otherSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
 
-        // Debugging: Log input values
-        console.log('Flight Spend:', flightSpend);
-        console.log('Hotel Spend:', hotelSpend);
-        console.log('Other Spend:', otherSpend);
+    console.log('Flight Spend:', flightSpend);
+    console.log('Hotel Spend:', hotelSpend);
+    console.log('Other Spend:', otherSpend);
 
-        const travelPoints = (flightSpend + hotelSpend) * 5;
-        const otherPoints = otherSpend;
-        const totalPoints = travelPoints + otherPoints;
+    const travelPoints = (flightSpend + hotelSpend) * 5;
+    const otherPoints = otherSpend;
+    const totalPoints = travelPoints + otherPoints;
 
-        // Debugging: Log calculated points
-        console.log('Travel Points:', travelPoints);
-        console.log('Other Points:', otherPoints);
-        console.log('Total Points:', totalPoints);
+    console.log('Travel Points:', travelPoints);
+    console.log('Other Points:', otherPoints);
+    console.log('Total Points:', totalPoints);
 
-        const totalValuation = (WELCOME_BONUS + totalPoints) * POINT_VALUE;
+    const totalValuation = (WELCOME_BONUS + totalPoints) * POINT_VALUE;
 
-        // Debugging: Log valuation
-        console.log('Total Valuation:', totalValuation);
+    // Update these lines to use textContent instead of value
+    document.querySelector('#results .points').textContent = Math.round(totalPoints).toLocaleString() + ' points';
+    document.querySelector('#results .points:nth-of-type(2)').textContent = WELCOME_BONUS.toLocaleString() + ' points';
+    document.querySelector('#results .currency').textContent = '$' + Math.round(totalValuation).toLocaleString();
 
-        document.getElementById('totalPoints').value = Math.round(totalPoints).toLocaleString() + ' points';
-        document.getElementById('welcomeBonus').value = WELCOME_BONUS.toLocaleString() + ' points';
-        document.getElementById('amexValuation').value = '$' + Math.round(totalValuation).toLocaleString();
-
-        document.getElementById('results').classList.remove('hidden');
-        console.log('Results displayed');
-    }
+    document.getElementById('results').classList.remove('hidden');
+    console.log('Results displayed');
+}
 
     // Calculate Section 2 Value
     function calculateSection2Value(isFirstYear = true) {
