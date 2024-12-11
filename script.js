@@ -73,17 +73,24 @@ document.getElementById('section1').classList.remove('hidden');
     });
 
     // Points Calculation for Section 1
-  function calculatePoints() {
+function calculatePoints() {
     const flightSpend = parseFloat(document.getElementById('flightSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
     const hotelSpend = parseFloat(document.getElementById('hotelSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
     const otherSpend = parseFloat(document.getElementById('otherSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
 
-    console.log('Flight Spend:', flightSpend);
+    // Cap flight spend at $500,000
+    const cappedFlightSpend = Math.min(flightSpend, 500000);
+    const uncappedFlightSpend = Math.max(0, flightSpend - 500000); // Amount over $500k
+
+    console.log('Flight Spend (Original):', flightSpend);
+    console.log('Flight Spend (Capped):', cappedFlightSpend);
+    console.log('Flight Spend (Uncapped):', uncappedFlightSpend);
     console.log('Hotel Spend:', hotelSpend);
     console.log('Other Spend:', otherSpend);
 
-    const travelPoints = (flightSpend + hotelSpend) * 5;
-    const otherPoints = otherSpend;
+    // Calculate points: 5x on capped flight spend, 1x on uncapped amount
+    const travelPoints = (cappedFlightSpend + hotelSpend) * 5;
+    const otherPoints = otherSpend + uncappedFlightSpend;
     const totalPoints = travelPoints + otherPoints;
 
     console.log('Travel Points:', travelPoints);
