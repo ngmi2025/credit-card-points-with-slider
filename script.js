@@ -92,10 +92,11 @@ document.getElementById('section1').classList.remove('hidden');
 
     const totalValuation = (WELCOME_BONUS + totalPoints) * POINT_VALUE;
 
-    // Update these lines to use textContent instead of value
-    document.querySelector('#results .points').textContent = Math.round(totalPoints).toLocaleString() + ' points';
-    document.querySelector('#results .points:nth-of-type(2)').textContent = WELCOME_BONUS.toLocaleString() + ' points';
-    document.querySelector('#results .currency').textContent = '$' + Math.round(totalValuation).toLocaleString();
+    // Update these lines to target the correct elements
+    const resultGroups = document.querySelectorAll('.result-group');
+    resultGroups[0].querySelector('.result-value').textContent = Math.round(totalPoints).toLocaleString() + ' points';
+    resultGroups[1].querySelector('.result-value').textContent = WELCOME_BONUS.toLocaleString() + ' points';
+    resultGroups[2].querySelector('.result-value').textContent = '$' + Math.round(totalValuation).toLocaleString();
 
     document.getElementById('results').classList.remove('hidden');
     console.log('Results displayed');
