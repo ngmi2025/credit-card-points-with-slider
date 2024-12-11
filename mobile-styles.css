@@ -531,6 +531,10 @@ select {
     background-color: white;
 }
 
+.credit-select option {
+    font-size: 12px; /* slightly larger for mobile */
+}
+
 .input-group {
     width: 100%;
     margin-top: 10px;
