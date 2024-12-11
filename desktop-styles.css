@@ -283,11 +283,17 @@ input[type="number"] {
 
 #results .result-group {
     display: flex;
-    flex-direction: column;
+    flex-direction: row; /* Change to row to align items horizontally */
+    justify-content: space-between; /* Space between title/description and value */
+    align-items: center; /* Vertically center items */
     margin-bottom: 2rem;
     padding-bottom: 25px;
     border-bottom: 1px solid #f0f0f0;
     position: relative;
+}
+
+#results .result-content {
+    flex: 1; /* Takes up remaining space */
 }
 
 #results .result-group:last-child {
@@ -304,25 +310,27 @@ input[type="number"] {
 #results .result-description {
     color: var(--secondary-text-color);
     font-size: 0.9rem;
-    margin-bottom: 0.75rem;
     line-height: 1.5;
 }
 
 #results .result-value {
     background-color: #f8f9fa;
     border-radius: 4px;
-    padding: 0.75rem 1rem;
+    padding: 12px 15px; /* Adjust padding to match other input heights */
     font-size: 1.1rem;
-    font-weight: 500;
+    font-weight: 700; /* Make text bold */
     text-align: left;
-    width: 200px;
-    margin-left: auto;
+    width: 250px; /* Match width of other inputs */
+    height: 40px; /* Match height of other inputs */
     border: 1px solid #e0e0e0;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center; /* Center text vertically */
 }
 
 #results .button-container {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end; /* Align button to the right */
     width: 100%;
     margin-top: 2rem;
 }
@@ -331,20 +339,17 @@ input[type="number"] {
     background-color: var(--primary-color);
     color: white;
     border: none;
-    border-radius: 4px;
-    padding: 12px 24px;
-    font-size: 1rem;
-    font-weight: 500;
+    border-radius: 5px;
+    padding: 15px 30px;
+    font-size: 1em;
+    font-weight: bold;
     cursor: pointer;
-    width: 100%;
-    max-width: 300px;
-    margin: 2rem auto 0;
-    display: block;
     text-transform: uppercase;
+    min-width: 150px; /* Match CALCULATE POINTS button width */
+    transition: all 0.3s ease;
 }
 
 #results .continue-btn:hover {
-    background-color: #005ba3;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0,119,190,0.2);
 }
