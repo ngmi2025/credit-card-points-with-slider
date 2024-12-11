@@ -157,17 +157,33 @@ function calculateFinalValuation() {
     console.log("Starting final valuation calculation");
     
     const travelFrequency = parseInt(document.getElementById('travelFrequency').value.replace(/[^\d.-]/g, ''));
+    console.log("Travel Frequency:", travelFrequency);
     
     if (!travelFrequency) {
         alert('Please enter your travel frequency in section 1');
         nextSection('section4', 'section1');
         return;
     }
+
+    // Get points value with error checking
+    const totalPointsElement = document.getElementById('totalPointsValue');
+    if (!totalPointsElement) {
+        console.error("Could not find totalPointsValue element");
+        return;
+    }
     
-    const totalPoints = parseInt(document.getElementById('totalPoints').value.replace(/[^\d.-]/g, '')) || 0;
+    const totalPoints = parseInt(totalPointsElement.textContent.replace(/[^\d.-]/g, '')) || 0;
+    console.log("Total Points:", totalPoints);
+    
     const pointsValue = totalPoints * POINT_VALUE;
     const section2Value = calculateSection2Value();
     const section3Value = calculateSection3Value();
+
+    console.log({
+        pointsValue,
+        section2Value,
+        section3Value
+    });
 
     // Debug logging
     console.log({
@@ -297,11 +313,16 @@ if (nextSectionId !== 'section1') {
         nextSection('section3', 'section2');
     });
 
-  document.getElementById('calculateValuationBtn').addEventListener('click', function(e) {
-    e.preventDefault();
-    console.log("Calculate Valuation button clicked");
-    calculateFinalValuation();
-});
+const calculateValuationBtn = document.getElementById('calculateValuationBtn');
+if (calculateValuationBtn) {
+    calculateValuationBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        console.log("Calculate Valuation button clicked");
+        calculateFinalValuation();
+    });
+} else {
+    console.error("Calculate Valuation button not found");
+}
     document.getElementById('backToSection3').addEventListener('click', function(e) {
         e.preventDefault();
         nextSection('section4', 'section3');
