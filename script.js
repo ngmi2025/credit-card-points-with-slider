@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const POINT_VALUE = 0.022;
     const ANNUAL_FEE = 595;
 
-    let globalEntryFirstYearUsage = 0;x
+    let globalEntryFirstYearUsage = 0;
 
     function formatCurrency(input) {
         let value = input.value.replace(/[^0-9.-]+/g, '');
