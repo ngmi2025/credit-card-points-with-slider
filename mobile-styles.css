@@ -522,3 +522,16 @@ select {
         font-size: 14px;
     }
 }
+.credit-select {
+    width: 100%;
+    padding: 10px; /* slightly larger touch target for mobile */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px; /* slightly larger for better readability on mobile */
+    background-color: white;
+}
+
+.input-group {
+    width: 100%;
+    margin-top: 10px;
+}
