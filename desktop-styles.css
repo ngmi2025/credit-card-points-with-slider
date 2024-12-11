@@ -37,6 +37,39 @@ h1 {
     margin-bottom: 20px;
 }
 
+/* Common styles for all major sections */
+.savings-summary,
+.yearly-breakdown,
+.card-details {
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 40px;
+    border: 2px solid #e0e0e0;
+}
+
+/* Common heading styles */
+.savings-summary h3,
+.yearly-breakdown h3,
+.card-details h3 {
+    color: var(--text-color);
+    font-size: 20px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+/* Common breakdown item styles */
+.breakdown-item,
+.savings-item {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    display: block;
+    animation: fadeIn 0.5s ease-out;
+}
+
 .intro {
     text-align: center;
     margin-bottom: 30px;
@@ -133,11 +166,6 @@ h1 {
     text-align: left; /* Aligns dropdowns text to the left */
 }
 
-.slider-container {
-    flex: 0 0 250px; /* Keeps sliders consistent */
-    width: 250px;
-}
-
 .input-group select, .input-wrapper input[type="text"] {
     width: 100%;
     padding: 10px;
@@ -149,6 +177,8 @@ h1 {
 }
 
 .slider-container {
+    flex: 0 0 250px;
+    width: 250px;
     display: flex;
     flex-direction: column;
     align-items: stretch;
@@ -476,14 +506,24 @@ input[type="number"] {
 #section4 .savings-value.negative {
     color: var(--error-color);
 }
-#section4 .savings-item {
-    margin-bottom: 20px;
-    padding: 15px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-    display: block;
-    animation: fadeIn 0.5s ease-out;
+
+/* Change these styles to be scoped to #section4 */
+#section4 .savings-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+#section4 .savings-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+#section4 .savings-label {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-color);
 }
 
 #section4 .breakdown-value.positive {
@@ -493,32 +533,20 @@ input[type="number"] {
 #section4 .breakdown-value.negative {
     color: var(--error-color);
 }
-
-.savings-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-}
-
-.savings-header {
+#section4 .breakdown-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 12px;
 }
 
-.savings-label {
-    font-size: 18px;
+#section4 .breakdown-label {
     font-weight: 600;
     color: var(--text-color);
 }
 
 .card-details {
-    background-color: #fff;
+    position: relative; /* For the :before pseudo-element */
     border: 1px solid var(--border-color);
-    border-radius: 10px;
-    padding: 30px;
-    margin: 40px 0;
-    position: relative;
 }
 
 .card-details:before {
@@ -531,12 +559,6 @@ input[type="number"] {
     height: 4px;
     background-color: #f0f0f0;
     border-radius: 2px;
-}
-
-.card-details h3 {
-    color: var(--text-color);
-    font-size: 20px;
-    margin-bottom: 20px;
 }
 
 .card-details a {
@@ -560,47 +582,6 @@ input[type="number"] {
 
 .detail-item:last-child {
     border-bottom: none;
-}
-
-.yearly-breakdown {
-    background-color: #f8f9fa;
-    border-radius: 10px;
-    padding: 25px;
-    margin-top: 40px;
-    position: relative;
-}
-
-.yearly-breakdown:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 4px;
-    background-color: #f0f0f0;
-    border-radius: 2px;
-}
-
-.breakdown-item {
-    margin-bottom: 20px;
-    padding: 15px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-    display: block;
-    animation: fadeIn 0.5s ease-out;
-}
-
-.breakdown-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.breakdown-label {
-    font-weight: 600;
-    color: var(--text-color);
 }
 
 .calculation-note {
