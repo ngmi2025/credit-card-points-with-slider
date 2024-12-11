@@ -634,8 +634,11 @@ input[type="number"] {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: 10px;
+    font-size: 12px;
     background-color: white;
+}
+.credit-select option {
+    font-size: 10px; /* or make this 10px to match */
 }
 
 .input-group {
