@@ -244,13 +244,18 @@ input[type="number"] {
     background-color: var(--primary-color);
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 15px 30px;
     font-size: 1em;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
     text-transform: uppercase;
     font-weight: bold;
+    min-width: 150px;
+}
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,119,190,0.2);
 }
 .error {
     border-color: var(--error-color) !important;
@@ -315,25 +320,6 @@ input[type="number"] {
 
 .button-container {
     margin-top: 20px; /* Added padding above button */
-}
-
-.continue-btn {
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    padding: 15px 30px;
-    font-size: 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    text-transform: uppercase;
-    font-weight: bold;
-    float: right;
-    min-width: 150px;
-}
-
-.continue-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,119,190,0.2);
 }
 
 .disclaimer a {
