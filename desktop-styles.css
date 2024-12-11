@@ -481,10 +481,20 @@ input[type="number"] {
     color: var(--text-color);
 }
 
-.savings-value {
-    font-size: 32px;
+.savings-value, .breakdown-value {
+    background-color: #f2f2f2;
+    border-radius: 4px;
+    padding: 12px 15px;
+    font-size: 1.1rem;
     font-weight: 700;
-    letter-spacing: -0.5px;
+    text-align: left;
+    width: 250px;
+    height: 40px;
+    border: 1px solid #e0e0e0;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    margin-left: auto;
 }
 
 .savings-value.positive {
@@ -584,13 +594,6 @@ input[type="number"] {
 .breakdown-label {
     font-weight: 600;
     color: var(--text-color);
-}
-
-.breakdown-value {
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--primary-color);
-    letter-spacing: -0.5px;
 }
 
 .calculation-note {
