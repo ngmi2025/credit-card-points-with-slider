@@ -188,7 +188,8 @@ function calculateFinalValuation() {
     document.getElementById('cardBenefitsValue').textContent = Math.round(section2Value + section3Value).toLocaleString();
     document.getElementById('cardBenefitsValueSecondYear').textContent = Math.round(section2Value + section3Value).toLocaleString();
     document.getElementById('signupBonusBreakdown').textContent = Math.round(signupBonusValue).toLocaleString();
-
+document.getElementById('travelPerksValue').textContent = Math.round(section3Value).toLocaleString();
+    document.getElementById('travelPerksValueSecondYear').textContent = Math.round(section3Value).toLocaleString();
     // Show section 4
     hideAllSections();
     document.getElementById('section4').classList.remove('hidden');
