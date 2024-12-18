@@ -160,8 +160,8 @@ function preSelectBenefitsValues() {
                         (clearAirports.includes(homeAirport) && travelFrequency >= 3) ? 2 : 1,
 
             // 6. Global Entry/TSA PreCheck
-            globalEntryCredit: travelFrequency > 4 ? 4 : 1,
-
+globalEntryCredit: travelFrequency > 6 ? 4 : (travelFrequency >= 3 ? 2 : 1),
+            
             // 7. Entertainment Credit
             entertainmentCredit: 2, // Default to medium
 
