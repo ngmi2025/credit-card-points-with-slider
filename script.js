@@ -216,9 +216,10 @@ globalEntryCredit: travelFrequency > 6 ? 4 : (travelFrequency >= 3 ? 2 : 1),
 }
 function updateExplanationText() {
     try {
+        // Get and parse values, defaulting to 0 or 'none' if not found
         const travelFrequency = parseInt(document.getElementById('travelFrequency').value) || 0;
-        const hotelSpend = parseFloat(document.getElementById('hotelSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
-        const homeAirport = document.getElementById('homeAirport').value || 'selected airport';
+        const hotelSpend = parseFloat(document.getElementById('hotelSpend').value.replace(/[$,]/g, '')) || 0;
+        const homeAirport = document.getElementById('homeAirport').value || 'none';
 
         const explanationText = document.querySelector('.pre-selection-notice p');
         if (!explanationText) {
@@ -226,27 +227,31 @@ function updateExplanationText() {
             return;
         }
 
-        // Format hotel spend with commas
-        const formattedHotelSpend = hotelSpend.toLocaleString();
+        // Format hotel spend with commas and $ sign
+        const formattedHotelSpend = hotelSpend ? `$${hotelSpend.toLocaleString()}` : '$0';
 
-        // Create explanation text with conditional parts
+        // Build the text string
         let text = `Based on your travel patterns (${travelFrequency} trip${travelFrequency !== 1 ? 's' : ''} per year`;
         
         // Only include hotel spend if it's greater than 0
         if (hotelSpend > 0) {
-            text += `, $${formattedHotelSpend} hotel spend`;
+            text += `, ${formattedHotelSpend} hotel spend`;
         }
         
         text += `) and home airport of ${homeAirport}, we've pre-selected suggested values for how much of each credit you might use yearly. These suggestions reflect typical usage patterns for similar travelers, but you can adjust any value to better match your expected usage.`;
 
+        // Set the text content
         explanationText.textContent = text;
+
+        console.log('Updated explanation text:', text); // Debug log
 
     } catch (error) {
         console.error('Error updating explanation text:', error);
-        // Fallback to simpler message if there's an error
+        // Fallback message
         const explanationText = document.querySelector('.pre-selection-notice p');
         if (explanationText) {
-explanationText.textContent = "We've pre-selected suggested values based on your travel patterns. Please adjust these values to match your expected usage.";        }
+            explanationText.textContent = "We've pre-selected suggested values based on your travel patterns. Please adjust these values to match your expected usage.";
+        }
     }
 }
     
@@ -597,5 +602,5 @@ function refreshExplanationText() {
 
 // Add to relevant event listeners
 document.getElementById('travelFrequency').addEventListener('change', refreshExplanationText);
-document.getElementById('hotelSpend').addEventListener('change', refreshExplanationText);
+document.getElementById('hotelSpend').addEventListener('blur', refreshExplanationText);
 document.getElementById('homeAirport').addEventListener('change', refreshExplanationText);
