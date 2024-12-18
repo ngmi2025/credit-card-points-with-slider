@@ -627,7 +627,7 @@ select.credit-select option {
     height: 2px;
     background: #e0e0e0;
     z-index: 1;
-    transition: background 0.3s ease;
+    transition: background 0.8s ease;
 
 }
 
@@ -680,7 +680,6 @@ select.credit-select option {
     margin-top: 6px;
     font-size: 11px;  /* Made even smaller */
     color: var(--secondary-text-color);
-    text-transform: uppercase;  /* Optional: makes labels look more polished */
     letter-spacing: 0.5px;     /* Optional: improves readability of small text */
 }
 
