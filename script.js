@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const POINT_VALUE = 0.022;
     const ANNUAL_FEE = 595;
 
+        updateProgressBar('section1');
+
         // Add the new function here
     function updateSliderLabel(sliderId) {
         const slider = document.getElementById(sliderId);
@@ -214,31 +216,28 @@ document.getElementById('travelPerksValueSecondYear').textContent = Math.round(s
     updateProgressBar('section4');
     window.scrollTo(0, 0);
 }
-    function updateProgressBar(currentSection) {
-        const progress = document.getElementById('progress');
-        const steps = document.querySelectorAll('.step');
+     function updateProgressBar(currentSection) {
+    // Remove all active and completed classes
+    document.querySelectorAll('.progress-bar .step').forEach(step => {
+        step.classList.remove('active', 'completed');
+    });
 
-        steps.forEach(step => step.classList.remove('active'));
+    const steps = document.querySelectorAll('.progress-bar .step');
+    const currentIndex = parseInt(currentSection.replace('section', '')) - 1;
 
-        switch(currentSection) {
-            case 'section1':
-                progress.style.width = '25%';
-                steps[0].classList.add('active');
-                break;
-            case 'section2':
-                progress.style.width = '50%';
-                steps[1].classList.add('active');
-                break;
-            case 'section3':
-                progress.style.width = '75%';
-                steps[2].classList.add('active');
-                break;
-            case 'section4':
-                progress.style.width = '100%';
-                steps[3].classList.add('active');
-                break;
-        }
+    // Mark previous steps as completed
+    for(let i = 0; i < currentIndex; i++) {
+        steps[i].classList.add('completed');
     }
+
+    // Mark current step as active
+    steps[currentIndex].classList.add('active');
+
+    // Remove any classes from future steps
+    for(let i = currentIndex + 1; i < steps.length; i++) {
+        steps[i].classList.remove('completed', 'active');
+    }
+}
 
     function nextSection(currentSectionId, nextSectionId) {
         hideAllSections();
@@ -249,48 +248,48 @@ if (nextSectionId !== 'section1') {
         window.scrollTo(0, 0);
     }
 
-    document.getElementById('calculatePointsBtn').addEventListener('click', function(e) {
-        const travelFrequency = document.getElementById('travelFrequency').value;
+// Find these existing event listeners and update them:
 
-        if (!travelFrequency || travelFrequency === '0') {
-            e.preventDefault();
-            document.getElementById('travelFrequency').classList.add('error');
-            alert('Please enter how many times you travel per year');
-            return;
-        }
+document.getElementById('calculatePointsBtn').addEventListener('click', function(e) {
+    const travelFrequency = document.getElementById('travelFrequency').value;
 
-        document.getElementById('travelFrequency').classList.remove('error');
-        try {
-            calculatePoints();
-            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
-        } catch (error) {
-            console.error("Error calculating points:", error);
-        }
-    });
-
-    document.getElementById('continueBtn').addEventListener('click', function() {
-        nextSection('section1', 'section2');
-            updateProgressBar('section2'); // Add this line
-
-    });
-
-    document.getElementById('backToSection1').addEventListener('click', function(e) {
+    if (!travelFrequency || travelFrequency === '0') {
         e.preventDefault();
-        nextSection('section2', 'section1');
-            updateProgressBar('section1'); // Add this line
-    });
+        document.getElementById('travelFrequency').classList.add('error');
+        alert('Please enter how many times you travel per year');
+        return;
+    }
 
-    document.getElementById('continueToSection3Btn').addEventListener('click', function() {
-        nextSection('section2', 'section3');
-    updateProgressBar('section3'); // Changed to section3 - moving forward to section3
+    document.getElementById('travelFrequency').classList.remove('error');
+    try {
+        calculatePoints();
+        document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+    } catch (error) {
+        console.error("Error calculating points:", error);
+    }
+});
 
-    });
+document.getElementById('continueBtn').addEventListener('click', function() {
+    nextSection('section1', 'section2');
+    updateProgressBar('section2');  // Add this line
+});
 
-    document.getElementById('backToSection2').addEventListener('click', function(e) {
-        e.preventDefault();
-        nextSection('section3', 'section2');
-    updateProgressBar('section2'); // Changed to section2 - going back to section2
-    });
+document.getElementById('backToSection1').addEventListener('click', function(e) {
+    e.preventDefault();
+    nextSection('section2', 'section1');
+    updateProgressBar('section1');  // Add this line
+});
+
+document.getElementById('continueToSection3Btn').addEventListener('click', function() {
+    nextSection('section2', 'section3');
+    updateProgressBar('section3');  // Add this line
+});
+
+document.getElementById('backToSection2').addEventListener('click', function(e) {
+    e.preventDefault();
+    nextSection('section3', 'section2');
+    updateProgressBar('section2');  // Add this line
+});
 
 const calculateValuationBtn = document.getElementById('calculateValuationBtn');
 if (calculateValuationBtn) {
@@ -298,15 +297,17 @@ if (calculateValuationBtn) {
         e.preventDefault();
         console.log("Calculate Valuation button clicked");
         calculateFinalValuation();
+        updateProgressBar('section4');  // Add this line
     });
 } else {
     console.error("Calculate Valuation button not found");
 }
-    document.getElementById('backToSection3').addEventListener('click', function(e) {
-        e.preventDefault();
-        nextSection('section4', 'section3');
-            updateProgressBar('section3'); // Add this line
-    });
+
+document.getElementById('backToSection3').addEventListener('click', function(e) {
+    e.preventDefault();
+    nextSection('section4', 'section3');
+    updateProgressBar('section3');  // Add this line
+});
 
     ['flightSpend', 'hotelSpend', 'otherSpend'].forEach(id => {
         const input = document.getElementById(id);
