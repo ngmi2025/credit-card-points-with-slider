@@ -711,4 +711,9 @@ select.credit-select option {
     font-size: 0.95rem;         /* Slightly smaller than regular text */
     line-height: 1.5;           /* Comfortable line height */
     color: #6c757d;            /* Softer text color */
+    transition: background-color 0.3s ease;
+
+}
+.pre-selection-notice.updated {
+    background-color: #f0f7ff;  /* Subtle highlight color */
 }
