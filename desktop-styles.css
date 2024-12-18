@@ -91,7 +91,7 @@ h1 {
     color: var(--primary-color);
     font-size: 28px;
     margin-top: 0; /* Remove top margin */
-    margin-bottom: 30px; /* Keep bottom spacing */
+    margin-bottom: 15px; /* Keep bottom spacing */
 }
 
 .question-group:last-child {
