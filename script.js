@@ -305,6 +305,7 @@ if (calculateValuationBtn) {
     document.getElementById('backToSection3').addEventListener('click', function(e) {
         e.preventDefault();
         nextSection('section4', 'section3');
+            updateProgressBar('section3'); // Add this line
     });
 
     ['flightSpend', 'hotelSpend', 'otherSpend'].forEach(id => {
