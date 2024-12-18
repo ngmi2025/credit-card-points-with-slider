@@ -194,7 +194,9 @@ globalEntryCredit: travelFrequency > 6 ? 4 : (travelFrequency >= 3 ? 2 : 1),
                 updateSliderLabel(id);
             }
         });
-
+        
+        updateExplanationText();
+        
     } catch (error) {
         console.error("Error in preSelectBenefitsValues:", error);
         // Set default values as fallback
@@ -210,6 +212,16 @@ globalEntryCredit: travelFrequency > 6 ? 4 : (travelFrequency >= 3 ? 2 : 1),
                 updateSliderLabel(id);
             }
         });
+    }
+}
+    function updateExplanationText() {
+    const travelFrequency = parseInt(document.getElementById('travelFrequency').value) || 0;
+    const hotelSpend = parseFloat(document.getElementById('hotelSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
+    const homeAirport = document.getElementById('homeAirport').value;
+
+    const explanationText = document.querySelector('.pre-selection-notice p');
+    if (explanationText) {
+        explanationText.textContent = `Based on your travel patterns (${travelFrequency} trips per year, $${hotelSpend.toLocaleString()} hotel spend) and home airport of ${homeAirport}, we've pre-selected suggested values for how much of each credit you might use yearly. These suggestions reflect typical usage patterns for similar travelers, but you can adjust any value to better match your expected usage.`;
     }
 }
     
