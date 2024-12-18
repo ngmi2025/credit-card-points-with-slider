@@ -3,6 +3,23 @@ document.addEventListener('DOMContentLoaded', function() {
     const POINT_VALUE = 0.022;
     const ANNUAL_FEE = 595;
 
+        // Add the new function here
+    function updateSliderLabel(sliderId) {
+        const slider = document.getElementById(sliderId);
+        const labels = slider.parentElement.querySelector('.slider-labels').children;
+        const value = parseInt(slider.value);
+        const maxValue = parseInt(slider.max);
+        const selectedIndex = Math.round((value / maxValue) * (labels.length - 1));
+
+        // Remove bold from all labels
+        Array.from(labels).forEach(label => {
+            label.classList.remove('selected');
+        });
+
+        // Add bold to selected label
+        labels[selectedIndex].classList.add('selected');
+    }
+
     function formatCurrency(input) {
         let value = input.value.replace(/[^0-9.-]+/g, '');
         if (value) {
@@ -58,20 +75,21 @@ function calculatePoints() {
     // Calculate Section 2 Value
 function calculateSection2Value(isFirstYear = true) {
     const credits = [
-        { id: 'airlineCredit', value: 200 },
-        { id: 'uberCredit', value: 200 },
-        { id: 'saksCredit', value: 100 },
-        { id: 'equinoxCredit', value: 300 },
-        { id: 'clearCredit', value: 199 },
-        { id: 'soulCycleCredit', value: 300 },
-        { id: 'entertainmentCredit', value: 240 },
-        { id: 'walmartCredit', value: 155 },
-        { id: 'hotelCredit', value: 200 }
+        { id: 'airlineCredit', value: 200, steps: 5 },
+        { id: 'uberCredit', value: 200, steps: 5 },
+        { id: 'saksCredit', value: 100, steps: 5 },
+        { id: 'equinoxCredit', value: 300, steps: 5 },
+        { id: 'clearCredit', value: 199, steps: 5 },
+        { id: 'soulCycleCredit', value: 300, steps: 5 },
+        { id: 'entertainmentCredit', value: 240, steps: 5 },
+        { id: 'walmartCredit', value: 155, steps: 5 },
+        { id: 'hotelCredit', value: 200, steps: 5 }
     ];
 
     let total = credits.reduce((sum, credit) => {
         const sliderValue = parseInt(document.getElementById(credit.id)?.value || 0);
-        return sum + sliderValue;
+        const creditValue = (credit.value / 4) * sliderValue; // Still divide by 4 as we want 0,25%,50%,75%,100%
+        return sum + creditValue;
     }, 0);
 
     // Add Global Entry/TSA PreCheck value
@@ -304,6 +322,12 @@ if (calculateValuationBtn) {
         if (value === '') value = '0';
         value = Math.max(0, parseInt(value));
         this.value = value;
+    });
+        // Add this with your other initialization code
+    document.querySelectorAll('.slider').forEach(slider => {
+        slider.addEventListener('input', () => updateSliderLabel(slider.id));
+        // Initialize labels on page load
+        updateSliderLabel(slider.id);
     });
 
     document.querySelectorAll('#section3 .slider-labels').forEach(labelGroup => {
