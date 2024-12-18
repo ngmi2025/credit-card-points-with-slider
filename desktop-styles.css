@@ -623,9 +623,9 @@ select.credit-select option {
 .progress-bar .step:not(:last-child)::after {
     content: '';
     position: absolute;
-    top: 12px;
-    left: calc(50% + 20px);
-    width: calc(100% - 40px);
+    top: 12px; /* Adjust this to center the line with icons */
+    left: calc(50% + 12px); /* Adjusted for smaller icons */
+    width: calc(100% - 24px); /* Adjusted for smaller icons */
     height: 2px;
     background: #e0e0e0;
     z-index: 1;
@@ -636,12 +636,12 @@ select.credit-select option {
 }
 
 .progress-bar .step .icon {
-    width: 28px;
-    height: 28px;
+    width: 24px; /* Smaller icon container */
+    height: 24px; /* Smaller icon container */
     background: white;
     border: 2px solid #e0e0e0;
     border-radius: 50%;
-    padding: 6px;
+    padding: 2px; /* Reduced padding */
     margin: 0 auto;
     position: relative;
     z-index: 2;
@@ -650,18 +650,26 @@ select.credit-select option {
     justify-content: center;
 }
 
+.progress-bar .step.active .icon {
+    border-color: var(--primary-color);
+    background: white;
+}
+
+.progress-bar .step.active .icon .material-icons {
+    color: var(--primary-color);
+}
+
 .progress-bar .step.completed .icon {
     border-color: var(--primary-color);
     background: var(--primary-color);
 }
-
-.progress-bar .step .icon .material-icons {
-    font-size: 20px;
-    color: #e0e0e0;
+.progress-bar .step.completed .icon .material-icons {
+    color: white; /* White icon when background is blue */
 }
 
-.progress-bar .step.completed .icon .material-icons {
-    color: white;
+.progress-bar .step .icon .material-icons {
+    font-size: 14px;
+    color: #e0e0e0;
 }
 
 .progress-bar .step .label {
