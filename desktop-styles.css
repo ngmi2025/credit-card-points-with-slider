@@ -279,6 +279,7 @@ input[type="number"] {
 
 #results .result-content {
     flex: 1; /* Takes up remaining space */
+        margin-right: 20px; /* Add this line to create space between text and value */
 }
 
 #results .result-group:last-child {
