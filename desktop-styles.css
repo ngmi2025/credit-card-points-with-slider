@@ -82,7 +82,9 @@ h1 {
     padding: 30px;
     border-radius: 5px;
     margin-bottom: 20px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15); /* Increased from 0.1 to 0.15 and made more consistent */
+    box-shadow: 
+        0 -2px 8px rgba(0,0,0,0.2),  /* Stronger top shadow */
+        0 2px 8px rgba(0,0,0,0.15);  /* Existing shadow for sides/bottom */
 }
 
 .section h2 {
