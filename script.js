@@ -484,11 +484,19 @@ document.getElementById('calculatePointsBtn').addEventListener('click', function
 });
 
 document.getElementById('continueBtn').addEventListener('click', function() {
+    const travelFrequency = document.getElementById('travelFrequency').value;
+
+    if (!travelFrequency || travelFrequency === '0') {
+        document.getElementById('travelFrequency').classList.add('error');
+        alert('Please enter how many times you travel per year');
+        return;
+    }
+
+    calculatePoints(); // Calculate points before moving to next section
     nextSection('section1', 'section2');
     updateProgressBar('section2'); 
-        preSelectBenefitsValues();
+    preSelectBenefitsValues();
 });
-
 document.getElementById('backToSection1').addEventListener('click', function(e) {
     e.preventDefault();
     nextSection('section2', 'section1');
@@ -524,17 +532,23 @@ document.getElementById('backToSection3').addEventListener('click', function(e) 
     updateProgressBar('section3');  
 });
 
-    ['flightSpend', 'hotelSpend', 'otherSpend'].forEach(id => {
-        const input = document.getElementById(id);
-        input.addEventListener('focus', function() {
-            if (this.value === '$0') this.value = '';
-        });
-        input.addEventListener('blur', function() {
-            formatCurrency(this);
-            if (this.value === '') this.value = '$0';
-        });
-        input.value = '$0';
+['flightSpend', 'hotelSpend', 'otherSpend'].forEach(id => {
+    const input = document.getElementById(id);
+    input.addEventListener('focus', function() {
+        let value = this.value.replace(/[^0-9.-]+/g, '');
+        this.value = value; // Remove $ but keep the number
     });
+    input.addEventListener('blur', function() {
+        let value = this.value.replace(/[^0-9.-]+/g, '');
+        if (value) {
+            value = parseInt(value, 10).toLocaleString('en-US');
+            this.value = '$' + value;
+        } else {
+            this.value = '$0';
+        }
+    });
+    input.value = '$0'; // Set initial value
+});
 
     document.getElementById('travelFrequency').addEventListener('blur', function() {
         let value = this.value.replace(/[^ -\u007F]+/g, '');
