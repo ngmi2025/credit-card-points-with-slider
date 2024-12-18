@@ -627,7 +627,7 @@ select.credit-select option {
     height: 2px;
     background: #e0e0e0;
     z-index: 1;
-    transition: background 1.4s ease;
+    transition: background 2s ease;
 
 }
 
