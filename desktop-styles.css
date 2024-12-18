@@ -698,3 +698,17 @@ select.credit-select option {
     color: var(--primary-color);
     font-weight: 600;
 }
+.pre-selection-notice {
+    background-color: #f8f9fa;  /* Light gray background */
+    border: 1px solid #e9ecef;  /* Subtle border */
+    border-radius: 4px;         /* Rounded corners */
+    padding: 15px;              /* Spacing inside the box */
+    margin: 20px 0;             /* Spacing above/below */
+}
+
+.pre-selection-notice p {
+    margin: 0;                  /* Remove default paragraph margin */
+    font-size: 0.95rem;         /* Slightly smaller than regular text */
+    line-height: 1.5;           /* Comfortable line height */
+    color: #6c757d;            /* Softer text color */
+}
