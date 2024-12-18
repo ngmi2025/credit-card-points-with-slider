@@ -39,60 +39,80 @@ document.addEventListener('DOMContentLoaded', function() {
 hideAllSections();
 document.getElementById('section1').classList.remove('hidden');
 
-// Add this function near the top with your other utility functions
 function preSelectPerkValues() {
-    // Get values from Section 1
-    const travelFrequency = parseInt(document.getElementById('travelFrequency').value) || 0;
-    const hotelSpend = parseFloat(document.getElementById('hotelSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
-    const homeAirport = document.getElementById('homeAirport').value;
+    try {
+        // Get values from Section 1
+        const travelFrequency = parseInt(document.getElementById('travelFrequency').value) || 0;
+        const hotelSpend = parseFloat(document.getElementById('hotelSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
+        const homeAirport = document.getElementById('homeAirport').value;
 
-    // Centurion Lounge airports
-    const centurionAirports = ['ATL', 'DEN', 'DFW', 'IAH', 'JFK', 'LAX', 'LGA', 'MIA', 'PHL', 'PHX', 'SEA', 'SFO'];
-    const otherLoungeAirports = ['BOS', 'CLT', 'DTW', 'EWR', 'IAD', 'ORD'];
+        // Centurion Lounge airports
+        const centurionAirports = ['ATL', 'DEN', 'DFW', 'IAH', 'JFK', 'LAX', 'LGA', 'MIA', 'PHL', 'PHX', 'SEA', 'SFO'];
+        const otherLoungeAirports = ['BOS', 'CLT', 'DTW', 'EWR', 'IAD', 'ORD'];
 
-    // 1. Lounge Access Logic
-    let loungeValue = 1; // Default to lowest
-    if (centurionAirports.includes(homeAirport) && travelFrequency > 6) {
-        loungeValue = 4; // High
-    } else if ((centurionAirports.includes(homeAirport) && travelFrequency >= 3) || 
-               (otherLoungeAirports.includes(homeAirport) && travelFrequency > 6)) {
-        loungeValue = 2; // Medium
+        // 1. Lounge Access Logic
+        let loungeValue = 1; // Default to lowest
+        if (centurionAirports.includes(homeAirport) && travelFrequency > 6) {
+            loungeValue = 4; // High
+        } else if ((centurionAirports.includes(homeAirport) && travelFrequency >= 3) || 
+                   (otherLoungeAirports.includes(homeAirport) && travelFrequency > 6)) {
+            loungeValue = 2; // Medium
+        }
+
+        // 2. Partner Elite Status
+        let statusValue = 1;
+        if (hotelSpend > 5000) {
+            statusValue = 4;
+        } else if (hotelSpend >= 2000) {
+            statusValue = 2;
+        }
+
+        // 3. FHR Access
+        let fhrValue = 1;
+        if (hotelSpend > 7500) {
+            fhrValue = 4;
+        } else if (hotelSpend >= 3000) {
+            fhrValue = 2;
+        }
+
+        // 4. Card Protections
+        let protectionValue = 1;
+        if (travelFrequency > 8) {
+            protectionValue = 4;
+        } else if (travelFrequency >= 4) {
+            protectionValue = 2;
+        }
+
+        // Debug logging
+        console.log('Pre-selection values:', {
+            travelFrequency,
+            hotelSpend,
+            homeAirport,
+            loungeValue,
+            statusValue,
+            fhrValue,
+            protectionValue
+        });
+
+        // Set the values
+        document.getElementById('loungeAccess').value = loungeValue;
+        document.getElementById('partnerStatus').value = statusValue;
+        document.getElementById('fhrAndIap').value = fhrValue;
+        document.getElementById('cardProtections').value = protectionValue;
+
+        // Update the slider labels
+        ['loungeAccess', 'partnerStatus', 'fhrAndIap', 'cardProtections'].forEach(id => {
+            updateSliderLabel(id);
+        });
+
+    } catch (error) {
+        console.error("Error in preSelectPerkValues:", error);
+        // Set default values as fallback
+        ['loungeAccess', 'partnerStatus', 'fhrAndIap', 'cardProtections'].forEach(id => {
+            document.getElementById(id).value = 1;
+            updateSliderLabel(id);
+        });
     }
-
-    // 2. Partner Elite Status
-    let statusValue = 1;
-    if (hotelSpend > 5000) {
-        statusValue = 4;
-    } else if (hotelSpend >= 2000) {
-        statusValue = 2;
-    }
-
-    // 3. FHR Access
-    let fhrValue = 1;
-    if (hotelSpend > 7500) {
-        fhrValue = 4;
-    } else if (hotelSpend >= 3000) {
-        fhrValue = 2;
-    }
-
-    // 4. Card Protections
-    let protectionValue = 1;
-    if (travelFrequency > 8) {
-        protectionValue = 4;
-    } else if (travelFrequency >= 4) {
-        protectionValue = 2;
-    }
-
-    // Set the values
-    document.getElementById('loungeAccess').value = loungeValue;
-    document.getElementById('partnerStatus').value = statusValue;
-    document.getElementById('fhrAndIap').value = fhrValue;
-    document.getElementById('cardProtections').value = protectionValue;
-
-    // Update the slider labels
-    ['loungeAccess', 'partnerStatus', 'fhrAndIap', 'cardProtections'].forEach(id => {
-        updateSliderLabel(id);
-    });
 }
 
 // Modify your continue button event listener
