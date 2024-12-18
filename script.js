@@ -119,8 +119,99 @@ function preSelectPerkValues() {
 document.getElementById('continueToSection3Btn').addEventListener('click', function() {
     nextSection('section2', 'section3');
     updateProgressBar('section3');
-    preSelectPerkValues(); // Add this line
+    preSelectPerkValues(); 
 });
+
+function preSelectBenefitsValues() {
+    try {
+        // Get values from Section 1
+        const travelFrequency = parseInt(document.getElementById('travelFrequency').value) || 0;
+        const hotelSpend = parseFloat(document.getElementById('hotelSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
+        const homeAirport = document.getElementById('homeAirport').value;
+
+        // Define airport categories
+        const majorUrbanAirports = ['JFK', 'LGA', 'EWR', 'LAX', 'SFO', 'ORD', 'MIA', 'BOS'];
+        const midTierAirports = ['DEN', 'DFW', 'IAH', 'SEA', 'PHX', 'DTW', 'PHL'];
+        const luxuryMarketAirports = ['JFK', 'LGA', 'EWR', 'LAX', 'SFO', 'MIA'];
+        const nycAirports = ['JFK', 'LGA', 'EWR'];
+        const equinoxMarkets = ['BOS', 'MIA', 'SFO', 'LAX'];
+        const clearAirports = ['ATL', 'BOS', 'DEN', 'DFW', 'IAH', 'JFK', 'LAX', 'LGA', 'MIA', 'ORD', 'PHX', 'SEA', 'SFO'];
+        const urbanAirports = ['JFK', 'LGA', 'EWR', 'LAX', 'SFO', 'BOS', 'MIA'];
+
+        // Set values for each credit
+        const creditValues = {
+            // 1. Airline Fee Credit
+            airlineCredit: travelFrequency > 6 ? 4 : (travelFrequency >= 3 ? 2 : 1),
+
+            // 2. Uber Cash
+            uberCredit: majorUrbanAirports.includes(homeAirport) ? 4 : 
+                       (midTierAirports.includes(homeAirport) ? 2 : 1),
+
+            // 3. Saks Credit
+            saksCredit: luxuryMarketAirports.includes(homeAirport) ? 4 :
+                       (majorUrbanAirports.includes(homeAirport) ? 2 : 1),
+
+            // 4. Equinox Credit
+            equinoxCredit: nycAirports.includes(homeAirport) ? 4 :
+                          (equinoxMarkets.includes(homeAirport) ? 2 : 1),
+
+            // 5. CLEAR Credit
+            clearCredit: (clearAirports.includes(homeAirport) && travelFrequency > 6) ? 4 :
+                        (clearAirports.includes(homeAirport) && travelFrequency >= 3) ? 2 : 1,
+
+            // 6. Global Entry/TSA PreCheck
+            globalEntryCredit: travelFrequency > 4 ? 4 : 1,
+
+            // 7. Entertainment Credit
+            entertainmentCredit: 2, // Default to medium
+
+            // 8. Walmart+ Credit
+            walmartCredit: !urbanAirports.includes(homeAirport) ? 4 :
+                          (midTierAirports.includes(homeAirport) ? 2 : 1),
+
+            // 9. Hotel Credit
+            hotelCredit: hotelSpend > 5000 ? 4 :
+                        (hotelSpend >= 2000 ? 2 : 1),
+
+            // 10. SoulCycle Credit
+            soulCycleCredit: urbanAirports.includes(homeAirport) ? 4 :
+                            (midTierAirports.includes(homeAirport) ? 2 : 1)
+        };
+
+        // Debug logging
+        console.log('Pre-selection values for benefits:', {
+            travelFrequency,
+            hotelSpend,
+            homeAirport,
+            creditValues
+        });
+
+        // Set the values and update labels
+        Object.entries(creditValues).forEach(([id, value]) => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.value = value;
+                updateSliderLabel(id);
+            }
+        });
+
+    } catch (error) {
+        console.error("Error in preSelectBenefitsValues:", error);
+        // Set default values as fallback
+        const creditIds = [
+            'airlineCredit', 'uberCredit', 'saksCredit', 'equinoxCredit',
+            'clearCredit', 'globalEntryCredit', 'entertainmentCredit',
+            'walmartCredit', 'hotelCredit', 'soulCycleCredit'
+        ];
+        creditIds.forEach(id => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.value = 1;
+                updateSliderLabel(id);
+            }
+        });
+    }
+}
     
     // Points Calculation for Section 1
 function calculatePoints() {
@@ -347,7 +438,7 @@ document.getElementById('calculatePointsBtn').addEventListener('click', function
     try {
         calculatePoints();
         document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
-                updateProgressBar('section1'); // Add this line to ensure progress bar shows section 1 as active
+                updateProgressBar('section1'); 
 
     } catch (error) {
         console.error("Error calculating points:", error);
@@ -356,24 +447,25 @@ document.getElementById('calculatePointsBtn').addEventListener('click', function
 
 document.getElementById('continueBtn').addEventListener('click', function() {
     nextSection('section1', 'section2');
-    updateProgressBar('section2');  // Add this line
+    updateProgressBar('section2'); 
+        preSelectBenefitsValues();
 });
 
 document.getElementById('backToSection1').addEventListener('click', function(e) {
     e.preventDefault();
     nextSection('section2', 'section1');
-    updateProgressBar('section1');  // Add this line
+    updateProgressBar('section1');  
 });
 
 document.getElementById('continueToSection3Btn').addEventListener('click', function() {
     nextSection('section2', 'section3');
-    updateProgressBar('section3');  // Add this line
+    updateProgressBar('section3');  
 });
 
 document.getElementById('backToSection2').addEventListener('click', function(e) {
     e.preventDefault();
     nextSection('section3', 'section2');
-    updateProgressBar('section2');  // Add this line
+    updateProgressBar('section2'); 
 });
 
 const calculateValuationBtn = document.getElementById('calculateValuationBtn');
@@ -382,7 +474,7 @@ if (calculateValuationBtn) {
         e.preventDefault();
         console.log("Calculate Valuation button clicked");
         calculateFinalValuation();
-        updateProgressBar('section4');  // Add this line
+        updateProgressBar('section4'); 
     });
 } else {
     console.error("Calculate Valuation button not found");
@@ -391,7 +483,7 @@ if (calculateValuationBtn) {
 document.getElementById('backToSection3').addEventListener('click', function(e) {
     e.preventDefault();
     nextSection('section4', 'section3');
-    updateProgressBar('section3');  // Add this line
+    updateProgressBar('section3');  
 });
 
     ['flightSpend', 'hotelSpend', 'otherSpend'].forEach(id => {
@@ -412,7 +504,7 @@ document.getElementById('backToSection3').addEventListener('click', function(e) 
         value = Math.max(0, parseInt(value));
         this.value = value;
     });
-        // Add this with your other initialization code
+       
     document.querySelectorAll('.slider').forEach(slider => {
         slider.addEventListener('input', () => updateSliderLabel(slider.id));
         // Initialize labels on page load
