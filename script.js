@@ -257,15 +257,19 @@ if (nextSectionId !== 'section1') {
     document.getElementById('backToSection1').addEventListener('click', function(e) {
         e.preventDefault();
         nextSection('section2', 'section1');
+            updateProgressBar('section1'); // Add this line
     });
 
     document.getElementById('continueToSection3Btn').addEventListener('click', function() {
         nextSection('section2', 'section3');
+    updateProgressBar('section3'); // Changed to section3 - moving forward to section3
+
     });
 
     document.getElementById('backToSection2').addEventListener('click', function(e) {
         e.preventDefault();
         nextSection('section3', 'section2');
+    updateProgressBar('section2'); // Changed to section2 - going back to section2
     });
 
 const calculateValuationBtn = document.getElementById('calculateValuationBtn');
