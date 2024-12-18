@@ -708,7 +708,7 @@ select.credit-select option {
 
 .pre-selection-notice p {
     margin: 0;                  /* Remove default paragraph margin */
-    font-size: 0.95rem;         /* Slightly smaller than regular text */
+    font-size: 0.75rem;         /* Slightly smaller than regular text */
     line-height: 1.5;           /* Comfortable line height */
     color: #6c757d;            /* Softer text color */
     transition: background-color 0.3s ease;
