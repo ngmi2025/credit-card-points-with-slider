@@ -214,14 +214,40 @@ globalEntryCredit: travelFrequency > 6 ? 4 : (travelFrequency >= 3 ? 2 : 1),
         });
     }
 }
-    function updateExplanationText() {
-    const travelFrequency = parseInt(document.getElementById('travelFrequency').value) || 0;
-    const hotelSpend = parseFloat(document.getElementById('hotelSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
-    const homeAirport = document.getElementById('homeAirport').value;
+function updateExplanationText() {
+    try {
+        const travelFrequency = parseInt(document.getElementById('travelFrequency').value) || 0;
+        const hotelSpend = parseFloat(document.getElementById('hotelSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
+        const homeAirport = document.getElementById('homeAirport').value || 'selected airport';
 
-    const explanationText = document.querySelector('.pre-selection-notice p');
-    if (explanationText) {
-        explanationText.textContent = `Based on your travel patterns (${travelFrequency} trips per year, $${hotelSpend.toLocaleString()} hotel spend) and home airport of ${homeAirport}, we've pre-selected suggested values for how much of each credit you might use yearly. These suggestions reflect typical usage patterns for similar travelers, but you can adjust any value to better match your expected usage.`;
+        const explanationText = document.querySelector('.pre-selection-notice p');
+        if (!explanationText) {
+            console.error('Explanation text element not found');
+            return;
+        }
+
+        // Format hotel spend with commas
+        const formattedHotelSpend = hotelSpend.toLocaleString();
+
+        // Create explanation text with conditional parts
+        let text = `Based on your travel patterns (${travelFrequency} trip${travelFrequency !== 1 ? 's' : ''} per year`;
+        
+        // Only include hotel spend if it's greater than 0
+        if (hotelSpend > 0) {
+            text += `, $${formattedHotelSpend} hotel spend`;
+        }
+        
+        text += `) and home airport of ${homeAirport}, we've pre-selected suggested values for how much of each credit you might use yearly. These suggestions reflect typical usage patterns for similar travelers, but you can adjust any value to better match your expected usage.`;
+
+        explanationText.textContent = text;
+
+    } catch (error) {
+        console.error('Error updating explanation text:', error);
+        // Fallback to simpler message if there's an error
+        const explanationText = document.querySelector('.pre-selection-notice p');
+        if (explanationText) {
+            explanationText.textContent = 'We've pre-selected suggested values based on your travel patterns. Please adjust these values to match your expected usage.';
+        }
     }
 }
     
@@ -527,3 +553,20 @@ document.getElementById('backToSection3').addEventListener('click', function(e) 
         labelGroup.innerHTML = '<span>Never</span><span>Rarely</span><span>Sometimes</span><span>Often</span><span>Always</span>';
     });
 });
+function refreshExplanationText() {
+    const notice = document.querySelector('.pre-selection-notice');
+    if (notice) {
+        updateExplanationText();
+        // Add highlight effect
+        notice.classList.add('updated');
+        // Remove highlight after animation
+        setTimeout(() => {
+            notice.classList.remove('updated');
+        }, 1000);
+    }
+}
+
+// Add to relevant event listeners
+document.getElementById('travelFrequency').addEventListener('change', refreshExplanationText);
+document.getElementById('hotelSpend').addEventListener('change', refreshExplanationText);
+document.getElementById('homeAirport').addEventListener('change', refreshExplanationText);
