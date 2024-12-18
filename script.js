@@ -270,6 +270,8 @@ if (nextSectionId !== 'section1') {
 
     document.getElementById('continueBtn').addEventListener('click', function() {
         nextSection('section1', 'section2');
+            updateProgressBar('section2'); // Add this line
+
     });
 
     document.getElementById('backToSection1').addEventListener('click', function(e) {
