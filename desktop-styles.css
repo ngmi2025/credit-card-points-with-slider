@@ -627,6 +627,8 @@ select.credit-select option {
     height: 2px;
     background: #e0e0e0;
     z-index: 1;
+    transition: background 0.3s ease;
+
 }
 
 .progress-bar .step.completed:not(:last-child)::after {
@@ -671,16 +673,18 @@ select.credit-select option {
 }
 
 .progress-bar .step .label {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0,0,0,0);
-    border: 0;
+    position: static;
+    display: block;
+    width: auto;
+    height: auto;
+    margin-top: 6px;
+    font-size: 11px;  /* Made even smaller */
+    color: var(--secondary-text-color);
+    text-transform: uppercase;  /* Optional: makes labels look more polished */
+    letter-spacing: 0.5px;     /* Optional: improves readability of small text */
 }
 
-.progress-bar .step.completed .label {
+.progress-bar .step.active .label {
     color: var(--primary-color);
+    font-weight: 600;
 }
