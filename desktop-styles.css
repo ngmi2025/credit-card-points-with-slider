@@ -603,7 +603,9 @@ select.credit-select option {
 .progress-bar {
     display: flex;
     justify-content: space-between;
-    margin: 30px 0;
+    margin: 15px 0;
+        padding: 0 5px;
+
     position: relative;
     max-width: 100%;
     width: 100%;
@@ -614,6 +616,8 @@ select.credit-select option {
     text-align: center;
     position: relative;
     padding: 0 10px;
+        min-width: 50px; /* Reduced from 70px */
+
 }
 
 .progress-bar .step:not(:last-child)::after {
@@ -628,17 +632,17 @@ select.credit-select option {
 }
 
 .progress-bar .step.completed:not(:last-child)::after {
-    background: #4CAF50;
+    background: var(--primary-color);
 }
 
 .progress-bar .step .icon {
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
     background: white;
     border: 2px solid #e0e0e0;
     border-radius: 50%;
     padding: 6px;
-    margin: 0 auto 8px;
+    margin: 0 auto;
     position: relative;
     z-index: 2;
     display: flex;
@@ -647,8 +651,8 @@ select.credit-select option {
 }
 
 .progress-bar .step.completed .icon {
-    border-color: #4CAF50;
-    background: #4CAF50;
+    border-color: var(--primary-color);
+    background: var(--primary-color);
 }
 
 .progress-bar .step.completed .icon svg {
@@ -662,11 +666,16 @@ select.credit-select option {
 }
 
 .progress-bar .step .label {
-    font-size: 14px;
-    color: #666;
-    margin-top: 4px;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;
 }
 
 .progress-bar .step.completed .label {
-    color: #4CAF50;
+    color: var(--primary-color);
 }
