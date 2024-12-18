@@ -82,7 +82,14 @@ h1 {
     padding: 30px;
     border-radius: 5px;
     margin-bottom: 20px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15); /* Increased from 0.1 to 0.15 and made more consistent */
+}
+
+.section h2 {
+    color: var(--primary-color);
+    font-size: 28px;
+    margin-top: 0; /* Remove top margin */
+    margin-bottom: 30px; /* Keep bottom spacing */
 }
 
 .question-group:last-child {
@@ -357,10 +364,11 @@ input[type="number"] {
 
 .back-link {
     display: inline-block;
-    margin-bottom: 20px;
+    margin-bottom: 15px; /* Reduced from 20px */
     color: var(--primary-color);
     text-decoration: none;
-    font-weight: bold;
+   font-weight: 600; /* Slightly reduced from bold */
+    font-size: 0.9em; /* Make text smaller */
 }
 
 .back-link:hover {
