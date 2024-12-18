@@ -264,6 +264,8 @@ document.getElementById('calculatePointsBtn').addEventListener('click', function
     try {
         calculatePoints();
         document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+                updateProgressBar('section1'); // Add this line to ensure progress bar shows section 1 as active
+
     } catch (error) {
         console.error("Error calculating points:", error);
     }
