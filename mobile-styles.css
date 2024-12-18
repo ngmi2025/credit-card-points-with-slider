@@ -552,7 +552,9 @@ select.credit-select option {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 20px;
+  padding: 10px;
+      overflow-x: auto; /* Allows scrolling on mobile */
+
   position: relative;
 }
 
@@ -560,14 +562,16 @@ select.credit-select option {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
+      min-width: 60px; /* Ensures minimum touch target size */
+
   position: relative;
   z-index: 1;
 }
 
 .icon {
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -585,7 +589,7 @@ select.credit-select option {
 }
 
 .label {
-  font-size: 14px;
+  font-size: 12px;
   color: #666;
   font-weight: 500;
 }
