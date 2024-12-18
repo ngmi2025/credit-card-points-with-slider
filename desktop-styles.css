@@ -650,3 +650,6 @@ select.credit-select option {
     font-weight: bold;
     color: var(--primary-color);
 }
+#section3 .slider-labels span {
+    font-size: 10px; /* Adjust this value as needed */
+}
