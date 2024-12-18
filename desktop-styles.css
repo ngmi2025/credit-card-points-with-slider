@@ -613,7 +613,7 @@ select.credit-select option {
 .progress-bar {
     display: flex;
     justify-content: space-between;
-    margin: 15px 0 30px; /* Added more bottom margin to match image */
+    margin: 10px 0 20px; /* Added more bottom margin to match image */
     padding: 0;  /* Remove padding */
     position: relative;
     width: 100%;  /* Full width */
