@@ -246,8 +246,7 @@ function updateExplanationText() {
         // Fallback to simpler message if there's an error
         const explanationText = document.querySelector('.pre-selection-notice p');
         if (explanationText) {
-            explanationText.textContent = 'We've pre-selected suggested values based on your travel patterns. Please adjust these values to match your expected usage.';
-        }
+explanationText.textContent = "We've pre-selected suggested values based on your travel patterns. Please adjust these values to match your expected usage.";        }
     }
 }
     
