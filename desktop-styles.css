@@ -370,7 +370,7 @@ input[type="number"] {
     color: var(--primary-color);
     text-decoration: none;
    font-weight: 600; /* Slightly reduced from bold */
-    font-size: 0.9em; /* Make text smaller */
+    font-size: 0.8em; /* Make text smaller */
 }
 
 .back-link:hover {
