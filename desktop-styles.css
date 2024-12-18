@@ -604,10 +604,9 @@ select.credit-select option {
     display: flex;
     justify-content: space-between;
     margin: 15px 0;
-        padding: 0 5px;
-
+    padding: 0 20px; /* Added more padding */
     position: relative;
-    max-width: 100%;
+    max-width: calc(100% - 40px); /* Adjust to account for padding */
     width: 100%;
 }
 
@@ -615,8 +614,8 @@ select.credit-select option {
     flex: 1;
     text-align: center;
     position: relative;
-    padding: 0 10px;
-        min-width: 50px; /* Reduced from 70px */
+    padding: 0 15px; /* Increased padding */
+    min-width: 60px; /* Slightly increased minimum width */
 
 }
 
@@ -624,8 +623,8 @@ select.credit-select option {
     content: '';
     position: absolute;
     top: 12px; /* Adjust this to center the line with icons */
-    left: calc(50% + 12px); /* Adjusted for smaller icons */
-    width: calc(100% - 24px); /* Adjusted for smaller icons */
+    left: calc(50% + 14px); /* Adjusted for smaller icons */
+    width: calc(100% - 28px); /* Adjusted for smaller icons */
     height: 2px;
     background: #e0e0e0;
     z-index: 1;
@@ -636,8 +635,8 @@ select.credit-select option {
 }
 
 .progress-bar .step .icon {
-    width: 24px; /* Smaller icon container */
-    height: 24px; /* Smaller icon container */
+    width: 28px; /* Smaller icon container */
+    height: 28px; /* Smaller icon container */
     background: white;
     border: 2px solid #e0e0e0;
     border-radius: 50%;
@@ -668,7 +667,7 @@ select.credit-select option {
 }
 
 .progress-bar .step .icon .material-icons {
-    font-size: 14px;
+    font-size: 16px;
     color: #e0e0e0;
 }
 
