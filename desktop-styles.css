@@ -295,7 +295,7 @@ input[type="number"] {
 
 #results .result-description {
     color: var(--secondary-text-color);
-    font-size: 0.9rem;
+    font-size: 0.75rem;
     line-height: 1.5;
 }
 
