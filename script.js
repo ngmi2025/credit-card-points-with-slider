@@ -460,24 +460,22 @@ document.getElementById('continueToSection3Btn').addEventListener('click', funct
 
 document.getElementById('hotelSpend').addEventListener('blur', updateAllExplanationTexts);
     
-    function calculateSection3Value() {
-        const travelFrequency = parseInt(document.getElementById('travelFrequency').value.replace(/[^ -\u007F]+/g, '')) || 0;
+function calculateSection3Value() {
+    const travelFrequency = parseInt(document.getElementById('travelFrequency').value.replace(/[^ -\u007F]+/g, '')) || 0;
 
-        const perks = [
-            { id: 'loungeAccess', valuePerUse: 50 },
-            { id: 'partnerStatus', valuePerUse: 40 },
-            { id: 'fhrAndIap', valuePerUse: 100 },
-        ];
+    const perks = [
+        { id: 'loungeAccess', valuePerUse: 50 },
+        { id: 'partnerStatus', valuePerUse: 40 },
+        { id: 'fhrAndIap', valuePerUse: 100 },
+    ];
 
-        return perks.reduce((total, perk) => {
-            const sliderValue = parseInt(document.getElementById(perk.id).value);
-            const perkValue = travelFrequency * perk.valuePerUse * (sliderValue / 4);
-
-            console.log(`${perk.id}: ${travelFrequency} trips × $${perk.valuePerUse} × ${sliderValue}/4 = $${perkValue}`);
-
-            return total + perkValue;
-        }, 0);
-    }
+    return perks.reduce((total, perk) => {
+        const sliderValue = parseInt(document.getElementById(perk.id).value);
+        // Adjust calculation to account for 0-4 range instead of 1-5
+        const perkValue = travelFrequency * perk.valuePerUse * ((sliderValue + 1) / 4);
+        return total + perkValue;
+    }, 0);
+}
 
 function calculateFinalValuation() {
     console.log("Starting final valuation calculation");
