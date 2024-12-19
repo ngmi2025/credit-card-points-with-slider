@@ -39,9 +39,10 @@ document.addEventListener('DOMContentLoaded', function() {
 hideAllSections();
 document.getElementById('section1').classList.remove('hidden');
 
+// Update the mapping in preSelectPerkValues
 function preSelectPerkValues() {
     try {
-        // Get values from Section 1
+        console.log('Starting preSelectPerkValues');
         const travelFrequency = parseInt(document.getElementById('travelFrequency').value) || 0;
         const hotelSpend = parseFloat(document.getElementById('hotelSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
         const homeAirport = document.getElementById('homeAirport').value;
@@ -50,37 +51,37 @@ function preSelectPerkValues() {
         const centurionAirports = ['ATL', 'DEN', 'DFW', 'IAH', 'JFK', 'LAX', 'LGA', 'MIA', 'PHL', 'PHX', 'SEA', 'SFO'];
         const otherLoungeAirports = ['BOS', 'CLT', 'DTW', 'EWR', 'IAD', 'ORD'];
 
-        // 1. Lounge Access Logic
-        let loungeValue = 1; // Default to lowest
+        // Map the values to the new scale (1=Never, 2=Rarely, 3=Sometimes, 4=Often, 5=Always)
+        let loungeValue = 1; // Default to Never
         if (centurionAirports.includes(homeAirport) && travelFrequency > 6) {
-            loungeValue = 4; // High
+            loungeValue = 5; // Always
         } else if ((centurionAirports.includes(homeAirport) && travelFrequency >= 3) || 
                    (otherLoungeAirports.includes(homeAirport) && travelFrequency > 6)) {
-            loungeValue = 2; // Medium
+            loungeValue = 3; // Sometimes
         }
 
-        // 2. Partner Elite Status
+        // Partner Elite Status
         let statusValue = 1;
         if (hotelSpend > 5000) {
-            statusValue = 4;
+            statusValue = 5; // Always
         } else if (hotelSpend >= 2000) {
-            statusValue = 2;
+            statusValue = 3; // Sometimes
         }
 
-        // 3. FHR Access
+        // FHR Access
         let fhrValue = 1;
         if (hotelSpend > 7500) {
-            fhrValue = 4;
+            statusValue = 5; // Always
         } else if (hotelSpend >= 3000) {
-            fhrValue = 2;
+            statusValue = 3; // Sometimes
         }
 
-        // 4. Card Protections
+        // Card Protections
         let protectionValue = 1;
         if (travelFrequency > 8) {
-            protectionValue = 4;
+            protectionValue = 5; // Always
         } else if (travelFrequency >= 4) {
-            protectionValue = 2;
+            protectionValue = 3; // Sometimes
         }
 
         // Debug logging
@@ -105,15 +106,21 @@ function preSelectPerkValues() {
             updateSliderLabel(id);
         });
 
+        updatePerksExplanationText();
+
     } catch (error) {
         console.error("Error in preSelectPerkValues:", error);
-        // Set default values as fallback
-        ['loungeAccess', 'partnerStatus', 'fhrAndIap', 'cardProtections'].forEach(id => {
-            document.getElementById(id).value = 1;
-            updateSliderLabel(id);
-        });
     }
 }
+
+// Update the event listener to call preSelectPerkValues when entering section 3
+document.getElementById('continueToSection3Btn').addEventListener('click', function() {
+    nextSection('section2', 'section3');
+    updateProgressBar('section3');
+    setTimeout(() => {
+        preSelectPerkValues();
+    }, 100);
+});
 
 // Modify your continue button event listener
 document.getElementById('continueToSection3Btn').addEventListener('click', function() {
