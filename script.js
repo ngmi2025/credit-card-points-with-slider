@@ -723,8 +723,3 @@ document.getElementById('backToSection3').addEventListener('click', function(e) 
     document.querySelectorAll('#section3 .slider-labels').forEach(labelGroup => {
         labelGroup.innerHTML = '<span>Never</span><span>Rarely</span><span>Sometimes</span><span>Often</span><span>Always</span>';
     });
-
-    // Add to relevant event listeners
-document.getElementById('travelFrequency').addEventListener('change', updateAllExplanationTexts);
-document.getElementById('hotelSpend').addEventListener('blur', updateAllExplanationTexts);
-document.getElementById('homeAirport').addEventListener('change', updateAllExplanationTexts);
