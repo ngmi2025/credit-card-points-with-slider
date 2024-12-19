@@ -717,3 +717,17 @@ select.credit-select option {
 .pre-selection-notice.updated {
     background-color: #f0f7ff;  /* Subtle highlight color */
 }
+
+.perks-selection-notice {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.perks-selection-notice p {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin: 0;
+    color: #333;
+}
