@@ -44,8 +44,7 @@ document.getElementById('homeAirport').addEventListener('change', function() {
 const customAirportInput = document.querySelector('#customHomeAirport input');
 if (customAirportInput) {
     customAirportInput.addEventListener('input', function() {
-        this.value = this.value.toUpperCase().replace(/[^A-Z]/g, '');
-        if (this.value.length === 3) {
+        this.value = this.value.replace(/[^A-Za-z\s]/g, ''); // Only letters and spaces
             updateAllExplanationTexts();
         }
     });
