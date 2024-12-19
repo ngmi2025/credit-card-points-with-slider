@@ -604,13 +604,19 @@ select.credit-select option {
     width: 100%;
     margin-top: 10px;
 }
-.slider-labels span.selected {
+
+#section2 .slider-labels span.selected {
     font-weight: bold;
-    color: var(--primary-color);
+    color: var(--text-color);
 }
+
 #section3 .slider-labels span {
     font-size: 0.75rem;
     color: #6c757d;
+}
+#section3 .slider-labels span.selected {
+    font-weight: bold;
+    color: var(--primary-color);
 }
 .progress-bar {
     display: flex;
