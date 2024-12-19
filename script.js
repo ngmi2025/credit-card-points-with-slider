@@ -15,21 +15,19 @@ function updateSliderLabel(sliderId) {
         label.classList.remove('selected', 'primary-color');
     });
 
-    // Map slider values (1-4 for section 2, 1-5 for section 3) to label indices (0-3 or 0-4)
-    const selectedIndex = value - 1;
+    // For section 2, the slider values are 0-4 and need to map directly to label indices 0-4
+    // For section 3, the slider values are 1-5 and need to map to label indices 0-4
+    const section = slider.closest('section');
+    const selectedIndex = section && section.id === 'section3' ? value - 1 : value;
     
     // Add selected class to the correct label
     if (selectedIndex >= 0 && selectedIndex < labels.length) {
         labels[selectedIndex].classList.add('selected');
         
-        // Check which section the slider belongs to
-        const section = slider.closest('section');
+        // For section 3, also add the primary-color class
         if (section && section.id === 'section3') {
-            // For section 3, add the primary-color class
             labels[selectedIndex].classList.add('primary-color');
         }
-        
-        console.log(`Slider ${sliderId}: value=${value}, selectedIndex=${selectedIndex}, label=${labels[selectedIndex].textContent}`);
     }
 }
     function formatCurrency(input) {
