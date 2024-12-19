@@ -711,3 +711,5 @@ document.getElementById('travelFrequency').addEventListener('blur', function() {
     value = Math.max(0, parseInt(value));
     this.value = value;
 });
+
+}); 
