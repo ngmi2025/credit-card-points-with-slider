@@ -747,6 +747,8 @@ select.credit-select option {
 /* Custom Airport Input Styles */
 #customHomeAirport {
     margin-top: 10px;
+     display: block;
+    width: 100%;    
 }
 
 #customHomeAirport input {
