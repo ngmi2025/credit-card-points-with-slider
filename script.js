@@ -25,8 +25,33 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
         updateProgressBar('section1');
+    
+document.getElementById('homeAirport').addEventListener('change', function() {
+    const customHomeAirport = document.getElementById('customHomeAirport');
+    const customAirportInput = customHomeAirport.querySelector('input');
+    
+    if (this.value === 'custom') {
+        customHomeAirport.classList.remove('hidden');
+        customAirportInput.required = true;
+        customAirportInput.focus();
+    } else {
+        customHomeAirport.classList.add('hidden');
+        customAirportInput.required = false;
+    }
+});
 
-function updateSliderLabel(sliderId) {
+// Add validation for the custom airport input
+const customAirportInput = document.querySelector('#customHomeAirport input');
+if (customAirportInput) {
+    customAirportInput.addEventListener('input', function() {
+        this.value = this.value.toUpperCase().replace(/[^A-Z]/g, '');
+        if (this.value.length === 3) {
+            updateAllExplanationTexts();
+        }
+    });
+}
+    
+    function updateSliderLabel(sliderId) {
     const slider = document.getElementById(sliderId);
     const labels = slider.parentElement.querySelector('.slider-labels').children;
     const value = parseInt(slider.value);
@@ -290,7 +315,6 @@ function preSelectBenefitsValues() {
 }
 function updateExplanationText() {
     try {
-        
         const travelFrequencyElement = document.getElementById('travelFrequency');
         const travelFrequency = parseInt(travelFrequencyElement?.value) || 0;
 
@@ -299,11 +323,17 @@ function updateExplanationText() {
 
         const homeAirportElement = document.getElementById('homeAirport');
         const homeAirport = homeAirportElement?.value || 'none';
+        const customAirportInput = document.querySelector('#customHomeAirport input');
         
         // Get full airport name or use code if not found
-        const airportDisplay = homeAirport !== 'none' 
-            ? `${airportNames[homeAirport] || homeAirport} (${homeAirport})`
-            : 'none';
+        let airportDisplay;
+        if (homeAirport === 'custom' && customAirportInput?.value) {
+            airportDisplay = customAirportInput.value.toUpperCase();
+        } else if (homeAirport !== 'none') {
+            airportDisplay = `${airportNames[homeAirport] || homeAirport} (${homeAirport})`;
+        } else {
+            airportDisplay = 'none';
+        }
 
         const explanationText = document.querySelector('.pre-selection-notice p');
         if (!explanationText) {
@@ -316,7 +346,7 @@ function updateExplanationText() {
 
         // Build the text with custom airport handling
         const text = homeAirport === 'custom' 
-            ? `Based on your travel patterns (${travelFrequency} trip${travelFrequency !== 1 ? 's' : ''} per year${hotelSpend > 0 ? `, ${formattedHotelSpend} hotel spend` : ''}) and custom airport selection, we've pre-selected conservative suggested values for how much of each credit you might use yearly. <strong>Since we don't have specific information about your airport, please adjust these values based on your expected usage.</strong>`
+            ? `Based on your travel patterns (${travelFrequency} trip${travelFrequency !== 1 ? 's' : ''} per year${hotelSpend > 0 ? `, ${formattedHotelSpend} hotel spend` : ''}) and custom airport (${customAirportInput?.value?.toUpperCase() || 'not specified'}), we've pre-selected conservative suggested values for how much of each credit you might use yearly. <strong>Since we don't have specific information about your airport, please adjust these values based on your expected usage.</strong>`
             : `Based on your travel patterns (${travelFrequency} trip${travelFrequency !== 1 ? 's' : ''} per year${hotelSpend > 0 ? `, ${formattedHotelSpend} hotel spend` : ''}) and home airport of ${airportDisplay}, we've pre-selected suggested values for how much of each credit you might use yearly. <strong>These suggestions reflect typical usage patterns for similar travelers, but you should adjust them to match your expected usage.</strong>`;
 
         explanationText.innerHTML = text;
@@ -325,7 +355,6 @@ function updateExplanationText() {
         console.error('Error in updateExplanationText:', error);
     }
 }
-
     function refreshExplanationText() {
     console.log('refreshExplanationText called');
     const notice = document.querySelector('.pre-selection-notice');
