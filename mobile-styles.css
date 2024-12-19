@@ -794,3 +794,67 @@ select:focus {
     border-color: var(--primary-color);
     box-shadow: 0 0 0 2px rgba(0,119,190,0.1);
 }
+.loading {
+    opacity: 0.5;
+    pointer-events: none;
+    position: relative;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid var(--primary-color);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: loading 0.8s linear infinite;
+}
+
+@keyframes loading {
+    to {
+        transform: rotate(360deg);
+    }
+}
+.cta-button:focus,
+.continue-btn:focus,
+.apply-now-btn:focus,
+input:focus,
+select:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0,119,190,0.2);
+}
+
+.radio-group label:focus-within {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(0,119,190,0.1);
+}
+.tooltip {
+    position: relative;
+    display: inline-block;
+    margin-left: 4px;
+    cursor: help;
+}
+
+.tooltip .tooltip-text {
+    visibility: hidden;
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    width: 200px;
+    z-index: 1;
+}
+
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+}
