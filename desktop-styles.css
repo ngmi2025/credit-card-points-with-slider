@@ -607,7 +607,7 @@ select.credit-select option {
 
 #section2 .slider-labels span.selected {
     font-weight: bold;
-    color: var(--text-color);
+    color: var(--primary-color);
 }
 
 #section3 .slider-labels span {
