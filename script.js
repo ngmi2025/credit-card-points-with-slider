@@ -216,42 +216,54 @@ globalEntryCredit: travelFrequency > 6 ? 4 : (travelFrequency >= 3 ? 2 : 1),
 }
 function updateExplanationText() {
     try {
-        // Get and parse values, defaulting to 0 or 'none' if not found
-        const travelFrequency = parseInt(document.getElementById('travelFrequency').value) || 0;
-        const hotelSpend = parseFloat(document.getElementById('hotelSpend').value.replace(/[$,]/g, '')) || 0;
-        const homeAirport = document.getElementById('homeAirport').value || 'none';
+        // Add debug logs for each value retrieval
+        const travelFrequencyElement = document.getElementById('travelFrequency');
+        console.log('Travel frequency element:', travelFrequencyElement);
+        const travelFrequency = parseInt(travelFrequencyElement?.value) || 0;
+        console.log('Travel frequency value:', travelFrequency);
+
+        const hotelSpendElement = document.getElementById('hotelSpend');
+        console.log('Hotel spend element:', hotelSpendElement);
+        const hotelSpend = parseFloat(hotelSpendElement?.value?.replace(/[$,]/g, '')) || 0;
+        console.log('Hotel spend value:', hotelSpend);
+
+        const homeAirportElement = document.getElementById('homeAirport');
+        console.log('Home airport element:', homeAirportElement);
+        const homeAirport = homeAirportElement?.value || 'none';
+        console.log('Home airport value:', homeAirport);
 
         const explanationText = document.querySelector('.pre-selection-notice p');
+        console.log('Explanation text element:', explanationText);
+
         if (!explanationText) {
             console.error('Explanation text element not found');
             return;
         }
 
-        // Format hotel spend with commas and $ sign
+        // Format hotel spend
         const formattedHotelSpend = hotelSpend ? `$${hotelSpend.toLocaleString()}` : '$0';
 
-        // Build the text string
-        let text = `Based on your travel patterns (${travelFrequency} trip${travelFrequency !== 1 ? 's' : ''} per year`;
-        
-        // Only include hotel spend if it's greater than 0
-        if (hotelSpend > 0) {
-            text += `, ${formattedHotelSpend} hotel spend`;
-        }
-        
-        text += `) and home airport of ${homeAirport}, we've pre-selected suggested values for how much of each credit you might use yearly. These suggestions reflect typical usage patterns for similar travelers, but you can adjust any value to better match your expected usage.`;
+        // Build the text
+        const text = `Based on your travel patterns (${travelFrequency} trip${travelFrequency !== 1 ? 's' : ''} per year${hotelSpend > 0 ? `, ${formattedHotelSpend} hotel spend` : ''}) and home airport of ${homeAirport}, we've pre-selected suggested values for how much of each credit you might use yearly. These suggestions reflect typical usage patterns for similar travelers, but you can adjust any value to better match your expected usage.`;
 
-        // Set the text content
+        console.log('Final text to be set:', text);
         explanationText.textContent = text;
 
-        console.log('Updated explanation text:', text); // Debug log
-
     } catch (error) {
-        console.error('Error updating explanation text:', error);
-        // Fallback message
-        const explanationText = document.querySelector('.pre-selection-notice p');
-        if (explanationText) {
-            explanationText.textContent = "We've pre-selected suggested values based on your travel patterns. Please adjust these values to match your expected usage.";
-        }
+        console.error('Error in updateExplanationText:', error);
+    }
+}
+
+    function refreshExplanationText() {
+    console.log('refreshExplanationText called');
+    const notice = document.querySelector('.pre-selection-notice');
+    console.log('notice element:', notice);
+    if (notice) {
+        updateExplanationText();
+        notice.classList.add('updated');
+        setTimeout(() => {
+            notice.classList.remove('updated');
+        }, 1000);
     }
 }
     
@@ -586,21 +598,9 @@ document.getElementById('backToSection3').addEventListener('click', function(e) 
     document.querySelectorAll('#section3 .slider-labels').forEach(labelGroup => {
         labelGroup.innerHTML = '<span>Never</span><span>Rarely</span><span>Sometimes</span><span>Often</span><span>Always</span>';
     });
-});
-function refreshExplanationText() {
-    const notice = document.querySelector('.pre-selection-notice');
-    if (notice) {
-        updateExplanationText();
-        // Add highlight effect
-        notice.classList.add('updated');
-        // Remove highlight after animation
-        setTimeout(() => {
-            notice.classList.remove('updated');
-        }, 1000);
-    }
-}
 
-// Add to relevant event listeners
+    // Add to relevant event listeners
 document.getElementById('travelFrequency').addEventListener('change', refreshExplanationText);
 document.getElementById('hotelSpend').addEventListener('blur', refreshExplanationText);
 document.getElementById('homeAirport').addEventListener('change', refreshExplanationText);
+});
