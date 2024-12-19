@@ -55,33 +55,48 @@ function preSelectPerkValues() {
         let loungeValue = 1; // Default to Never
         if (centurionAirports.includes(homeAirport) && travelFrequency > 6) {
             loungeValue = 5; // Always
-        } else if ((centurionAirports.includes(homeAirport) && travelFrequency >= 3) || 
-                   (otherLoungeAirports.includes(homeAirport) && travelFrequency > 6)) {
+        } else if (centurionAirports.includes(homeAirport) && travelFrequency >= 3) {
+            loungeValue = 4; // Often
+        } else if (otherLoungeAirports.includes(homeAirport) && travelFrequency > 6) {
             loungeValue = 3; // Sometimes
+        } else if (otherLoungeAirports.includes(homeAirport) && travelFrequency >= 3) {
+            loungeValue = 2; // Rarely
         }
 
         // Partner Elite Status
-        let statusValue = 1;
+        let statusValue = 1; // Never
         if (hotelSpend > 5000) {
             statusValue = 5; // Always
+        } else if (hotelSpend > 3500) {
+            statusValue = 4; // Often
         } else if (hotelSpend >= 2000) {
             statusValue = 3; // Sometimes
+        } else if (hotelSpend >= 1000) {
+            statusValue = 2; // Rarely
         }
 
         // FHR Access
-        let fhrValue = 1;
+        let fhrValue = 1; // Never
         if (hotelSpend > 7500) {
-            statusValue = 5; // Always
+            fhrValue = 5; // Always
+        } else if (hotelSpend > 5000) {
+            fhrValue = 4; // Often
         } else if (hotelSpend >= 3000) {
-            statusValue = 3; // Sometimes
+            fhrValue = 3; // Sometimes
+        } else if (hotelSpend >= 1500) {
+            fhrValue = 2; // Rarely
         }
 
         // Card Protections
-        let protectionValue = 1;
+        let protectionValue = 1; // Never
         if (travelFrequency > 8) {
             protectionValue = 5; // Always
+        } else if (travelFrequency > 6) {
+            protectionValue = 4; // Often
         } else if (travelFrequency >= 4) {
             protectionValue = 3; // Sometimes
+        } else if (travelFrequency >= 2) {
+            protectionValue = 2; // Rarely
         }
 
         // Debug logging
@@ -112,22 +127,6 @@ function preSelectPerkValues() {
         console.error("Error in preSelectPerkValues:", error);
     }
 }
-
-// Update the event listener to call preSelectPerkValues when entering section 3
-document.getElementById('continueToSection3Btn').addEventListener('click', function() {
-    nextSection('section2', 'section3');
-    updateProgressBar('section3');
-    setTimeout(() => {
-        preSelectPerkValues();
-    }, 100);
-});
-
-// Modify your continue button event listener
-document.getElementById('continueToSection3Btn').addEventListener('click', function() {
-    nextSection('section2', 'section3');
-    updateProgressBar('section3');
-    preSelectPerkValues(); 
-});
 
 function preSelectBenefitsValues() {
     try {
@@ -305,6 +304,11 @@ explanationText.innerHTML = text;
         }, 1000);
     }
 }
+        function updateAllExplanationTexts() {
+    console.log('Updating all explanation texts');
+    refreshExplanationText();
+    updatePerksExplanationText();
+}
     
     // Points Calculation for Section 1
 function calculatePoints() {
@@ -431,35 +435,23 @@ function updatePerksExplanationText() {
     }
 }
 
-// Then modify your preSelectPerkValues function to call this at the end
-function preSelectPerkValues() {
-    try {
-        // ... existing preSelectPerkValues code ...
-
-        // Add this line at the end, just before the closing try block
-        updatePerksExplanationText();
-
-    } catch (error) {
-        console.error("Error in preSelectPerkValues:", error);
-        // ... rest of error handling ...
-    }
-}
-
-// Update your existing event listeners to also call the new function
-document.getElementById('travelFrequency').addEventListener('change', function() {
-    refreshExplanationText();
-    updatePerksExplanationText();
+// Add this single event listener for section 3 transition
+document.getElementById('continueToSection3Btn').addEventListener('click', function() {
+    console.log('Continue to Section 3 clicked');
+    nextSection('section2', 'section3');
+    updateProgressBar('section3');
+    setTimeout(() => {
+        preSelectPerkValues();
+        console.log('Perks pre-selected');
+    }, 100);
 });
 
-document.getElementById('hotelSpend').addEventListener('blur', function() {
-    refreshExplanationText();
-    updatePerksExplanationText();
+// Update the input listeners to use updateAllExplanationTexts
+['travelFrequency', 'homeAirport'].forEach(id => {
+    document.getElementById(id).addEventListener('change', updateAllExplanationTexts);
 });
 
-document.getElementById('homeAirport').addEventListener('change', function() {
-    refreshExplanationText();
-    updatePerksExplanationText();
-});
+document.getElementById('hotelSpend').addEventListener('blur', updateAllExplanationTexts);
     
     function calculateSection3Value() {
         const travelFrequency = parseInt(document.getElementById('travelFrequency').value.replace(/[^ -\u007F]+/g, '')) || 0;
@@ -606,11 +598,6 @@ if (nextSectionId !== 'section1') {
         window.scrollTo(0, 0);
     }
 
-    function updateAllExplanationTexts() {
-    refreshExplanationText();
-    updatePerksExplanationText();
-}
-
 // Find these existing event listeners and update them:
 
 document.getElementById('calculatePointsBtn').addEventListener('click', function(e) {
@@ -658,11 +645,6 @@ document.getElementById('backToSection1').addEventListener('click', function(e) 
     e.preventDefault();
     nextSection('section2', 'section1');
     updateProgressBar('section1');  
-});
-
-document.getElementById('continueToSection3Btn').addEventListener('click', function() {
-    nextSection('section2', 'section3');
-    updateProgressBar('section3');  
 });
 
 document.getElementById('backToSection2').addEventListener('click', function(e) {
@@ -728,9 +710,4 @@ document.getElementById('travelFrequency').addEventListener('blur', function() {
     if (value === '') value = '0';
     value = Math.max(0, parseInt(value));
     this.value = value;
-});
-
-document.getElementById('travelFrequency').addEventListener('change', updateAllExplanationTexts);
-
-document.getElementById('homeAirport').addEventListener('change', updateAllExplanationTexts);
 });
