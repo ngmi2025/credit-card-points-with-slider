@@ -363,6 +363,94 @@ function calculateSection2Value(isFirstYear = true) {
     return total;
 }
 
+    // Add this new function alongside your other functions
+function updatePerksExplanationText() {
+    try {
+        // Airport name mapping - using the same mapping as updateExplanationText
+        const airportNames = {
+            'ATL': 'Atlanta',
+            'BOS': 'Boston',
+            'CLT': 'Charlotte',
+            'DEN': 'Denver',
+            'DFW': 'Dallas/Fort Worth',
+            'DTW': 'Detroit',
+            'EWR': 'Newark',
+            'IAD': 'Washington Dulles',
+            'IAH': 'Houston',
+            'JFK': 'New York JFK',
+            'LAX': 'Los Angeles',
+            'LGA': 'New York LaGuardia',
+            'MIA': 'Miami',
+            'ORD': 'Chicago',
+            'PHL': 'Philadelphia',
+            'PHX': 'Phoenix',
+            'SEA': 'Seattle',
+            'SFO': 'San Francisco'
+        };
+
+        const travelFrequencyElement = document.getElementById('travelFrequency');
+        const travelFrequency = parseInt(travelFrequencyElement?.value) || 0;
+
+        const hotelSpendElement = document.getElementById('hotelSpend');
+        const hotelSpend = parseFloat(hotelSpendElement?.value?.replace(/[$,]/g, '')) || 0;
+
+        const homeAirportElement = document.getElementById('homeAirport');
+        const homeAirport = homeAirportElement?.value || 'none';
+        
+        // Get full airport name or use code if not found
+        const airportDisplay = homeAirport !== 'none' 
+            ? `${airportNames[homeAirport] || homeAirport} (${homeAirport})`
+            : 'none';
+
+        const perksNotice = document.querySelector('.perks-selection-notice p');
+        if (!perksNotice) {
+            console.error('Perks explanation text element not found');
+            return;
+        }
+
+        // Format hotel spend
+        const formattedHotelSpend = hotelSpend ? `$${hotelSpend.toLocaleString()}` : '$0';
+
+        // Build the text
+        const text = `Based on your travel patterns (${travelFrequency} trip${travelFrequency !== 1 ? 's' : ''} per year${hotelSpend > 0 ? `, ${formattedHotelSpend} hotel spend` : ''}) and home airport of ${airportDisplay}, we've suggested initial values for how often you might use each perk. <strong>These suggestions are based on typical usage patterns for similar travelers, but you should adjust them to match your expected usage.</strong>`;
+
+        perksNotice.innerHTML = text;
+
+    } catch (error) {
+        console.error('Error in updatePerksExplanationText:', error);
+    }
+}
+
+// Then modify your preSelectPerkValues function to call this at the end
+function preSelectPerkValues() {
+    try {
+        // ... existing preSelectPerkValues code ...
+
+        // Add this line at the end, just before the closing try block
+        updatePerksExplanationText();
+
+    } catch (error) {
+        console.error("Error in preSelectPerkValues:", error);
+        // ... rest of error handling ...
+    }
+}
+
+// Update your existing event listeners to also call the new function
+document.getElementById('travelFrequency').addEventListener('change', function() {
+    refreshExplanationText();
+    updatePerksExplanationText();
+});
+
+document.getElementById('hotelSpend').addEventListener('blur', function() {
+    refreshExplanationText();
+    updatePerksExplanationText();
+});
+
+document.getElementById('homeAirport').addEventListener('change', function() {
+    refreshExplanationText();
+    updatePerksExplanationText();
+});
+    
     function calculateSection3Value() {
         const travelFrequency = parseInt(document.getElementById('travelFrequency').value.replace(/[^ -\u007F]+/g, '')) || 0;
 
@@ -508,6 +596,11 @@ if (nextSectionId !== 'section1') {
         window.scrollTo(0, 0);
     }
 
+    function updateAllExplanationTexts() {
+    refreshExplanationText();
+    updatePerksExplanationText();
+}
+
 // Find these existing event listeners and update them:
 
 document.getElementById('calculatePointsBtn').addEventListener('click', function(e) {
@@ -632,7 +725,6 @@ document.getElementById('backToSection3').addEventListener('click', function(e) 
     });
 
     // Add to relevant event listeners
-document.getElementById('travelFrequency').addEventListener('change', refreshExplanationText);
-document.getElementById('hotelSpend').addEventListener('blur', refreshExplanationText);
-document.getElementById('homeAirport').addEventListener('change', refreshExplanationText);
-});
+document.getElementById('travelFrequency').addEventListener('change', updateAllExplanationTexts);
+document.getElementById('hotelSpend').addEventListener('blur', updateAllExplanationTexts);
+document.getElementById('homeAirport').addEventListener('change', updateAllExplanationTexts);
