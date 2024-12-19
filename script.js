@@ -277,7 +277,7 @@ function updateExplanationText() {
         const formattedHotelSpend = hotelSpend ? `$${hotelSpend.toLocaleString()}` : '$0';
 
         // Build the text
-const text = `Based on your travel patterns (${travelFrequency} trip${travelFrequency !== 1 ? 's' : ''} per year${hotelSpend > 0 ? `, ${formattedHotelSpend} hotel spend` : ''}) and home airport of ${airportDisplay}, we've pre-selected suggested values for how much of each credit you might use yearly. <strong>These initial suggestions reflect typical usage patterns for similar travelers, but you should adjust them to match your expected usage.</strong>`;
+const text = `Based on your travel patterns (${travelFrequency} trip${travelFrequency !== 1 ? 's' : ''} per year${hotelSpend > 0 ? `, ${formattedHotelSpend} hotel spend` : ''}) and home airport of ${airportDisplay}, we've pre-selected suggested values for how much of each credit you might use yearly. <strong>These suggestions reflect typical usage patterns for similar travelers, but you should adjust them to match your expected usage.</strong>`;
 
 explanationText.innerHTML = text;
 
