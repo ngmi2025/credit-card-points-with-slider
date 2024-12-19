@@ -129,6 +129,18 @@ function preSelectBenefitsValues() {
         const hotelSpend = parseFloat(document.getElementById('hotelSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
         const homeAirport = document.getElementById('homeAirport').value;
 
+        // Special handling for Global Entry/TSA PreCheck dropdown
+        const globalEntrySelect = document.getElementById('globalEntryCredit');
+        if (globalEntrySelect) {
+            if (travelFrequency > 6) {
+                globalEntrySelect.value = "120"; // Will apply for Global Entry
+            } else if (travelFrequency >= 3) {
+                globalEntrySelect.value = "85";  // Will apply for TSA PreCheck
+            } else {
+                globalEntrySelect.value = "0";   // Won't use the credit
+            }
+        }
+
         // Define airport categories
         const majorUrbanAirports = ['JFK', 'LGA', 'EWR', 'LAX', 'SFO', 'ORD', 'MIA', 'BOS'];
         const midTierAirports = ['DEN', 'DFW', 'IAH', 'SEA', 'PHX', 'DTW', 'PHL'];
@@ -158,9 +170,6 @@ function preSelectBenefitsValues() {
             // 5. CLEAR Credit
             clearCredit: (clearAirports.includes(homeAirport) && travelFrequency > 6) ? 4 :
                         (clearAirports.includes(homeAirport) && travelFrequency >= 3) ? 2 : 1,
-
-            // 6. Global Entry/TSA PreCheck
-globalEntryCredit: travelFrequency > 6 ? 4 : (travelFrequency >= 3 ? 2 : 1),
             
             // 7. Entertainment Credit
             entertainmentCredit: 2, // Default to medium
@@ -183,7 +192,8 @@ globalEntryCredit: travelFrequency > 6 ? 4 : (travelFrequency >= 3 ? 2 : 1),
             travelFrequency,
             hotelSpend,
             homeAirport,
-            creditValues
+            creditValues,
+            globalEntryValue: globalEntrySelect?.value
         });
 
         // Set the values and update labels
@@ -202,8 +212,8 @@ globalEntryCredit: travelFrequency > 6 ? 4 : (travelFrequency >= 3 ? 2 : 1),
         // Set default values as fallback
         const creditIds = [
             'airlineCredit', 'uberCredit', 'saksCredit', 'equinoxCredit',
-            'clearCredit', 'globalEntryCredit', 'entertainmentCredit',
-            'walmartCredit', 'hotelCredit', 'soulCycleCredit'
+            'clearCredit', 'entertainmentCredit', 'walmartCredit', 
+            'hotelCredit', 'soulCycleCredit'
         ];
         creditIds.forEach(id => {
             const element = document.getElementById(id);
@@ -212,6 +222,11 @@ globalEntryCredit: travelFrequency > 6 ? 4 : (travelFrequency >= 3 ? 2 : 1),
                 updateSliderLabel(id);
             }
         });
+        // Set default for Global Entry dropdown
+        const globalEntrySelect = document.getElementById('globalEntryCredit');
+        if (globalEntrySelect) {
+            globalEntrySelect.value = "0";
+        }
     }
 }
 function updateExplanationText() {
