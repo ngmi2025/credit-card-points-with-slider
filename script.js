@@ -3,6 +3,27 @@ document.addEventListener('DOMContentLoaded', function() {
     const POINT_VALUE = 0.022;
     const ANNUAL_FEE = 595;
 
+        const airportNames = {
+        'ATL': 'Atlanta',
+        'BOS': 'Boston',
+        'CLT': 'Charlotte',
+        'DEN': 'Denver',
+        'DFW': 'Dallas/Fort Worth',
+        'DTW': 'Detroit',
+        'EWR': 'Newark',
+        'IAD': 'Washington Dulles',
+        'IAH': 'Houston',
+        'JFK': 'New York JFK',
+        'LAX': 'Los Angeles',
+        'LGA': 'New York LaGuardia',
+        'MIA': 'Miami',
+        'ORD': 'Chicago',
+        'PHL': 'Philadelphia',
+        'PHX': 'Phoenix',
+        'SEA': 'Seattle',
+        'SFO': 'San Francisco'
+    };
+
         updateProgressBar('section1');
 
 function updateSliderLabel(sliderId) {
@@ -106,6 +127,14 @@ function preSelectPerkValues() {
             protectionValue = 2; // Rarely
         }
 
+        // If it's a custom airport, use more conservative values
+        if (homeAirport === 'custom') {
+            loungeValue = Math.min(loungeValue, 3); // Cap at "Sometimes"
+            statusValue = Math.min(statusValue, 3); // Cap at "Sometimes"
+            fhrValue = Math.min(fhrValue, 3); // Cap at "Sometimes"
+            protectionValue = Math.min(protectionValue, 3); // Cap at "Sometimes"
+        }
+
         // Debug logging
         console.log('Pre-selection values:', {
             travelFrequency,
@@ -200,6 +229,23 @@ function preSelectBenefitsValues() {
                             (midTierAirports.includes(homeAirport) ? 2 : 1)
         };
 
+           if (homeAirport === 'custom') {
+            // Cap all values at 2 ("Rarely") for custom airports
+            Object.keys(creditValues).forEach(key => {
+                creditValues[key] = Math.min(creditValues[key], 2);
+            });
+            
+            // Special handling for specific credits that should be even more conservative
+            creditValues.equinoxCredit = 1;  // Set to "Never" for custom airports
+            creditValues.soulCycleCredit = 1; // Set to "Never" for custom airports
+            creditValues.clearCredit = 1;     // Set to "Never" for custom airports
+            
+            // Set Global Entry to TSA PreCheck value for custom airports
+            if (globalEntrySelect && travelFrequency >= 3) {
+                globalEntrySelect.value = "85";
+            }
+        }
+
         // Debug logging
         console.log('Pre-selection values for benefits:', {
             travelFrequency,
@@ -244,28 +290,7 @@ function preSelectBenefitsValues() {
 }
 function updateExplanationText() {
     try {
-        // Airport name mapping
-        const airportNames = {
-            'ATL': 'Atlanta',
-            'BOS': 'Boston',
-            'CLT': 'Charlotte',
-            'DEN': 'Denver',
-            'DFW': 'Dallas/Fort Worth',
-            'DTW': 'Detroit',
-            'EWR': 'Newark',
-            'IAD': 'Washington Dulles',
-            'IAH': 'Houston',
-            'JFK': 'New York JFK',
-            'LAX': 'Los Angeles',
-            'LGA': 'New York LaGuardia',
-            'MIA': 'Miami',
-            'ORD': 'Chicago',
-            'PHL': 'Philadelphia',
-            'PHX': 'Phoenix',
-            'SEA': 'Seattle',
-            'SFO': 'San Francisco'
-        };
-
+        
         const travelFrequencyElement = document.getElementById('travelFrequency');
         const travelFrequency = parseInt(travelFrequencyElement?.value) || 0;
 
@@ -289,10 +314,12 @@ function updateExplanationText() {
         // Format hotel spend
         const formattedHotelSpend = hotelSpend ? `$${hotelSpend.toLocaleString()}` : '$0';
 
-        // Build the text
-const text = `Based on your travel patterns (${travelFrequency} trip${travelFrequency !== 1 ? 's' : ''} per year${hotelSpend > 0 ? `, ${formattedHotelSpend} hotel spend` : ''}) and home airport of ${airportDisplay}, we've pre-selected suggested values for how much of each credit you might use yearly. <strong>These suggestions reflect typical usage patterns for similar travelers, but you should adjust them to match your expected usage.</strong>`;
+        // Build the text with custom airport handling
+        const text = homeAirport === 'custom' 
+            ? `Based on your travel patterns (${travelFrequency} trip${travelFrequency !== 1 ? 's' : ''} per year${hotelSpend > 0 ? `, ${formattedHotelSpend} hotel spend` : ''}) and custom airport selection, we've pre-selected conservative suggested values for how much of each credit you might use yearly. <strong>Since we don't have specific information about your airport, please adjust these values based on your expected usage.</strong>`
+            : `Based on your travel patterns (${travelFrequency} trip${travelFrequency !== 1 ? 's' : ''} per year${hotelSpend > 0 ? `, ${formattedHotelSpend} hotel spend` : ''}) and home airport of ${airportDisplay}, we've pre-selected suggested values for how much of each credit you might use yearly. <strong>These suggestions reflect typical usage patterns for similar travelers, but you should adjust them to match your expected usage.</strong>`;
 
-explanationText.innerHTML = text;
+        explanationText.innerHTML = text;
 
     } catch (error) {
         console.error('Error in updateExplanationText:', error);
@@ -383,57 +410,50 @@ function calculateSection2Value(isFirstYear = true) {
 
 function updatePerksExplanationText() {
     try {
-        console.log('Starting updatePerksExplanationText');
-        
         const perksNotice = document.querySelector('.perks-selection-notice p');
-        console.log('Found perks notice element:', perksNotice);
-        
-        if (!perksNotice) {
-            console.error('Perks explanation text element not found');
-            return;
-        }
+        if (!perksNotice) return;
 
-        // Airport name mapping
-        const airportNames = {
-            'ATL': 'Atlanta',
-            'BOS': 'Boston',
-            'CLT': 'Charlotte',
-            'DEN': 'Denver',
-            'DFW': 'Dallas/Fort Worth',
-            'DTW': 'Detroit',
-            'EWR': 'Newark',
-            'IAD': 'Washington Dulles',
-            'IAH': 'Houston',
-            'JFK': 'New York JFK',
-            'LAX': 'Los Angeles',
-            'LGA': 'New York LaGuardia',
-            'MIA': 'Miami',
-            'ORD': 'Chicago',
-            'PHL': 'Philadelphia',
-            'PHX': 'Phoenix',
-            'SEA': 'Seattle',
-            'SFO': 'San Francisco'
+        const homeAirport = document.getElementById('homeAirport').value;
+        const travelFrequency = parseInt(document.getElementById('travelFrequency').value) || 0;
+        const hotelSpend = parseFloat(document.getElementById('hotelSpend').value.replace(/[$,]/g, '')) || 0;
+
+        // Define airport amenities
+        const airportAmenities = {
+            centurionLounges: ['ATL', 'DEN', 'DFW', 'IAH', 'JFK', 'LAX', 'LGA', 'MIA', 'PHL', 'PHX', 'SEA', 'SFO'],
+            clearLanes: ['ATL', 'BOS', 'DEN', 'DFW', 'IAH', 'JFK', 'LAX', 'LGA', 'MIA', 'ORD', 'PHX', 'SEA', 'SFO'],
+            escapeLounges: ['BOS', 'CLT', 'MSP', 'OAK', 'PHL', 'PHX', 'RNO', 'SAC']
         };
 
-        const travelFrequencyElement = document.getElementById('travelFrequency');
-        const travelFrequency = parseInt(travelFrequencyElement?.value) || 0;
+        // Build available amenities text
+        let amenitiesText = '';
+        if (homeAirport === 'custom') {
+            amenitiesText = "We're unable to confirm specific lounge availability at your selected airport. Please check the American Express Global Lounge Collection for available lounges.";
+        } else {
+            const availableAmenities = [];
+            
+            if (airportAmenities.centurionLounges.includes(homeAirport)) {
+                availableAmenities.push("Centurion Lounge");
+            }
+            if (airportAmenities.clearLanes.includes(homeAirport)) {
+                availableAmenities.push("CLEAR security lanes");
+            }
+            if (airportAmenities.escapeLounges.includes(homeAirport)) {
+                availableAmenities.push("Escape Lounge");
+            }
+            availableAmenities.push("Priority Pass lounges"); // Always available but varies by airport
 
-        const hotelSpendElement = document.getElementById('hotelSpend');
-        const hotelSpend = parseFloat(hotelSpendElement?.value?.replace(/[$,]/g, '')) || 0;
-
-        const homeAirportElement = document.getElementById('homeAirport');
-        const homeAirport = homeAirportElement?.value || 'none';
-        
-        // Get full airport name
-        const airportDisplay = homeAirport !== 'none' 
-            ? `${airportNames[homeAirport] || homeAirport} (${homeAirport})`
-            : 'none';
+            if (availableAmenities.length > 0) {
+                amenitiesText = `you'll have access to ${availableAmenities.join(", ")}`;
+            }
+        }
 
         // Format hotel spend
         const formattedHotelSpend = hotelSpend ? `$${hotelSpend.toLocaleString()}` : '$0';
 
-        // Build the text
-        const text = `With ${airportDisplay} as your home airport, you'll have access to Priority Pass lounges, CLEAR security lanes, and nearby Escape Lounges. Combined with your travel frequency (${travelFrequency} trip${travelFrequency !== 1 ? 's' : ''} per year) and hotel spend (${formattedHotelSpend}), we've pre-selected values for each perk based on typical usage patterns. <strong>These suggestions are based on typical usage patterns for similar travelers, but you should adjust them based on how often you're likely to take advantage of them.</strong>`;
+        // Build the complete text
+        const text = homeAirport === 'custom' 
+            ? `With your custom airport selection, ${amenitiesText} Combined with your travel frequency (${travelFrequency} trip${travelFrequency !== 1 ? 's' : ''} per year) and hotel spend (${formattedHotelSpend}), we've pre-selected conservative values for each perk. <strong>Please adjust these based on your expected usage and actual lounge availability.</strong>`
+            : `With ${airportNames[homeAirport] || homeAirport} (${homeAirport}) as your home airport, ${amenitiesText}. Combined with your travel frequency (${travelFrequency} trip${travelFrequency !== 1 ? 's' : ''} per year) and hotel spend (${formattedHotelSpend}), we've pre-selected values for each perk based on typical usage patterns. <strong>These suggestions are based on typical usage patterns for similar travelers, but you should adjust them based on how often you're likely to take advantage of them.</strong>`;
 
         perksNotice.innerHTML = text;
 
@@ -471,8 +491,9 @@ function calculateSection3Value() {
 
     return perks.reduce((total, perk) => {
         const sliderValue = parseInt(document.getElementById(perk.id).value);
-        // Adjust calculation to account for 0-4 range instead of 1-5
-        const perkValue = travelFrequency * perk.valuePerUse * ((sliderValue + 1) / 4);
+        // Convert 1-5 range to 0-1 percentage (1=0%, 2=25%, 3=50%, 4=75%, 5=100%)
+        const percentage = (sliderValue - 1) / 4;
+        const perkValue = travelFrequency * perk.valuePerUse * percentage;
         return total + perkValue;
     }, 0);
 }
