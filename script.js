@@ -46,7 +46,6 @@ if (customAirportInput) {
     customAirportInput.addEventListener('input', function() {
         this.value = this.value.replace(/[^A-Za-z\s]/g, ''); // Only letters and spaces
             updateAllExplanationTexts();
-        }
     });
 }
     
