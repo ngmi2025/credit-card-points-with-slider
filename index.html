@@ -76,10 +76,15 @@
                             <option value="custom">Other (specify)</option>
                         </select>
                     </div>
-                    <div id="customHomeAirport" class="input-wrapper hidden">
-                        <input type="text" placeholder="Enter your home airport">
-                    </div>
-                </div>
+  <div id="customHomeAirport" class="input-wrapper hidden">
+        <input type="text" 
+               id="customAirportInput"
+               placeholder="Enter your airport code (e.g., SFO)"
+               maxlength="3"
+               pattern="[A-Za-z]{3}"
+               style="text-transform: uppercase;">
+    </div>
+</div>
                 <div class="question-group">
                     <label for="flightSpend">Spending on flights with airlines or Amex Travel / year</label>
                     <div class="input-wrapper">
