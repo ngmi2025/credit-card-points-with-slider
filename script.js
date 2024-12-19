@@ -469,10 +469,17 @@ function updatePerksExplanationText() {
             }
             availableAmenities.push("Priority Pass lounges"); // Always available but varies by airport
 
-            if (availableAmenities.length > 0) {
-                amenitiesText = `you'll have access to ${availableAmenities.join(", ")}`;
-            }
-        }
+          if (availableAmenities.length > 0) {
+    if (availableAmenities.length === 1) {
+        amenitiesText = `you'll have access to ${availableAmenities[0]}`;
+    } else if (availableAmenities.length === 2) {
+        amenitiesText = `you'll have access to both ${availableAmenities[0]} and ${availableAmenities[1]}`;
+    } else {
+        // For 3 or more amenities, keep the existing comma-separated format
+        amenitiesText = `you'll have access to ${availableAmenities.join(", ")}`;
+    }
+}
+}
 
         // Format hotel spend
         const formattedHotelSpend = hotelSpend ? `$${hotelSpend.toLocaleString()}` : '$0';
