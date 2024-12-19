@@ -16,24 +16,18 @@ function updateSliderLabel(sliderId) {
         label.classList.remove('selected', 'primary-color');
     });
 
-    let selectedIndex;
     if (section && section.id === 'section3') {
-        // Section 3: Values 1-5 map to indices 0-4
-        selectedIndex = value - 1;
+        // For section 3, adjust the index to match the 1-5 value range
+        const selectedIndex = value - 1;  // Convert 1-5 to 0-4 for label index
+        if (selectedIndex >= 0 && selectedIndex < labels.length) {
+            labels[selectedIndex].classList.add('selected', 'primary-color');
+        }
     } else {
-        // Section 2: Values 0-4 map directly to indices
-        selectedIndex = value;
-    }
-    
-    // Add appropriate classes based on section
-    if (selectedIndex >= 0 && selectedIndex < labels.length) {
-        labels[selectedIndex].classList.add('selected');
-        if (section && section.id === 'section3') {
-            labels[selectedIndex].classList.add('primary-color');
+        // Section 2 stays the same (0-4 range)
+        if (value >= 0 && value < labels.length) {
+            labels[value].classList.add('selected');
         }
     }
-    
-    console.log(`Slider ${sliderId}: section=${section?.id}, value=${value}, selectedIndex=${selectedIndex}`);
 }
     function formatCurrency(input) {
         let value = input.value.replace(/[^0-9.-]+/g, '');
