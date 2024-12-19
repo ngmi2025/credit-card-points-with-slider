@@ -11,17 +11,19 @@ document.addEventListener('DOMContentLoaded', function() {
         const labels = slider.parentElement.querySelector('.slider-labels').children;
         const value = parseInt(slider.value);
         const maxValue = parseInt(slider.max);
-        const selectedIndex = Math.round((value / maxValue) * (labels.length - 1));
 
-        // Remove bold from all labels
-        Array.from(labels).forEach(label => {
-            label.classList.remove('selected');
-        });
+         Array.from(labels).forEach(label => {
+        label.classList.remove('selected');
+    });
+
+        const selectedIndex = value - 1;
 
         // Add bold to selected label
+        if (selectedIndex >= 0 && selectedIndex < labels.length) {
         labels[selectedIndex].classList.add('selected');
+        console.log(`Slider ${sliderId}: value=${value}, selectedIndex=${selectedIndex}, label=${labels[selectedIndex].textContent}`);
     }
-
+}
     function formatCurrency(input) {
         let value = input.value.replace(/[^0-9.-]+/g, '');
         if (value) {
@@ -702,6 +704,10 @@ document.getElementById('backToSection3').addEventListener('click', function(e) 
 
     // Set initial value
     input.value = '$0';
+});
+
+    document.querySelectorAll('input[type="range"]').forEach(slider => {
+    slider.addEventListener('input', () => updateSliderLabel(slider.id));
 });
 
 // Update travel frequency listeners
