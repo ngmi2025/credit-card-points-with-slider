@@ -6,21 +6,30 @@ document.addEventListener('DOMContentLoaded', function() {
         updateProgressBar('section1');
 
         // Add the new function here
-    function updateSliderLabel(sliderId) {
-        const slider = document.getElementById(sliderId);
-        const labels = slider.parentElement.querySelector('.slider-labels').children;
-        const value = parseInt(slider.value);
-        const maxValue = parseInt(slider.max);
-
-         Array.from(labels).forEach(label => {
+function updateSliderLabel(sliderId) {
+    const slider = document.getElementById(sliderId);
+    const labels = slider.parentElement.querySelector('.slider-labels').children;
+    const value = parseInt(slider.value);
+    
+    // Remove selected class from all labels
+    Array.from(labels).forEach(label => {
         label.classList.remove('selected');
     });
 
-        const selectedIndex = value - 1;
-
-        // Add bold to selected label
-        if (selectedIndex >= 0 && selectedIndex < labels.length) {
+    // Map slider values (1-4 for section 2, 1-5 for section 3) to label indices (0-3 or 0-4)
+    const selectedIndex = value - 1;
+    
+    // Add selected class to the correct label
+    if (selectedIndex >= 0 && selectedIndex < labels.length) {
         labels[selectedIndex].classList.add('selected');
+        
+        // Check which section the slider belongs to
+        const section = slider.closest('section');
+        if (section && section.id === 'section3') {
+            // For section 3, add the primary-color class
+            labels[selectedIndex].classList.add('primary-color');
+        }
+        
         console.log(`Slider ${sliderId}: value=${value}, selectedIndex=${selectedIndex}, label=${labels[selectedIndex].textContent}`);
     }
 }
