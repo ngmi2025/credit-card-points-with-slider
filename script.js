@@ -9,26 +9,31 @@ function updateSliderLabel(sliderId) {
     const slider = document.getElementById(sliderId);
     const labels = slider.parentElement.querySelector('.slider-labels').children;
     const value = parseInt(slider.value);
+    const section = slider.closest('section');
     
-    // Remove both selected and primary-color classes from all labels
+    // Remove classes from all labels
     Array.from(labels).forEach(label => {
         label.classList.remove('selected', 'primary-color');
     });
 
-    // For section 2, the slider values are 0-4 and need to map directly to label indices 0-4
-    // For section 3, the slider values are 1-5 and need to map to label indices 0-4
-    const section = slider.closest('section');
-    const selectedIndex = section && section.id === 'section3' ? value - 1 : value;
+    let selectedIndex;
+    if (section && section.id === 'section3') {
+        // Section 3: Values 1-5 map to indices 0-4
+        selectedIndex = value - 1;
+    } else {
+        // Section 2: Values 0-4 map directly to indices
+        selectedIndex = value;
+    }
     
-    // Add selected class to the correct label
+    // Add appropriate classes based on section
     if (selectedIndex >= 0 && selectedIndex < labels.length) {
         labels[selectedIndex].classList.add('selected');
-        
-        // For section 3, also add the primary-color class
         if (section && section.id === 'section3') {
             labels[selectedIndex].classList.add('primary-color');
         }
     }
+    
+    console.log(`Slider ${sliderId}: section=${section?.id}, value=${value}, selectedIndex=${selectedIndex}`);
 }
     function formatCurrency(input) {
         let value = input.value.replace(/[^0-9.-]+/g, '');
