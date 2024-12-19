@@ -757,7 +757,6 @@ select.credit-select option {
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
-    text-transform: uppercase; /* Forces uppercase display */
 }
 
 #customHomeAirport input:focus {
@@ -768,7 +767,6 @@ select.credit-select option {
 
 #customHomeAirport input::placeholder {
     color: #999;
-    text-transform: none; /* Keeps placeholder in normal case */
 }
 
 /* Error state */
