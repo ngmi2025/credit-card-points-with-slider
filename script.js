@@ -5,15 +5,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
         updateProgressBar('section1');
 
-        // Add the new function here
 function updateSliderLabel(sliderId) {
     const slider = document.getElementById(sliderId);
     const labels = slider.parentElement.querySelector('.slider-labels').children;
     const value = parseInt(slider.value);
     
-    // Remove selected class from all labels
+    // Remove both selected and primary-color classes from all labels
     Array.from(labels).forEach(label => {
-        label.classList.remove('selected');
+        label.classList.remove('selected', 'primary-color');
     });
 
     // Map slider values (1-4 for section 2, 1-5 for section 3) to label indices (0-3 or 0-4)
