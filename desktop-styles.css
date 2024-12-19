@@ -744,3 +744,38 @@ select.credit-select option {
 .perks-selection-notice.updated {
     background-color: #f0f7ff;
 }
+/* Custom Airport Input Styles */
+#customHomeAirport {
+    margin-top: 10px;
+}
+
+#customHomeAirport input {
+    width: 100%;
+    max-width: 200px;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    text-transform: uppercase; /* Forces uppercase display */
+}
+
+#customHomeAirport input:focus {
+    outline: none;
+    border-color: #695BE9; /* Your primary color */
+    box-shadow: 0 0 0 2px rgba(105, 91, 233, 0.1); /* Subtle focus ring */
+}
+
+#customHomeAirport input::placeholder {
+    color: #999;
+    text-transform: none; /* Keeps placeholder in normal case */
+}
+
+/* Error state */
+#customHomeAirport input:invalid {
+    border-color: #dc3545;
+}
+
+/* Hidden state */
+.hidden {
+    display: none;
+}
