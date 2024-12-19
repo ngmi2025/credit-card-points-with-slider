@@ -216,25 +216,43 @@ globalEntryCredit: travelFrequency > 6 ? 4 : (travelFrequency >= 3 ? 2 : 1),
 }
 function updateExplanationText() {
     try {
-        // Add debug logs for each value retrieval
+        // Airport name mapping
+        const airportNames = {
+            'ATL': 'Atlanta',
+            'BOS': 'Boston',
+            'CLT': 'Charlotte',
+            'DEN': 'Denver',
+            'DFW': 'Dallas/Fort Worth',
+            'DTW': 'Detroit',
+            'EWR': 'Newark',
+            'IAD': 'Washington Dulles',
+            'IAH': 'Houston',
+            'JFK': 'New York JFK',
+            'LAX': 'Los Angeles',
+            'LGA': 'New York LaGuardia',
+            'MIA': 'Miami',
+            'ORD': 'Chicago',
+            'PHL': 'Philadelphia',
+            'PHX': 'Phoenix',
+            'SEA': 'Seattle',
+            'SFO': 'San Francisco'
+        };
+
         const travelFrequencyElement = document.getElementById('travelFrequency');
-        console.log('Travel frequency element:', travelFrequencyElement);
         const travelFrequency = parseInt(travelFrequencyElement?.value) || 0;
-        console.log('Travel frequency value:', travelFrequency);
 
         const hotelSpendElement = document.getElementById('hotelSpend');
-        console.log('Hotel spend element:', hotelSpendElement);
         const hotelSpend = parseFloat(hotelSpendElement?.value?.replace(/[$,]/g, '')) || 0;
-        console.log('Hotel spend value:', hotelSpend);
 
         const homeAirportElement = document.getElementById('homeAirport');
-        console.log('Home airport element:', homeAirportElement);
         const homeAirport = homeAirportElement?.value || 'none';
-        console.log('Home airport value:', homeAirport);
+        
+        // Get full airport name or use code if not found
+        const airportDisplay = homeAirport !== 'none' 
+            ? `${airportNames[homeAirport] || homeAirport} (${homeAirport})`
+            : 'none';
 
         const explanationText = document.querySelector('.pre-selection-notice p');
-        console.log('Explanation text element:', explanationText);
-
         if (!explanationText) {
             console.error('Explanation text element not found');
             return;
@@ -244,9 +262,8 @@ function updateExplanationText() {
         const formattedHotelSpend = hotelSpend ? `$${hotelSpend.toLocaleString()}` : '$0';
 
         // Build the text
-        const text = `Based on your travel patterns (${travelFrequency} trip${travelFrequency !== 1 ? 's' : ''} per year${hotelSpend > 0 ? `, ${formattedHotelSpend} hotel spend` : ''}) and home airport of ${homeAirport}, we've pre-selected suggested values for how much of each credit you might use yearly. These suggestions reflect typical usage patterns for similar travelers, but you can adjust any value to better match your expected usage.`;
+        const text = `Based on your travel patterns (${travelFrequency} trip${travelFrequency !== 1 ? 's' : ''} per year${hotelSpend > 0 ? `, ${formattedHotelSpend} hotel spend` : ''}) and home airport of ${airportDisplay}, we've pre-selected suggested values for how much of each credit you might use yearly. These suggestions reflect typical usage patterns for similar travelers, but you can adjust any value to better match your expected usage.`;
 
-        console.log('Final text to be set:', text);
         explanationText.textContent = text;
 
     } catch (error) {
