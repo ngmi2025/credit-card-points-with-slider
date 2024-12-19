@@ -363,10 +363,19 @@ function calculateSection2Value(isFirstYear = true) {
     return total;
 }
 
-    // Add this new function alongside your other functions
 function updatePerksExplanationText() {
     try {
-        // Airport name mapping - using the same mapping as updateExplanationText
+        console.log('Starting updatePerksExplanationText');
+        
+        const perksNotice = document.querySelector('.perks-selection-notice p');
+        console.log('Found perks notice element:', perksNotice);
+        
+        if (!perksNotice) {
+            console.error('Perks explanation text element not found');
+            return;
+        }
+
+        // Airport name mapping
         const airportNames = {
             'ATL': 'Atlanta',
             'BOS': 'Boston',
@@ -397,22 +406,16 @@ function updatePerksExplanationText() {
         const homeAirportElement = document.getElementById('homeAirport');
         const homeAirport = homeAirportElement?.value || 'none';
         
-        // Get full airport name or use code if not found
+        // Get full airport name
         const airportDisplay = homeAirport !== 'none' 
             ? `${airportNames[homeAirport] || homeAirport} (${homeAirport})`
             : 'none';
-
-        const perksNotice = document.querySelector('.perks-selection-notice p');
-        if (!perksNotice) {
-            console.error('Perks explanation text element not found');
-            return;
-        }
 
         // Format hotel spend
         const formattedHotelSpend = hotelSpend ? `$${hotelSpend.toLocaleString()}` : '$0';
 
         // Build the text
-        const text = `With ${airportName} (${homeAirport}) as your home airport, you'll have access to Priority Pass lounges, CLEAR security lanes, and nearby Escape Lounges. Combined with your travel frequency (${travelFrequency} trip${travelFrequency !== 1 ? 's' : ''} per year) and hotel spend (${formattedHotelSpend}), we've pre-selected values for each perk based on typical usage patterns. <strong>These suggestions are based on typical usage patterns for similar travelers, but you should adjust them to match your expected usage.</strong>`;
+        const text = `With ${airportDisplay} as your home airport, you'll have access to Priority Pass lounges, CLEAR security lanes, and nearby Escape Lounges. Combined with your travel frequency (${travelFrequency} trip${travelFrequency !== 1 ? 's' : ''} per year) and hotel spend (${formattedHotelSpend}), we've pre-selected values for each perk based on typical usage patterns. <strong>These suggestions are based on typical usage patterns for similar travelers, but you should adjust them to match your expected usage.</strong>`;
 
         perksNotice.innerHTML = text;
 
