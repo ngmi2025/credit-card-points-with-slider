@@ -701,25 +701,26 @@ document.getElementById('backToSection3').addEventListener('click', function(e) 
         } else {
             this.value = '$0';
         }
+        
+        // Add this condition to only update explanation texts for hotelSpend
+        if (id === 'hotelSpend') {
+            updateAllExplanationTexts();
+        }
     });
 
     // Set initial value
     input.value = '$0';
 });
 
-    document.getElementById('travelFrequency').addEventListener('blur', function() {
-        let value = this.value.replace(/[^ -\u007F]+/g, '');
-        if (value === '') value = '0';
-        value = Math.max(0, parseInt(value));
-        this.value = value;
-    });
-       
-    document.querySelectorAll('.slider').forEach(slider => {
-        slider.addEventListener('input', () => updateSliderLabel(slider.id));
-        // Initialize labels on page load
-        updateSliderLabel(slider.id);
-    });
+// Update travel frequency listeners
+document.getElementById('travelFrequency').addEventListener('blur', function() {
+    let value = this.value.replace(/[^ -\u007F]+/g, '');
+    if (value === '') value = '0';
+    value = Math.max(0, parseInt(value));
+    this.value = value;
+});
 
-    document.querySelectorAll('#section3 .slider-labels').forEach(labelGroup => {
-        labelGroup.innerHTML = '<span>Never</span><span>Rarely</span><span>Sometimes</span><span>Often</span><span>Always</span>';
-    });
+document.getElementById('travelFrequency').addEventListener('change', updateAllExplanationTexts);
+
+document.getElementById('homeAirport').addEventListener('change', updateAllExplanationTexts);
+});
