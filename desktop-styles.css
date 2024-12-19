@@ -753,7 +753,6 @@ select.credit-select option {
 
 #customHomeAirport input {
     width: 100%;
-    max-width: 200px;
     padding: 8px 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -779,5 +778,5 @@ select.credit-select option {
 
 /* Hidden state */
 .hidden {
-    display: none;
+    display: none !important;
 }
