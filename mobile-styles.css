@@ -490,22 +490,21 @@ select.credit-select option {
     color: var(--primary-color);
 }
 #section3 .slider-labels span {
-    font-size: 12px; /* Adjust this value as needed */
+    font-size: 0.75rem;
+    color: #6c757d;
 }
 /* Progress Bar - Mobile Styles */
 .progress-bar {
     display: flex;
     justify-content: space-between;
-    margin: 20px 0;
+    margin: 10px 0 20px;
     position: relative;
-    max-width: 100%;
     width: 100%;
-    overflow-x: auto;
-    padding: 0 10px;
+    padding: 0;
 }
 
 .progress-bar .step {
-    flex: 0 0 auto;
+    flex: 1;
     text-align: center;
     position: relative;
     padding: 0 10px;
@@ -515,26 +514,27 @@ select.credit-select option {
 .progress-bar .step:not(:last-child)::after {
     content: '';
     position: absolute;
-    top: 12px;
-    left: calc(50% + 15px);
-    width: calc(100% - 30px);
+    top: 14px;
+    left: calc(50% + 14px);
+    width: calc(100% - 20px);
     height: 2px;
     background: #e0e0e0;
     z-index: 1;
+    transition: background 2s ease;
 }
 
 .progress-bar .step.completed:not(:last-child)::after {
-    background: #4CAF50;
+    background: var(--primary-color);
 }
 
 .progress-bar .step .icon {
-    width: 20px;
-    height: 20px;
+    width: 28px;
+    height: 28px;
     background: white;
     border: 2px solid #e0e0e0;
     border-radius: 50%;
-    padding: 4px;
-    margin: 0 auto 6px;
+    padding: 2px;
+    margin: 0 auto;
     position: relative;
     z-index: 2;
     display: flex;
@@ -542,28 +542,217 @@ select.credit-select option {
     justify-content: center;
 }
 
-.progress-bar .step.completed .icon {
-    border-color: #4CAF50;
-    background: #4CAF50;
+.progress-bar .step.active .icon {
+    border-color: var(--primary-color);
+    background: white;
 }
 
-.progress-bar .step.completed .icon svg {
-    fill: white;
+.progress-bar .step.active .icon .material-icons {
+    color: var(--primary-color);
+}
+.pre-selection-notice, .perks-selection-notice {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    padding: 15px;
+    margin: 20px 0;
 }
 
-.progress-bar .step .icon svg {
+.pre-selection-notice p, .perks-selection-notice p {
+    margin: 0;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    color: #6c757d;
+    transition: background-color 0.3s ease;
+}
+
+.pre-selection-notice.updated, .perks-selection-notice.updated {
+    background-color: #f0f7ff;
+}
+#customHomeAirport {
+    margin-top: 10px;
+    display: block;
     width: 100%;
-    height: 100%;
-    fill: #e0e0e0;
 }
 
+#customHomeAirport input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+#customHomeAirport input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(0,119,190,0.1);
+}
+
+#customAirportInput {
+    text-transform: none !important;
+}
+.question-title {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.question-description {
+    display: block;
+    font-size: 0.9em;
+    color: var(--secondary-text-color);
+    margin-bottom: 10px;
+}
 .progress-bar .step .label {
-    font-size: 12px;
-    color: #666;
-    margin-top: 4px;
-    white-space: nowrap;
+    position: static;
+    display: block;
+    width: auto;
+    height: auto;
+    margin-top: 6px;
+    font-size: 11px;
+    color: var(--secondary-text-color);
+    letter-spacing: 0.5px;
 }
 
-.progress-bar .step.completed .label {
-    color: #4CAF50;
+.progress-bar .step.active .label {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.progress-bar .step.completed .icon {
+    border-color: var(--primary-color);
+    background: var(--primary-color);
+}
+
+.progress-bar .step.completed .icon .material-icons {
+    color: white;
+}
+.subheading {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+.slider-value {
+    margin-top: 5px;
+    font-size: 0.9em;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,119,190,0.2);
+}
+
+#section4 .savings-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+.card-details a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    padding-bottom: 2px;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.2s ease;
+}
+
+.card-details a:hover {
+    border-bottom-color: var(--primary-color);
+}
+#results .result-content {
+    flex: 1;
+    margin-right: 20px;
+}
+#results .credit-note {
+    display: block;
+    font-size: 0.8em;
+    color: var(--secondary-text-color);
+    font-weight: normal;
+    margin-top: 2px;
+}
+.pre-selection-notice.updated,
+.perks-selection-notice.updated {
+    background-color: #f0f7ff;
+    transition: background-color 0.3s ease;
+}
+.back-link:hover {
+    text-decoration: underline;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+#results .continue-btn {
+    background-color: var(--primary-color);
+    margin-top: 15px;
+    width: 100%;
+}
+
+#results .continue-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,119,190,0.2);
+}
+.savings-item,
+.breakdown-item,
+.card-details a,
+.cta-button,
+.continue-btn,
+.apply-now-btn {
+    transition: all 0.3s ease;
+}
+.calculation-note {
+    padding: 10px;
+    margin: 10px 0;
+}
+.savings-summary h3,
+.yearly-breakdown h3,
+.card-details h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+.value-breakdown-item {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.value-breakdown-item:last-child {
+    border-bottom: none;
+}
+
+.value-breakdown-item .label {
+    font-size: 0.8em;
+    color: var(--secondary-text-color);
+}
+
+.value-breakdown-item .value {
+    font-weight: 600;
+}
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.radio-group label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.radio-group input[type="radio"] {
+    margin: 0;
 }
