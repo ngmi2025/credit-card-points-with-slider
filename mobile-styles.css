@@ -143,13 +143,13 @@ select option {
 /* Slider Styling */
 .slider-container {
     position: relative;
-    padding: 20px 8px;
+    padding: 20px 16px;
     width: 100%;
 }
 
 .slider-container input[type="range"] {
-    width: calc(100% - 16px); /* Subtract the padding to align with labels */
-    margin: 0 8px; /* Add margin to center the slider */
+    width: calc(100% - 32px); /* Subtract the padding to align with labels */
+    margin: 0 16px; /* Add margin to center the slider */
     padding: 0;
     -webkit-appearance: none;
     appearance: none;
@@ -188,15 +188,14 @@ input[type="range"]::-webkit-slider-runnable-track {
     justify-content: space-between;
     margin-top: 10px;
     /* Critical: ensure labels align with slider points */
-    padding: 0 8px; /* Half the width of the slider thumb */
+    padding: 0 16px; /* Half the width of the slider thumb */
 }
 
 .slider-labels span {
     position: relative;
     text-align: center;
-    flex: 1;
-    /* Adjust the transform to center the text under the dot */
-    transform: translateX(-50%);
+    width: 40px; /* Give fixed width to labels */
+    margin: 0 -20px; /* Negative margin to adjust spacing */
 }
 
 /* Button Styling */
