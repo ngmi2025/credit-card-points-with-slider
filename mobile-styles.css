@@ -52,6 +52,7 @@ body {
         .slider-labels span:nth-child(2) {
         position: relative;
         left: 5px;
+        background: yellow;  /* temporary test */
     }
 
     .slider-labels span:nth-child(4) {
