@@ -531,22 +531,23 @@ select.credit-select option {
     position: relative;
     width: 100%;
     padding: 0;
+    overflow: hidden;
 }
 
 .progress-bar .step {
     flex: 1;
     text-align: center;
     position: relative;
-    padding: 0 10px;
-    min-width: 70px;
+    padding: 0 5px;
+    min-width: auto;
 }
 
 .progress-bar .step:not(:last-child)::after {
     content: '';
     position: absolute;
     top: 14px;
-    left: calc(50% + 14px);
-    width: calc(100% - 20px);
+    left: calc(50% + 10px);  
+    width: calc(100% - 12px);  
     height: 2px;
     background: #e0e0e0;
     z-index: 1;
@@ -558,8 +559,8 @@ select.credit-select option {
 }
 
 .progress-bar .step .icon {
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
     background: white;
     border: 2px solid #e0e0e0;
     border-radius: 50%;
@@ -646,8 +647,8 @@ select.credit-select option {
     display: block;
     width: auto;
     height: auto;
-    margin-top: 6px;
-    font-size: 11px;
+    margin-top: 4px;
+    font-size: 10px;
     color: var(--secondary-text-color);
     letter-spacing: 0.5px;
 }
