@@ -229,12 +229,17 @@ h1 {
 /* Back Link */
 .back-link {
     display: inline-block;
-    margin: 0 0 15px 0; 
-    padding: 10px 0;     
+    margin: 0 0 20px 0;
+    padding: 10px 0;
     color: var(--primary-color);
     text-decoration: none;
     font-weight: bold;
-    font-size: 14px;     
+    font-size: 14px;
+}
+
+.back-link::before {
+    content: '←';
+    margin-right: 8px;
 }
 
 /* Results Section */
@@ -307,6 +312,11 @@ h1 {
     border-radius: 12px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     margin-top: 20px;
+    padding: 20px;
+}
+#section4 .back-link {
+    margin: 0 0 20px 0;  /* Standardize margin */
+    padding: 10px 0;     /* Match other sections */
 }
 
 #section4 h2 {
@@ -717,9 +727,6 @@ select.credit-select option {
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
-#section4 .back-link {
-    margin-top: 10px;   
-}
 .card-details a {
     color: var(--primary-color);
     text-decoration: none;
