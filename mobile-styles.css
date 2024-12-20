@@ -600,8 +600,8 @@ select.credit-select option {
 }
 
 .progress-bar .step .icon {
-    width: 24px;
-    height: 24px;
+    width: 26px;
+    height: 26px;
     background: white;
     border: 2px solid #e0e0e0;
     border-radius: 50%;
@@ -614,6 +614,10 @@ select.credit-select option {
     justify-content: center;
 }
 
+.progress-bar .step .icon .material-icons {
+    font-size: 14px;
+}
+
 .progress-bar .step.active .icon {
     border-color: var(--primary-color);
    background: var(--primary-color);
@@ -621,7 +625,7 @@ select.credit-select option {
 
 .progress-bar .step.active .icon .material-icons {
    color: white;
-    font-size: 12px;
+    font-size: 14px;
 }
 .pre-selection-notice, .perks-selection-notice {
     background-color: #f8f9fa;
@@ -707,6 +711,7 @@ select.credit-select option {
 
 .progress-bar .step.completed .icon .material-icons {
     color: white;
+    font-size: 14px;
 }
 .subheading {
     font-weight: bold;
