@@ -576,8 +576,13 @@ select.credit-select option {
 }
 #customHomeAirport {
     margin-top: 10px;
-    display: block;
+    display: none;
     width: 100%;
+}
+
+#customHomeAirport.show {
+    display: block;
+    margin-top: 10px;
 }
 
 #customHomeAirport input {
