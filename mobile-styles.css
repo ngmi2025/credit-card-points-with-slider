@@ -194,8 +194,10 @@ input[type="range"]::-webkit-slider-runnable-track {
 .slider-labels span {
     position: relative;
     text-align: center;
-    width: 40px; /* Give fixed width to labels */
-    margin: 0 -20px; /* Negative margin to adjust spacing */
+    width: 40px;
+    margin: 0 -20px;
+    font-size: 0.75rem;  /* Match section 3's font size */
+    color: #6c757d;      /* Match section 3's color */
 }
 
 /* Button Styling */
@@ -555,6 +557,10 @@ select.credit-select option {
     font-weight: bold;
     color: var(--primary-color);
 }
+#section3 .slider-labels span:nth-child(3) {
+    transform: translateX(-5px); /* Small adjustment to center "sometimes" */
+}
+
 #section3 .slider-labels span {
     font-size: 0.75rem;
     color: #6c757d;
