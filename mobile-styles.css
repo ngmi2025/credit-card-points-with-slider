@@ -229,7 +229,6 @@ h1 {
 /* Back Link */
 .back-link {
     display: inline-block;
-    margin: 0 0 5px 0;
     padding: 10px 0;
     color: var(--primary-color);
     text-decoration: none;
