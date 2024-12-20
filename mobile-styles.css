@@ -542,13 +542,13 @@ select.credit-select {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: 10px;
+    font-size: 14px;
     background-color: white;
     color: var(--text-color); 
 }
 
 select.credit-select option {
-    font-size: 12px;
+    font-size: 14px;
     color: var(--text-color);
 }
 
