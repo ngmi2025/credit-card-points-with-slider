@@ -50,11 +50,11 @@ body {
     }
 
         .slider-labels span:nth-child(2) {
-        transform: translateX(5px);
+        transform: translateX(8px); !important;
     }
 
     .slider-labels span:nth-child(4) {
-        transform: translateX(-5px);
+        transform: translateX(-8px); !important;
     }
 
     .question-group {
