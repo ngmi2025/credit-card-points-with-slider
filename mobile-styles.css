@@ -235,6 +235,7 @@ select option {
 /* Back Link */
 .back-link {
     display: inline-block;
+    margin: 0;
     padding: 10px 0;
     color: var(--primary-color);
     text-decoration: none;
@@ -312,10 +313,6 @@ select option {
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     margin-top: 20px;
     padding: 20px;
-}
-#section4 .back-link {
-    margin: 0 0 20px 0;  /* Standardize margin */
-    padding: 10px 0;     /* Match other sections */
 }
 
 #section4 h2 {
