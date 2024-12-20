@@ -434,10 +434,14 @@ function calculateSection2Value(isFirstYear = true) {
         return sum + creditValue;
     }, 0);
 
-    // Add Global Entry/TSA PreCheck value
-    const globalEntryValue = parseInt(document.getElementById('globalEntryCredit').value) || 0;
     if (isFirstYear) {
+        // Add Global Entry/TSA PreCheck
+        const globalEntryValue = parseInt(document.getElementById('globalEntryCredit').value) || 0;
         total += globalEntryValue;
+
+        // Add SoulCycle credit
+        const soulCycleValue = (300 / 4) * parseInt(document.getElementById('soulCycleCredit').value || 0);
+        total += soulCycleValue;
     }
 
     return total;
