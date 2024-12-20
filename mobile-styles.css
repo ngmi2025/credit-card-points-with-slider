@@ -137,6 +137,12 @@ h1 {
     font-size: 16px;
     height: 40px;
     box-sizing: border-box;
+    color: var(--text-color) !important;  /* Add this line */
+}
+
+select,
+select option {
+    color: var(--text-color) !important;
 }
 
 /* Slider Styling */
