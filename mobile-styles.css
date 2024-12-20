@@ -540,7 +540,7 @@ select.credit-select {
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 14px;
-    background-color: white;
+    background-color: #f9f9f9;
     color: var(--text-color); 
 }
 
