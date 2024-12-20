@@ -225,9 +225,17 @@ function preSelectBenefitsValues() {
                        (midTierAirports.includes(homeAirport) ? 2 : 1),
 
             // 3. Saks Credit
-            saksCredit: luxuryMarketAirports.includes(homeAirport) ? 4 :
-                       (majorUrbanAirports.includes(homeAirport) ? 2 : 1),
-
+              saksCredit: (() => {
+        const otherSpend = parseFloat(document.getElementById('otherSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
+        
+        if (otherSpend > 5000 || luxuryMarketAirports.includes(homeAirport)) {
+            return 4;  // High likelihood of using full credit
+        } else if (otherSpend > 2000 || majorUrbanAirports.includes(homeAirport)) {
+            return 2;  // Medium likelihood
+        }
+        return 1;  // Lower likelihood but still possible due to online shopping
+    })(),
+    
             // 4. Equinox Credit
             equinoxCredit: nycAirports.includes(homeAirport) ? 4 :
                           (equinoxMarkets.includes(homeAirport) ? 2 : 1),
