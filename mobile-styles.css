@@ -45,13 +45,13 @@ body {
     }
 
     .slider-labels span:nth-child(2) {
-        transform: translateX(-25%);  /* Changed from 10px */
+        transform: translateX(10px);
         position: relative;
         z-index: 1;
     }
 
     .slider-labels span:nth-child(4) {
-        transform: translateX(-75%);  /* Changed from -10px */
+        transform: translateX(-10px);
         position: relative;
         z-index: 1;
     }
@@ -162,15 +162,14 @@ select option {
 /* Slider Styling */
 .slider-container {
     position: relative;
-    padding: 20px 0;
+    padding: 20px 8px;
     width: 100%;
 }
 
 .slider-container input[type="range"] {
-    width: 100%;
-    margin: 0;
+    width: calc(100% - 16px); /* Subtract the padding to align with labels */
+    margin: 0 8px; /* Add margin to center the slider */
     padding: 0;
-    /* Remove default styling */
     -webkit-appearance: none;
     appearance: none;
 }
