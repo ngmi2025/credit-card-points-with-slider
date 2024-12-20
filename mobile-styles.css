@@ -77,9 +77,13 @@ h1 {
 
 /* Section Styling */
 .section {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
     border: 2px solid var(--border-color);
-    padding: 15px;
-    margin-bottom: 15px;
+    padding: 10px;  /* Reduced from 15px */
+    margin: 10px 0;
     background-color: var(--background-color);
     border-radius: 5px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
@@ -87,8 +91,11 @@ h1 {
 
 /* Question Groups */
 .question-group {
-    margin-bottom: 30px;
-    padding-bottom: 20px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 20px;  /* Reduced from 30px */
+    padding-bottom: 15px; /* Reduced from 20px */
     border-bottom: 1px solid var(--border-color);
     display: flex;
     flex-direction: column;
@@ -109,11 +116,14 @@ h1 {
 /* Input Styling */
 .input-group, .input-wrapper {
     width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .input-group select, 
 .input-wrapper input[type="text"] {
     width: 100%;
+    max-width: 100%;
     padding: 10px;
     border: 1px solid var(--border-color);
     border-radius: 5px;
@@ -220,11 +230,15 @@ h1 {
 
 /* Results Section */
 #results {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
     background-color: #f9f9f9;
     margin-top: 20px;
-    padding: 20px;
+    padding: 15px; /* Reduced from 20px */
     border-radius: 12px;
     border: 2px solid #e0e0e0;
+    overflow: hidden;
 }
 
 #results h2 {
@@ -234,6 +248,9 @@ h1 {
 }
 
 #results .result-group {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     margin-bottom: 1.5rem;
@@ -365,6 +382,10 @@ h1 {
 
 /* Disclaimers and Notes */
 .disclaimer {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    word-wrap: break-word;
     font-size: 0.7rem;
     color: var(--secondary-text-color);
     line-height: 1.4;
