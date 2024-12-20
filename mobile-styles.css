@@ -229,10 +229,12 @@ h1 {
 /* Back Link */
 .back-link {
     display: inline-block;
-    margin-bottom: 15px;
+    margin: 0 0 15px 0; 
+    padding: 10px 0;     
     color: var(--primary-color);
     text-decoration: none;
     font-weight: bold;
+    font-size: 14px;     
 }
 
 /* Results Section */
@@ -301,7 +303,7 @@ h1 {
 /* Section 4 - Final Valuation */
 #section4 {
     background-color: #fff;
-    padding: 20px;
+    padding-top: 0;
     border-radius: 12px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     margin-top: 20px;
@@ -713,6 +715,10 @@ select.credit-select option {
 #section4 .savings-item:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+#section4 .back-link {
+    margin-top: 10px;   
 }
 .card-details a {
     color: var(--primary-color);
