@@ -3,6 +3,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const POINT_VALUE = 0.022;
     const ANNUAL_FEE = 595;
 
+    const INTERNATIONAL_HUBS = [
+    'JFK', 'LAX', 'ORD', 'MIA', 'SFO', 'EWR', 'IAD', 
+    'BOS', 'SEA', 'ATL', 'DFW', 'IAH', 'DEN'
+];
+
         const airportNames = {
         'ATL': 'Atlanta',
         'BOS': 'Boston',
@@ -194,17 +199,11 @@ function preSelectBenefitsValues() {
         const hotelSpend = parseFloat(document.getElementById('hotelSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
         const homeAirport = document.getElementById('homeAirport').value;
 
-        // Special handling for Global Entry/TSA PreCheck dropdown
-        const globalEntrySelect = document.getElementById('globalEntryCredit');
-        if (globalEntrySelect) {
-            if (travelFrequency > 6) {
-                globalEntrySelect.value = "120"; // Will apply for Global Entry
-            } else if (travelFrequency >= 3) {
-                globalEntrySelect.value = "85";  // Will apply for TSA PreCheck
-            } else {
-                globalEntrySelect.value = "0";   // Won't use the credit
-            }
-        }
+     const globalEntryValue = calculateGlobalEntryCredit(homeAirport, travelFrequency);
+const globalEntrySelect = document.getElementById('globalEntryCredit');
+if (globalEntrySelect) {
+    globalEntrySelect.value = globalEntryValue.toString();
+}
 
         // Define airport categories
         const majorUrbanAirports = ['JFK', 'LGA', 'EWR', 'LAX', 'SFO', 'ORD', 'MIA', 'BOS'];
@@ -453,6 +452,43 @@ function calculateSection2Value(isFirstYear = true) {
     }
 
     return total;
+}
+
+function calculateGlobalEntryCredit(homeAirport, tripsPerYear) {
+    try {
+        const airport = homeAirport.toUpperCase();
+        
+        // Log the inputs for debugging
+        console.log('Calculating Global Entry credit:', {
+            homeAirport,
+            airport,
+            tripsPerYear
+        });
+        
+        // For custom airports, default to TSA PreCheck if frequent enough
+        if (homeAirport === 'custom') {
+            return tripsPerYear >= 3 ? 85 : 0;
+        }
+        
+        // For international hubs
+        if (INTERNATIONAL_HUBS.includes(airport)) {
+            if (tripsPerYear >= 3) {
+                return 120; // Global Entry
+            }
+        }
+        
+        // For all other airports
+        if (tripsPerYear >= 6) {
+            return 85; // TSA PreCheck
+        } else if (tripsPerYear >= 3) {
+            return 85; // TSA PreCheck
+        }
+        
+        return 0; // Not enough travel frequency
+    } catch (error) {
+        console.error('Error in calculateGlobalEntryCredit:', error);
+        return 0; // Default to no credit if there's an error
+    }
 }
 
 function updatePerksExplanationText() {
