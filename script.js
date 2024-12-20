@@ -350,10 +350,18 @@ function updateExplanationText() {
         // Format hotel spend
         const formattedHotelSpend = hotelSpend ? `$${hotelSpend.toLocaleString()}` : '$0';
 
-        // Build the text with custom airport handling
- const text = homeAirport === 'custom' 
-            ? `Based on your travel patterns (${travelFrequency} trip${travelFrequency !== 1 ? 's' : ''} per year${hotelSpend > 0 ? `, ${formattedHotelSpend} hotel spend` : ''}) and home airport of ${customAirportInput?.value || 'not specified'}, we've pre-selected conservative values for each credit. <strong>Since this is a custom airport location, we've taken a more conservative approach - please adjust these values based on your expected usage and local availability of these benefits.</strong>`
-            : `Based on your travel patterns (${travelFrequency} trip${travelFrequency !== 1 ? 's' : ''} per year${hotelSpend > 0 ? `, ${formattedHotelSpend} hotel spend` : ''}) and home airport of ${airportDisplay}, we've pre-selected suggested values for how much of each credit you might use yearly. <strong>These suggestions reflect typical usage patterns for similar travelers, but you should adjust them to match your expected usage.</strong>`;
+        // Build base travel pattern text
+        const travelPattern = `Based on your travel patterns (${travelFrequency} trip${travelFrequency !== 1 ? 's' : ''} per year${hotelSpend > 0 ? `, ${formattedHotelSpend} hotel spend` : ''})`;
+
+        // Build the text based on airport selection status
+        let text;
+        if (!homeAirport || homeAirport === 'none') {
+            text = `${travelPattern}, we've pre-selected suggested values for how much of each credit you might use yearly. <strong>These suggestions reflect typical usage patterns, but you should adjust them to match your expected usage.</strong>`;
+        } else if (homeAirport === 'custom') {
+            text = `${travelPattern} and home airport of ${customAirportInput?.value || 'not specified'}, we've pre-selected conservative values for each credit. <strong>Since this is a custom airport location, we've taken a more conservative approach - please adjust these values based on your expected usage and local availability of these benefits.</strong>`;
+        } else {
+            text = `${travelPattern} and home airport of ${airportDisplay}, we've pre-selected suggested values for how much of each credit you might use yearly. <strong>These suggestions reflect typical usage patterns for similar travelers, but you should adjust them to match your expected usage.</strong>`;
+        }
 
         explanationText.innerHTML = text;
 
@@ -455,6 +463,7 @@ function updatePerksExplanationText() {
         const homeAirport = document.getElementById('homeAirport').value;
         const travelFrequency = parseInt(document.getElementById('travelFrequency').value) || 0;
         const hotelSpend = parseFloat(document.getElementById('hotelSpend').value.replace(/[$,]/g, '')) || 0;
+        const customAirportInput = document.querySelector('#customHomeAirport input');
 
         // Define airport amenities
         const airportAmenities = {
@@ -463,10 +472,15 @@ function updatePerksExplanationText() {
             escapeLounges: ['BOS', 'CLT', 'MSP', 'OAK', 'PHL', 'PHX', 'RNO', 'SAC']
         };
 
+        // Format hotel spend
+        const formattedHotelSpend = hotelSpend ? `$${hotelSpend.toLocaleString()}` : '$0';
+
         // Build available amenities text
         let amenitiesText = '';
         if (homeAirport === 'custom') {
             amenitiesText = "We're unable to confirm specific lounge availability at your selected airport. Please check the American Express Global Lounge Collection for available lounges.";
+        } else if (!homeAirport || homeAirport === 'none') {
+            amenitiesText = "Without a selected home airport, we can't provide specific lounge availability information.";
         } else {
             const availableAmenities = [];
             
@@ -479,28 +493,27 @@ function updatePerksExplanationText() {
             if (airportAmenities.escapeLounges.includes(homeAirport)) {
                 availableAmenities.push("Escape Lounge");
             }
-            availableAmenities.push("Priority Pass lounges"); // Always available but varies by airport
+            availableAmenities.push("Priority Pass lounges");
 
-if (availableAmenities.length > 0) {
-    if (availableAmenities.length === 1) {
-        amenitiesText = `you'll have access to ${availableAmenities[0]}`;
-    } else if (availableAmenities.length === 2) {
-        amenitiesText = `you'll have access to both ${availableAmenities[0]} and ${availableAmenities[1]}`;
-    } else {
-        // For 3 or more amenities, add 'and' before the last item
-        const lastAmenity = availableAmenities.pop();
-        amenitiesText = `you'll have access to ${availableAmenities.join(", ")} and ${lastAmenity}`;
-    }
-}
-}
+            if (availableAmenities.length === 1) {
+                amenitiesText = `you'll have access to ${availableAmenities[0]}`;
+            } else if (availableAmenities.length === 2) {
+                amenitiesText = `you'll have access to both ${availableAmenities[0]} and ${availableAmenities[1]}`;
+            } else {
+                const lastAmenity = availableAmenities.pop();
+                amenitiesText = `you'll have access to ${availableAmenities.join(", ")} and ${lastAmenity}`;
+            }
+        }
 
-        // Format hotel spend
-        const formattedHotelSpend = hotelSpend ? `$${hotelSpend.toLocaleString()}` : '$0';
-
-        // Build the complete text
- const text = homeAirport === 'custom' 
-    ? `For travelers using ${customAirportInput?.value || 'your airport'}, we're unable to provide specific lounge information. We recommend checking the <a href="https://global.americanexpress.com/lounge-access/the-platinum-card?locale=en-CA" target="_blank">American Express Global Lounge Collection</a> for available lounges at your airport. Based on your travel frequency (${travelFrequency} trip${travelFrequency !== 1 ? 's' : ''} per year) and hotel spend (${formattedHotelSpend}), we've pre-selected conservative values for each perk. <strong>Please adjust these based on the actual lounge availability and how often you expect to use each benefit.</strong>`
-            : `With ${airportNames[homeAirport] || homeAirport} (${homeAirport}) as your home airport, ${amenitiesText}. Combined with your travel frequency (${travelFrequency} trip${travelFrequency !== 1 ? 's' : ''} per year) and hotel spend (${formattedHotelSpend}), we've pre-selected values for each perk based on typical usage patterns. <strong>These suggestions are based on typical usage patterns for similar travelers, but you should adjust them based on how often you're likely to take advantage of them.</strong>`;
+        // Build the complete text based on airport selection status
+        let text;
+        if (!homeAirport || homeAirport === 'none') {
+            text = `${amenitiesText} Based on your travel frequency (${travelFrequency} trip${travelFrequency !== 1 ? 's' : ''} per year) and hotel spend (${formattedHotelSpend}), we've pre-selected suggested values for each perk. <strong>Please adjust these based on your local airport's lounge availability and how often you expect to use each benefit.</strong>`;
+        } else if (homeAirport === 'custom') {
+            text = `For travelers using ${customAirportInput?.value || 'your airport'}, we're unable to provide specific lounge information. We recommend checking the <a href="https://global.americanexpress.com/lounge-access/the-platinum-card?locale=en-CA" target="_blank">American Express Global Lounge Collection</a> for available lounges at your airport. Based on your travel frequency (${travelFrequency} trip${travelFrequency !== 1 ? 's' : ''} per year) and hotel spend (${formattedHotelSpend}), we've pre-selected conservative values for each perk. <strong>Please adjust these based on the actual lounge availability and how often you expect to use each benefit.</strong>`;
+        } else {
+            text = `With ${airportNames[homeAirport] || homeAirport} (${homeAirport}) as your home airport, ${amenitiesText}. Combined with your travel frequency (${travelFrequency} trip${travelFrequency !== 1 ? 's' : ''} per year) and hotel spend (${formattedHotelSpend}), we've pre-selected values for each perk based on typical usage patterns. <strong>These suggestions are based on typical usage patterns for similar travelers, but you should adjust them based on how often you're likely to take advantage of them.</strong>`;
+        }
 
         perksNotice.innerHTML = text;
 
