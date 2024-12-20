@@ -44,25 +44,6 @@ body {
         position: relative;
     }
 
-    .slider-labels span:nth-child(2) {
-        transform: translateX(10px);
-        position: relative;
-        z-index: 1;
-    }
-
-    .slider-labels span:nth-child(4) {
-        transform: translateX(-10px);
-        position: relative;
-        z-index: 1;
-    }
-        .slider-labels span:first-child {
-        transform: translateX(0);
-    }
-
-    .slider-labels span:last-child {
-        transform: translateX(-100%);
-    }
-
     .question-group {
         margin-bottom: 20px;
         padding-bottom: 15px;
