@@ -51,13 +51,13 @@ body {
 
         .slider-labels span:nth-child(2) {
         position: relative;
-        left: 5px;
-        background: yellow;  /* temporary test */
+        left: 8px;
+        background: red;  /* temporary test */
     }
 
     .slider-labels span:nth-child(4) {
         position: relative;
-        left: -5px;
+        left: -8px;
     }
 
     .question-group {
