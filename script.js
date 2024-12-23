@@ -597,15 +597,15 @@ document.getElementById('continueToSection3Btn').addEventListener('click', funct
 document.getElementById('hotelSpend').addEventListener('blur', updateAllExplanationTexts);
     
 function calculateSection3Value() {
-    const travelFrequency = parseInt(document.getElementById('travelFrequency').value) || 0;
+    const travelFrequency = parseInt(document.getElementById('travelFrequency').value.replace(/[^ -\u007F]+/g, '')) || 0;
 
     const perks = [
-        { id: 'loungeAccess', valuePerUse: 50 },
-        { id: 'partnerStatus', valuePerUse: 40 },
-        { id: 'fhrAndIap', valuePerUse: 100 }
+        { id: 'loungeAccess', valuePerUse: 50, steps: 5 },
+        { id: 'partnerStatus', valuePerUse: 40, steps: 5 },
+        { id: 'fhrAndIap', valuePerUse: 100, steps: 5 }
     ];
 
-    return perks.reduce((total, perk) => {
+    let total = perks.reduce((sum, perk) => {
         const sliderValue = parseInt(document.getElementById(perk.id).value);
         
         // Convert slider values 1-5 to percentages
@@ -620,7 +620,7 @@ function calculateSection3Value() {
         const percentage = percentages[sliderValue] || 0;
         const perkValue = travelFrequency * perk.valuePerUse * percentage;
         
-        console.log(`Calculating ${perk.id}:`, {
+        console.log(`${perk.id}:`, {
             travelFrequency,
             valuePerUse: perk.valuePerUse,
             sliderValue,
@@ -628,8 +628,10 @@ function calculateSection3Value() {
             perkValue
         });
         
-        return total + perkValue;
+        return sum + perkValue;
     }, 0);
+
+    return Math.round(total);
 }
 
 function calculateFinalValuation() {
