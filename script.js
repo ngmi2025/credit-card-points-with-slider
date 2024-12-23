@@ -423,35 +423,55 @@ function calculatePoints() {
 }
     // Calculate Section 2 Value
 function calculateSection2Value(isFirstYear = true) {
-    const credits = [
-        { id: 'airlineCredit', value: 200, steps: 5 },
-        { id: 'uberCredit', value: 200, steps: 5 },
-        { id: 'saksCredit', value: 100, steps: 5 },
-        { id: 'equinoxCredit', value: 300, steps: 5 },
-        { id: 'clearCredit', value: 199, steps: 5 },
-        { id: 'soulCycleCredit', value: 300, steps: 5 },
-        { id: 'entertainmentCredit', value: 240, steps: 5 },
-        { id: 'walmartCredit', value: 155, steps: 5 },
-        { id: 'hotelCredit', value: 200, steps: 5 }
+    // Define all credits with their annual values
+    const regularCredits = [
+        { id: 'airlineCredit', value: 200, steps: 5 },      // Annual
+        { id: 'uberCredit', value: 200, steps: 5 },         // Monthly ($15 + $20 Dec)
+        { id: 'saksCredit', value: 100, steps: 5 },         // Semi-annual ($50 × 2)
+        { id: 'equinoxCredit', value: 300, steps: 5 },      // Annual
+        { id: 'clearCredit', value: 199, steps: 5 },        // Annual
+        { id: 'entertainmentCredit', value: 240, steps: 5 }, // Monthly ($20)
+        { id: 'walmartCredit', value: 155, steps: 5 },      // Monthly ($12.95)
+        { id: 'hotelCredit', value: 200, steps: 5 }         // Annual
     ];
 
-    let total = credits.reduce((sum, credit) => {
+    // First year only credits
+    const firstYearCredits = [
+        { id: 'soulCycleCredit', value: 300, steps: 5 }     // One-time
+    ];
+
+    // Calculate regular credits
+    let total = regularCredits.reduce((sum, credit) => {
         const sliderValue = parseInt(document.getElementById(credit.id)?.value || 0);
-        const creditValue = (credit.value / 4) * sliderValue; // Still divide by 4 as we want 0,25%,50%,75%,100%
+        // Convert slider value (0-4) to percentage (0, 0.25, 0.50, 0.75, 1.0)
+        const percentage = sliderValue / 4;
+        const creditValue = credit.value * percentage;
+        
+        console.log(`${credit.id}:`, {
+            value: credit.value,
+            sliderValue,
+            percentage,
+            creditValue
+        });
+        
         return sum + creditValue;
     }, 0);
 
+    // Add first year only credits
     if (isFirstYear) {
         // Add Global Entry/TSA PreCheck
         const globalEntryValue = parseInt(document.getElementById('globalEntryCredit').value) || 0;
         total += globalEntryValue;
 
-        // Add SoulCycle credit
-        const soulCycleValue = (300 / 4) * parseInt(document.getElementById('soulCycleCredit').value || 0);
-        total += soulCycleValue;
+        // Add other first-year-only credits
+        firstYearCredits.forEach(credit => {
+            const sliderValue = parseInt(document.getElementById(credit.id)?.value || 0);
+            const percentage = sliderValue / 4;
+            total += credit.value * percentage;
+        });
     }
 
-    return total;
+    return Math.round(total);
 }
 
 function calculateGlobalEntryCredit(homeAirport, tripsPerYear) {
@@ -577,19 +597,37 @@ document.getElementById('continueToSection3Btn').addEventListener('click', funct
 document.getElementById('hotelSpend').addEventListener('blur', updateAllExplanationTexts);
     
 function calculateSection3Value() {
-    const travelFrequency = parseInt(document.getElementById('travelFrequency').value.replace(/[^ -\u007F]+/g, '')) || 0;
+    const travelFrequency = parseInt(document.getElementById('travelFrequency').value) || 0;
 
     const perks = [
         { id: 'loungeAccess', valuePerUse: 50 },
         { id: 'partnerStatus', valuePerUse: 40 },
-        { id: 'fhrAndIap', valuePerUse: 100 },
+        { id: 'fhrAndIap', valuePerUse: 100 }
     ];
 
     return perks.reduce((total, perk) => {
         const sliderValue = parseInt(document.getElementById(perk.id).value);
-        // Convert 1-5 range to 0-1 percentage (1=0%, 2=25%, 3=50%, 4=75%, 5=100%)
-        const percentage = (sliderValue - 1) / 4;
+        
+        // Convert slider values 1-5 to percentages
+        const percentages = {
+            1: 0,    // Never = 0%
+            2: 0.25, // Rarely = 25%
+            3: 0.50, // Sometimes = 50%
+            4: 0.75, // Often = 75%
+            5: 1.00  // Always = 100%
+        };
+        
+        const percentage = percentages[sliderValue] || 0;
         const perkValue = travelFrequency * perk.valuePerUse * percentage;
+        
+        console.log(`Calculating ${perk.id}:`, {
+            travelFrequency,
+            valuePerUse: perk.valuePerUse,
+            sliderValue,
+            percentage,
+            perkValue
+        });
+        
         return total + perkValue;
     }, 0);
 }
