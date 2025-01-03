@@ -786,3 +786,27 @@ select.credit-select option {
     font-weight: 600;
     font-size: 1.3em;
 }
+.points-suggestion {
+    color: #2E8B57;  /* Same green as your success card style */
+    margin-top: 8px;
+    font-size: 0.9em;
+    line-height: 1.4;
+    font-weight: 500;
+    transition: opacity 0.3s ease;
+}
+
+/* Optional: Add a subtle fade-in animation when suggestions update */
+@keyframes suggestionFade {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.points-suggestion {
+    animation: suggestionFade 0.3s ease-out;
+}
