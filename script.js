@@ -3,6 +3,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const POINT_VALUE = 0.022;
     const ANNUAL_FEE = 595;
 
+     const travelFrequencyInput = document.getElementById('travelFrequency');
+    const questionGroup = travelFrequencyInput.closest('.question-group');
+    
+    if (!questionGroup.querySelector('.question-description')) {
+        const description = document.createElement('span');
+        description.className = 'question-description';
+        description.innerHTML = 'Count each round-trip as one trip. For example, flying from New York to Los Angeles and back counts as one trip. Multiple destinations on the same itinerary (like New York to Los Angeles to San Francisco and back to New York) also count as one trip.';
+        
+        const inputWrapper = questionGroup.querySelector('.input-wrapper');
+        inputWrapper.insertAdjacentElement('afterend', description);
+    }
+
     const INTERNATIONAL_HUBS = [
     'JFK', 'LAX', 'ORD', 'MIA', 'SFO', 'EWR', 'IAD', 
     'BOS', 'SEA', 'ATL', 'DFW', 'IAH', 'DEN'
