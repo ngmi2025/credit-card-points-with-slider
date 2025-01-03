@@ -827,17 +827,25 @@ select.credit-select option {
     text-align: center;
     font-size: 0.8em;
     color: var(--secondary-text-color);
+    position: relative;
+    display: inline-block; /* Change to inline-block */
     width: 100%;
-    display: flex;
-    justify-content: center;
+}
+
+/* Specific positioning for 2nd and 4th items */
+.slider-container .slider-labels span:nth-child(2),
+.slider-container .slider-labels span:nth-child(4) {
+    transform: translateX(-50%); /* Center the text */
+    left: 50%; /* Position relative to center of grid cell */
+    position: relative;
 }
 
 .slider-container .slider-labels span:first-child {
-    justify-content: flex-start;
+    text-align: left;
 }
 
 .slider-container .slider-labels span:last-child {
-    justify-content: flex-end;
+    text-align: right;
 }
 
 .slider-container .slider-labels span.selected {
