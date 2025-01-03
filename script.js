@@ -3,6 +3,132 @@ document.addEventListener('DOMContentLoaded', function() {
     const POINT_VALUE = 0.022;
     const ANNUAL_FEE = 595;
 
+// Add this near the top of your script.js file, after your existing constants
+const MINIMUM_POINTS_FOR_SUGGESTION = 15000;
+
+const earnedPointSuggestions = [
+    {
+        min: 15000,
+        max: 20000,
+        suggestions: [
+            { text: "That's enough for a one-way flight to any major US city!", category: "FLIGHTS" },
+            { text: "That's enough for a luxury hotel night through Fine Hotels & Resorts!", category: "HOTELS" },
+            { text: "That's enough for multiple premium dining experiences through Resy!", category: "EXPERIENCES" }
+        ]
+    },
+    {
+        min: 20001,
+        max: 40000,
+        suggestions: [
+            { text: "That's enough for a round-trip flight anywhere in the continental US!", category: "FLIGHTS" },
+            { text: "That's enough for two nights at a 5-star hotel in Miami or LA!", category: "HOTELS" },
+            { text: "That's enough for multiple spa treatments at luxury resorts!", category: "EXPERIENCES" }
+        ]
+    },
+    {
+        min: 40001,
+        max: 60000,
+        suggestions: [
+            { text: "That's enough for a round-trip flight to Hawaii!", category: "FLIGHTS" },
+            { text: "That's enough for three nights at a beachfront resort in Mexico!", category: "HOTELS" },
+            { text: "That's enough for a weekend of luxury experiences including dining and spa!", category: "EXPERIENCES" }
+        ]
+    },
+    {
+        min: 60001,
+        max: 80000,
+        suggestions: [
+            { text: "That's enough for a round-trip flight to Europe!", category: "FLIGHTS" },
+            { text: "That's enough for a 4-night luxury hotel stay in Paris or London!", category: "HOTELS" },
+            { text: "That's enough for multiple domestic weekend getaways!", category: "EXPERIENCES" }
+        ]
+    },
+    {
+        min: 80001,
+        max: 120000,
+        suggestions: [
+            { text: "That's enough for a business class flight to Europe!", category: "FLIGHTS" },
+            { text: "That's enough for a 5-night stay at a luxury resort in Bora Bora!", category: "HOTELS" },
+            { text: "That's enough for multiple romantic getaways with luxury perks!", category: "EXPERIENCES" }
+        ]
+    },
+    {
+        min: 120001,
+        max: 160000,
+        suggestions: [
+            { text: "That's enough for a first class flight to Asia!", category: "FLIGHTS" },
+            { text: "That's enough for a week at top hotels in multiple European cities!", category: "HOTELS" },
+            { text: "That's enough for multiple luxury vacations with VIP experiences!", category: "EXPERIENCES" }
+        ]
+    },
+    {
+        min: 160001,
+        max: 200000,
+        suggestions: [
+            { text: "That's enough for two business class tickets to anywhere in the world!", category: "FLIGHTS" },
+            { text: "That's enough for 10 nights at luxury hotels across multiple destinations!", category: "HOTELS" },
+            { text: "That's enough for a year of premium travel experiences!", category: "EXPERIENCES" }
+        ]
+    },
+    {
+        min: 200001,
+        max: Infinity,
+        suggestions: [
+            { text: "That's enough for multiple first class international flights!", category: "FLIGHTS" },
+            { text: "That's enough for two weeks at the world's most exclusive resorts!", category: "HOTELS" },
+            { text: "That's enough for unlimited luxury travel possibilities!", category: "EXPERIENCES" }
+        ]
+    }
+];
+
+const welcomeBonusSuggestions = [
+    { text: "That's enough for 2 round-trip flights from the US to the Caribbean!", category: "FLIGHTS" },
+    { text: "That's enough for a round-trip flight to Europe!", category: "FLIGHTS" },
+    { text: "That's enough for multiple domestic round-trip flights!", category: "FLIGHTS" },
+    
+    { text: "That's enough for 4 nights at a luxury resort through Fine Hotels & Resorts!", category: "HOTELS" },
+    { text: "That's enough for a week of 5-star hotel stays!", category: "HOTELS" },
+    { text: "That's enough for multiple weekend escapes at luxury hotels!", category: "HOTELS" },
+    
+    { text: "That's enough for multiple luxury weekend adventures!", category: "EXPERIENCES" },
+    { text: "That's enough for a year of premium dining and entertainment!", category: "EXPERIENCES" },
+    { text: "That's enough for several VIP travel experiences!", category: "EXPERIENCES" }
+];
+
+function getComplementarySuggestions(points) {
+    if (points < MINIMUM_POINTS_FOR_SUGGESTION) {
+        return {
+            earnedSuggestion: "",
+            welcomeSuggestion: welcomeBonusSuggestions[
+                Math.floor(Math.random() * welcomeBonusSuggestions.length)
+            ].text
+        };
+    }
+
+    let earnedOptions = [];
+    for (let range of earnedPointSuggestions) {
+        if (points >= range.min && points <= range.max) {
+            earnedOptions = range.suggestions;
+            break;
+        }
+    }
+    
+    const earnedSuggestion = earnedOptions[Math.floor(Math.random() * earnedOptions.length)];
+    
+    const availableWelcomeSuggestions = welcomeBonusSuggestions.filter(
+        suggestion => suggestion.category !== earnedSuggestion.category
+    );
+    
+    const welcomeSuggestion = availableWelcomeSuggestions[
+        Math.floor(Math.random() * availableWelcomeSuggestions.length)
+    ];
+    
+    return {
+        earnedSuggestion: earnedSuggestion.text,
+        welcomeSuggestion: welcomeSuggestion.text
+    };
+}
+    
  const travelFrequencyGroup = document.getElementById('travelFrequency').closest('.question-group');
     
     // Create title container
