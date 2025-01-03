@@ -611,14 +611,6 @@ select.credit-select option {
     color: var(--primary-color);
 }
 
-#section3 .slider-labels span {
-    font-size: 0.75rem;
-    color: #6c757d;
-}
-#section3 .slider-labels span.selected {
-    font-weight: bold;
-    color: var(--primary-color);
-}
 .progress-bar {
     display: flex;
     justify-content: space-between;
@@ -855,6 +847,27 @@ select.credit-select option {
 }
 
 .slider-container .slider-labels span.selected {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+/* Section 3 specific slider styles */
+#section3 .slider-container .slider-labels span {
+    font-size: 0.7em;
+    color: var(--secondary-text-color);
+    white-space: nowrap;
+}
+
+#section3 .slider-container .slider-labels span:nth-child(2) {
+    text-align: center;
+    transform: translateX(-10%);
+}
+
+#section3 .slider-container .slider-labels span:nth-child(4) {
+    text-align: center;
+    transform: translateX(10%);
+}
+
+#section3 .slider-container .slider-labels span.selected {
     color: var(--primary-color);
     font-weight: bold;
 }
