@@ -832,6 +832,21 @@ select.credit-select option {
 
 .points-suggestion {
     animation: suggestionFade 0.3s ease-out;
+}
+    
+.slider-container .slider-labels {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 0;
+    left: 10px;
+    right: 10px;
+    padding: 0;
+    margin: 0;
+    width: calc(100% - 20px);
+}
+
+/* Then your individual span rules */
 .slider-container .slider-labels span:nth-child(1) { 
     left: 0; 
     transform: translateX(0);
