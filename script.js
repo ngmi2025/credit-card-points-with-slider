@@ -60,13 +60,6 @@ function calculatePoints() {
         // Get complementary suggestions
         const suggestions = getComplementarySuggestions(totalPoints);
         
-        // Update Total Points Earned suggestion
-        const earnedPointsContainer = elements.totalPointsValue.parentElement;
-        const existingEarnedSuggestion = earnedPointsContainer.querySelector('.points-suggestion');
-        if (existingEarnedSuggestion) {
-            existingEarnedSuggestion.remove();
-        }
-        
 // Update Total Points Earned suggestion
 const earnedPointsContainer = document.getElementById('totalPointsValue').parentElement.querySelector('.points-suggestion');
 if (suggestions.earnedSuggestion && totalPoints >= MINIMUM_POINTS_FOR_SUGGESTION) {
