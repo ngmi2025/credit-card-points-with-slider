@@ -311,16 +311,18 @@ input[type="number"] {
 #results .result-value {
     background-color: #f2f2f2;
     border-radius: 4px;
-    padding: 12px 15px; /* Adjust padding to match other input heights */
+    padding: 12px 15px;
     font-size: 1.1rem;
-    font-weight: 700; /* Make text bold */
+    font-weight: 700;
     text-align: right;
-    width: 250px; /* Match width of other inputs */
-    height: 40px; /* Match height of other inputs */
+    width: 250px;
+    height: 40px;
     border: 1px solid #e0e0e0;
     box-sizing: border-box;
     display: flex;
-    align-items: center; /* Center text vertically */
+    align-items: center;
+    justify-content: flex-end; /* Add this line */
+    margin-left: auto; /* Add this line */
 }
 
 #results .button-container {
