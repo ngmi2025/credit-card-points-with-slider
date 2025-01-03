@@ -150,11 +150,9 @@ h1 {
     outline: none;
     opacity: 1; /* Full opacity */
     border-radius: 6px;
-    margin: 18px 0;
+    margin: 18px 0 25px 0; /* Top Right Bottom Left */
     width: 100%;
     position: relative;
-    margin-bottom: 25px; /* Add more space below the slider */
-
 }
 
 .slider-container input[type="range"]:hover {
