@@ -199,6 +199,8 @@ h1 {
     padding: 0;
     margin: 0;
     width: calc(100% - 20px); /* Account for padding */
+    font-size: 0.8em; /* Restore font size */
+    color: var(--secondary-text-color);
 }
 
 .slider-container .slider-labels span {
@@ -831,19 +833,25 @@ select.credit-select option {
 .points-suggestion {
     animation: suggestionFade 0.3s ease-out;
 }
-/* Add these new rules at the end of your CSS file */
-.slider-container .slider-labels span:nth-child(1) { left: 0; transform: translateX(-50%); }
-.slider-container .slider-labels span:nth-child(2) { left: 25%; transform: translateX(-50%); }
-.slider-container .slider-labels span:nth-child(3) { left: 50%; transform: translateX(-50%); }
-.slider-container .slider-labels span:nth-child(4) { left: 75%; transform: translateX(-50%); }
-.slider-container .slider-labels span:nth-child(5) { left: 100%; transform: translateX(-50%); }
-
-.slider-container .slider-labels span:first-child {
+.slider-container .slider-labels span:nth-child(1) { 
+    left: 0; 
     transform: translateX(0);
     text-align: left;
 }
-
-.slider-container .slider-labels span:last-child {
+.slider-container .slider-labels span:nth-child(2) { 
+    left: 25%; 
+    transform: translateX(-50%);
+}
+.slider-container .slider-labels span:nth-child(3) { 
+    left: 50%; 
+    transform: translateX(-50%);
+}
+.slider-container .slider-labels span:nth-child(4) { 
+    left: 75%; 
+    transform: translateX(-50%);
+}
+.slider-container .slider-labels span:nth-child(5) { 
+    left: 100%; 
     transform: translateX(-100%);
     text-align: right;
 }
