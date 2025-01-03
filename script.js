@@ -3,20 +3,24 @@ document.addEventListener('DOMContentLoaded', function() {
     const POINT_VALUE = 0.022;
     const ANNUAL_FEE = 595;
 
-    const travelFrequencyInput = document.getElementById('travelFrequency');
-    const questionGroup = travelFrequencyInput.closest('.question-group');
+ const travelFrequencyGroup = document.getElementById('travelFrequency').closest('.question-group');
     
-    if (!questionGroup.querySelector('.question-description')) {
-        const description = document.createElement('div'); // Changed to div for block-level element
-        description.className = 'question-description';
-        description.style.marginTop = '5px'; // Add some space between input and description
-        description.innerHTML = 'Count each round-trip as one trip. For example, flying from New York to Los Angeles and back counts as one trip. Multiple destinations on the same itinerary (like New York to Los Angeles to San Francisco and back to New York) also count as one trip.';
-        
-        // Insert after the input-wrapper
-        const inputWrapper = questionGroup.querySelector('.input-wrapper');
-        inputWrapper.parentNode.insertBefore(description, inputWrapper.nextSibling);
-    }
-
+    // Create title container
+    const titleContainer = document.createElement('div');
+    titleContainer.className = 'title-container';
+    
+    // Move the existing label into the title container
+    const existingLabel = travelFrequencyGroup.querySelector('label');
+    titleContainer.appendChild(existingLabel);
+    
+    // Add the disclaimer span
+    const disclaimer = document.createElement('span');
+    disclaimer.className = 'disclaimer';
+    disclaimer.innerHTML = 'Count each round-trip as one trip. For example, flying from New York to Los Angeles and back counts as one trip. Multiple destinations on the same itinerary (like New York to Los Angeles to San Francisco and back to New York) also count as one trip.';
+    titleContainer.appendChild(disclaimer);
+    
+    // Insert the title container at the start of the question group
+    travelFrequencyGroup.insertBefore(titleContainer, travelFrequencyGroup.firstChild);
     const INTERNATIONAL_HUBS = [
     'JFK', 'LAX', 'ORD', 'MIA', 'SFO', 'EWR', 'IAD', 
     'BOS', 'SEA', 'ATL', 'DFW', 'IAH', 'DEN'
