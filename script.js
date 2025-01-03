@@ -3,16 +3,26 @@ document.addEventListener('DOMContentLoaded', function() {
     const POINT_VALUE = 0.022;
     const ANNUAL_FEE = 595;
 
-     const travelFrequencyInput = document.getElementById('travelFrequency');
+  const travelFrequencyInput = document.getElementById('travelFrequency');
     const questionGroup = travelFrequencyInput.closest('.question-group');
     
     if (!questionGroup.querySelector('.question-description')) {
+        // Create a wrapper div for the input and description
+        const wrapper = document.createElement('div');
+        wrapper.className = 'input-description-wrapper';
+        
+        // Move the existing input wrapper into our new wrapper
+        const inputWrapper = questionGroup.querySelector('.input-wrapper');
+        wrapper.appendChild(inputWrapper.cloneNode(true));
+        
+        // Add the description after the input
         const description = document.createElement('span');
         description.className = 'question-description';
         description.innerHTML = 'Count each round-trip as one trip. For example, flying from New York to Los Angeles and back counts as one trip. Multiple destinations on the same itinerary (like New York to Los Angeles to San Francisco and back to New York) also count as one trip.';
+        wrapper.appendChild(description);
         
-        const inputWrapper = questionGroup.querySelector('.input-wrapper');
-        inputWrapper.insertAdjacentElement('afterend', description);
+        // Replace the old input wrapper with our new wrapper
+        inputWrapper.parentNode.replaceChild(wrapper, inputWrapper);
     }
 
     const INTERNATIONAL_HUBS = [
