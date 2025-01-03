@@ -206,8 +206,16 @@ h1 {
     color: var(--primary-color);
 }
 
+.input-wrapper input[type="number"],
+#flightSpend,
+#hotelSpend,
+#otherSpend,
+#travelFrequency {
+    text-align: right;
+}
+
 .input-wrapper input[type="text"] {
-    text-align: left;
+    text-align: right;
 }
 
 input[type="number"]::-webkit-inner-spin-button,
@@ -305,7 +313,7 @@ input[type="number"] {
     padding: 12px 15px; /* Adjust padding to match other input heights */
     font-size: 1.1rem;
     font-weight: 700; /* Make text bold */
-    text-align: left;
+    text-align: right;
     width: 250px; /* Match width of other inputs */
     height: 40px; /* Match height of other inputs */
     border: 1px solid #e0e0e0;
@@ -447,7 +455,7 @@ input[type="number"] {
     padding: 12px 15px;
     font-size: 1.1rem;
     font-weight: 700;
-    text-align: left;
+    text-align: right;
     width: 250px;
     height: 40px;
     border: 1px solid #e0e0e0;
