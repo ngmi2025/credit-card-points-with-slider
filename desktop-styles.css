@@ -832,24 +832,35 @@ select.credit-select option {
 
 .points-suggestion {
     animation: suggestionFade 0.3s ease-out;
-}
 .slider-container .slider-labels span:nth-child(1) { 
     left: 0; 
     transform: translateX(0);
     text-align: left;
 }
+
 .slider-container .slider-labels span:nth-child(2) { 
-    left: 25%; 
-    transform: translateX(-45%);
+    left: 25%;
+    position: absolute;
+    transform: translate(-50%, 0);
+    text-align: center;
+    white-space: nowrap;
+    width: auto;
 }
+
 .slider-container .slider-labels span:nth-child(3) { 
     left: 50%; 
     transform: translateX(-50%);
 }
+
 .slider-container .slider-labels span:nth-child(4) { 
-    left: 75%; 
-    transform: translateX(-65%);
+    left: 75%;
+    position: absolute;
+    transform: translate(-50%, 0);
+    text-align: center;
+    white-space: nowrap;
+    width: auto;
 }
+
 .slider-container .slider-labels span:nth-child(5) { 
     left: 100%; 
     transform: translateX(-100%);
