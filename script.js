@@ -935,25 +935,42 @@ if (nextSectionId !== 'section1') {
     }
 
 // Find these existing event listeners and update them:
-
 document.getElementById('calculatePointsBtn').addEventListener('click', function(e) {
+    e.preventDefault(); // Prevent any default form submission
+    
     const travelFrequency = document.getElementById('travelFrequency').value;
 
+    // Validate travel frequency
     if (!travelFrequency || travelFrequency === '0') {
-        e.preventDefault();
         document.getElementById('travelFrequency').classList.add('error');
         alert('Please enter how many times you travel per year');
         return;
     }
 
     document.getElementById('travelFrequency').classList.remove('error');
+    
     try {
-        calculatePoints();
-        document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
-                updateProgressBar('section1'); 
-
+        calculatePoints(); // Calculate the points
+        
+        // Make sure the results section exists and is visible
+        const resultsSection = document.getElementById('results');
+        if (resultsSection) {
+            resultsSection.classList.remove('hidden');
+            
+            // Scroll to results section
+            resultsSection.scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
+            
+            // Update progress bar
+            updateProgressBar('section1');
+        } else {
+            console.error('Results section not found');
+        }
     } catch (error) {
         console.error("Error calculating points:", error);
+        alert('There was an error calculating your points. Please try again.');
     }
 });
 
