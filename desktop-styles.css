@@ -824,28 +824,34 @@ select.credit-select option {
 }
 
 .slider-container .slider-labels span {
-    text-align: center;
     font-size: 0.8em;
     color: var(--secondary-text-color);
-    position: relative;
-    display: inline-block; /* Change to inline-block */
-    width: 100%;
+    white-space: nowrap;
 }
 
-/* Specific positioning for 2nd and 4th items */
-.slider-container .slider-labels span:nth-child(2),
-.slider-container .slider-labels span:nth-child(4) {
-    transform: translateX(-50%); /* Center the text */
-    left: 50%; /* Position relative to center of grid cell */
-    position: relative;
-}
-
-.slider-container .slider-labels span:first-child {
+/* Position each label individually */
+.slider-container .slider-labels span:nth-child(1) {
     text-align: left;
+    margin-left: 0;
 }
 
-.slider-container .slider-labels span:last-child {
+.slider-container .slider-labels span:nth-child(2) {
+    text-align: center;
+    transform: translateX(-25%);
+}
+
+.slider-container .slider-labels span:nth-child(3) {
+    text-align: center;
+}
+
+.slider-container .slider-labels span:nth-child(4) {
+    text-align: center;
+    transform: translateX(25%);
+}
+
+.slider-container .slider-labels span:nth-child(5) {
     text-align: right;
+    margin-right: 0;
 }
 
 .slider-container .slider-labels span.selected {
