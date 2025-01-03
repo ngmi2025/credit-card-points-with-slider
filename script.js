@@ -530,7 +530,7 @@ function updateExplanationText() {
     updatePerksExplanationText();
 }
     
-    // Points Calculation for Section 1
+  // Points Calculation for Section 1
 function calculatePoints() {
     const flightSpend = parseFloat(document.getElementById('flightSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
     const hotelSpend = parseFloat(document.getElementById('hotelSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
@@ -561,6 +561,37 @@ function calculatePoints() {
     document.getElementById('totalPointsValue').textContent = Math.round(totalPoints).toLocaleString() + ' points';
     document.getElementById('welcomeBonusValue').textContent = WELCOME_BONUS.toLocaleString() + ' points';
     document.getElementById('valuationValue').textContent = '$' + Math.round(totalValuation).toLocaleString();
+
+    // Get complementary suggestions
+    const suggestions = getComplementarySuggestions(totalPoints);
+    
+    // Update Total Points Earned suggestion
+    const earnedPointsContainer = document.getElementById('totalPointsValue').parentElement;
+    // Remove any existing suggestion first
+    const existingEarnedSuggestion = earnedPointsContainer.querySelector('.points-suggestion');
+    if (existingEarnedSuggestion) {
+        existingEarnedSuggestion.remove();
+    }
+    // Add new suggestion if we have one and meet minimum threshold
+    if (suggestions.earnedSuggestion && totalPoints >= MINIMUM_POINTS_FOR_SUGGESTION) {
+        const earnedSuggestionElement = document.createElement('div');
+        earnedSuggestionElement.className = 'points-suggestion';
+        earnedSuggestionElement.innerHTML = `<strong>${suggestions.earnedSuggestion}</strong>`;
+        earnedPointsContainer.appendChild(earnedSuggestionElement);
+    }
+
+    // Update Welcome Bonus suggestion
+    const welcomeBonusContainer = document.querySelector('.welcome-bonus');
+    // Remove any existing suggestion first
+    const existingWelcomeSuggestion = welcomeBonusContainer.querySelector('.points-suggestion');
+    if (existingWelcomeSuggestion) {
+        existingWelcomeSuggestion.remove();
+    }
+    // Add new suggestion
+    const welcomeSuggestionElement = document.createElement('div');
+    welcomeSuggestionElement.className = 'points-suggestion';
+    welcomeSuggestionElement.innerHTML = `<strong>${suggestions.welcomeSuggestion}</strong>`;
+    welcomeBonusContainer.appendChild(welcomeSuggestionElement);
 
     document.getElementById('results').classList.remove('hidden');
     console.log('Results displayed');
