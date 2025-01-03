@@ -2,10 +2,75 @@ document.addEventListener('DOMContentLoaded', function() {
     const WELCOME_BONUS = 80000;
     const POINT_VALUE = 0.022;
     const ANNUAL_FEE = 595;
-
-// Add this near the top of your script.js file, after your existing constants
 const MINIMUM_POINTS_FOR_SUGGESTION = 15000;
 
+  // Points Calculation for Section 1
+function calculatePoints() {
+    const flightSpend = parseFloat(document.getElementById('flightSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
+    const hotelSpend = parseFloat(document.getElementById('hotelSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
+    const otherSpend = parseFloat(document.getElementById('otherSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
+
+    // Cap flight spend at $500,000
+    const cappedFlightSpend = Math.min(flightSpend, 500000);
+    const uncappedFlightSpend = Math.max(0, flightSpend - 500000); // Amount over $500k
+
+    console.log('Flight Spend (Original):', flightSpend);
+    console.log('Flight Spend (Capped):', cappedFlightSpend);
+    console.log('Flight Spend (Uncapped):', uncappedFlightSpend);
+    console.log('Hotel Spend:', hotelSpend);
+    console.log('Other Spend:', otherSpend);
+
+    // Calculate points: 5x on capped flight spend, 1x on uncapped amount
+    const travelPoints = (cappedFlightSpend + hotelSpend) * 5;
+    const otherPoints = otherSpend + uncappedFlightSpend;
+    const totalPoints = travelPoints + otherPoints;
+
+    console.log('Travel Points:', travelPoints);
+    console.log('Other Points:', otherPoints);
+    console.log('Total Points:', totalPoints);
+
+    const totalValuation = (WELCOME_BONUS + totalPoints) * POINT_VALUE;
+
+    // Update values using IDs
+    document.getElementById('totalPointsValue').textContent = Math.round(totalPoints).toLocaleString() + ' points';
+    document.getElementById('welcomeBonusValue').textContent = WELCOME_BONUS.toLocaleString() + ' points';
+    document.getElementById('valuationValue').textContent = '$' + Math.round(totalValuation).toLocaleString();
+
+    // Get complementary suggestions
+    const suggestions = getComplementarySuggestions(totalPoints);
+    
+    // Update Total Points Earned suggestion
+    const earnedPointsContainer = document.getElementById('totalPointsValue').parentElement;
+    // Remove any existing suggestion first
+    const existingEarnedSuggestion = earnedPointsContainer.querySelector('.points-suggestion');
+    if (existingEarnedSuggestion) {
+        existingEarnedSuggestion.remove();
+    }
+    // Add new suggestion if we have one and meet minimum threshold
+    if (suggestions.earnedSuggestion && totalPoints >= MINIMUM_POINTS_FOR_SUGGESTION) {
+        const earnedSuggestionElement = document.createElement('div');
+        earnedSuggestionElement.className = 'points-suggestion';
+        earnedSuggestionElement.innerHTML = `<strong>${suggestions.earnedSuggestion}</strong>`;
+        earnedPointsContainer.appendChild(earnedSuggestionElement);
+    }
+
+    // Update Welcome Bonus suggestion
+    const welcomeBonusContainer = document.querySelector('.welcome-bonus');
+    // Remove any existing suggestion first
+    const existingWelcomeSuggestion = welcomeBonusContainer.querySelector('.points-suggestion');
+    if (existingWelcomeSuggestion) {
+        existingWelcomeSuggestion.remove();
+    }
+    // Add new suggestion
+    const welcomeSuggestionElement = document.createElement('div');
+    welcomeSuggestionElement.className = 'points-suggestion';
+    welcomeSuggestionElement.innerHTML = `<strong>${suggestions.welcomeSuggestion}</strong>`;
+    welcomeBonusContainer.appendChild(welcomeSuggestionElement);
+
+    document.getElementById('results').classList.remove('hidden');
+    console.log('Results displayed');
+}
+    
 const earnedPointSuggestions = [
     {
         min: 15000,
@@ -529,73 +594,7 @@ function updateExplanationText() {
     refreshExplanationText();
     updatePerksExplanationText();
 }
-    
-  // Points Calculation for Section 1
-function calculatePoints() {
-    const flightSpend = parseFloat(document.getElementById('flightSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
-    const hotelSpend = parseFloat(document.getElementById('hotelSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
-    const otherSpend = parseFloat(document.getElementById('otherSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
 
-    // Cap flight spend at $500,000
-    const cappedFlightSpend = Math.min(flightSpend, 500000);
-    const uncappedFlightSpend = Math.max(0, flightSpend - 500000); // Amount over $500k
-
-    console.log('Flight Spend (Original):', flightSpend);
-    console.log('Flight Spend (Capped):', cappedFlightSpend);
-    console.log('Flight Spend (Uncapped):', uncappedFlightSpend);
-    console.log('Hotel Spend:', hotelSpend);
-    console.log('Other Spend:', otherSpend);
-
-    // Calculate points: 5x on capped flight spend, 1x on uncapped amount
-    const travelPoints = (cappedFlightSpend + hotelSpend) * 5;
-    const otherPoints = otherSpend + uncappedFlightSpend;
-    const totalPoints = travelPoints + otherPoints;
-
-    console.log('Travel Points:', travelPoints);
-    console.log('Other Points:', otherPoints);
-    console.log('Total Points:', totalPoints);
-
-    const totalValuation = (WELCOME_BONUS + totalPoints) * POINT_VALUE;
-
-    // Update values using IDs
-    document.getElementById('totalPointsValue').textContent = Math.round(totalPoints).toLocaleString() + ' points';
-    document.getElementById('welcomeBonusValue').textContent = WELCOME_BONUS.toLocaleString() + ' points';
-    document.getElementById('valuationValue').textContent = '$' + Math.round(totalValuation).toLocaleString();
-
-    // Get complementary suggestions
-    const suggestions = getComplementarySuggestions(totalPoints);
-    
-    // Update Total Points Earned suggestion
-    const earnedPointsContainer = document.getElementById('totalPointsValue').parentElement;
-    // Remove any existing suggestion first
-    const existingEarnedSuggestion = earnedPointsContainer.querySelector('.points-suggestion');
-    if (existingEarnedSuggestion) {
-        existingEarnedSuggestion.remove();
-    }
-    // Add new suggestion if we have one and meet minimum threshold
-    if (suggestions.earnedSuggestion && totalPoints >= MINIMUM_POINTS_FOR_SUGGESTION) {
-        const earnedSuggestionElement = document.createElement('div');
-        earnedSuggestionElement.className = 'points-suggestion';
-        earnedSuggestionElement.innerHTML = `<strong>${suggestions.earnedSuggestion}</strong>`;
-        earnedPointsContainer.appendChild(earnedSuggestionElement);
-    }
-
-    // Update Welcome Bonus suggestion
-    const welcomeBonusContainer = document.querySelector('.welcome-bonus');
-    // Remove any existing suggestion first
-    const existingWelcomeSuggestion = welcomeBonusContainer.querySelector('.points-suggestion');
-    if (existingWelcomeSuggestion) {
-        existingWelcomeSuggestion.remove();
-    }
-    // Add new suggestion
-    const welcomeSuggestionElement = document.createElement('div');
-    welcomeSuggestionElement.className = 'points-suggestion';
-    welcomeSuggestionElement.innerHTML = `<strong>${suggestions.welcomeSuggestion}</strong>`;
-    welcomeBonusContainer.appendChild(welcomeSuggestionElement);
-
-    document.getElementById('results').classList.remove('hidden');
-    console.log('Results displayed');
-}
     // Calculate Section 2 Value
 function calculateSection2Value(isFirstYear = true) {
     // Define all credits with their annual values
