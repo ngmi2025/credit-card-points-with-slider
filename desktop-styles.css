@@ -778,3 +778,12 @@ select.credit-select option {
 .hidden {
     display: none !important;
 }
+#valuationValue {
+    background-color: #E7F6E7;
+    color: #2E8B57;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 1.3em;
+    display: inline-block;
+}
