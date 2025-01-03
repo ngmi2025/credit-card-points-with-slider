@@ -67,30 +67,21 @@ function calculatePoints() {
             existingEarnedSuggestion.remove();
         }
         
-        // Add new suggestion if we have one and meet minimum threshold
-        if (suggestions.earnedSuggestion && totalPoints >= MINIMUM_POINTS_FOR_SUGGESTION) {
-            const earnedSuggestionElement = document.createElement('div');
-            earnedSuggestionElement.className = 'points-suggestion';
-            earnedSuggestionElement.innerHTML = `<strong>${suggestions.earnedSuggestion}</strong>`;
-            earnedPointsContainer.appendChild(earnedSuggestionElement);
-        }
+// Update Total Points Earned suggestion
+const earnedPointsContainer = document.getElementById('totalPointsValue').parentElement.querySelector('.points-suggestion');
+if (suggestions.earnedSuggestion && totalPoints >= MINIMUM_POINTS_FOR_SUGGESTION) {
+    if (earnedPointsContainer) {
+        earnedPointsContainer.textContent = suggestions.earnedSuggestion;
+    }
+}
 
-        // Update Welcome Bonus suggestion
-        const welcomeBonusContainer = document.querySelector('.welcome-bonus');
-        if (!welcomeBonusContainer) {
-            console.warn('Welcome bonus container not found');
-        } else {
-            const existingWelcomeSuggestion = welcomeBonusContainer.querySelector('.points-suggestion');
-            if (existingWelcomeSuggestion) {
-                existingWelcomeSuggestion.remove();
-            }
-            
-            const welcomeSuggestionElement = document.createElement('div');
-            welcomeSuggestionElement.className = 'points-suggestion';
-            welcomeSuggestionElement.innerHTML = `<strong>${suggestions.welcomeSuggestion}</strong>`;
-            welcomeBonusContainer.appendChild(welcomeSuggestionElement);
-        }
-
+// Update Welcome Bonus suggestion
+const welcomeBonusContainer = document.querySelector('.welcome-bonus .points-suggestion');
+if (!welcomeBonusContainer) {
+    console.warn('Welcome bonus container not found');
+} else {
+    welcomeBonusContainer.textContent = suggestions.welcomeSuggestion;
+}
         // Show results
         elements.results.classList.remove('hidden');
         console.log('Results displayed successfully');
