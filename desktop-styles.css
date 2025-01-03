@@ -837,23 +837,33 @@ select.credit-select option {
 .slider-container .slider-labels {
     display: flex;
     justify-content: space-between;
-    position: relative; /* Change from absolute */
-    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 10px;
+    right: 10px;
     padding: 0;
     margin: 0;
+    width: calc(100% - 20px);
 }
 
 .slider-container .slider-labels span {
-    position: relative; /* Change from absolute */
-    flex: 1;
+    position: absolute;
+    width: 40px; /* Give each label a fixed width */
+    margin-left: -20px; /* Center the label by moving it left half its width */
     text-align: center;
 }
 
-/* Keep first and last special cases */
-.slider-container .slider-labels span:first-child {
+/* Position each span */
+.slider-container .slider-labels span:nth-child(1) { 
+    left: 0;
+    margin-left: 0; /* Override for first label */
     text-align: left;
 }
-
-.slider-container .slider-labels span:last-child {
+.slider-container .slider-labels span:nth-child(2) { left: 25%; }
+.slider-container .slider-labels span:nth-child(3) { left: 50%; }
+.slider-container .slider-labels span:nth-child(4) { left: 75%; }
+.slider-container .slider-labels span:nth-child(5) { 
+    left: 100%;
+    margin-left: -40px; /* Move last label to align right */
     text-align: right;
 }
