@@ -3,26 +3,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const POINT_VALUE = 0.022;
     const ANNUAL_FEE = 595;
 
-  const travelFrequencyInput = document.getElementById('travelFrequency');
+    const travelFrequencyInput = document.getElementById('travelFrequency');
     const questionGroup = travelFrequencyInput.closest('.question-group');
     
     if (!questionGroup.querySelector('.question-description')) {
-        // Create a wrapper div for the input and description
-        const wrapper = document.createElement('div');
-        wrapper.className = 'input-description-wrapper';
-        
-        // Move the existing input wrapper into our new wrapper
-        const inputWrapper = questionGroup.querySelector('.input-wrapper');
-        wrapper.appendChild(inputWrapper.cloneNode(true));
-        
-        // Add the description after the input
-        const description = document.createElement('span');
+        const description = document.createElement('div'); // Changed to div for block-level element
         description.className = 'question-description';
+        description.style.marginTop = '5px'; // Add some space between input and description
         description.innerHTML = 'Count each round-trip as one trip. For example, flying from New York to Los Angeles and back counts as one trip. Multiple destinations on the same itinerary (like New York to Los Angeles to San Francisco and back to New York) also count as one trip.';
-        wrapper.appendChild(description);
         
-        // Replace the old input wrapper with our new wrapper
-        inputWrapper.parentNode.replaceChild(wrapper, inputWrapper);
+        // Insert after the input-wrapper
+        const inputWrapper = questionGroup.querySelector('.input-wrapper');
+        inputWrapper.parentNode.insertBefore(description, inputWrapper.nextSibling);
     }
 
     const INTERNATIONAL_HUBS = [
