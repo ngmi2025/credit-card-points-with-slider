@@ -814,8 +814,8 @@ select.credit-select option {
 }
     
 .slider-container .slider-labels {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
     width: 100%;
     padding: 0;
     margin: 0;
@@ -824,20 +824,20 @@ select.credit-select option {
 }
 
 .slider-container .slider-labels span {
-    flex: 1;
     text-align: center;
     font-size: 0.8em;
     color: var(--secondary-text-color);
-    position: relative;
-    min-width: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .slider-container .slider-labels span:first-child {
-    text-align: left;
+    justify-content: flex-start;
 }
 
 .slider-container .slider-labels span:last-child {
-    text-align: right;
+    justify-content: flex-end;
 }
 
 .slider-container .slider-labels span.selected {
