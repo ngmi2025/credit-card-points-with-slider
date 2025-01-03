@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add the disclaimer span
     const disclaimer = document.createElement('span');
     disclaimer.className = 'disclaimer';
-    disclaimer.innerHTML = 'Count each round-trip as one trip. For example, flying from New York to Los Angeles and back counts as one trip. Multiple destinations on the same itinerary (like New York to Los Angeles to San Francisco and back to New York) also count as one trip.';
+    disclaimer.innerHTML = 'Count each round-trip as one trip (e.g., NYC to LA and back = one trip)';
     titleContainer.appendChild(disclaimer);
     
     // Insert the title container at the start of the question group
