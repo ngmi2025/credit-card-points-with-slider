@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add the disclaimer span
     const disclaimer = document.createElement('span');
     disclaimer.className = 'disclaimer';
-    disclaimer.innerHTML = 'Count each round-trip as one trip (e.g., NYC to LA and back = one trip)';
+    disclaimer.innerHTML = 'Count each round-trip as one trip (e.g., NYC to LA and back = one trip).';
     titleContainer.appendChild(disclaimer);
     
     // Insert the title container at the start of the question group
