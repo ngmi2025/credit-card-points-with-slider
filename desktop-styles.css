@@ -823,19 +823,24 @@ select.credit-select option {
     padding: 0;
     margin: 0;
     width: calc(100% - 20px);
+    font-size: 0.8em;
+    color: var(--secondary-text-color);
 }
 
 .slider-container .slider-labels span {
     position: absolute;
-    width: 40px; /* Give each label a fixed width */
-    margin-left: -20px; /* Center the label by moving it left half its width */
+    width: 60px; /* Increased from 40px to accommodate larger numbers */
+    margin-left: -30px; /* Half of the width */
     text-align: center;
+    white-space: nowrap;
+    font-size: 1em; /* Restore font size */
+    font-weight: normal; /* Restore font weight */
 }
 
 /* Position each span */
 .slider-container .slider-labels span:nth-child(1) { 
     left: 0;
-    margin-left: 0; /* Override for first label */
+    margin-left: 0;
     text-align: left;
 }
 .slider-container .slider-labels span:nth-child(2) { left: 25%; }
@@ -843,6 +848,12 @@ select.credit-select option {
 .slider-container .slider-labels span:nth-child(4) { left: 75%; }
 .slider-container .slider-labels span:nth-child(5) { 
     left: 100%;
-    margin-left: -40px; /* Move last label to align right */
+    margin-left: -60px; /* Match the width */
     text-align: right;
+}
+
+/* Add back the selected state styling */
+.slider-container .slider-labels span.selected {
+    color: var(--primary-color);
+    font-weight: bold;
 }
