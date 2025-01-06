@@ -997,3 +997,42 @@ function updateValuationDisplay(firstYearValue, secondYearValue, pointsValue, se
     updateProgressBar('section4');
     window.scrollTo(0, 0);
 }
+function showError(message) {
+    // Remove any existing error modal
+    const existingModal = document.querySelector('.error-modal');
+    if (existingModal) {
+        existingModal.remove();
+    }
+
+    // Create overlay
+    const overlay = document.createElement('div');
+    overlay.className = 'modal-overlay';
+
+    // Create modal
+    const modal = document.createElement('div');
+    modal.className = 'error-modal';
+
+    // Add message
+    const messageP = document.createElement('p');
+    messageP.textContent = message;
+    modal.appendChild(messageP);
+
+    // Add close button
+    const closeButton = document.createElement('button');
+    closeButton.textContent = 'Close';
+    closeButton.onclick = () => {
+        overlay.remove();
+        modal.remove();
+    };
+    modal.appendChild(closeButton);
+
+    // Add to document
+    document.body.appendChild(overlay);
+    document.body.appendChild(modal);
+}
+
+// Update the error handling in your existing code
+function handleCalculationError(error, section) {
+    console.error(`Error in ${section}:`, error);
+    showError(`There was an error calculating your ${section.toLowerCase()}. Please try again.`);
+}
