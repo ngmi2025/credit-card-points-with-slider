@@ -107,7 +107,7 @@ h1 {
 }
 
 .question-group {
-    display: block;
+    display: flex;
     justify-content: space-between;
     align-items: center; /* Aligns radio buttons and slider vertically */
     margin-bottom: 24px;
@@ -210,8 +210,9 @@ h1 {
     font-size: 0.9em;
     font-weight: bold;
     color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 10px;
 }
-
 .input-wrapper input[type="number"],
 #flightSpend,
 #hotelSpend,
@@ -1079,7 +1080,7 @@ select.credit-select option {
     background-color: #f0f7ff;
 }
 .form-select {
-    width: 100%;
+    width: 250px;
     padding: 12px;
     border: 1px solid #e0e0e0;
     border-radius: 8px;
@@ -1089,6 +1090,7 @@ select.credit-select option {
     cursor: pointer;
     appearance: none;
     background-image: url("data:image/svg+xml,..."); /* Add dropdown arrow */
+    margin-left: auto;
 }
 
 .form-select:focus {
