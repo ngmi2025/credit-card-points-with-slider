@@ -82,24 +82,69 @@
 </div>
     </div>
 </div>
-                <div class="question-group">
-                    <label for="flightSpend">Spending on flights with airlines or Amex Travel / year</label>
-                    <div class="input-wrapper">
-                        <input type="text" id="flightSpend" inputmode="numeric" placeholder="$0" required>
-                    </div>
-                </div>
-                <div class="question-group">
-                    <label for="hotelSpend">Spending on prepaid hotels through Amex Travel / year</label>
-                    <div class="input-wrapper">
-                        <input type="text" id="hotelSpend" inputmode="numeric" placeholder="$0" required>
-                    </div>
-                </div>
-                <div class="question-group">
-                    <label for="otherSpend">Spending on all other purchases / year</label>
-                    <div class="input-wrapper">
-                        <input type="text" id="otherSpend" inputmode="numeric" placeholder="$0" required>
-                    </div>
-                </div>
+<div class="question-group">
+    <label>Spending on flights with airlines or Amex Travel / year</label>
+    <div class="preset-container">
+        <div class="preset-options">
+            <label class="preset-option">
+                <input type="radio" name="flightSpend" value="18000">
+                <span class="preset-label">Light</span>
+                <span class="preset-value">$1,500/month ≈ $18,000/year</span>
+            </label>
+            <label class="preset-option">
+                <input type="radio" name="flightSpend" value="36000">
+                <span class="preset-label">Average</span>
+                <span class="preset-value">$3,000/month ≈ $36,000/year</span>
+            </label>
+            <label class="preset-option">
+                <input type="radio" name="flightSpend" value="60000">
+                <span class="preset-label">Heavy</span>
+                <span class="preset-value">$5,000/month ≈ $60,000/year</span>
+            </label>
+            <label class="preset-option custom">
+                <input type="radio" name="flightSpend" value="custom">
+                <span class="preset-label">Custom</span>
+                <input type="number" class="custom-input" placeholder="Enter amount" disabled>
+            </label>
+        </div>
+    </div>
+</div>
+<div class="question-group">
+    <label>Spending on prepaid hotels through Amex Travel / year</label>
+    <div class="enhanced-slider-container">
+        <input type="range" 
+               id="hotelSpend" 
+               min="0" 
+               max="100000" 
+               step="500" 
+               class="enhanced-slider">
+        <div class="slider-values">
+            <span class="monthly-value">$0/month</span>
+            <span class="yearly-value">$0/year</span>
+        </div>
+        <div class="slider-markers">
+            <span>$0</span>
+            <span>$25k</span>
+            <span>$50k</span>
+            <span>$75k</span>
+            <span>$100k+</span>
+        </div>
+    </div>
+</div>
+<div class="question-group">
+    <label>Spending on all other purchases / year</label>
+    <div class="smart-dropdown-container">
+        <select id="otherSpend" class="smart-dropdown">
+            <option value="">Select monthly spend</option>
+            <option value="6000">$0-500/month ($0-6,000/year)</option>
+            <option value="12000">$501-1,000/month ($6,012-12,000/year)</option>
+            <option value="30000">$1,001-2,500/month ($12,012-30,000/year)</option>
+            <option value="60000">$2,501-5,000/month ($30,012-60,000/year)</option>
+            <option value="120000">$5,001-10,000/month ($60,012-120,000/year)</option>
+            <option value="120001">$10,000+/month ($120,000+/year)</option>
+        </select>
+    </div>
+</div>
                 <div class="button-container">
                     <button id="calculatePointsBtn" class="cta-button">Calculate Points</button>
                 </div>
