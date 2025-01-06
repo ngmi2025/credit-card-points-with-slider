@@ -205,9 +205,28 @@ function initializeFormFields() {
 // Points Calculation and Suggestions
 function calculatePoints() {
     try {
-        const flightSpend = parseFloat(document.getElementById('flightSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
-        const hotelSpend = parseFloat(document.getElementById('hotelSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
-        const otherSpend = parseFloat(document.getElementById('otherSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
+        console.log('Starting calculatePoints');
+        
+        // Log the input values
+        const flightSpendElement = document.getElementById('flightSpend');
+        const hotelSpendElement = document.getElementById('hotelSpend');
+        const otherSpendElement = document.getElementById('otherSpend');
+        
+        console.log('Input elements:', {
+            flightSpend: flightSpendElement?.value,
+            hotelSpend: hotelSpendElement?.value,
+            otherSpend: otherSpendElement?.value
+        });
+
+        const flightSpend = parseFloat(flightSpendElement?.value?.replace(/[^0-9.-]+/g, '')) || 0;
+        const hotelSpend = parseFloat(hotelSpendElement?.value?.replace(/[^0-9.-]+/g, '')) || 0;
+        const otherSpend = parseFloat(otherSpendElement?.value?.replace(/[^0-9.-]+/g, '')) || 0;
+
+        console.log('Parsed values:', {
+            flightSpend,
+            hotelSpend,
+            otherSpend
+        });
 
         const cappedFlightSpend = Math.min(flightSpend, 500000);
         const uncappedFlightSpend = Math.max(0, flightSpend - 500000);
