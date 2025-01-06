@@ -110,10 +110,10 @@ h1 {
     display: flex;
     flex-direction: column; 
     justify-content: space-between;
-    align-items: flex-start; /* Change from center to flex-start */
-    padding: 25px 0;  /* Reduce from 8px */
+    align-items: flex-start;
+    padding: 25px 0;
     border-bottom: 1px solid var(--border-color);
-    margin-bottom: 0px; /* Add small margin between groups */
+    margin-bottom: 0px;
 }
 
 .question-group:first-child {
@@ -296,10 +296,6 @@ input[type="number"] {
 }
 .error {
     border-color: var(--error-color) !important;
-}
-
-.hidden {
-    display: none;
 }
 
 /* Results Section Styling */
@@ -848,52 +844,7 @@ select.credit-select option {
         transform: translateY(0);
     }
 }
-    
-.slider-container .slider-labels {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    position: relative;
-    bottom: 0;
-}
 
-.slider-container .slider-labels span {
-    font-size: 0.8em;
-    color: var(--secondary-text-color);
-    white-space: nowrap;
-}
-
-/* Position each label individually */
-.slider-container .slider-labels span:nth-child(1) {
-    text-align: left;
-    margin-left: 0;
-}
-
-.slider-container .slider-labels span:nth-child(2) {
-    text-align: center;
-    transform: translateX(-15%); /* Reduced from -25% to move it right */
-}
-
-.slider-container .slider-labels span:nth-child(3) {
-    text-align: center;
-}
-
-.slider-container .slider-labels span:nth-child(4) {
-    text-align: center;
-    transform: translateX(15%); /* Reduced from 25% to move it left */
-}
-
-.slider-container .slider-labels span:nth-child(5) {
-    text-align: right;
-    margin-right: 0;
-}
-
-.slider-container .slider-labels span.selected {
-    color: var(--primary-color);
-    font-weight: bold;
-}
 /* Section 3 specific slider styles */
 #section3 .slider-container .slider-labels span {
     font-size: 0.7em;
@@ -914,32 +865,4 @@ select.credit-select option {
 #section3 .slider-container .slider-labels span.selected {
     color: var(--primary-color);
     font-weight: bold;
-}
-
-.helper-text {
-    display: block;
-    font-size: 0.75em;
-    color: var(--secondary-text-color);
-    line-height: 1.4;
-    max-width: 600px;
-    margin-top: 5px;
-    margin-bottom: 0; 
-}
-
-#customFlightSpend,
-#customHotelSpend,
-#customOtherSpend {
-    width: 250px;
-    margin-left: auto;
-}
-
-#customFlightSpend input,
-#customHotelSpend input,
-#customOtherSpend input {
-    width: 100%;
-}
-
-.input-wrapper.hidden {
-    margin-top: 10px;
-    width: 250px; /* Match select width */
 }
