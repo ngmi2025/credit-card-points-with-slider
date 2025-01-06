@@ -79,12 +79,10 @@ h1 {
 
 .section {
     background-color: var(--background-color);
-    padding: 30px;
+    padding: 15px;  /* Reduced from 20px */
     border-radius: 5px;
-    margin-bottom: 20px;
-    box-shadow: 
-        0 -2px 8px rgba(0,0,0,0.2),  /* Stronger top shadow */
-        0 2px 8px rgba(0,0,0,0.15);  /* Existing shadow for sides/bottom */
+    margin-bottom: 15px;  /* Reduced from 20px */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
 .section h2 {
@@ -96,45 +94,46 @@ h1 {
 
 .question-group:last-child {
     border-bottom: none;
+    margin-bottom: 0;
 }
 
 .question-group label {
     flex: 1;
     margin-right: 20px;
+    font-weight: normal; /* Changed from 600 to normal to match original design */
+    margin-bottom: 0; /* Remove bottom margin to match original design */
 }
 
 .question-group {
     display: flex;
-    flex-direction: column;  /* Changed from row to column */
-    align-items: flex-start; /* Changed from center */
-    margin-bottom: 25px;
-    padding-bottom: 25px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;  /* Reduced from 10px */
     border-bottom: 1px solid var(--border-color);
 }
 
 .input-wrapper {
     flex: 0 0 250px; /* Fixed width for input fields */
-    text-align: right; /* Aligns input text to the right */
+    text-align: auto; /* Aligns input text to the right */
 }
 
 .input-group {
-    flex: 0 0 250px; /* Fixed width for dropdowns */
-    text-align: left; /* Aligns dropdowns text to the left */
-}
-
-.input-group select, .input-wrapper input[type="text"] {
+    flex: 0 0 250px;
     width: 100%;
-    padding: 10px;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    font-size: 1em;
-    height: 40px;
-    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-top: 10px;
 }
 
-#homeAirport {
+/* Add the new consolidated styles here */
+/* Common input styles */
+.input-wrapper input[type="text"],
+.input-wrapper input[type="number"],
+#travelFrequency,
+#homeAirport,
+.input-group select {
     width: 250px;
-    text-align: left;
     margin-left: auto;
     padding: 10px;
     border: 1px solid var(--border-color);
@@ -142,7 +141,52 @@ h1 {
     font-size: 1em;
     height: 40px;
     box-sizing: border-box;
-    background: linear-gradient(to bottom, #ffffff 0%, #f3f3f3 100%); 
+}
+
+/* Specific styles for select elements */
+.input-group select {
+    text-align: left;
+    background: linear-gradient(to bottom, #ffffff 0%, #f3f3f3 100%);
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 12px;
+    padding-right: 30px;
+}
+
+/* Right-align text inputs */
+.input-wrapper input[type="number"],
+#flightSpend,
+#hotelSpend,
+#otherSpend,
+#travelFrequency {
+    text-align: right;
+}
+
+/* Focus states */
+.input-group select:focus,
+.input-wrapper input[type="text"]:focus,
+.input-wrapper input[type="number"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(0,119,190,0.1);
+}
+
+/* Hover states */
+.input-group select:hover {
+    border-color: var(--primary-color);
+    cursor: pointer;
+}
+
+/* Error states */
+.input-group select.error,
+.input-wrapper input[type="text"].error,
+.input-wrapper input[type="number"].error {
+    border-color: var(--error-color);
 }
 
 .slider-container {
@@ -614,11 +658,6 @@ select.credit-select option {
     font-size: 12px;
 }
 
-.input-group {
-    width: 100%;
-    margin-top: 10px;
-}
-
 #section2 .slider-labels span.selected {
     font-weight: bold;
     color: var(--primary-color);
@@ -813,10 +852,6 @@ select.credit-select option {
         transform: translateY(0);
     }
 }
-
-.points-suggestion {
-    animation: suggestionFade 0.3s ease-out;
-}
     
 .slider-container .slider-labels {
     display: grid;
@@ -884,28 +919,6 @@ select.credit-select option {
     color: var(--primary-color);
     font-weight: bold;
 }
-/* New styles for dropdowns and custom inputs */
-.input-group select {
-    width: 250px;
-    text-align: left;
-    margin-left: auto;
-    padding: 10px;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    font-size: 1em;
-    height: 40px;
-    box-sizing: border-box;
-    background: linear-gradient(to bottom, #ffffff 0%, #f3f3f3 100%);
-    cursor: pointer;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
-    background-repeat: no-repeat;
-    background-position: right 12px center;
-    background-size: 12px;
-    padding-right: 30px;
-}
 
 .helper-text {
     display: block;
@@ -914,30 +927,6 @@ select.credit-select option {
     margin-top: 8px;
     line-height: 1.4;
     max-width: 600px;
-}
-
-.question-group label {
-    margin-bottom: 10px;
-    font-weight: 600;
-}
-
-.question-group .input-group {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-}
-
-.input-group select:focus,
-.input-wrapper input[type="text"]:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 2px rgba(0,119,190,0.1);
-}
-
-.input-group select.error,
-.input-wrapper input[type="text"].error {
-    border-color: var(--error-color);
 }
 
 #customFlightSpend,
@@ -951,8 +940,4 @@ select.credit-select option {
 #customHotelSpend input,
 #customOtherSpend input {
     width: 100%;
-}
-.input-group select:hover {
-    border-color: var(--primary-color);
-    cursor: pointer;
 }
