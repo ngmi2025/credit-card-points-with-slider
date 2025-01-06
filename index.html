@@ -44,23 +44,15 @@
             <div class="section" id="section1">
                 <h2>Travel Profile</h2>
                 <div class="question-group">
-                    <div class="question-content">
-                        <div class="label-container">
-                            <label for="travelFrequency">How many times do you travel per year?</label>
-                        </div>
-                        <div class="input-group">
-                            <input type="text" id="travelFrequency" inputmode="numeric" placeholder="Enter number of trips" required>
-                        </div>
+                    <label for="travelFrequency">How many times do you travel per year?</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="travelFrequency" inputmode="numeric" placeholder="Enter number of trips" required>
                     </div>
                 </div>
-            
-                <div class="question-group">
-                    <div class="question-content">
-                        <div class="label-container">
-                            <label for="homeAirport">What is your home airport?</label>
-                        </div>
-                        <div class="input-group">
-                            <select id="homeAirport" required>
+<div class="question-group">
+    <label for="homeAirport">What is your home airport?</label>
+    <div class="input-group">
+        <select id="homeAirport" required>
             <option value="">Select an option</option>
             <option value="ATL">Atlanta (ATL)</option>
             <option value="BOS">Boston (BOS)</option>
@@ -82,76 +74,79 @@
             <option value="IAD">Washington Dulles (IAD)</option>
             <option value="custom">Other (specify)</option>
         </select>
-        <div id="customHomeAirport" class="input-wrapper hidden">
-            <input type="text" id="customAirportInput" maxlength="40" placeholder="Enter your airport name">
-        </div>
+  <div id="customHomeAirport" class="input-wrapper hidden">
+    <input type="text" 
+           id="customAirportInput"
+            maxlength="40"
+           placeholder="Enter your airport name">
+</div>
     </div>
 </div>
-</div>
-
 <div class="question-group">
-    <div class="question-content">
-        <div class="label-container">
-            <label for="flightSpend">Spending on flights with airlines or Amex Travel per month</label>
-            <span class="helper-text">Spending ranges are based on typical Platinum Card member travel patterns. Select the option that best matches your travel style.</span>
-        </div>
-        <div class="input-group">
-            <select id="flightSpend" required aria-label="Monthly flight spending">
+    <label for="flightSpend">Monthly spending on flights with airlines or Amex Travel</label>
+    <div class="input-group">
+        <select id="flightSpend" required>
+            <option value="">Select an option</option>
             <option value="0">I rarely book flights ($0)</option>
-            <option value="2000">Light traveler ($1,000 - $3,000/month)</option>
-            <option value="4000">Regular traveler ($3,000 - $5,000/month)</option>
-            <option value="7500">Frequent traveler ($5,000 - $10,000/month)</option>
+            <option value="2000">Light traveler ($1k - $3k /month)</option>
+            <option value="4000">Regular traveler ($3k - $5k /month)</option>
+            <option value="7500">Frequent traveler ($5k - $10k /month)</option>
             <option value="custom">Custom amount</option>
         </select>
         <div id="customFlightSpend" class="input-wrapper hidden">
-            <input type="text" id="customFlightInput" inputmode="numeric" placeholder="Enter monthly amount">
+            <input type="text" 
+                   id="customFlightInput"
+                   inputmode="numeric"
+                   placeholder="Enter monthly flight spend">
         </div>
+        <div class="helper-text">Spending ranges are based on typical Platinum Card member travel patterns. Select the option that best matches your travel style.</div>
     </div>
-</div>
 </div>
 
 <div class="question-group">
-    <div class="question-content">
-        <div class="label-container">
-            <label for="hotelSpend">Spending on prepaid hotels through Amex Travel per month</label>
-            <span class="helper-text">Spending ranges are based on typical Platinum Card member travel patterns. Select the option that best matches your travel style.</span>
-        </div>
-        <div class="input-group">
-            <select id="hotelSpend" required>
+    <label for="hotelSpend">Monthly spending on prepaid hotels through Amex Travel</label>
+    <div class="input-group">
+        <select id="hotelSpend" required>
+            <option value="">Select an option</option>
             <option value="0">I rarely book hotels ($0)</option>
-            <option value="1250">Occasional stays ($500 - $2,000/month)</option>
-            <option value="3000">Regular stays ($2,000 - $4,000/month)</option>
-            <option value="6000">Frequent stays ($4,000 - $8,000/month)</option>
+            <option value="1250">Occasional stays ($500 - $2k /month)</option>
+            <option value="3000">Regular stays ($2k - $4k /month)</option>
+            <option value="6000">Frequent stays ($4k - $8k /month)</option>
             <option value="custom">Custom amount</option>
         </select>
         <div id="customHotelSpend" class="input-wrapper hidden">
-            <input type="text" id="customHotelInput" inputmode="numeric" placeholder="Enter monthly amount">
+            <input type="text" 
+                   id="customHotelInput"
+                   inputmode="numeric"
+                   placeholder="Enter monthly hotel spend">
         </div>
+        <div class="helper-text">Spending ranges are based on typical Platinum Card member travel patterns. Select the option that best matches your travel style.</div>
     </div>
 </div>
 
 <div class="question-group">
-    <div class="question-content">
-        <div class="label-container">
-            <label for="otherSpend">Spending on all other purchases per month</label>
-            <span class="helper-text">These ranges reflect typical monthly spending patterns. Choose the option that best matches your card usage.</span>
-        </div>
-        <div class="input-group">
-            <select id="otherSpend" required>
+    <label for="otherSpend">Monthly spending on all other purchases</label>
+    <div class="input-group">
+        <select id="otherSpend" required>
+            <option value="">Select an option</option>
             <option value="0">I don't use the card for other purchases ($0)</option>
-            <option value="3500">Regular usage ($2,000 - $5,000/month)</option>
-            <option value="7500">High usage ($5,000 - $10,000/month)</option>
-            <option value="12000">Premium usage ($10,000+/month)</option>
+            <option value="3500">Regular usage ($2k - $5k /month)</option>
+            <option value="7500">High usage ($5k - $10k /month)</option>
+            <option value="12000">Premium usage ($10k+ /month)</option>
             <option value="custom">Custom amount</option>
         </select>
         <div id="customOtherSpend" class="input-wrapper hidden">
-            <input type="text" id="customOtherInput" inputmode="numeric" placeholder="Enter monthly amount">
+            <input type="text" 
+                   id="customOtherInput"
+                   inputmode="numeric"
+                   placeholder="Enter monthly spend">
         </div>
+        <div class="helper-text">These ranges reflect typical monthly spending patterns. Choose the option that best matches your card usage.</div>
     </div>
 </div>
-<div class="button-container">
-    <button id="calculatePointsBtn" class="cta-button">Calculate Points</button>
-</div>
+                <div class="button-container">
+                    <button id="calculatePointsBtn" class="cta-button">Calculate Points</button>
+                </div>
 <div id="results" class="hidden">
  <!-- Replace your existing Results section content with this -->
 <h2>Results</h2>
