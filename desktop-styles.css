@@ -132,6 +132,19 @@ h1 {
     box-sizing: border-box;
 }
 
+#homeAirport {
+    width: 250px;
+    text-align: left;
+    margin-left: auto;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1em;
+    height: 40px;
+    box-sizing: border-box;
+    background-color: white;
+}
+
 .slider-container {
     flex: 0 0 250px;
     width: 250px;
