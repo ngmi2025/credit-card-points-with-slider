@@ -142,7 +142,7 @@ h1 {
     font-size: 1em;
     height: 40px;
     box-sizing: border-box;
-    background-color: white;
+    background: linear-gradient(to bottom, #ffffff 0%, #f3f3f3 100%); 
 }
 
 .slider-container {
