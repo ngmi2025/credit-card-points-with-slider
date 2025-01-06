@@ -98,20 +98,29 @@ h1 {
 }
 
 .question-group label {
+    display: block;
     flex: 1;
     margin-right: 20px;
     font-weight: normal;
-    margin-bottom: 0;
+    margin-bottom: 8px;
     padding-top: 8px; /* Add padding to align with input top */
 }
 
 .question-group {
     display: flex;
+    flex-direction: column; 
     justify-content: space-between;
     align-items: flex-start; /* Change from center to flex-start */
-    padding: 4px 0;  /* Reduce from 8px */
+    padding: 8px 0;  /* Reduce from 8px */
     border-bottom: 1px solid var(--border-color);
-    margin-bottom: 8px; /* Add small margin between groups */
+    margin-bottom: 20px; /* Add small margin between groups */
+}
+
+.question-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
 }
 
 .input-wrapper {
@@ -121,10 +130,11 @@ h1 {
 
 .input-group {
     flex: 0 0 250px;
-    width: 100%;
+    width: 250px;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    margin-left: auto;
     margin-top: 0; /* Remove margin-top */
 }
 
@@ -135,7 +145,7 @@ h1 {
 #travelFrequency,
 #homeAirport,
 .input-group select {
-    width: 250px;
+    width: 100%;
     margin-left: auto;
     padding: 10px;
     border: 1px solid var(--border-color);
@@ -926,10 +936,10 @@ select.credit-select option {
     display: block;
     font-size: 0.8em;
     color: var(--secondary-text-color);
-    margin-top: 12px; /* Increase from 8px */
     line-height: 1.4;
     max-width: 600px;
-    margin-bottom: 4px; /* Add small bottom margin */
+    margin-top: 8px;
+    margin-bottom: 0; 
 }
 
 #customFlightSpend,
