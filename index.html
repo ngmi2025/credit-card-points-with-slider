@@ -84,28 +84,35 @@
 </div>
 <div class="question-group">
     <label>Spending on flights with airlines or Amex Travel / year</label>
-    <div class="preset-container">
-        <div class="preset-options">
-            <label class="preset-option">
-                <input type="radio" name="flightSpend" value="18000">
-                <span class="preset-label">Light</span>
-                <span class="preset-value">$1,500/month ≈ $18,000/year</span>
+    <div class="spending-options">
+        <div class="spending-option">
+            <input type="radio" id="light" name="flightSpend" value="18000">
+            <label for="light">
+                <span class="amount">Light $1,500/month</span>
+                <span class="yearly">≈ $18,000/year</span>
             </label>
-            <label class="preset-option">
-                <input type="radio" name="flightSpend" value="36000">
-                <span class="preset-label">Average</span>
-                <span class="preset-value">$3,000/month ≈ $36,000/year</span>
+        </div>
+        
+        <div class="spending-option">
+            <input type="radio" id="average" name="flightSpend" value="36000">
+            <label for="average">
+                <span class="amount">Average $3,000/month</span>
+                <span class="yearly">≈ $36,000/year</span>
             </label>
-            <label class="preset-option">
-                <input type="radio" name="flightSpend" value="60000">
-                <span class="preset-label">Heavy</span>
-                <span class="preset-value">$5,000/month ≈ $60,000/year</span>
+        </div>
+        
+        <div class="spending-option">
+            <input type="radio" id="heavy" name="flightSpend" value="60000">
+            <label for="heavy">
+                <span class="amount">Heavy $5,000/month</span>
+                <span class="yearly">≈ $60,000/year</span>
             </label>
-            <label class="preset-option custom">
-                <input type="radio" name="flightSpend" value="custom">
-                <span class="preset-label">Custom</span>
-                <input type="number" class="custom-input" placeholder="Enter amount" disabled>
-            </label>
+        </div>
+        
+        <div class="spending-option custom">
+            <input type="radio" id="custom" name="flightSpend" value="custom">
+            <label for="custom">Custom</label>
+            <input type="number" class="custom-input" disabled placeholder="Enter amount">
         </div>
     </div>
 </div>
