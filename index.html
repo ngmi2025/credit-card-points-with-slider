@@ -82,75 +82,45 @@
 </div>
     </div>
 </div>
+<!-- 1. Flight Spending Dropdown -->
 <div class="question-group">
     <label>Spending on flights with airlines or Amex Travel / year</label>
-    <div class="spending-options">
-        <div class="spending-option">
-            <input type="radio" id="light" name="flightSpend" value="18000">
-            <label for="light">
-                <span class="amount">Light $1,500/month</span>
-                <span class="yearly">≈ $18,000/year</span>
-            </label>
-        </div>
-        
-        <div class="spending-option">
-            <input type="radio" id="average" name="flightSpend" value="36000">
-            <label for="average">
-                <span class="amount">Average $3,000/month</span>
-                <span class="yearly">≈ $36,000/year</span>
-            </label>
-        </div>
-        
-        <div class="spending-option">
-            <input type="radio" id="heavy" name="flightSpend" value="60000">
-            <label for="heavy">
-                <span class="amount">Heavy $5,000/month</span>
-                <span class="yearly">≈ $60,000/year</span>
-            </label>
-        </div>
-        
-        <div class="spending-option custom">
-            <input type="radio" id="custom" name="flightSpend" value="custom">
-            <label for="custom">Custom</label>
-            <input type="number" class="custom-input" disabled placeholder="Enter amount">
-        </div>
+    <select id="flightSpend" class="form-select">
+        <option value="" selected disabled>Select flight spending</option>
+        <option value="18000">Light ($1,500/month)</option>
+        <option value="36000">Average ($3,000/month)</option>
+        <option value="60000">Heavy ($5,000/month)</option>
+        <option value="custom">Custom amount</option>
+    </select>
+    <div id="customFlightSpend" class="custom-input-container hidden">
+        <input type="number" placeholder="Enter monthly amount" class="form-input">
     </div>
 </div>
+
+<!-- 2. Hotel Spending Slider -->
 <div class="question-group">
     <label>Spending on prepaid hotels through Amex Travel / year</label>
-    <div class="enhanced-slider-container">
-        <input type="range" 
-               id="hotelSpend" 
-               min="0" 
-               max="100000" 
-               step="500" 
-               class="enhanced-slider">
-        <div class="slider-values">
-            <span class="monthly-value">$0/month</span>
-            <span class="yearly-value">$0/year</span>
-        </div>
+    <div class="slider-container">
+        <div class="slider-value">$0</div>
+        <input type="range" id="hotelSpend" min="0" max="100000" value="0" class="form-slider">
         <div class="slider-markers">
             <span>$0</span>
-            <span>$25k</span>
-            <span>$50k</span>
-            <span>$75k</span>
             <span>$100k+</span>
         </div>
     </div>
 </div>
+
+<!-- 3. Other Spending Dropdown -->
 <div class="question-group">
     <label>Spending on all other purchases / year</label>
-    <div class="smart-dropdown-container">
-        <select id="otherSpend" class="smart-dropdown">
-            <option value="">Select monthly spend</option>
-            <option value="6000">$0-500/month ($0-6,000/year)</option>
-            <option value="12000">$501-1,000/month ($6,012-12,000/year)</option>
-            <option value="30000">$1,001-2,500/month ($12,012-30,000/year)</option>
-            <option value="60000">$2,501-5,000/month ($30,012-60,000/year)</option>
-            <option value="120000">$5,001-10,000/month ($60,012-120,000/year)</option>
-            <option value="120001">$10,000+/month ($120,000+/year)</option>
-        </select>
-    </div>
+    <select id="otherSpend" class="form-select">
+        <option value="" selected disabled>Select other spending</option>
+        <option value="12000">$1,000 per month</option>
+        <option value="24000">$2,000 per month</option>
+        <option value="36000">$3,000 per month</option>
+        <option value="60000">$5,000 per month</option>
+        <option value="120000">$10,000 per month</option>
+    </select>
 </div>
                 <div class="button-container">
                     <button id="calculatePointsBtn" class="cta-button">Calculate Points</button>
