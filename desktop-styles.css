@@ -884,3 +884,194 @@ select.credit-select option {
     color: var(--primary-color);
     font-weight: bold;
 }
+/* Add these to the bottom of your CSS file */
+
+/* Smart Presets - Modified for existing layout */
+.preset-container {
+    flex: 0 0 250px; /* Match your other input widths */
+    width: 250px;
+}
+
+.preset-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.preset-option {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px; /* Match your existing border-radius */
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background-color: white;
+}
+
+/* Enhanced Slider - Modified to match existing slider styles */
+.enhanced-slider-container {
+    flex: 0 0 250px;
+    width: 250px;
+}
+
+.enhanced-slider {
+    -webkit-appearance: none;
+    height: 12px;
+    background: #e0e0e0;
+    border-radius: 6px;
+    outline: none;
+    margin: 18px 0 25px 0;
+}
+
+.enhanced-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    cursor: pointer;
+    margin-top: -6px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Smart Dropdown - Modified to match existing select styles */
+.smart-dropdown-container {
+    flex: 0 0 250px;
+    width: 250px;
+}
+
+.smart-dropdown {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1em;
+    height: 40px;
+    box-sizing: border-box;
+    background: linear-gradient(to bottom, #ffffff 0%, #f3f3f3 100%);
+}
+
+/* Additional helper classes */
+.monthly-yearly-display {
+    font-size: 0.7rem;
+    color: var(--secondary-text-color);
+    margin-top: 5px;
+    text-align: right;
+}
+
+.preset-value {
+    font-size: 0.7rem;
+    color: var(--secondary-text-color);
+}
+
+.preset-label {
+    font-weight: 600;
+    margin-right: 8px;
+    font-size: 0.9em;
+}
+
+.error-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    text-align: center;
+    min-width: 300px;
+    max-width: 90%;
+}
+
+.error-modal p {
+    margin: 0 0 20px 0;
+    color: #333;
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+.error-modal button {
+    background: #0076CE;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.error-modal button:hover {
+    background: #005ba1;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+.spending-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 15px 0;
+}
+
+.spending-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.spending-option:hover {
+    background-color: #f5f5f5;
+}
+
+.spending-option input[type="radio"] {
+    margin: 0;
+}
+
+.spending-option label {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.spending-option .amount {
+    font-weight: 600;
+    color: #333;
+}
+
+.spending-option .yearly {
+    font-size: 14px;
+    color: #666;
+}
+
+.spending-option.custom {
+    align-items: center;
+}
+
+.spending-option.custom input[type="text"] {
+    margin-left: 10px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 150px;
+}
+
+.spending-option.selected {
+    border-color: #0076CE;
+    background-color: #f0f7ff;
+}
