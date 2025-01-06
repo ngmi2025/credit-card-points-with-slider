@@ -79,10 +79,12 @@ h1 {
 
 .section {
     background-color: var(--background-color);
-    padding: 12px 15px;  /* Reduce padding */
+    padding: 30px;
     border-radius: 5px;
-    margin-bottom: 15px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    margin-bottom: 20px;
+    box-shadow: 
+        0 -2px 8px rgba(0,0,0,0.2),  /* Stronger top shadow */
+        0 2px 8px rgba(0,0,0,0.15);  /* Existing shadow for sides/bottom */
 }
 
 .section h2 {
@@ -94,106 +96,100 @@ h1 {
 
 .question-group:last-child {
     border-bottom: none;
-    margin-bottom: 0;
 }
 
 .question-group label {
-    display: block;
     flex: 1;
     margin-right: 20px;
-    font-weight: normal;
-    margin-bottom: 8px;
-    padding-top: 8px; /* Add padding to align with input top */
 }
 
 .question-group {
     display: flex;
-    flex-direction: column; 
     justify-content: space-between;
-    align-items: flex-start;
-    padding: 25px 0;
+    align-items: center; /* Aligns radio buttons and slider vertically */
+    margin-bottom: 20px;
+    padding-bottom: 20px;
     border-bottom: 1px solid var(--border-color);
-    margin-bottom: 0px;
-}
-
-.question-group:first-child {
-    padding-top: 0;
-}
-
-.question-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 100%;
 }
 
 .input-wrapper {
     flex: 0 0 250px; /* Fixed width for input fields */
-    text-align: auto; /* Aligns input text to the right */
+    text-align: right; /* Aligns input text to the right */
 }
 
 .input-group {
-    flex: 0 0 250px;
-    width: 250px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    margin-left: auto;
+    flex: 0 0 250px; /* Fixed width for dropdowns */
+    text-align: left; /* Aligns dropdowns text to the left */
 }
 
-/* Add the new consolidated styles here */
-/* Common input styles */
-.input-wrapper input[type="text"],
-.input-wrapper input[type="number"],
-#flightSpend,
-#hotelSpend,
-#otherSpend,
-#travelFrequency {
-    text-align: right;
-}
-.input-group select {
+.input-group select, .input-wrapper input[type="text"] {
     width: 100%;
-    margin-left: auto;
+    padding: 10px;
     border: 1px solid var(--border-color);
     border-radius: 5px;
     font-size: 1em;
     height: 40px;
     box-sizing: border-box;
+}
+
+#homeAirport {
+    width: 250px;
     text-align: left;
+    margin-left: auto;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1em;
+    height: 40px;
+    box-sizing: border-box;
+    background: linear-gradient(to bottom, #ffffff 0%, #f3f3f3 100%); 
+}
+
+/* Spending Dropdown Styles - Section 1 Only */
+#section1 .input-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1em;
+    height: 40px;
+    box-sizing: border-box;
     background: linear-gradient(to bottom, #ffffff 0%, #f3f3f3 100%);
-    cursor: pointer;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
-    background-repeat: no-repeat;
-    background-position: right 12px center;
-    background-size: 12px;
-    padding: 8px 12px;
-    padding-right: 30px;  /* Extra padding on right for dropdown arrow */
 }
 
-/* Focus states */
-.input-group select:focus,
-.input-wrapper input[type="text"]:focus,
-.input-wrapper input[type="number"]:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 2px rgba(0,119,190,0.1);
+/* Custom Amount Input Styling - Section 1 Only */
+#section1 .input-wrapper.hidden {
+    display: none;
 }
 
-/* Hover states */
-.input-group select:hover {
-    border-color: var(--primary-color);
-    cursor: pointer;
+#section1 .input-wrapper {
+    margin-top: 10px;
 }
 
-/* Error states */
-.input-group select.error,
-.input-wrapper input[type="text"].error,
-.input-wrapper input[type="number"].error {
-    border-color: var(--error-color);
+#section1 .input-wrapper input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1em;
+    height: 40px;
+    box-sizing: border-box;
+    text-align: right;
 }
+
+/* Helper Text Styling - Section 1 Only */
+#section1 .helper-text {
+    font-size: 0.7rem;
+    color: var(--secondary-text-color);
+    margin-top: 5px;
+    line-height: 1.2;
+}
+
+/* Continue with existing code */
+#homeAirport {
+    width: 250px;
+    text-align: left;
+    margin-left: auto;
 
 .slider-container {
     flex: 0 0 250px;
@@ -259,6 +255,18 @@ h1 {
     color: var(--primary-color);
 }
 
+.input-wrapper input[type="number"],
+#flightSpend,
+#hotelSpend,
+#otherSpend,
+#travelFrequency {
+    text-align: right;
+}
+
+.input-wrapper input[type="text"] {
+    text-align: right;
+}
+
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
@@ -272,8 +280,7 @@ input[type="number"] {
 .button-container {
     display: flex;
     justify-content: flex-end;
-    margin-top: 30px;
-    width: 100%
+    margin-top: 20px;
 }
 
 .cta-button {
@@ -288,7 +295,6 @@ input[type="number"] {
     text-transform: uppercase;
     font-weight: bold;
     min-width: 150px;
-    margin-left: auto;
 }
 .cta-button:hover {
     transform: translateY(-2px);
@@ -296,6 +302,10 @@ input[type="number"] {
 }
 .error {
     border-color: var(--error-color) !important;
+}
+
+.hidden {
+    display: none;
 }
 
 /* Results Section Styling */
@@ -650,6 +660,11 @@ select.credit-select option {
     font-size: 12px;
 }
 
+.input-group {
+    width: 100%;
+    margin-top: 10px;
+}
+
 #section2 .slider-labels span.selected {
     font-weight: bold;
     color: var(--primary-color);
@@ -845,6 +860,55 @@ select.credit-select option {
     }
 }
 
+.points-suggestion {
+    animation: suggestionFade 0.3s ease-out;
+}
+    
+.slider-container .slider-labels {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    bottom: 0;
+}
+
+.slider-container .slider-labels span {
+    font-size: 0.8em;
+    color: var(--secondary-text-color);
+    white-space: nowrap;
+}
+
+/* Position each label individually */
+.slider-container .slider-labels span:nth-child(1) {
+    text-align: left;
+    margin-left: 0;
+}
+
+.slider-container .slider-labels span:nth-child(2) {
+    text-align: center;
+    transform: translateX(-15%); /* Reduced from -25% to move it right */
+}
+
+.slider-container .slider-labels span:nth-child(3) {
+    text-align: center;
+}
+
+.slider-container .slider-labels span:nth-child(4) {
+    text-align: center;
+    transform: translateX(15%); /* Reduced from 25% to move it left */
+}
+
+.slider-container .slider-labels span:nth-child(5) {
+    text-align: right;
+    margin-right: 0;
+}
+
+.slider-container .slider-labels span.selected {
+    color: var(--primary-color);
+    font-weight: bold;
+}
 /* Section 3 specific slider styles */
 #section3 .slider-container .slider-labels span {
     font-size: 0.7em;
