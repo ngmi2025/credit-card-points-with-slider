@@ -1,247 +1,142 @@
-// Constants
-const WELCOME_BONUS = 80000;
-const POINT_VALUE = 0.022;
-const ANNUAL_FEE = 595;
-const MINIMUM_POINTS_FOR_SUGGESTION = 15000;
-const INTERNATIONAL_HUBS = [
-    'JFK', 'LAX', 'ORD', 'MIA', 'SFO', 'EWR', 'IAD', 
-    'BOS', 'SEA', 'ATL', 'DFW', 'IAH', 'DEN'
-];
+document.addEventListener('DOMContentLoaded', function() {
+    const WELCOME_BONUS = 80000;
+    const POINT_VALUE = 0.022;
+    const ANNUAL_FEE = 595;
+    const MINIMUM_POINTS_FOR_SUGGESTION = 15000;
+    const MAX_MONTHLY_SPEND = 100000; //
 
-const airportNames = {
-    'ATL': 'Atlanta',
-    'BOS': 'Boston',
-    'CLT': 'Charlotte',
-    'DEN': 'Denver',
-    'DFW': 'Dallas/Fort Worth',
-    'DTW': 'Detroit',
-    'EWR': 'Newark',
-    'IAD': 'Washington Dulles',
-    'IAH': 'Houston',
-    'JFK': 'New York JFK',
-    'LAX': 'Los Angeles',
-    'LGA': 'New York LaGuardia',
-    'MIA': 'Miami',
-    'ORD': 'Chicago',
-    'PHL': 'Philadelphia',
-    'PHX': 'Phoenix',
-    'SEA': 'Seattle',
-    'SFO': 'San Francisco'
+const SPENDING_OPTIONS = {
+    flight: [
+        { label: "I rarely book flights", value: 0 },
+        { label: "Light traveler", value: 2000 },
+        { label: "Regular traveler", value: 4000 },
+        { label: "Frequent traveler", value: 7500 },
+        { label: "Custom amount", value: "custom" }
+    ],
+    hotel: [
+        { label: "I rarely book hotels", value: 0 },
+        { label: "Occasional stays", value: 1250 },
+        { label: "Regular stays", value: 3000 },
+        { label: "Frequent stays", value: 6000 },
+        { label: "Custom amount", value: "custom" }
+    ],
+    other: [
+        { label: "I don't use the card for other purchases", value: 0 },
+        { label: "Regular usage", value: 3500 },
+        { label: "High usage", value: 7500 },
+        { label: "Premium usage", value: 12000 },
+        { label: "Custom amount", value: "custom" }
+    ]
 };
 
-// Utility Functions
-function formatNumber(number) {
-    return number.toLocaleString('en-US');
-}
-
-function parseCurrencyValue(value) {
-    return parseFloat(value.replace(/[^0-9.-]+/g, '')) || 0;
-}
-
-function validateNumericInput(input, min = 0, max = Infinity) {
-    const value = parseCurrencyValue(input.value);
-    if (isNaN(value) || value < min || value > max) {
-        throw new Error(`Invalid value for ${input.id}: ${input.value}`);
-    }
-    return value;
-}
-
-// Helper Functions
-function hideAllSections() {
-    document.querySelectorAll('.section').forEach(section => {
-        section.classList.add('hidden');
+   // Add change listeners for spending dropdowns
+   ['flightSpend', 'hotelSpend', 'otherSpend'].forEach(id => {
+    document.getElementById(id)?.addEventListener('change', function() {
+        const customId = 'custom' + id.charAt(0).toUpperCase() + id.slice(1);
+        handleCustomAmountField(id, customId);
     });
-}
+});
 
-function formatCurrency(input) {
-    let value = input.value.replace(/[^0-9.-]+/g, '');
-    if (value) {
-        value = parseInt(value, 10).toLocaleString('en-US');
-    }
-    input.value = value ? '$' + value : '';
-}
-
-function updateProgressBar(currentSection) {
-    document.querySelectorAll('.progress-bar .step').forEach(step => {
-        step.classList.remove('active', 'completed');
+document.querySelectorAll('.custom-spend input').forEach(input => {
+    input.addEventListener('input', function() {
+        this.value = this.value.replace(/[^0-9]/g, '');
     });
 
-    const steps = document.querySelectorAll('.progress-bar .step');
-    const currentIndex = parseInt(currentSection.replace('section', '')) - 1;
-
-    for(let i = 0; i < currentIndex; i++) {
-        steps[i].classList.add('completed');
-    }
-
-    steps[currentIndex].classList.add('active');
-
-    for(let i = currentIndex + 1; i < steps.length; i++) {
-        steps[i].classList.remove('completed', 'active');
-    }
-}
-
-function nextSection(currentSectionId, nextSectionId) {
-    hideAllSections();
-    document.getElementById(nextSectionId).classList.remove('hidden');
-    if (nextSectionId !== 'section1') {
-        document.getElementById('results').classList.add('hidden');
-    }
-    window.scrollTo(0, 0);
-}
-
-// Component Handlers
-function handleFlightSpendPresets() {
-    const presetOptions = document.querySelectorAll('input[name="flightSpend"]');
-    const customInput = document.querySelector('.custom-input');
-
-    presetOptions.forEach(option => {
-        option.addEventListener('change', function() {
-            if (this.value === 'custom') {
-                customInput.disabled = false;
-                customInput.focus();
-            } else {
-                customInput.disabled = true;
-                customInput.value = '';
-                document.getElementById('flightSpend').value = '$' + parseInt(this.value).toLocaleString();
-                calculatePoints();
-            }
-        });
-    });
-
-    customInput.addEventListener('blur', function() {
-        if (!this.disabled && this.value) {
-            document.getElementById('flightSpend').value = '$' + parseInt(this.value).toLocaleString();
-            calculatePoints();
+    input.addEventListener('blur', function() {
+        let value = parseInt(this.value) || 0;
+        if (value > MAX_MONTHLY_SPEND) {
+            value = MAX_MONTHLY_SPEND;
+            alert(`Monthly spending amount cannot exceed $${MAX_MONTHLY_SPEND.toLocaleString()}`);
         }
+        this.value = '$' + value.toLocaleString('en-US');
     });
-}
 
-function handleHotelSpendSlider() {
-    const slider = document.querySelector('#hotelSpend');
-    const monthlyValue = slider.parentElement.querySelector('.monthly-value');
-    const yearlyValue = slider.parentElement.querySelector('.yearly-value');
-
-    slider.addEventListener('input', function() {
-        const value = parseInt(this.value);
-        const monthly = Math.round(value / 12);
-        
-        monthlyValue.textContent = '$' + monthly.toLocaleString() + '/month';
-        yearlyValue.textContent = '$' + value.toLocaleString() + '/year';
-        
-        document.getElementById('hotelSpend').value = '$' + value.toLocaleString();
-        calculatePoints();
+    input.addEventListener('focus', function() {
+        this.value = this.value.replace(/[$,]/g, '');
     });
-}
+});
 
-function handleOtherSpendDropdown() {
-    const dropdown = document.querySelector('#otherSpend');
+// Update travel frequency listener to trigger pre-selection
+document.getElementById('travelFrequency').addEventListener('change', function() {
+    const frequency = parseInt(this.value) || 0;
+    preSelectSpendingOptions(frequency);
+});
+});
+
+function handleCustomAmountField(selectId, customContainerId) {
+    const select = document.getElementById(selectId);
+    const customContainer = document.getElementById(customContainerId);
+    const customInput = customContainer.querySelector('input');
     
-    dropdown.addEventListener('change', function() {
-        const value = parseInt(this.value);
-        document.getElementById('otherSpend').value = '$' + value.toLocaleString();
-        calculatePoints();
-    });
-}
-
-function updateSliderLabel(sliderId) {
-    const slider = document.getElementById(sliderId);
-    const labels = slider.parentElement.querySelector('.slider-labels').children;
-    const value = parseInt(slider.value);
-    const section = slider.closest('section');
-    
-    Array.from(labels).forEach(label => {
-        label.classList.remove('selected', 'primary-color');
-    });
-
-    if (section && section.id === 'section3') {
-        const selectedIndex = value - 1;
-        if (selectedIndex >= 0 && selectedIndex < labels.length) {
-            labels[selectedIndex].classList.add('selected', 'primary-color');
-        }
+    if (select.value === 'custom') {
+        customContainer.classList.remove('hidden');
+        customInput.required = true;
+        customInput.focus();
     } else {
-        if (value >= 0 && value < labels.length) {
-            labels[value].classList.add('selected');
-        }
+        customContainer.classList.add('hidden');
+        customInput.required = false;
     }
 }
 
-function initializeFormFields() {
-    ['flightSpend', 'hotelSpend', 'otherSpend'].forEach(id => {
-        const input = document.getElementById(id);
-        if (!input) {
-            console.error(`Input element with id ${id} not found`);
-            return;
-        }
-        
-        input.addEventListener('focus', function() {
-            const value = this.value.replace(/[$,]/g, '');
-            this.value = value;
-        });
+function preSelectSpendingOptions(travelFrequency) {
+    const tripRanges = [
+        { max: 1, flightIndex: 0, hotelIndex: 0 },
+        { max: 4, flightIndex: 1, hotelIndex: 1 },
+        { max: 8, flightIndex: 2, hotelIndex: 2 },
+        { max: Infinity, flightIndex: 3, hotelIndex: 3 }
+    ];
 
-        input.addEventListener('blur', function() {
-            let value = this.value.replace(/[^\d]/g, '');
-            if (value) {
-                value = parseInt(value, 10);
-                this.value = '$' + value.toLocaleString('en-US');
-            } else {
-                this.value = '$0';
-            }
-            
-            if (id === 'hotelSpend') {
-                updateAllExplanationTexts();
-            }
-        });
-
-        input.value = '$0';
-    });
-
-    document.getElementById('travelFrequency').addEventListener('blur', function() {
-        let value = this.value.replace(/[^ -\u007F]+/g, '');
-        if (value === '') value = '0';
-        value = Math.max(0, parseInt(value));
-        this.value = value;
-    });
+    const range = tripRanges.find(r => travelFrequency <= r.max);
+    
+    document.getElementById('flightSpend').selectedIndex = range.flightIndex;
+    document.getElementById('hotelSpend').selectedIndex = range.hotelIndex;
+    
+    // Hide any custom input fields that might be visible
+    document.getElementById('customFlightSpend').classList.add('hidden');
+    document.getElementById('customHotelSpend').classList.add('hidden');
 }
-// Points Calculation and Suggestions
-function calculatePoints() {
+
+  // Points Calculation for Section 1
+  function calculatePoints() {
     try {
-        console.log('Starting calculatePoints');
-        
-        // Log the input values
-        const flightSpendElement = document.getElementById('flightSpend');
-        const hotelSpendElement = document.getElementById('hotelSpend');
-        const otherSpendElement = document.getElementById('otherSpend');
-        
-        console.log('Input elements:', {
-            flightSpend: flightSpendElement?.value,
-            hotelSpend: hotelSpendElement?.value,
-            otherSpend: otherSpendElement?.value
-        });
+        // Get selected values and convert to annual amounts
+        const getAnnualAmount = (selectId, customId) => {
+            const select = document.getElementById(selectId);
+            if (select.value === 'custom') {
+                const customInput = document.getElementById(customId).querySelector('input');
+                return parseFloat(customInput.value.replace(/[^0-9.-]+/g, '')) * 12 || 0;
+            }
+            return parseFloat(select.value) * 12 || 0;
+        };
 
-        const flightSpend = parseFloat(flightSpendElement?.value?.replace(/[^0-9.-]+/g, '')) || 0;
-        const hotelSpend = parseFloat(hotelSpendElement?.value?.replace(/[^0-9.-]+/g, '')) || 0;
-        const otherSpend = parseFloat(otherSpendElement?.value?.replace(/[^0-9.-]+/g, '')) || 0;
+        const flightSpend = getAnnualAmount('flightSpend', 'customFlightSpend');
+        const hotelSpend = getAnnualAmount('hotelSpend', 'customHotelSpend');
+        const otherSpend = getAnnualAmount('otherSpend', 'customOtherSpend');
 
-        console.log('Parsed values:', {
-            flightSpend,
-            hotelSpend,
-            otherSpend
-        });
-
+        // Rest of the calculation remains the same
         const cappedFlightSpend = Math.min(flightSpend, 500000);
         const uncappedFlightSpend = Math.max(0, flightSpend - 500000);
 
+        // Calculate points: 5x on capped flight spend, 1x on uncapped amount
         const travelPoints = (cappedFlightSpend + hotelSpend) * 5;
         const otherPoints = otherSpend + uncappedFlightSpend;
         const totalPoints = travelPoints + otherPoints;
         const totalValuation = (WELCOME_BONUS + totalPoints) * POINT_VALUE;
 
+        // Debug logging
         console.log('Calculation values:', {
-            flightSpend, hotelSpend, otherSpend,
-            cappedFlightSpend, uncappedFlightSpend,
-            travelPoints, otherPoints, totalPoints, totalValuation
+            flightSpend,
+            hotelSpend,
+            otherSpend,
+            cappedFlightSpend,
+            uncappedFlightSpend,
+            travelPoints,
+            otherPoints,
+            totalPoints,
+            totalValuation
         });
 
+        // Verify all required elements exist
         const elements = {
             totalPointsValue: document.getElementById('totalPointsValue'),
             welcomeBonusValue: document.getElementById('welcomeBonusValue'),
@@ -249,6 +144,7 @@ function calculatePoints() {
             results: document.getElementById('results')
         };
 
+        // Check if any elements are missing
         const missingElements = Object.entries(elements)
             .filter(([key, element]) => !element)
             .map(([key]) => key);
@@ -257,31 +153,37 @@ function calculatePoints() {
             throw new Error(`Missing required elements: ${missingElements.join(', ')}`);
         }
 
+        // Update values
         elements.totalPointsValue.textContent = Math.round(totalPoints).toLocaleString() + ' points';
         elements.welcomeBonusValue.textContent = WELCOME_BONUS.toLocaleString() + ' points';
         elements.valuationValue.textContent = '$' + Math.round(totalValuation).toLocaleString();
 
+        // Get complementary suggestions
         const suggestions = getComplementarySuggestions(totalPoints);
         
-        const earnedPointsContainer = document.getElementById('totalPointsValue')
-            .parentElement.querySelector('.points-suggestion');
-        if (suggestions.earnedSuggestion && totalPoints >= MINIMUM_POINTS_FOR_SUGGESTION) {
-            if (earnedPointsContainer) {
-                earnedPointsContainer.textContent = suggestions.earnedSuggestion;
-            }
-        }
+// Update Total Points Earned suggestion
+const earnedPointsContainer = document.getElementById('totalPointsValue').parentElement.querySelector('.points-suggestion');
+if (suggestions.earnedSuggestion && totalPoints >= MINIMUM_POINTS_FOR_SUGGESTION) {
+    if (earnedPointsContainer) {
+        earnedPointsContainer.textContent = suggestions.earnedSuggestion;
+    }
+}
 
-        const welcomeBonusContainer = document.querySelector('.welcome-bonus .points-suggestion');
-        if (!welcomeBonusContainer) {
-            console.warn('Welcome bonus container not found');
-        } else {
-            welcomeBonusContainer.textContent = suggestions.welcomeSuggestion;
-        }
-
+// Update Welcome Bonus suggestion
+const welcomeBonusContainer = document.querySelector('.welcome-bonus .points-suggestion');
+if (!welcomeBonusContainer) {
+    console.warn('Welcome bonus container not found');
+} else {
+    welcomeBonusContainer.textContent = suggestions.welcomeSuggestion;
+}
+        // Show results
         elements.results.classList.remove('hidden');
         console.log('Results displayed successfully');
 
-        return { totalPoints, totalValuation };
+        return {
+            totalPoints,
+            totalValuation
+        };
 
     } catch (error) {
         console.error('Error in calculatePoints:', error);
@@ -289,7 +191,7 @@ function calculatePoints() {
         throw error;
     }
 }
-
+    
 const earnedPointSuggestions = [
     {
         min: 15000,
@@ -369,9 +271,11 @@ const welcomeBonusSuggestions = [
     { text: "That's enough for 2 round-trip flights from the US to the Caribbean!", category: "FLIGHTS" },
     { text: "That's enough for a round-trip flight to Europe!", category: "FLIGHTS" },
     { text: "That's enough for multiple domestic round-trip flights!", category: "FLIGHTS" },
+    
     { text: "That's enough for 4 nights at a luxury resort through Fine Hotels & Resorts!", category: "HOTELS" },
     { text: "That's enough for a week of 5-star hotel stays!", category: "HOTELS" },
     { text: "That's enough for multiple weekend escapes at luxury hotels!", category: "HOTELS" },
+    
     { text: "That's enough for multiple luxury weekend adventures!", category: "EXPERIENCES" },
     { text: "That's enough for a year of premium dining and entertainment!", category: "EXPERIENCES" },
     { text: "That's enough for several VIP travel experiences!", category: "EXPERIENCES" }
@@ -410,168 +314,118 @@ function getComplementarySuggestions(points) {
         welcomeSuggestion: welcomeSuggestion.text
     };
 }
+    
+ const travelFrequencyGroup = document.getElementById('travelFrequency').closest('.question-group');
+    
+    // Create title container
+    const titleContainer = document.createElement('div');
+    titleContainer.className = 'title-container';
+    
+    // Move the existing label into the title container
+    const existingLabel = travelFrequencyGroup.querySelector('label');
+    titleContainer.appendChild(existingLabel);
+    
+    // Add the disclaimer span
+    const disclaimer = document.createElement('span');
+    disclaimer.className = 'disclaimer';
+    disclaimer.innerHTML = 'Count each round-trip as one trip (e.g., NYC to LA and back = one trip).';
+    titleContainer.appendChild(disclaimer);
+    
+    // Insert the title container at the start of the question group
+    travelFrequencyGroup.insertBefore(titleContainer, travelFrequencyGroup.firstChild);
+    const INTERNATIONAL_HUBS = [
+    'JFK', 'LAX', 'ORD', 'MIA', 'SFO', 'EWR', 'IAD', 
+    'BOS', 'SEA', 'ATL', 'DFW', 'IAH', 'DEN'
+];
 
-// Benefits and Perks Calculations
-function calculateSection2Value(isFirstYear = true) {
-    const regularCredits = [
-        { id: 'airlineCredit', value: 200, steps: 5 },
-        { id: 'uberCredit', value: 200, steps: 5 },
-        { id: 'saksCredit', value: 100, steps: 5 },
-        { id: 'equinoxCredit', value: 300, steps: 5 },
-        { id: 'clearCredit', value: 199, steps: 5 },
-        { id: 'entertainmentCredit', value: 240, steps: 5 },
-        { id: 'walmartCredit', value: 155, steps: 5 },
-        { id: 'hotelCredit', value: 200, steps: 5 }
-    ];
+        const airportNames = {
+        'ATL': 'Atlanta',
+        'BOS': 'Boston',
+        'CLT': 'Charlotte',
+        'DEN': 'Denver',
+        'DFW': 'Dallas/Fort Worth',
+        'DTW': 'Detroit',
+        'EWR': 'Newark',
+        'IAD': 'Washington Dulles',
+        'IAH': 'Houston',
+        'JFK': 'New York JFK',
+        'LAX': 'Los Angeles',
+        'LGA': 'New York LaGuardia',
+        'MIA': 'Miami',
+        'ORD': 'Chicago',
+        'PHL': 'Philadelphia',
+        'PHX': 'Phoenix',
+        'SEA': 'Seattle',
+        'SFO': 'San Francisco'
+    };
 
-    const firstYearCredits = [
-        { id: 'soulCycleCredit', value: 300, steps: 5 }
-    ];
-
-    let total = regularCredits.reduce((sum, credit) => {
-        const sliderValue = parseInt(document.getElementById(credit.id)?.value || 0);
-        const percentage = sliderValue / 4;
-        const creditValue = credit.value * percentage;
-        
-        console.log(`${credit.id}:`, {
-            value: credit.value,
-            sliderValue,
-            percentage,
-            creditValue
-        });
-        
-        return sum + creditValue;
-    }, 0);
-
-    if (isFirstYear) {
-        const globalEntryValue = parseInt(document.getElementById('globalEntryCredit').value) || 0;
-        total += globalEntryValue;
-
-        firstYearCredits.forEach(credit => {
-            const sliderValue = parseInt(document.getElementById(credit.id)?.value || 0);
-            const percentage = sliderValue / 4;
-            total += credit.value * percentage;
-        });
+        updateProgressBar('section1');
+    
+document.getElementById('homeAirport').addEventListener('change', function() {
+    const customHomeAirport = document.getElementById('customHomeAirport');
+    const customAirportInput = customHomeAirport.querySelector('input');
+    
+    if (this.value === 'custom') {
+        customHomeAirport.classList.remove('hidden');
+        customAirportInput.required = true;
+        customAirportInput.focus();
+    } else {
+        customHomeAirport.classList.add('hidden');
+        customAirportInput.required = false;
     }
+});
 
-    return Math.round(total);
+// Add validation for the custom airport input
+const customAirportInput = document.querySelector('#customHomeAirport input');
+if (customAirportInput) {
+    customAirportInput.addEventListener('input', function() {
+        this.value = this.value.replace(/[^A-Za-z\s]/g, ''); // Only letters and spaces
+            updateAllExplanationTexts();
+    });
 }
+    
+    function updateSliderLabel(sliderId) {
+    const slider = document.getElementById(sliderId);
+    const labels = slider.parentElement.querySelector('.slider-labels').children;
+    const value = parseInt(slider.value);
+    const section = slider.closest('section');
+    
+    // Remove classes from all labels
+    Array.from(labels).forEach(label => {
+        label.classList.remove('selected', 'primary-color');
+    });
 
-function calculateSection3Value() {
-    const travelFrequency = parseInt(document.getElementById('travelFrequency').value.replace(/[^ -\u007F]+/g, '')) || 0;
-
-    const perks = [
-        { id: 'loungeAccess', valuePerUse: 50, steps: 5 },
-        { id: 'partnerStatus', valuePerUse: 40, steps: 5 },
-        { id: 'fhrAndIap', valuePerUse: 100, steps: 5 }
-    ];
-
-    let total = perks.reduce((sum, perk) => {
-        const sliderValue = parseInt(document.getElementById(perk.id).value);
-        const percentages = {
-            1: 0,    // Never
-            2: 0.25, // Rarely
-            3: 0.50, // Sometimes
-            4: 0.75, // Often
-            5: 1.00  // Always
-        };
-        
-        const percentage = percentages[sliderValue] || 0;
-        const perkValue = travelFrequency * perk.valuePerUse * percentage;
-        
-        console.log(`${perk.id}:`, {
-            travelFrequency,
-            valuePerUse: perk.valuePerUse,
-            sliderValue,
-            percentage,
-            perkValue
-        });
-        
-        return sum + perkValue;
-    }, 0);
-
-    return Math.round(total);
-}
-
-function calculateGlobalEntryCredit(homeAirport, tripsPerYear) {
-    try {
-        const airport = homeAirport.toUpperCase();
-        
-        console.log('Calculating Global Entry credit:', {
-            homeAirport,
-            airport,
-            tripsPerYear
-        });
-        
-        if (homeAirport === 'custom') {
-            return tripsPerYear >= 3 ? 85 : 0;
+    if (section && section.id === 'section3') {
+        // For section 3, adjust the index to match the 1-5 value range
+        const selectedIndex = value - 1;  // Convert 1-5 to 0-4 for label index
+        if (selectedIndex >= 0 && selectedIndex < labels.length) {
+            labels[selectedIndex].classList.add('selected', 'primary-color');
         }
-        
-        if (INTERNATIONAL_HUBS.includes(airport)) {
-            if (tripsPerYear >= 3) {
-                return 120; // Global Entry
-            }
+    } else {
+        // Section 2 stays the same (0-4 range)
+        if (value >= 0 && value < labels.length) {
+            labels[value].classList.add('selected');
         }
-        
-        if (tripsPerYear >= 3) {
-            return 85; // TSA PreCheck
-        }
-        
-        return 0;
-    } catch (error) {
-        console.error('Error in calculateGlobalEntryCredit:', error);
-        return 0;
     }
 }
-
-// Pre-selection Functions
-function preSelectBenefitsValues() {
-    try {
-        console.log('Starting preSelectBenefitsValues');
-        const travelFrequency = parseInt(document.getElementById('travelFrequency').value) || 0;
-        const homeAirport = document.getElementById('homeAirport').value;
-
-        // Airline Credit (0-4 scale)
-        const airlineValue = travelFrequency >= 4 ? 4 : 
-                           travelFrequency >= 2 ? 3 : 
-                           travelFrequency >= 1 ? 2 : 1;
-        
-        // Uber Credit (0-4 scale)
-        const uberValue = travelFrequency >= 6 ? 4 : 
-                         travelFrequency >= 3 ? 3 : 
-                         travelFrequency >= 1 ? 2 : 1;
-        
-        // CLEAR Credit (0-4 scale)
-        const clearValue = INTERNATIONAL_HUBS.includes(homeAirport) && travelFrequency >= 4 ? 4 :
-                         INTERNATIONAL_HUBS.includes(homeAirport) && travelFrequency >= 2 ? 3 :
-                         travelFrequency >= 4 ? 2 : 1;
-
-        // Global Entry/TSA PreCheck
-        const globalEntryValue = calculateGlobalEntryCredit(homeAirport, travelFrequency);
-
-        // Set the values
-        document.getElementById('airlineCredit').value = Math.min(airlineValue, 4);
-        document.getElementById('uberCredit').value = Math.min(uberValue, 4);
-        document.getElementById('clearCredit').value = Math.min(clearValue, 4);
-        document.getElementById('globalEntryCredit').value = globalEntryValue;
-
-        // Update slider labels
-        ['airlineCredit', 'uberCredit', 'clearCredit'].forEach(id => {
-            updateSliderLabel(id);
-        });
-
-        console.log('Benefits pre-selected:', {
-            airlineValue,
-            uberValue,
-            clearValue,
-            globalEntryValue
-        });
-
-    } catch (error) {
-        console.error('Error in preSelectBenefitsValues:', error);
+    function formatCurrency(input) {
+        let value = input.value.replace(/[^0-9.-]+/g, '');
+        if (value) {
+            value = parseInt(value, 10).toLocaleString('en-US');
+        }
+        input.value = value ? '$' + value : '';
     }
-}
 
+    function hideAllSections() {
+        document.querySelectorAll('.section').forEach(section => {
+    section.classList.add('hidden');
+});
+    }
+
+hideAllSections();
+document.getElementById('section1').classList.remove('hidden');
+
+// Update the mapping in preSelectPerkValues
 function preSelectPerkValues() {
     try {
         console.log('Starting preSelectPerkValues');
@@ -579,15 +433,19 @@ function preSelectPerkValues() {
         const hotelSpend = parseFloat(document.getElementById('hotelSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
         const homeAirport = document.getElementById('homeAirport').value;
 
-        // Lounge Access (1-5 scale)
-        let loungeValue = 1; // Never
-        if (INTERNATIONAL_HUBS.includes(homeAirport) && travelFrequency > 6) {
+        // Centurion Lounge airports
+        const centurionAirports = ['ATL', 'DEN', 'DFW', 'IAH', 'JFK', 'LAX', 'LGA', 'MIA', 'PHL', 'PHX', 'SEA', 'SFO'];
+        const otherLoungeAirports = ['BOS', 'CLT', 'DTW', 'EWR', 'IAD', 'ORD'];
+
+        // Map the values to the new scale (1=Never, 2=Rarely, 3=Sometimes, 4=Often, 5=Always)
+        let loungeValue = 1; // Default to Never
+        if (centurionAirports.includes(homeAirport) && travelFrequency > 6) {
             loungeValue = 5; // Always
-        } else if (INTERNATIONAL_HUBS.includes(homeAirport) && travelFrequency >= 3) {
+        } else if (centurionAirports.includes(homeAirport) && travelFrequency >= 3) {
             loungeValue = 4; // Often
-        } else if (travelFrequency > 6) {
+        } else if (otherLoungeAirports.includes(homeAirport) && travelFrequency > 6) {
             loungeValue = 3; // Sometimes
-        } else if (travelFrequency >= 3) {
+        } else if (otherLoungeAirports.includes(homeAirport) && travelFrequency >= 3) {
             loungeValue = 2; // Rarely
         }
 
@@ -615,108 +473,194 @@ function preSelectPerkValues() {
             fhrValue = 2; // Rarely
         }
 
+        // Card Protections
+        let protectionValue = 1; // Never
+        if (travelFrequency > 8) {
+            protectionValue = 5; // Always
+        } else if (travelFrequency > 6) {
+            protectionValue = 4; // Often
+        } else if (travelFrequency >= 4) {
+            protectionValue = 3; // Sometimes
+        } else if (travelFrequency >= 2) {
+            protectionValue = 2; // Rarely
+        }
+
         // If it's a custom airport, use more conservative values
         if (homeAirport === 'custom') {
-            loungeValue = Math.min(loungeValue, 3);
-            statusValue = Math.min(statusValue, 3);
-            fhrValue = Math.min(fhrValue, 3);
+            loungeValue = Math.min(loungeValue, 3); // Cap at "Sometimes"
+            statusValue = Math.min(statusValue, 3); // Cap at "Sometimes"
+            fhrValue = Math.min(fhrValue, 3); // Cap at "Sometimes"
+            protectionValue = Math.min(protectionValue, 3); // Cap at "Sometimes"
         }
+
+        // Debug logging
+        console.log('Pre-selection values:', {
+            travelFrequency,
+            hotelSpend,
+            homeAirport,
+            loungeValue,
+            statusValue,
+            fhrValue,
+            protectionValue
+        });
 
         // Set the values
         document.getElementById('loungeAccess').value = loungeValue;
         document.getElementById('partnerStatus').value = statusValue;
         document.getElementById('fhrAndIap').value = fhrValue;
+        document.getElementById('cardProtections').value = protectionValue;
 
-        // Update slider labels
-        ['loungeAccess', 'partnerStatus', 'fhrAndIap'].forEach(id => {
+        // Update the slider labels
+        ['loungeAccess', 'partnerStatus', 'fhrAndIap', 'cardProtections'].forEach(id => {
             updateSliderLabel(id);
         });
 
-        console.log('Perks pre-selected:', {
-            loungeValue,
-            statusValue,
-            fhrValue
-        });
-
-        // Update explanation text
         updatePerksExplanationText();
 
     } catch (error) {
-        console.error('Error in preSelectPerkValues:', error);
+        console.error("Error in preSelectPerkValues:", error);
     }
 }
 
-// Additional Error Handling
-function handleCalculationError(error, section) {
-    console.error(`Error in ${section}:`, error);
-    alert(`There was an error calculating your ${section.toLowerCase()}. Please try again or contact support if the problem persists.`);
+function preSelectBenefitsValues() {
+    try {
+        // Get values from Section 1
+        const travelFrequency = parseInt(document.getElementById('travelFrequency').value) || 0;
+        const hotelSpend = parseFloat(document.getElementById('hotelSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
+        const homeAirport = document.getElementById('homeAirport').value;
+
+     const globalEntryValue = calculateGlobalEntryCredit(homeAirport, travelFrequency);
+const globalEntrySelect = document.getElementById('globalEntryCredit');
+if (globalEntrySelect) {
+    globalEntrySelect.value = globalEntryValue.toString();
 }
 
-function validateInputs() {
-    const requiredInputs = {
-        travelFrequency: document.getElementById('travelFrequency'),
-        homeAirport: document.getElementById('homeAirport'),
-        hotelSpend: document.getElementById('hotelSpend')
-    };
+        // Define airport categories
+        const majorUrbanAirports = ['JFK', 'LGA', 'EWR', 'LAX', 'SFO', 'ORD', 'MIA', 'BOS'];
+        const midTierAirports = ['DEN', 'DFW', 'IAH', 'SEA', 'PHX', 'DTW', 'PHL'];
+        const luxuryMarketAirports = ['JFK', 'LGA', 'EWR', 'LAX', 'SFO', 'MIA'];
+        const nycAirports = ['JFK', 'LGA', 'EWR'];
+        const equinoxMarkets = ['BOS', 'MIA', 'SFO', 'LAX'];
+        const clearAirports = ['ATL', 'BOS', 'DEN', 'DFW', 'IAH', 'JFK', 'LAX', 'LGA', 'MIA', 'ORD', 'PHX', 'SEA', 'SFO'];
+        const urbanAirports = ['JFK', 'LGA', 'EWR', 'LAX', 'SFO', 'BOS', 'MIA'];
 
-    for (const [name, input] of Object.entries(requiredInputs)) {
-        if (!input || !input.value) {
-            throw new Error(`Missing required input: ${name}`);
+        // Set values for each credit
+        const creditValues = {
+            // 1. Airline Fee Credit
+            airlineCredit: travelFrequency > 6 ? 4 : (travelFrequency >= 3 ? 2 : 1),
+
+            // 2. Uber Cash
+            uberCredit: majorUrbanAirports.includes(homeAirport) ? 4 : 
+                       (midTierAirports.includes(homeAirport) ? 2 : 1),
+
+            // 3. Saks Credit
+              saksCredit: (() => {
+        const otherSpend = parseFloat(document.getElementById('otherSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
+        
+        if (otherSpend > 5000 || luxuryMarketAirports.includes(homeAirport)) {
+            return 4;  // High likelihood of using full credit
+        } else if (otherSpend > 2000 || majorUrbanAirports.includes(homeAirport)) {
+            return 2;  // Medium likelihood
+        }
+        return 1;  // Lower likelihood but still possible due to online shopping
+    })(),
+    
+            // 4. Equinox Credit
+            equinoxCredit: nycAirports.includes(homeAirport) ? 4 :
+                          (equinoxMarkets.includes(homeAirport) ? 2 : 1),
+
+            // 5. CLEAR Credit
+            clearCredit: (clearAirports.includes(homeAirport) && travelFrequency > 6) ? 4 :
+                        (clearAirports.includes(homeAirport) && travelFrequency >= 3) ? 2 : 1,
+            
+            // 7. Entertainment Credit
+            entertainmentCredit: 2, // Default to medium
+
+            // 8. Walmart+ Credit
+            walmartCredit: !urbanAirports.includes(homeAirport) ? 4 :
+                          (midTierAirports.includes(homeAirport) ? 2 : 1),
+
+            // 9. Hotel Credit
+            hotelCredit: hotelSpend > 5000 ? 4 :
+                        (hotelSpend >= 2000 ? 2 : 1),
+
+            // 10. SoulCycle Credit
+            soulCycleCredit: urbanAirports.includes(homeAirport) ? 4 :
+                            (midTierAirports.includes(homeAirport) ? 2 : 1)
+        };
+
+           if (homeAirport === 'custom') {
+            // Cap all values at 2 ("Rarely") for custom airports
+            Object.keys(creditValues).forEach(key => {
+                creditValues[key] = Math.min(creditValues[key], 2);
+            });
+            
+            // Special handling for specific credits that should be even more conservative
+            creditValues.equinoxCredit = 1;  // Set to "Never" for custom airports
+            creditValues.soulCycleCredit = 1; // Set to "Never" for custom airports
+            creditValues.clearCredit = 1;     // Set to "Never" for custom airports
+            
+            // Set Global Entry to TSA PreCheck value for custom airports
+            if (globalEntrySelect && travelFrequency >= 3) {
+                globalEntrySelect.value = "85";
+            }
+        }
+
+        // Debug logging
+        console.log('Pre-selection values for benefits:', {
+            travelFrequency,
+            hotelSpend,
+            homeAirport,
+            creditValues,
+            globalEntryValue: globalEntrySelect?.value
+        });
+
+        // Set the values and update labels
+        Object.entries(creditValues).forEach(([id, value]) => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.value = value;
+                updateSliderLabel(id);
+            }
+        });
+        
+        updateExplanationText();
+        
+    } catch (error) {
+        console.error("Error in preSelectBenefitsValues:", error);
+        // Set default values as fallback
+        const creditIds = [
+            'airlineCredit', 'uberCredit', 'saksCredit', 'equinoxCredit',
+            'clearCredit', 'entertainmentCredit', 'walmartCredit', 
+            'hotelCredit', 'soulCycleCredit'
+        ];
+        creditIds.forEach(id => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.value = 1;
+                updateSliderLabel(id);
+            }
+        });
+        // Set default for Global Entry dropdown
+        const globalEntrySelect = document.getElementById('globalEntryCredit');
+        if (globalEntrySelect) {
+            globalEntrySelect.value = "0";
         }
     }
 }
-
-// Add this to your existing updateProgressBar function
-function updateProgressBarWithError(currentSection, error) {
-    updateProgressBar(currentSection);
-    console.error(`Error in section ${currentSection}:`, error);
-    // You might want to add visual feedback here
-}
-
-function calculateFinalValuation() {
-    console.log("Starting final valuation calculation");
-    
-    const travelFrequency = parseInt(document.getElementById('travelFrequency').value.replace(/[^\d.-]/g, ''));
-    console.log("Travel Frequency:", travelFrequency);
-    
-    if (!travelFrequency) {
-        alert('Please enter your travel frequency in section 1');
-        nextSection('section4', 'section1');
-        return;
-    }
-
-    const totalPointsElement = document.getElementById('totalPointsValue');
-    if (!totalPointsElement) {
-        console.error("Could not find totalPointsValue element");
-        return;
-    }
-    
-    const totalPoints = parseInt(totalPointsElement.textContent.replace(/[^\d.-]/g, '')) || 0;
-    const pointsValue = totalPoints * POINT_VALUE;
-    const section2Value = calculateSection2Value();
-    const section3Value = calculateSection3Value();
-
-    console.log({
-        pointsValue,
-        section2Value,
-        section3Value
-    });
-
-    const yearlyValue = pointsValue + section2Value + section3Value;
-    const signupBonusValue = WELCOME_BONUS * POINT_VALUE;
-    const firstYearValue = yearlyValue + signupBonusValue - ANNUAL_FEE;
-    const secondYearValue = yearlyValue - ANNUAL_FEE;
-
-    updateValuationDisplay(firstYearValue, secondYearValue, pointsValue, section2Value, section3Value, signupBonusValue);
-}
-// Explanation Text Updates
 function updateExplanationText() {
     try {
-        const travelFrequency = parseInt(document.getElementById('travelFrequency')?.value) || 0;
-        const hotelSpend = parseFloat(document.getElementById('hotelSpend')?.value?.replace(/[$,]/g, '')) || 0;
-        const homeAirport = document.getElementById('homeAirport')?.value || 'none';
+        const travelFrequencyElement = document.getElementById('travelFrequency');
+        const travelFrequency = parseInt(travelFrequencyElement?.value) || 0;
+
+        const hotelSpendElement = document.getElementById('hotelSpend');
+        const hotelSpend = parseFloat(hotelSpendElement?.value?.replace(/[$,]/g, '')) || 0;
+
+        const homeAirportElement = document.getElementById('homeAirport');
+        const homeAirport = homeAirportElement?.value || 'none';
         const customAirportInput = document.querySelector('#customHomeAirport input');
         
+        // Get full airport name or use code if not found
         let airportDisplay;
         if (homeAirport === 'custom' && customAirportInput?.value) {
             airportDisplay = customAirportInput.value.toUpperCase();
@@ -727,11 +671,18 @@ function updateExplanationText() {
         }
 
         const explanationText = document.querySelector('.pre-selection-notice p');
-        if (!explanationText) return;
+        if (!explanationText) {
+            console.error('Explanation text element not found');
+            return;
+        }
 
+        // Format hotel spend
         const formattedHotelSpend = hotelSpend ? `$${hotelSpend.toLocaleString()}` : '$0';
+
+        // Build base travel pattern text
         const travelPattern = `Based on your travel patterns (${travelFrequency} trip${travelFrequency !== 1 ? 's' : ''} per year${hotelSpend > 0 ? `, ${formattedHotelSpend} hotel spend` : ''})`;
 
+        // Build the text based on airport selection status
         let text;
         if (!homeAirport || homeAirport === 'none') {
             text = `${travelPattern}, we've pre-selected suggested values for how much of each credit you might use yearly. <strong>These suggestions reflect typical usage patterns, but you should adjust them to match your expected usage.</strong>`;
@@ -747,6 +698,113 @@ function updateExplanationText() {
         console.error('Error in updateExplanationText:', error);
     }
 }
+    function refreshExplanationText() {
+    console.log('refreshExplanationText called');
+    const notice = document.querySelector('.pre-selection-notice');
+    console.log('notice element:', notice);
+    if (notice) {
+        updateExplanationText();
+        notice.classList.add('updated');
+        setTimeout(() => {
+            notice.classList.remove('updated');
+        }, 1000);
+    }
+}
+        function updateAllExplanationTexts() {
+    console.log('Updating all explanation texts');
+    refreshExplanationText();
+    updatePerksExplanationText();
+}
+
+    // Calculate Section 2 Value
+function calculateSection2Value(isFirstYear = true) {
+    // Define all credits with their annual values
+    const regularCredits = [
+        { id: 'airlineCredit', value: 200, steps: 5 },      // Annual
+        { id: 'uberCredit', value: 200, steps: 5 },         // Monthly ($15 + $20 Dec)
+        { id: 'saksCredit', value: 100, steps: 5 },         // Semi-annual ($50 × 2)
+        { id: 'equinoxCredit', value: 300, steps: 5 },      // Annual
+        { id: 'clearCredit', value: 199, steps: 5 },        // Annual
+        { id: 'entertainmentCredit', value: 240, steps: 5 }, // Monthly ($20)
+        { id: 'walmartCredit', value: 155, steps: 5 },      // Monthly ($12.95)
+        { id: 'hotelCredit', value: 200, steps: 5 }         // Annual
+    ];
+
+    // First year only credits
+    const firstYearCredits = [
+        { id: 'soulCycleCredit', value: 300, steps: 5 }     // One-time
+    ];
+
+    // Calculate regular credits
+    let total = regularCredits.reduce((sum, credit) => {
+        const sliderValue = parseInt(document.getElementById(credit.id)?.value || 0);
+        // Convert slider value (0-4) to percentage (0, 0.25, 0.50, 0.75, 1.0)
+        const percentage = sliderValue / 4;
+        const creditValue = credit.value * percentage;
+        
+        console.log(`${credit.id}:`, {
+            value: credit.value,
+            sliderValue,
+            percentage,
+            creditValue
+        });
+        
+        return sum + creditValue;
+    }, 0);
+
+    // Add first year only credits
+    if (isFirstYear) {
+        // Add Global Entry/TSA PreCheck
+        const globalEntryValue = parseInt(document.getElementById('globalEntryCredit').value) || 0;
+        total += globalEntryValue;
+
+        // Add other first-year-only credits
+        firstYearCredits.forEach(credit => {
+            const sliderValue = parseInt(document.getElementById(credit.id)?.value || 0);
+            const percentage = sliderValue / 4;
+            total += credit.value * percentage;
+        });
+    }
+
+    return Math.round(total);
+}
+
+function calculateGlobalEntryCredit(homeAirport, tripsPerYear) {
+    try {
+        const airport = homeAirport.toUpperCase();
+        
+        // Log the inputs for debugging
+        console.log('Calculating Global Entry credit:', {
+            homeAirport,
+            airport,
+            tripsPerYear
+        });
+        
+        // For custom airports, default to TSA PreCheck if frequent enough
+        if (homeAirport === 'custom') {
+            return tripsPerYear >= 3 ? 85 : 0;
+        }
+        
+        // For international hubs
+        if (INTERNATIONAL_HUBS.includes(airport)) {
+            if (tripsPerYear >= 3) {
+                return 120; // Global Entry
+            }
+        }
+        
+        // For all other airports
+        if (tripsPerYear >= 6) {
+            return 85; // TSA PreCheck
+        } else if (tripsPerYear >= 3) {
+            return 85; // TSA PreCheck
+        }
+        
+        return 0; // Not enough travel frequency
+    } catch (error) {
+        console.error('Error in calculateGlobalEntryCredit:', error);
+        return 0; // Default to no credit if there's an error
+    }
+}
 
 function updatePerksExplanationText() {
     try {
@@ -758,15 +816,18 @@ function updatePerksExplanationText() {
         const hotelSpend = parseFloat(document.getElementById('hotelSpend').value.replace(/[$,]/g, '')) || 0;
         const customAirportInput = document.querySelector('#customHomeAirport input');
 
+        // Define airport amenities
         const airportAmenities = {
             centurionLounges: ['ATL', 'DEN', 'DFW', 'IAH', 'JFK', 'LAX', 'LGA', 'MIA', 'PHL', 'PHX', 'SEA', 'SFO'],
             clearLanes: ['ATL', 'BOS', 'DEN', 'DFW', 'IAH', 'JFK', 'LAX', 'LGA', 'MIA', 'ORD', 'PHX', 'SEA', 'SFO'],
             escapeLounges: ['BOS', 'CLT', 'MSP', 'OAK', 'PHL', 'PHX', 'RNO', 'SAC']
         };
 
+        // Format hotel spend
         const formattedHotelSpend = hotelSpend ? `$${hotelSpend.toLocaleString()}` : '$0';
-        let amenitiesText = '';
 
+        // Build available amenities text
+        let amenitiesText = '';
         if (homeAirport === 'custom') {
             amenitiesText = "We're unable to confirm specific lounge availability at your selected airport. Please check the American Express Global Lounge Collection for available lounges.";
         } else if (!homeAirport || homeAirport === 'none') {
@@ -785,208 +846,152 @@ function updatePerksExplanationText() {
             }
             availableAmenities.push("Priority Pass lounges");
 
-            amenitiesText = formatAmenitiesList(availableAmenities);
+            if (availableAmenities.length === 1) {
+                amenitiesText = `you'll have access to ${availableAmenities[0]}`;
+            } else if (availableAmenities.length === 2) {
+                amenitiesText = `you'll have access to both ${availableAmenities[0]} and ${availableAmenities[1]}`;
+            } else {
+                const lastAmenity = availableAmenities.pop();
+                amenitiesText = `you'll have access to ${availableAmenities.join(", ")} and ${lastAmenity}`;
+            }
         }
 
-        perksNotice.innerHTML = generatePerksText(homeAirport, travelFrequency, formattedHotelSpend, amenitiesText, customAirportInput);
+        // Build the complete text based on airport selection status
+        let text;
+        if (!homeAirport || homeAirport === 'none') {
+            text = `${amenitiesText} Based on your travel frequency (${travelFrequency} trip${travelFrequency !== 1 ? 's' : ''} per year) and hotel spend (${formattedHotelSpend}), we've pre-selected suggested values for each perk. <strong>Please adjust these based on your local airport's lounge availability and how often you expect to use each benefit.</strong>`;
+        } else if (homeAirport === 'custom') {
+            text = `For travelers using ${customAirportInput?.value || 'your airport'}, we're unable to provide specific lounge information. We recommend checking the <a href="https://global.americanexpress.com/lounge-access/the-platinum-card?locale=en-CA" target="_blank">American Express Global Lounge Collection</a> for available lounges at your airport. Based on your travel frequency (${travelFrequency} trip${travelFrequency !== 1 ? 's' : ''} per year) and hotel spend (${formattedHotelSpend}), we've pre-selected conservative values for each perk. <strong>Please adjust these based on the actual lounge availability and how often you expect to use each benefit.</strong>`;
+        } else {
+            text = `With ${airportNames[homeAirport] || homeAirport} (${homeAirport}) as your home airport, ${amenitiesText}. Combined with your travel frequency (${travelFrequency} trip${travelFrequency !== 1 ? 's' : ''} per year) and hotel spend (${formattedHotelSpend}), we've pre-selected values for each perk based on typical usage patterns. <strong>These suggestions are based on typical usage patterns for similar travelers, but you should adjust them based on how often you're likely to take advantage of them.</strong>`;
+        }
+
+        perksNotice.innerHTML = text;
 
     } catch (error) {
         console.error('Error in updatePerksExplanationText:', error);
     }
 }
 
-function formatAmenitiesList(amenities) {
-    if (amenities.length === 1) {
-        return `you'll have access to ${amenities[0]}`;
-    } else if (amenities.length === 2) {
-        return `you'll have access to both ${amenities[0]} and ${amenities[1]}`;
-    } else {
-        const lastAmenity = amenities.pop();
-        return `you'll have access to ${amenities.join(", ")} and ${lastAmenity}`;
-    }
-}
-
-function generatePerksText(homeAirport, travelFrequency, formattedHotelSpend, amenitiesText, customAirportInput) {
-    const travelPattern = `travel frequency (${travelFrequency} trip${travelFrequency !== 1 ? 's' : ''} per year) and hotel spend (${formattedHotelSpend})`;
-
-    if (!homeAirport || homeAirport === 'none') {
-        return `${amenitiesText} Based on your ${travelPattern}, we've pre-selected suggested values for each perk. <strong>Please adjust these based on your local airport's lounge availability and how often you expect to use each benefit.</strong>`;
-    } else if (homeAirport === 'custom') {
-        return `For travelers using ${customAirportInput?.value || 'your airport'}, we're unable to provide specific lounge information. We recommend checking the <a href="https://global.americanexpress.com/lounge-access/the-platinum-card?locale=en-CA" target="_blank">American Express Global Lounge Collection</a> for available lounges at your airport. Based on your ${travelPattern}, we've pre-selected conservative values for each perk. <strong>Please adjust these based on the actual lounge availability and how often you expect to use each benefit.</strong>`;
-    } else {
-        return `With ${airportNames[homeAirport] || homeAirport} (${homeAirport}) as your home airport, ${amenitiesText}. Combined with your ${travelPattern}, we've pre-selected values for each perk based on typical usage patterns. <strong>These suggestions are based on typical usage patterns for similar travelers, but you should adjust them based on how often you're likely to take advantage of them.</strong>`;
-    }
-}
-
-function refreshExplanationText() {
-    console.log('refreshExplanationText called');
-    const notice = document.querySelector('.pre-selection-notice');
-    if (notice) {
-        updateExplanationText();
-        notice.classList.add('updated');
-        setTimeout(() => {
-            notice.classList.remove('updated');
-        }, 1000);
-    }
-}
-
-function updateAllExplanationTexts() {
-    console.log('Updating all explanation texts');
-    refreshExplanationText();
-    updatePerksExplanationText();
-}
-
-// Main Initialization and Event Listeners
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize components
-    handleFlightSpendPresets();
-    handleHotelSpendSlider();
-    handleOtherSpendDropdown();
-    
-    // Set initial state
-    hideAllSections();
-    document.getElementById('section1').classList.remove('hidden');
-    updateProgressBar('section1');
-    
-    // Initialize form fields
-    initializeFormFields();
-    
-    // Initialize sliders
-    document.querySelectorAll('input[type="range"]').forEach(slider => {
-        slider.addEventListener('input', () => updateSliderLabel(slider.id));
-    });
-
-    // Home Airport Event Listeners
-    document.getElementById('homeAirport').addEventListener('change', function() {
-        const customHomeAirport = document.getElementById('customHomeAirport');
-        const customAirportInput = customHomeAirport.querySelector('input');
-        
-        if (this.value === 'custom') {
-            customHomeAirport.classList.remove('hidden');
-            customAirportInput.required = true;
-            customAirportInput.focus();
-        } else {
-            customHomeAirport.classList.add('hidden');
-            customAirportInput.required = false;
-        }
-    });
-
-    // Custom Airport Input Validation
-    const customAirportInput = document.querySelector('#customHomeAirport input');
-    if (customAirportInput) {
-        customAirportInput.addEventListener('input', function() {
-            this.value = this.value.replace(/[^A-Za-z\s]/g, '');
-            updateAllExplanationTexts();
-        });
-    }
-
-    // Section Navigation Event Listeners
-    document.getElementById('calculatePointsBtn').addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        const travelFrequency = document.getElementById('travelFrequency').value;
-        if (!travelFrequency || travelFrequency === '0') {
-            document.getElementById('travelFrequency').classList.add('error');
-            alert('Please enter how many times you travel per year');
-            return;
-        }
-
-        document.getElementById('travelFrequency').classList.remove('error');
-        
-        try {
-            calculatePoints();
-            const resultsSection = document.getElementById('results');
-            if (resultsSection) {
-                resultsSection.classList.remove('hidden');
-                resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                updateProgressBar('section1');
-            }
-        } catch (error) {
-            console.error("Error calculating points:", error);
-            alert('There was an error calculating your points. Please try again.');
-        }
-    });
-
-    // Continue Button
-    const continueBtn = document.getElementById('continueBtn');
-    if (continueBtn) {
-        continueBtn.addEventListener('click', function() {
-            const travelFrequency = document.getElementById('travelFrequency').value;
-            if (!travelFrequency || travelFrequency === '0') {
-                document.getElementById('travelFrequency').classList.add('error');
-                alert('Please enter how many times you travel per year');
-                return;
-            }
-            calculatePoints();
-            nextSection('section1', 'section2');
-            updateProgressBar('section2');
-            preSelectBenefitsValues();
-        });
-    }
-
-    // Back Buttons
-    document.getElementById('backToSection1').addEventListener('click', function(e) {
-        e.preventDefault();
-        nextSection('section2', 'section1');
-        updateProgressBar('section1');
-    });
-
-    document.getElementById('backToSection2').addEventListener('click', function(e) {
-        e.preventDefault();
-        nextSection('section3', 'section2');
-        updateProgressBar('section2');
-    });
-
-    document.getElementById('backToSection3').addEventListener('click', function(e) {
-        e.preventDefault();
-        nextSection('section4', 'section3');
-        updateProgressBar('section3');
-    });
-
-    // Continue to Section 3 Button
-    document.getElementById('continueToSection3Btn').addEventListener('click', function() {
-        console.log('Continue to Section 3 clicked');
-        nextSection('section2', 'section3');
-        updateProgressBar('section3');
-        setTimeout(() => {
-            preSelectPerkValues();
-            console.log('Perks pre-selected');
-        }, 100);
-    });
-
-    // Calculate Valuation Button
-    const calculateValuationBtn = document.getElementById('calculateValuationBtn');
-    if (calculateValuationBtn) {
-        calculateValuationBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            console.log("Calculate Valuation button clicked");
-            calculateFinalValuation();
-            updateProgressBar('section4');
-        });
-    }
-
-    // Update explanation texts when relevant fields change
-    ['travelFrequency', 'homeAirport'].forEach(id => {
-        document.getElementById(id).addEventListener('change', updateAllExplanationTexts);
-    });
-
-    document.getElementById('hotelSpend').addEventListener('blur', updateAllExplanationTexts);
-
-    // Initialize travel frequency group
-    const travelFrequencyGroup = document.getElementById('travelFrequency').closest('.question-group');
-    const titleContainer = document.createElement('div');
-    titleContainer.className = 'title-container';
-    const existingLabel = travelFrequencyGroup.querySelector('label');
-    titleContainer.appendChild(existingLabel);
-    const disclaimer = document.createElement('span');
-    disclaimer.className = 'disclaimer';
-    disclaimer.innerHTML = 'Count each round-trip as one trip (e.g., NYC to LA and back = one trip).';
-    titleContainer.appendChild(disclaimer);
-    travelFrequencyGroup.insertBefore(titleContainer, travelFrequencyGroup.firstChild);
+// Add this single event listener for section 3 transition
+document.getElementById('continueToSection3Btn').addEventListener('click', function() {
+    console.log('Continue to Section 3 clicked');
+    nextSection('section2', 'section3');
+    updateProgressBar('section3');
+    setTimeout(() => {
+        preSelectPerkValues();
+        console.log('Perks pre-selected');
+    }, 100);
 });
 
-// Helper function to update valuation display
-function updateValuationDisplay(firstYearValue, secondYearValue, pointsValue, section2Value, section3Value, signupBonusValue) {
+// Update the input listeners to use updateAllExplanationTexts
+['travelFrequency', 'homeAirport'].forEach(id => {
+    document.getElementById(id).addEventListener('change', updateAllExplanationTexts);
+});
+
+document.getElementById('hotelSpend').addEventListener('blur', updateAllExplanationTexts);
+    
+function calculateSection3Value() {
+    const travelFrequency = parseInt(document.getElementById('travelFrequency').value.replace(/[^ -\u007F]+/g, '')) || 0;
+
+    const perks = [
+        { id: 'loungeAccess', valuePerUse: 50, steps: 5 },
+        { id: 'partnerStatus', valuePerUse: 40, steps: 5 },
+        { id: 'fhrAndIap', valuePerUse: 100, steps: 5 }
+    ];
+
+    let total = perks.reduce((sum, perk) => {
+        const sliderValue = parseInt(document.getElementById(perk.id).value);
+        
+        // Convert slider values 1-5 to percentages
+        const percentages = {
+            1: 0,    // Never = 0%
+            2: 0.25, // Rarely = 25%
+            3: 0.50, // Sometimes = 50%
+            4: 0.75, // Often = 75%
+            5: 1.00  // Always = 100%
+        };
+        
+        const percentage = percentages[sliderValue] || 0;
+        const perkValue = travelFrequency * perk.valuePerUse * percentage;
+        
+        console.log(`${perk.id}:`, {
+            travelFrequency,
+            valuePerUse: perk.valuePerUse,
+            sliderValue,
+            percentage,
+            perkValue
+        });
+        
+        return sum + perkValue;
+    }, 0);
+
+    return Math.round(total);
+}
+
+function calculateFinalValuation() {
+    console.log("Starting final valuation calculation");
+    
+    const travelFrequency = parseInt(document.getElementById('travelFrequency').value.replace(/[^\d.-]/g, ''));
+    console.log("Travel Frequency:", travelFrequency);
+    
+    if (!travelFrequency) {
+        alert('Please enter your travel frequency in section 1');
+        nextSection('section4', 'section1');
+        return;
+    }
+
+    // Get points value with error checking
+    const totalPointsElement = document.getElementById('totalPointsValue');
+    if (!totalPointsElement) {
+        console.error("Could not find totalPointsValue element");
+        return;
+    }
+    
+    const totalPoints = parseInt(totalPointsElement.textContent.replace(/[^\d.-]/g, '')) || 0;
+    console.log("Total Points:", totalPoints);
+    
+    const pointsValue = totalPoints * POINT_VALUE;
+    const section2Value = calculateSection2Value();
+    const section3Value = calculateSection3Value();
+
+    console.log({
+        pointsValue,
+        section2Value,
+        section3Value
+    });
+
+    // Debug logging
+    console.log({
+        points: {
+            totalPoints,
+            pointsValue
+        },
+        credits: {
+            section2Value
+        },
+        perks: {
+            section3Value,
+            travelFrequency,
+            loungeValue: parseInt(document.getElementById('loungeAccess').value),
+            statusValue: parseInt(document.getElementById('partnerStatus').value),
+            fhrValue: parseInt(document.getElementById('fhrAndIap').value),
+        }
+    });
+
+    const yearlyValue = pointsValue + section2Value + section3Value;
+    const signupBonusValue = WELCOME_BONUS * POINT_VALUE;
+    const firstYearValue = yearlyValue + signupBonusValue - ANNUAL_FEE;
+    const secondYearValue = yearlyValue - ANNUAL_FEE;
+
+    console.log({
+        yearlyValue,
+        signupBonusValue,
+        firstYearValue,
+        secondYearValue
+    });
+
+    // Helper function to update values with proper classes
     function updateValueWithClass(elementId, value) {
         const element = document.getElementById(elementId);
         if (element) {
@@ -996,62 +1001,193 @@ function updateValuationDisplay(firstYearValue, secondYearValue, pointsValue, se
         }
     }
 
+    // Update values with color classes
     updateValueWithClass('firstYearSavings', firstYearValue);
     updateValueWithClass('secondYearSavings', secondYearValue);
     updateValueWithClass('firstYearValue', firstYearValue);
     updateValueWithClass('secondYearValue', secondYearValue);
 
+    // Update other values that don't need color coding
     document.getElementById('annualFee').textContent = '$' + ANNUAL_FEE.toLocaleString();
     document.getElementById('signupBonusValue').textContent = '$' + Math.round(signupBonusValue).toLocaleString();
     document.getElementById('pointsSpendingValue').textContent = Math.round(pointsValue).toLocaleString();
     document.getElementById('pointsSpendingValueSecondYear').textContent = Math.round(pointsValue).toLocaleString();
-    document.getElementById('cardBenefitsValue').textContent = Math.round(section2Value).toLocaleString();
-    document.getElementById('cardBenefitsValueSecondYear').textContent = Math.round(section2Value).toLocaleString();
-    document.getElementById('travelPerksValue').textContent = Math.round(section3Value).toLocaleString();
-    document.getElementById('travelPerksValueSecondYear').textContent = Math.round(section3Value).toLocaleString();
-    document.getElementById('signupBonusBreakdown').textContent = Math.round(signupBonusValue).toLocaleString();
-
+document.getElementById('cardBenefitsValue').textContent = Math.round(section2Value).toLocaleString();
+document.getElementById('cardBenefitsValueSecondYear').textContent = Math.round(section2Value).toLocaleString();
+document.getElementById('travelPerksValue').textContent = Math.round(section3Value).toLocaleString();
+document.getElementById('travelPerksValueSecondYear').textContent = Math.round(section3Value).toLocaleString();
+        document.getElementById('signupBonusBreakdown').textContent = Math.round(signupBonusValue).toLocaleString();
+    // Show section 4
     hideAllSections();
     document.getElementById('section4').classList.remove('hidden');
     updateProgressBar('section4');
     window.scrollTo(0, 0);
 }
-function showError(message) {
-    // Remove any existing error modal
-    const existingModal = document.querySelector('.error-modal');
-    if (existingModal) {
-        existingModal.remove();
+     function updateProgressBar(currentSection) {
+    // Remove all active and completed classes
+    document.querySelectorAll('.progress-bar .step').forEach(step => {
+        step.classList.remove('active', 'completed');
+    });
+
+    const steps = document.querySelectorAll('.progress-bar .step');
+    const currentIndex = parseInt(currentSection.replace('section', '')) - 1;
+
+    // Mark previous steps as completed
+    for(let i = 0; i < currentIndex; i++) {
+        steps[i].classList.add('completed');
     }
 
-    // Create overlay
-    const overlay = document.createElement('div');
-    overlay.className = 'modal-overlay';
+    // Mark current step as active
+    steps[currentIndex].classList.add('active');
 
-    // Create modal
-    const modal = document.createElement('div');
-    modal.className = 'error-modal';
-
-    // Add message
-    const messageP = document.createElement('p');
-    messageP.textContent = message;
-    modal.appendChild(messageP);
-
-    // Add close button
-    const closeButton = document.createElement('button');
-    closeButton.textContent = 'Close';
-    closeButton.onclick = () => {
-        overlay.remove();
-        modal.remove();
-    };
-    modal.appendChild(closeButton);
-
-    // Add to document
-    document.body.appendChild(overlay);
-    document.body.appendChild(modal);
+    // Remove any classes from future steps
+    for(let i = currentIndex + 1; i < steps.length; i++) {
+        steps[i].classList.remove('completed', 'active');
+    }
 }
 
-// Update the error handling in your existing code
-function handleCalculationError(error, section) {
-    console.error(`Error in ${section}:`, error);
-    showError(`There was an error calculating your ${section.toLowerCase()}. Please try again.`);
+    function nextSection(currentSectionId, nextSectionId) {
+        hideAllSections();
+document.getElementById(nextSectionId).classList.remove('hidden');
+if (nextSectionId !== 'section1') {
+    document.getElementById('results').classList.add('hidden');
 }
+        window.scrollTo(0, 0);
+    }
+
+// Find these existing event listeners and update them:
+document.getElementById('calculatePointsBtn').addEventListener('click', function(e) {
+    e.preventDefault(); // Prevent any default form submission
+    
+    const travelFrequency = document.getElementById('travelFrequency').value;
+
+    // Validate travel frequency
+    if (!travelFrequency || travelFrequency === '0') {
+        document.getElementById('travelFrequency').classList.add('error');
+        alert('Please enter how many times you travel per year');
+        return;
+    }
+
+    document.getElementById('travelFrequency').classList.remove('error');
+    
+    try {
+        calculatePoints(); // Calculate the points
+        
+        // Make sure the results section exists and is visible
+        const resultsSection = document.getElementById('results');
+        if (resultsSection) {
+            resultsSection.classList.remove('hidden');
+            
+            // Scroll to results section
+            resultsSection.scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
+            
+            // Update progress bar
+            updateProgressBar('section1');
+        } else {
+            console.error('Results section not found');
+        }
+    } catch (error) {
+        console.error("Error calculating points:", error);
+        alert('There was an error calculating your points. Please try again.');
+    }
+});
+
+const continueBtn = document.getElementById('continueBtn');
+if (!continueBtn) {
+    console.error('Continue button not found');
+} else {
+    continueBtn.addEventListener('click', function() {
+        console.log('Continue button clicked'); // Debug log
+        const travelFrequency = document.getElementById('travelFrequency').value;
+
+        if (!travelFrequency || travelFrequency === '0') {
+            document.getElementById('travelFrequency').classList.add('error');
+            alert('Please enter how many times you travel per year');
+            return;
+        }
+
+        calculatePoints(); // Calculate points before moving to next section
+        nextSection('section1', 'section2');
+        updateProgressBar('section2'); 
+        preSelectBenefitsValues();
+    });
+}
+document.getElementById('backToSection1').addEventListener('click', function(e) {
+    e.preventDefault();
+    nextSection('section2', 'section1');
+    updateProgressBar('section1');  
+});
+
+document.getElementById('backToSection2').addEventListener('click', function(e) {
+    e.preventDefault();
+    nextSection('section3', 'section2');
+    updateProgressBar('section2'); 
+});
+
+const calculateValuationBtn = document.getElementById('calculateValuationBtn');
+if (calculateValuationBtn) {
+    calculateValuationBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        console.log("Calculate Valuation button clicked");
+        calculateFinalValuation();
+        updateProgressBar('section4'); 
+    });
+} else {
+    console.error("Calculate Valuation button not found");
+}
+
+document.getElementById('backToSection3').addEventListener('click', function(e) {
+    e.preventDefault();
+    nextSection('section4', 'section3');
+    updateProgressBar('section3');  
+});
+
+['flightSpend', 'hotelSpend', 'otherSpend'].forEach(id => {
+    const input = document.getElementById(id);
+    if (!input) {
+        console.error(`Input element with id ${id} not found`);
+        return;
+    }
+    
+    // On focus (when clicking into the input)
+    input.addEventListener('focus', function() {
+        const value = this.value.replace(/[$,]/g, ''); // Remove $ and commas
+        this.value = value;
+    });
+
+    // On blur (when clicking away from the input)
+    input.addEventListener('blur', function() {
+        let value = this.value.replace(/[^\d]/g, ''); // Remove non-digits
+        if (value) {
+            value = parseInt(value, 10);
+            this.value = '$' + value.toLocaleString('en-US');
+        } else {
+            this.value = '$0';
+        }
+        
+        // Add this condition to only update explanation texts for hotelSpend
+        if (id === 'hotelSpend') {
+            updateAllExplanationTexts();
+        }
+    });
+
+    // Set initial value
+    input.value = '$0';
+});
+
+    document.querySelectorAll('input[type="range"]').forEach(slider => {
+    slider.addEventListener('input', () => updateSliderLabel(slider.id));
+});
+
+// Update travel frequency listeners
+document.getElementById('travelFrequency').addEventListener('blur', function() {
+    let value = this.value.replace(/[^ -\u007F]+/g, '');
+    if (value === '') value = '0';
+    value = Math.max(0, parseInt(value));
+    this.value = value;
+});
+
+}); 
