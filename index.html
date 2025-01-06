@@ -49,10 +49,11 @@
                         <input type="text" id="travelFrequency" inputmode="numeric" placeholder="Enter number of trips" required>
                     </div>
                 </div>
-<div class="question-group">
-    <label for="homeAirport">What is your home airport?</label>
-    <div class="input-group">
-        <select id="homeAirport" required>
+            
+                <div class="question-group">
+                    <label for="homeAirport">What is your home airport?</label>
+                    <div class="input-group">
+                        <select id="homeAirport" required>
             <option value="">Select an option</option>
             <option value="ATL">Atlanta (ATL)</option>
             <option value="BOS">Boston (BOS)</option>
@@ -74,57 +75,66 @@
             <option value="IAD">Washington Dulles (IAD)</option>
             <option value="custom">Other (specify)</option>
         </select>
-  <div id="customHomeAirport" class="input-wrapper hidden">
-    <input type="text" 
-           id="customAirportInput"
-            maxlength="40"
-           placeholder="Enter your airport name">
-</div>
-    </div>
-</div>
-<!-- 1. Flight Spending Dropdown -->
-<div class="question-group">
-    <label>Spending on flights with airlines or Amex Travel / year</label>
-    <select id="flightSpend" class="form-select">
-        <option value="" selected disabled>Select flight spending</option>
-        <option value="18000">Light ($1,500/month)</option>
-        <option value="36000">Average ($3,000/month)</option>
-        <option value="60000">Heavy ($5,000/month)</option>
-        <option value="custom">Custom amount</option>
-    </select>
-    <div id="customFlightSpend" class="custom-input-container hidden">
-        <input type="number" placeholder="Enter monthly amount" class="form-input">
-    </div>
-</div>
-
-<!-- 2. Hotel Spending Slider -->
-<div class="question-group">
-    <label>Spending on prepaid hotels through Amex Travel / year</label>
-    <div class="slider-container">
-        <div class="slider-value">$0</div>
-        <input type="range" id="hotelSpend" min="0" max="100000" value="0" class="form-slider">
-        <div class="slider-markers">
-            <span>$0</span>
-            <span>$100k+</span>
+        <div id="customHomeAirport" class="input-wrapper hidden">
+            <input type="text" id="customAirportInput" maxlength="40" placeholder="Enter your airport name">
         </div>
     </div>
 </div>
 
-<!-- 3. Other Spending Dropdown -->
 <div class="question-group">
-    <label>Spending on all other purchases / year</label>
-    <select id="otherSpend" class="form-select">
-        <option value="" selected disabled>Select other spending</option>
-        <option value="12000">$1,000 per month</option>
-        <option value="24000">$2,000 per month</option>
-        <option value="36000">$3,000 per month</option>
-        <option value="60000">$5,000 per month</option>
-        <option value="120000">$10,000 per month</option>
-    </select>
+    <label for="flightSpend">Spending on flights with airlines or Amex Travel per month</label>
+    <div class="input-group">
+        <select id="flightSpend" required aria-label="Monthly flight spending">
+            <option value="0">I rarely book flights ($0)</option>
+            <option value="2000">Light traveler ($1,000 - $3,000/month)</option>
+            <option value="4000">Regular traveler ($3,000 - $5,000/month)</option>
+            <option value="7500">Frequent traveler ($5,000 - $10,000/month)</option>
+            <option value="custom">Custom amount</option>
+        </select>
+        <div id="customFlightSpend" class="input-wrapper hidden">
+            <input type="text" id="customFlightInput" inputmode="numeric" placeholder="Enter monthly amount">
+        </div>
+    </div>
+    <span class="helper-text">Spending ranges are based on typical Platinum Card member travel patterns. Select the option that best matches your travel style.</span>
 </div>
-                <div class="button-container">
-                    <button id="calculatePointsBtn" class="cta-button">Calculate Points</button>
-                </div>
+
+<div class="question-group">
+    <label for="hotelSpend">Spending on prepaid hotels through Amex Travel per month</label>
+    <div class="input-group">
+        <select id="hotelSpend" required>
+            <option value="0">I rarely book hotels ($0)</option>
+            <option value="1250">Occasional stays ($500 - $2,000/month)</option>
+            <option value="3000">Regular stays ($2,000 - $4,000/month)</option>
+            <option value="6000">Frequent stays ($4,000 - $8,000/month)</option>
+            <option value="custom">Custom amount</option>
+        </select>
+        <div id="customHotelSpend" class="input-wrapper hidden">
+            <input type="text" id="customHotelInput" inputmode="numeric" placeholder="Enter monthly amount">
+        </div>
+    </div>
+    <span class="helper-text">Spending ranges are based on typical Platinum Card member travel patterns. Select the option that best matches your travel style.</span>
+</div>
+
+<div class="question-group">
+    <label for="otherSpend">Spending on all other purchases per month</label>
+    <div class="input-group">
+        <select id="otherSpend" required>
+            <option value="0">I don't use the card for other purchases ($0)</option>
+            <option value="3500">Regular usage ($2,000 - $5,000/month)</option>
+            <option value="7500">High usage ($5,000 - $10,000/month)</option>
+            <option value="12000">Premium usage ($10,000+/month)</option>
+            <option value="custom">Custom amount</option>
+        </select>
+        <div id="customOtherSpend" class="input-wrapper hidden">
+            <input type="text" id="customOtherInput" inputmode="numeric" placeholder="Enter monthly amount">
+        </div>
+    </div>
+    <span class="helper-text">These ranges reflect typical monthly spending patterns. Choose the option that best matches your card usage.</span>
+</div>
+
+<div class="button-container">
+    <button id="calculatePointsBtn" class="cta-button">Calculate Points</button>
+</div>
 <div id="results" class="hidden">
  <!-- Replace your existing Results section content with this -->
 <h2>Results</h2>
