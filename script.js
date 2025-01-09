@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const ANNUAL_FEE = 595;
 const MINIMUM_POINTS_FOR_SUGGESTION = 15000;
 
-// Exactly match the working home airport implementation
 document.getElementById('flightSpend').addEventListener('change', function() {
     const customFlightSpend = document.getElementById('customFlightSpend');
     const customFlightInput = customFlightSpend.querySelector('input');
@@ -19,9 +18,14 @@ document.getElementById('flightSpend').addEventListener('change', function() {
     }
 });
 
-// Optional: Add number formatting for the custom input
-document.getElementById('customFlightInput').addEventListener('input', function() {
-    this.value = this.value.replace(/[^0-9]/g, '');
+document.getElementById('customFlightInput').addEventListener('blur', function() {
+    let value = this.value.replace(/[^\d]/g, '');
+    if (value) {
+        value = parseInt(value, 10);
+        this.value = '$' + value.toLocaleString('en-US');
+    } else {
+        this.value = '$0';
+    }
 });
 
   // Points Calculation for Section 1
@@ -1064,8 +1068,8 @@ document.getElementById('backToSection3').addEventListener('click', function(e) 
     updateProgressBar('section3');  
 });
 
-['flightSpend', 'hotelSpend', 'otherSpend'].forEach(id => {
-    const input = document.getElementById(id);
+['hotelSpend', 'otherSpend'].forEach(id => {
+        const input = document.getElementById(id);
     if (!input) {
         console.error(`Input element with id ${id} not found`);
         return;
