@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const ANNUAL_FEE = 595;
 const MINIMUM_POINTS_FOR_SUGGESTION = 15000;
 
+// Existing flight spend code
 document.getElementById('flightSpend').addEventListener('change', function() {
     const customFlightSpend = document.getElementById('customFlightSpend');
     const customFlightInput = customFlightSpend.querySelector('input');
@@ -18,7 +19,48 @@ document.getElementById('flightSpend').addEventListener('change', function() {
     }
 });
 
-document.getElementById('customFlightInput').addEventListener('blur', function() {
+// Add new hotel spend code here
+document.getElementById('hotelSpend').addEventListener('change', function() {
+    const customHotelSpend = document.getElementById('customHotelSpend');
+    const customHotelInput = customHotelSpend.querySelector('input');
+    
+    if (this.value === 'custom') {
+        customHotelSpend.classList.remove('hidden');
+        customHotelInput.required = true;
+        customHotelInput.focus();
+    } else {
+        customHotelSpend.classList.add('hidden');
+        customHotelInput.required = false;
+    }
+});
+
+// Add new other spend code here
+document.getElementById('otherSpend').addEventListener('change', function() {
+    const customOtherSpend = document.getElementById('customOtherSpend');
+    const customOtherInput = customOtherSpend.querySelector('input');
+    
+    if (this.value === 'custom') {
+        customOtherSpend.classList.remove('hidden');
+        customOtherInput.required = true;
+        customOtherInput.focus();
+    } else {
+        customOtherSpend.classList.add('hidden');
+        customOtherInput.required = false;
+    }
+});
+
+// Add currency formatting for all custom inputs
+document.getElementById('customHotelInput').addEventListener('blur', function() {
+    let value = this.value.replace(/[^\d]/g, '');
+    if (value) {
+        value = parseInt(value, 10);
+        this.value = '$' + value.toLocaleString('en-US');
+    } else {
+        this.value = '$0';
+    }
+});
+
+document.getElementById('customOtherInput').addEventListener('blur', function() {
     let value = this.value.replace(/[^\d]/g, '');
     if (value) {
         value = parseInt(value, 10);
@@ -1066,39 +1108,6 @@ document.getElementById('backToSection3').addEventListener('click', function(e) 
     e.preventDefault();
     nextSection('section4', 'section3');
     updateProgressBar('section3');  
-});
-
-['hotelSpend', 'otherSpend'].forEach(id => {
-        const input = document.getElementById(id);
-    if (!input) {
-        console.error(`Input element with id ${id} not found`);
-        return;
-    }
-    
-    // On focus (when clicking into the input)
-    input.addEventListener('focus', function() {
-        const value = this.value.replace(/[$,]/g, ''); // Remove $ and commas
-        this.value = value;
-    });
-
-    // On blur (when clicking away from the input)
-    input.addEventListener('blur', function() {
-        let value = this.value.replace(/[^\d]/g, ''); // Remove non-digits
-        if (value) {
-            value = parseInt(value, 10);
-            this.value = '$' + value.toLocaleString('en-US');
-        } else {
-            this.value = '$0';
-        }
-        
-        // Add this condition to only update explanation texts for hotelSpend
-        if (id === 'hotelSpend') {
-            updateAllExplanationTexts();
-        }
-    });
-
-    // Set initial value
-    input.value = '$0';
 });
 
     document.querySelectorAll('input[type="range"]').forEach(slider => {
