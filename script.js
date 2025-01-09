@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
 const MINIMUM_POINTS_FOR_SUGGESTION = 15000;
 
 // Test just the flight spend dropdown first
+// Test just the flight spend dropdown first
 const select = document.getElementById('flightSpend');
 const customInput = document.getElementById('customFlightInput');
 const customWrapper = document.getElementById('customFlightSpend');
@@ -32,21 +33,27 @@ if (select && customInput && customWrapper) {
         } else {
             customWrapper.classList.add('hidden');
         }
-        
-        // Double-check the value stays
-        setTimeout(() => {
-            this.value = selectedValue;
-        }, 0);
     });
 
-    // Prevent the dropdown from clearing for ALL values
-    ['blur', 'focus', 'mouseout'].forEach(eventType => {
+    // Prevent any value clearing
+    ['blur', 'focus', 'mouseout', 'mouseleave', 'click'].forEach(eventType => {
         select.addEventListener(eventType, function(e) {
-            if (eventType === 'blur') e.preventDefault();
+            e.preventDefault();
+            e.stopPropagation();
             console.log(`${eventType} event, selectedValue:`, selectedValue);
             this.value = selectedValue;
             return false;
-        });
+        }, true);
+    });
+
+    // Additional safeguard
+    Object.defineProperty(select, 'value', {
+        get: function() {
+            return selectedValue;
+        },
+        set: function(val) {
+            selectedValue = val;
+        }
     });
 }
 
