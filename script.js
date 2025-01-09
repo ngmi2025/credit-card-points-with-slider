@@ -43,7 +43,6 @@ const MINIMUM_POINTS_FOR_SUGGESTION = 15000;
     }
 });
 
-
   // Points Calculation for Section 1
 function calculatePoints() {
     try {
