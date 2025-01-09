@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function() {
 const MINIMUM_POINTS_FOR_SUGGESTION = 15000;
 
 // Test just the flight spend dropdown first
-// Test just the flight spend dropdown first
 const select = document.getElementById('flightSpend');
 const customInput = document.getElementById('customFlightInput');
 const customWrapper = document.getElementById('customFlightSpend');
@@ -19,6 +18,16 @@ console.log('Elements found:', {
 if (select && customInput && customWrapper) {
     let selectedValue = select.value || "0";
     
+    // Function to handle custom input visibility
+    const updateCustomVisibility = (value) => {
+        if (value === 'custom') {
+            customWrapper.classList.remove('hidden');
+            customInput.focus();
+        } else {
+            customWrapper.classList.add('hidden');
+        }
+    };
+
     select.addEventListener('change', function(e) {
         console.log('Change event triggered', this.value);
         selectedValue = this.value;
@@ -26,13 +35,8 @@ if (select && customInput && customWrapper) {
         // Force the value to stay immediately
         this.value = selectedValue;
         
-        if (this.value === 'custom') {
-            console.log('Showing custom input');
-            customWrapper.classList.remove('hidden');
-            customInput.focus();
-        } else {
-            customWrapper.classList.add('hidden');
-        }
+        // Update custom input visibility
+        updateCustomVisibility(selectedValue);
     });
 
     // Prevent any value clearing
@@ -42,6 +46,9 @@ if (select && customInput && customWrapper) {
             e.stopPropagation();
             console.log(`${eventType} event, selectedValue:`, selectedValue);
             this.value = selectedValue;
+            
+            // Ensure custom input visibility is maintained
+            updateCustomVisibility(selectedValue);
             return false;
         }, true);
     });
@@ -53,8 +60,13 @@ if (select && customInput && customWrapper) {
         },
         set: function(val) {
             selectedValue = val;
+            // Update custom input visibility when value is set
+            updateCustomVisibility(val);
         }
     });
+
+    // Initial setup
+    updateCustomVisibility(selectedValue);
 }
 
   // Points Calculation for Section 1
