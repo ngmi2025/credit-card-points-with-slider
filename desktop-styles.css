@@ -139,10 +139,14 @@ h1 {
     padding: 10px;
     border: 1px solid var(--border-color);
     border-radius: 5px;
-    font-size: 1em;
+    font-size: 0.9em;
     height: 40px;
     box-sizing: border-box;
     background: linear-gradient(to bottom, #ffffff 0%, #f3f3f3 100%); 
+}
+
+#homeAirport option {
+    font-size: 0.9rem;  /* keep the same size for consistency */
 }
 
 .slider-container {
