@@ -9,64 +9,43 @@ const select = document.getElementById('flightSpend');
 const customInput = document.getElementById('customFlightInput');
 const customWrapper = document.getElementById('customFlightSpend');
 
-console.log('Elements found:', {
-    select: !!select,
-    customInput: !!customInput,
-    customWrapper: !!customWrapper
+console.log('Initial elements:', {
+    select: select,
+    customInput: customInput,
+    customWrapper: customWrapper,
+    wrapperClasses: customWrapper?.classList.toString()
 });
 
 if (select && customInput && customWrapper) {
     let selectedValue = select.value || "0";
     
-    // Function to handle custom input visibility
-    const updateCustomVisibility = (value) => {
-        if (value === 'custom') {
+    select.addEventListener('change', function(e) {
+        console.log('Change event:', {
+            newValue: this.value,
+            isCustom: this.value === 'custom',
+            wrapperHidden: customWrapper.classList.contains('hidden')
+        });
+        
+        selectedValue = this.value;
+        this.value = selectedValue;  // Keep the value
+
+        // Explicitly handle visibility
+        if (this.value === 'custom') {
+            console.log('Attempting to show custom input');
+            customWrapper.style.display = 'block';
             customWrapper.classList.remove('hidden');
             customInput.focus();
+            console.log('Wrapper classes after show:', customWrapper.classList.toString());
         } else {
+            customWrapper.style.display = 'none';
             customWrapper.classList.add('hidden');
         }
-    };
+    });
 
-    select.addEventListener('change', function(e) {
-        console.log('Change event triggered', this.value);
-        selectedValue = this.value;
-        
-        // Force the value to stay immediately
+    // Simple blur handler to maintain selection
+    select.addEventListener('blur', function() {
         this.value = selectedValue;
-        
-        // Update custom input visibility
-        updateCustomVisibility(selectedValue);
     });
-
-    // Prevent any value clearing
-    ['blur', 'focus', 'mouseout', 'mouseleave', 'click'].forEach(eventType => {
-        select.addEventListener(eventType, function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            console.log(`${eventType} event, selectedValue:`, selectedValue);
-            this.value = selectedValue;
-            
-            // Ensure custom input visibility is maintained
-            updateCustomVisibility(selectedValue);
-            return false;
-        }, true);
-    });
-
-    // Additional safeguard
-    Object.defineProperty(select, 'value', {
-        get: function() {
-            return selectedValue;
-        },
-        set: function(val) {
-            selectedValue = val;
-            // Update custom input visibility when value is set
-            updateCustomVisibility(val);
-        }
-    });
-
-    // Initial setup
-    updateCustomVisibility(selectedValue);
 }
 
   // Points Calculation for Section 1
