@@ -86,6 +86,10 @@ h1 {
     display: none; /* Hide all sections by default */
 }
 
+#section1 {
+    display: block !important; /* Force display of first section */
+}
+
 .section.active {
     display: block; /* Show only active section */
 }
