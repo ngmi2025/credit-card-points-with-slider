@@ -10,13 +10,24 @@ const MINIMUM_POINTS_FOR_SUGGESTION = 15000;
     const customWrapper = document.getElementById(`custom${id.charAt(0).toUpperCase() + id.slice(1)}`);
     
     if (select && customInput && customWrapper) {
+        // Store the selected value
+        let selectedValue = select.value;
+
         // Handle dropdown changes
         select.addEventListener('change', function() {
+            selectedValue = this.value; // Update stored value
             if (this.value === 'custom') {
                 customWrapper.classList.remove('hidden');
                 customInput.focus();
             } else {
                 customWrapper.classList.add('hidden');
+            }
+        });
+
+        // Prevent the select from clearing
+        select.addEventListener('blur', function() {
+            if (selectedValue) {
+                this.value = selectedValue;
             }
         });
 
@@ -31,6 +42,7 @@ const MINIMUM_POINTS_FOR_SUGGESTION = 15000;
             if (value) {
                 value = parseInt(value, 10);
                 this.value = '$' + value.toLocaleString('en-US');
+                select.value = 'custom'; // Ensure select stays on custom
             } else {
                 this.value = '$0';
             }
