@@ -17,38 +17,20 @@ console.log('Initial elements:', {
 });
 
 if (select && customInput && customWrapper) {
-    let selectedValue = select.value || "0";
-    
-    select.addEventListener('change', function(e) {
-        console.log('Change event:', {
-            newValue: this.value,
-            isCustom: this.value === 'custom'
-        });
-        
-        selectedValue = this.value;  // Store the selected value
-        
+    select.addEventListener('change', function() {
         if (this.value === 'custom') {
-            console.log('Showing custom input');
             customWrapper.classList.remove('hidden');
+            customInput.required = true;
             customInput.focus();
         } else {
             customWrapper.classList.add('hidden');
+            customInput.required = false;
         }
     });
 
-    // Just use blur to maintain the selected value
-    select.addEventListener('blur', function() {
-        if (selectedValue) {
-            this.value = selectedValue;
-        }
-    });
-
-    // Handle custom input
-    customInput.addEventListener('blur', function() {
-        if (this.value) {
-            select.value = 'custom';
-            selectedValue = 'custom';
-        }
+    // Add validation for the custom input
+    customInput.addEventListener('input', function() {
+        this.value = this.value.replace(/[^0-9]/g, ''); // Only numbers
     });
 }
 
