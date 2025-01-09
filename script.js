@@ -5,34 +5,50 @@ document.addEventListener('DOMContentLoaded', function() {
 const MINIMUM_POINTS_FOR_SUGGESTION = 15000;
 
 // Test just the flight spend dropdown first
-const select = document.getElementById('flightSpend');
-const customInput = document.getElementById('customFlightInput');
-const customWrapper = document.getElementById('customFlightSpend');
+function initializeFlightSpendDropdown() {
+    const flightSpendSelect = document.getElementById('flightSpend');
+    const flightCustomInput = document.getElementById('customFlightInput');
+    const flightCustomWrapper = document.getElementById('customFlightSpend');
 
-console.log('Initial elements:', {
-    select: select,
-    customInput: customInput,
-    customWrapper: customWrapper,
-    wrapperClasses: customWrapper?.classList.toString()
-});
-
-if (select && customInput && customWrapper) {
-    select.addEventListener('change', function() {
-        if (this.value === 'custom') {
-            customWrapper.classList.remove('hidden');
-            customInput.required = true;
-            customInput.focus();
-        } else {
-            customWrapper.classList.add('hidden');
-            customInput.required = false;
-        }
+    console.log('Flight spend elements:', {
+        select: flightSpendSelect,
+        customInput: flightCustomInput,
+        customWrapper: flightCustomWrapper
     });
 
-    // Add validation for the custom input
-    customInput.addEventListener('input', function() {
-        this.value = this.value.replace(/[^0-9]/g, ''); // Only numbers
-    });
+    if (flightSpendSelect && flightCustomInput && flightCustomWrapper) {
+        // Remove any existing event listeners
+        const newSelect = flightSpendSelect.cloneNode(true);
+        flightSpendSelect.parentNode.replaceChild(newSelect, flightSpendSelect);
+        
+        // Add our new event listener
+        newSelect.addEventListener('change', function handleFlightSpendChange(e) {
+            console.log('Flight spend changed:', this.value);
+            
+            if (this.value === 'custom') {
+                flightCustomWrapper.classList.remove('hidden');
+                flightCustomInput.required = true;
+                flightCustomInput.focus();
+            } else {
+                flightCustomWrapper.classList.add('hidden');
+                flightCustomInput.required = false;
+            }
+        });
+
+        // Handle custom input formatting
+        const newInput = flightCustomInput.cloneNode(true);
+        flightCustomInput.parentNode.replaceChild(newInput, flightCustomInput);
+        
+        newInput.addEventListener('input', function handleFlightCustomInput(e) {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+    }
 }
+
+// Call this after DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    initializeFlightSpendDropdown();
+});
 
   // Points Calculation for Section 1
 function calculatePoints() {
