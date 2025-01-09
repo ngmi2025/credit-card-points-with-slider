@@ -4,50 +4,24 @@ document.addEventListener('DOMContentLoaded', function() {
     const ANNUAL_FEE = 595;
 const MINIMUM_POINTS_FOR_SUGGESTION = 15000;
 
-// Test just the flight spend dropdown first
-function initializeFlightSpendDropdown() {
-    const flightSpendSelect = document.getElementById('flightSpend');
-    const flightCustomInput = document.getElementById('customFlightInput');
-    const flightCustomWrapper = document.getElementById('customFlightSpend');
-
-    console.log('Flight spend elements:', {
-        select: flightSpendSelect,
-        customInput: flightCustomInput,
-        customWrapper: flightCustomWrapper
-    });
-
-    if (flightSpendSelect && flightCustomInput && flightCustomWrapper) {
-        // Remove any existing event listeners
-        const newSelect = flightSpendSelect.cloneNode(true);
-        flightSpendSelect.parentNode.replaceChild(newSelect, flightSpendSelect);
-        
-        // Add our new event listener
-        newSelect.addEventListener('change', function handleFlightSpendChange(e) {
-            console.log('Flight spend changed:', this.value);
-            
-            if (this.value === 'custom') {
-                flightCustomWrapper.classList.remove('hidden');
-                flightCustomInput.required = true;
-                flightCustomInput.focus();
-            } else {
-                flightCustomWrapper.classList.add('hidden');
-                flightCustomInput.required = false;
-            }
-        });
-
-        // Handle custom input formatting
-        const newInput = flightCustomInput.cloneNode(true);
-        flightCustomInput.parentNode.replaceChild(newInput, flightCustomInput);
-        
-        newInput.addEventListener('input', function handleFlightCustomInput(e) {
-            this.value = this.value.replace(/[^0-9]/g, '');
-        });
+// Exactly match the working home airport implementation
+document.getElementById('flightSpend').addEventListener('change', function() {
+    const customFlightSpend = document.getElementById('customFlightSpend');
+    const customFlightInput = customFlightSpend.querySelector('input');
+    
+    if (this.value === 'custom') {
+        customFlightSpend.classList.remove('hidden');
+        customFlightInput.required = true;
+        customFlightInput.focus();
+    } else {
+        customFlightSpend.classList.add('hidden');
+        customFlightInput.required = false;
     }
-}
+});
 
-// Call this after DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    initializeFlightSpendDropdown();
+// Optional: Add number formatting for the custom input
+document.getElementById('customFlightInput').addEventListener('input', function() {
+    this.value = this.value.replace(/[^0-9]/g, '');
 });
 
   // Points Calculation for Section 1
