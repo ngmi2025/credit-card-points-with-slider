@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function() {
 const MINIMUM_POINTS_FOR_SUGGESTION = 15000;
 
 // Test just the flight spend dropdown first
-// Test just the flight spend dropdown first
 const select = document.getElementById('flightSpend');
 const customInput = document.getElementById('customFlightInput');
 const customWrapper = document.getElementById('customFlightSpend');
@@ -23,6 +22,9 @@ if (select && customInput && customWrapper) {
         console.log('Change event triggered', this.value);
         selectedValue = this.value;
         
+        // Force the value to stay immediately
+        this.value = selectedValue;
+        
         if (this.value === 'custom') {
             console.log('Showing custom input');
             customWrapper.classList.remove('hidden');
@@ -31,29 +33,20 @@ if (select && customInput && customWrapper) {
             customWrapper.classList.add('hidden');
         }
         
-        // Force the value to stay
+        // Double-check the value stays
         setTimeout(() => {
             this.value = selectedValue;
         }, 0);
     });
 
-    // Prevent the dropdown from clearing
-    select.addEventListener('blur', function(e) {
-        e.preventDefault();
-        console.log('Blur event, selectedValue:', selectedValue);
-        this.value = selectedValue;
-        return false;
-    });
-
-    // Ensure value is correct when focusing
-    select.addEventListener('focus', function(e) {
-        console.log('Focus event, selectedValue:', selectedValue);
-        this.value = selectedValue;
-    });
-
-    // Prevent any mouseout/mouseleave from changing the value
-    select.addEventListener('mouseout', function(e) {
-        this.value = selectedValue;
+    // Prevent the dropdown from clearing for ALL values
+    ['blur', 'focus', 'mouseout'].forEach(eventType => {
+        select.addEventListener(eventType, function(e) {
+            if (eventType === 'blur') e.preventDefault();
+            console.log(`${eventType} event, selectedValue:`, selectedValue);
+            this.value = selectedValue;
+            return false;
+        });
     });
 }
 
