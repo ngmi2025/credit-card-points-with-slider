@@ -30,6 +30,17 @@ if (select && customInput && customWrapper) {
             customWrapper.classList.add('hidden');
         }
     });
+
+    // Keep the dropdown showing the correct value
+    select.addEventListener('blur', function() {
+        console.log('Blur event, selectedValue:', selectedValue);
+        this.value = selectedValue;
+    });
+
+    select.addEventListener('focus', function() {
+        console.log('Focus event, selectedValue:', selectedValue);
+        this.value = selectedValue;
+    });
 }
 
   // Points Calculation for Section 1
