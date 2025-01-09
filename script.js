@@ -22,39 +22,33 @@ if (select && customInput && customWrapper) {
     select.addEventListener('change', function(e) {
         console.log('Change event:', {
             newValue: this.value,
-            isCustom: this.value === 'custom',
-            wrapperHidden: customWrapper.classList.contains('hidden')
+            isCustom: this.value === 'custom'
         });
         
         selectedValue = this.value;  // Store the selected value
         
         if (this.value === 'custom') {
-            console.log('Attempting to show custom input');
-            customWrapper.style.display = 'block';
+            console.log('Showing custom input');
             customWrapper.classList.remove('hidden');
             customInput.focus();
-            console.log('Wrapper classes after show:', customWrapper.classList.toString());
         } else {
-            customWrapper.style.display = 'none';
             customWrapper.classList.add('hidden');
         }
     });
 
-    // Maintain the selected value in the dropdown
-    ['blur', 'focus', 'mouseout'].forEach(eventType => {
-        select.addEventListener(eventType, function(e) {
-            if (selectedValue) {
-                // Force the dropdown to keep its selected value
-                this.value = selectedValue;
-            }
-        });
+    // Just use blur to maintain the selected value
+    select.addEventListener('blur', function() {
+        if (selectedValue) {
+            this.value = selectedValue;
+        }
     });
 
     // Handle custom input
     customInput.addEventListener('blur', function() {
-        // Ensure the dropdown stays on "Custom amount"
-        select.value = 'custom';
-        selectedValue = 'custom';
+        if (this.value) {
+            select.value = 'custom';
+            selectedValue = 'custom';
+        }
     });
 }
 
