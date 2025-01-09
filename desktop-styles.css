@@ -118,6 +118,28 @@ h1 {
     border-bottom: 1px solid var(--border-color);
 }
 
+.question-group:first-child {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.question-group:first-child input {
+    width: 250px;
+    text-align: right;
+}
+
+.question-group:not(:first-child) {
+    display: flex;
+    flex-direction: column;
+}
+
+.question-group:not(:first-child) .input-group {
+    align-self: flex-end;
+}
+
+
 .input-wrapper {
     flex: 0 0 250px; /* Fixed width for input fields */
     text-align: right; /* Aligns input text to the right */
@@ -190,6 +212,7 @@ h1 {
     color: var(--secondary-text-color);
     margin-top: 5px;
     line-height: 1.2;
+    margin-bottom: 10px; /* Add space before the dropdown */
 }
 
 /* Continue with existing code */
@@ -675,8 +698,7 @@ select.credit-select option {
 }
 
 .input-group {
-    width: 100%;
-    max-width: 250px;
+    width: 250px;
     margin-left: auto;
 }
 
