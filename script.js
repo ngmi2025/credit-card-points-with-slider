@@ -1,100 +1,133 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // 1. Constants
     const WELCOME_BONUS = 80000;
     const POINT_VALUE = 0.022;
     const ANNUAL_FEE = 595;
-const MINIMUM_POINTS_FOR_SUGGESTION = 15000;
+    const MINIMUM_POINTS_FOR_SUGGESTION = 15000;
 
-// Flight spend handler
-document.getElementById('flightSpend').addEventListener('change', function() {
-    const customFlightSpend = document.getElementById('customFlightSpend');
-    const customFlightInput = customFlightSpend.querySelector('input');
-    
-    if (this.value === 'custom') {
-        customFlightSpend.classList.remove('hidden');
-        customFlightInput.required = true;
-        customFlightInput.focus();
-    } else {
-        customFlightSpend.classList.add('hidden');
-        customFlightInput.required = false;
+    // 2. Travel frequency function for pre-selection
+    function updateSpendingBasedOnTravel() {
+        const travelFrequency = parseInt(document.getElementById('travelFrequency').value) || 0;
+        const flightSpend = document.getElementById('flightSpend');
+        const hotelSpend = document.getElementById('hotelSpend');
+
+        // Set default values based on travel frequency
+        let spendValue;
+        if (travelFrequency <= 1) {
+            spendValue = "0";  // "I rarely book..."
+        } else if (travelFrequency <= 4) {
+            spendValue = "2000";  // "Light traveler..."
+        } else if (travelFrequency <= 8) {
+            spendValue = "4000";  // "Regular traveler..."
+        } else {
+            spendValue = "7500";  // "Frequent traveler..."
+        }
+
+        // Only update if no value is already selected
+        if (!flightSpend.value) {
+            flightSpend.value = spendValue;
+        }
+        if (!hotelSpend.value) {
+            hotelSpend.value = spendValue;
+        }
     }
-});
 
-// Add currency formatting for flight custom input
-document.getElementById('customFlightInput').addEventListener('blur', function() {
-    let value = this.value.replace(/[^\d]/g, '');
-    if (value) {
-        value = parseInt(value, 10);
-        this.value = '$' + value.toLocaleString('en-US');
-    } else {
-        this.value = '$0';
-    }
-});
+    // Add event listeners for travel frequency
+    document.getElementById('travelFrequency').addEventListener('change', updateSpendingBasedOnTravel);
+    document.getElementById('travelFrequency').addEventListener('blur', updateSpendingBasedOnTravel);
 
-// Add input validation for flight custom input
-document.getElementById('customFlightInput').addEventListener('input', function() {
-    this.value = this.value.replace(/[^\d]/g, '');
-});
+    // Flight spend handler
+    document.getElementById('flightSpend').addEventListener('change', function() {
+        const customFlightSpend = document.getElementById('customFlightSpend');
+        const customFlightInput = customFlightSpend.querySelector('input');
+        
+        if (this.value === 'custom') {
+            customFlightSpend.classList.remove('hidden');
+            customFlightInput.required = true;
+            customFlightInput.focus();
+        } else {
+            customFlightSpend.classList.add('hidden');
+            customFlightInput.required = false;
+        }
+    });
 
-// Hotel spend handler
-document.getElementById('hotelSpend').addEventListener('change', function() {
-    const customHotelSpend = document.getElementById('customHotelSpend');
-    const customHotelInput = customHotelSpend.querySelector('input');
-    
-    if (this.value === 'custom') {
-        customHotelSpend.classList.remove('hidden');
-        customHotelInput.required = true;
-        customHotelInput.focus();
-    } else {
-        customHotelSpend.classList.add('hidden');
-        customHotelInput.required = false;
-    }
-});
+    // Add currency formatting for flight custom input
+    document.getElementById('customFlightInput').addEventListener('blur', function() {
+        let value = this.value.replace(/[^\d]/g, '');
+        if (value) {
+            value = parseInt(value, 10);
+            this.value = '$' + value.toLocaleString('en-US');
+        } else {
+            this.value = '$0';
+        }
+    });
 
-// Add currency formatting for hotel custom input
-document.getElementById('customHotelInput').addEventListener('blur', function() {
-    let value = this.value.replace(/[^\d]/g, '');
-    if (value) {
-        value = parseInt(value, 10);
-        this.value = '$' + value.toLocaleString('en-US');
-    } else {
-        this.value = '$0';
-    }
-});
+    // Add input validation for flight custom input
+    document.getElementById('customFlightInput').addEventListener('input', function() {
+        this.value = this.value.replace(/[^\d]/g, '');
+    });
 
-// Add input validation for hotel custom input
-document.getElementById('customHotelInput').addEventListener('input', function() {
-    this.value = this.value.replace(/[^\d]/g, '');
-});
+    // Hotel spend handler
+    document.getElementById('hotelSpend').addEventListener('change', function() {
+        const customHotelSpend = document.getElementById('customHotelSpend');
+        const customHotelInput = customHotelSpend.querySelector('input');
+        
+        if (this.value === 'custom') {
+            customHotelSpend.classList.remove('hidden');
+            customHotelInput.required = true;
+            customHotelInput.focus();
+        } else {
+            customHotelSpend.classList.add('hidden');
+            customHotelInput.required = false;
+        }
+    });
 
-// Other spend handler
-document.getElementById('otherSpend').addEventListener('change', function() {
-    const customOtherSpend = document.getElementById('customOtherSpend');
-    const customOtherInput = customOtherSpend.querySelector('input');
-    
-    if (this.value === 'custom') {
-        customOtherSpend.classList.remove('hidden');
-        customOtherInput.required = true;
-        customOtherInput.focus();
-    } else {
-        customOtherSpend.classList.add('hidden');
-        customOtherInput.required = false;
-    }
-});
+    // Add currency formatting for hotel custom input
+    document.getElementById('customHotelInput').addEventListener('blur', function() {
+        let value = this.value.replace(/[^\d]/g, '');
+        if (value) {
+            value = parseInt(value, 10);
+            this.value = '$' + value.toLocaleString('en-US');
+        } else {
+            this.value = '$0';
+        }
+    });
 
-// Add currency formatting for other custom input
-document.getElementById('customOtherInput').addEventListener('blur', function() {
-    let value = this.value.replace(/[^\d]/g, '');
-    if (value) {
-        value = parseInt(value, 10);
-        this.value = '$' + value.toLocaleString('en-US');
-    } else {
-        this.value = '$0';
-    }
-});
+    // Add input validation for hotel custom input
+    document.getElementById('customHotelInput').addEventListener('input', function() {
+        this.value = this.value.replace(/[^\d]/g, '');
+    });
 
-// Add input validation for other custom input
-document.getElementById('customOtherInput').addEventListener('input', function() {
-    this.value = this.value.replace(/[^\d]/g, '');
+    // Other spend handler
+    document.getElementById('otherSpend').addEventListener('change', function() {
+        const customOtherSpend = document.getElementById('customOtherSpend');
+        const customOtherInput = customOtherSpend.querySelector('input');
+        
+        if (this.value === 'custom') {
+            customOtherSpend.classList.remove('hidden');
+            customOtherInput.required = true;
+            customOtherInput.focus();
+        } else {
+            customOtherSpend.classList.add('hidden');
+            customOtherInput.required = false;
+        }
+    });
+
+    // Add currency formatting for other custom input
+    document.getElementById('customOtherInput').addEventListener('blur', function() {
+        let value = this.value.replace(/[^\d]/g, '');
+        if (value) {
+            value = parseInt(value, 10);
+            this.value = '$' + value.toLocaleString('en-US');
+        } else {
+            this.value = '$0';
+        }
+    });
+
+    // Add input validation for other custom input
+    document.getElementById('customOtherInput').addEventListener('input', function() {
+        this.value = this.value.replace(/[^\d]/g, '');
+    });
 });
 
   // Points Calculation for Section 1
