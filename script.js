@@ -5,30 +5,37 @@ document.addEventListener('DOMContentLoaded', function() {
     const ANNUAL_FEE = 595;
     const MINIMUM_POINTS_FOR_SUGGESTION = 15000;
 
-    // 2. Travel frequency function for pre-selection
     function updateSpendingBasedOnTravel() {
         const travelFrequency = parseInt(document.getElementById('travelFrequency').value) || 0;
         const flightSpend = document.getElementById('flightSpend');
         const hotelSpend = document.getElementById('hotelSpend');
-
+        
+        console.log('Travel frequency:', travelFrequency); // Debug log
+        console.log('Found flight spend element:', !!flightSpend); // Debug log
+        console.log('Found hotel spend element:', !!hotelSpend); // Debug log
+    
         // Set default values based on travel frequency
         let spendValue;
         if (travelFrequency <= 1) {
-            spendValue = "0";  // "I rarely book..."
+            spendValue = "0";
         } else if (travelFrequency <= 4) {
-            spendValue = "2000";  // "Light traveler..."
+            spendValue = "2000";
         } else if (travelFrequency <= 8) {
-            spendValue = "4000";  // "Regular traveler..."
+            spendValue = "4000";
         } else {
-            spendValue = "7500";  // "Frequent traveler..."
+            spendValue = "7500";
         }
-
+        
+        console.log('Selected spend value:', spendValue); // Debug log
+    
         // Only update if no value is already selected
         if (!flightSpend.value) {
             flightSpend.value = spendValue;
+            console.log('Updated flight spend to:', spendValue); // Debug log
         }
         if (!hotelSpend.value) {
             hotelSpend.value = spendValue;
+            console.log('Updated hotel spend to:', spendValue); // Debug log
         }
     }
 
@@ -1167,10 +1174,10 @@ if (calculateValuationBtn) {
 document.getElementById('backToSection3').addEventListener('click', function(e) {
     e.preventDefault();
     nextSection('section4', 'section3');
-    updateProgressBar('section3');  
+    updateProgressBar('section3');
 });
 
-    document.querySelectorAll('input[type="range"]').forEach(slider => {
+document.querySelectorAll('input[type="range"]').forEach(slider => {
     slider.addEventListener('input', () => updateSliderLabel(slider.id));
 });
 
@@ -1180,6 +1187,4 @@ document.getElementById('travelFrequency').addEventListener('blur', function() {
     if (value === '') value = '0';
     value = Math.max(0, parseInt(value));
     this.value = value;
-});
-
-}); 
+}); // Remove the extra } here
