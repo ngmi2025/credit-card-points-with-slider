@@ -83,8 +83,8 @@
     </div>
 </div>
 <div class="question-group">
-    <label for="flightSpend">Monthly spending on flights with airlines or Amex Travel</label>
-    <div class="input-group">
+    <label for="flightSpend">Spending on flights with airlines or Amex Travel / year</label>
+    <div class="input-wrapper">
         <select id="flightSpend" required>
             <option value="">Select an option</option>
             <option value="0">I rarely book flights ($0)</option>
@@ -94,18 +94,13 @@
             <option value="custom">Custom amount</option>
         </select>
         <div id="customFlightSpend" class="input-wrapper hidden">
-            <input type="text" 
-                   id="customFlightInput"
-                   inputmode="numeric"
-                   placeholder="Enter monthly flight spend">
+            <input type="text" id="customFlightInput" inputmode="numeric" placeholder="Enter monthly flight spend">
         </div>
-        <div class="helper-text">Spending ranges are based on typical Platinum Card member travel patterns. Select the option that best matches your travel style.</div>
     </div>
 </div>
-
 <div class="question-group">
-    <label for="hotelSpend">Monthly spending on prepaid hotels through Amex Travel</label>
-    <div class="input-group">
+    <label for="hotelSpend">Spending on prepaid hotels through Amex Travel / year</label>
+    <div class="input-wrapper">
         <select id="hotelSpend" required>
             <option value="">Select an option</option>
             <option value="0">I rarely book hotels ($0)</option>
@@ -115,18 +110,13 @@
             <option value="custom">Custom amount</option>
         </select>
         <div id="customHotelSpend" class="input-wrapper hidden">
-            <input type="text" 
-                   id="customHotelInput"
-                   inputmode="numeric"
-                   placeholder="Enter monthly hotel spend">
+            <input type="text" id="customHotelInput" inputmode="numeric" placeholder="Enter monthly hotel spend">
         </div>
-        <div class="helper-text">Spending ranges are based on typical Platinum Card member travel patterns. Select the option that best matches your travel style.</div>
     </div>
 </div>
-
 <div class="question-group">
-    <label for="otherSpend">Monthly spending on all other purchases</label>
-    <div class="input-group">
+    <label for="otherSpend">Spending on all other purchases / year</label>
+    <div class="input-wrapper">
         <select id="otherSpend" required>
             <option value="">Select an option</option>
             <option value="0">I don't use the card for other purchases ($0)</option>
@@ -136,12 +126,8 @@
             <option value="custom">Custom amount</option>
         </select>
         <div id="customOtherSpend" class="input-wrapper hidden">
-            <input type="text" 
-                   id="customOtherInput"
-                   inputmode="numeric"
-                   placeholder="Enter monthly spend">
+            <input type="text" id="customOtherInput" inputmode="numeric" placeholder="Enter monthly spend">
         </div>
-        <div class="helper-text">These ranges reflect typical monthly spending patterns. Choose the option that best matches your card usage.</div>
     </div>
 </div>
                 <div class="button-container">
