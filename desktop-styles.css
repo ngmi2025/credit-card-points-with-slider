@@ -82,16 +82,9 @@ h1 {
     padding: 30px;
     border-radius: 5px;
     margin-bottom: 20px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    display: none; /* Hide all sections by default */
-}
-
-#section1 {
-    display: block !important; /* Force display of first section */
-}
-
-.section.active {
-    display: block; /* Show only active section */
+    box-shadow: 
+        0 -2px 8px rgba(0,0,0,0.2),  /* Stronger top shadow */
+        0 2px 8px rgba(0,0,0,0.15);  /* Existing shadow for sides/bottom */
 }
 
 .section h2 {
@@ -106,39 +99,18 @@ h1 {
 }
 
 .question-group label {
-    margin-bottom: 10px;
-    font-weight: 600;
-    color: var(--text-color);
+    flex: 1;
+    margin-right: 20px;
 }
+
 .question-group {
     display: flex;
-    flex-direction: column;
-    margin-bottom: 25px;
+    justify-content: space-between;
+    align-items: center; /* Aligns radio buttons and slider vertically */
+    margin-bottom: 20px;
     padding-bottom: 20px;
     border-bottom: 1px solid var(--border-color);
 }
-
-.question-group:first-child {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
-}
-
-.question-group:first-child input {
-    width: 250px;
-    text-align: right;
-}
-
-.question-group:not(:first-child) {
-    display: flex;
-    flex-direction: column;
-}
-
-.question-group:not(:first-child) .input-group {
-    align-self: flex-end;
-}
-
 
 .input-wrapper {
     flex: 0 0 250px; /* Fixed width for input fields */
@@ -146,9 +118,8 @@ h1 {
 }
 
 .input-group {
-    width: 100%;
-    max-width: 250px;
-    margin-left: auto;
+    flex: 0 0 250px; /* Fixed width for dropdowns */
+    text-align: left; /* Aligns dropdowns text to the left */
 }
 
 .input-group select, .input-wrapper input[type="text"] {
@@ -173,53 +144,6 @@ h1 {
     box-sizing: border-box;
     background: linear-gradient(to bottom, #ffffff 0%, #f3f3f3 100%); 
 }
-
-/* Spending Dropdown Styles - Section 1 Only */
-.input-group select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    font-size: 1em;
-    height: 40px;
-    box-sizing: border-box;
-    background: linear-gradient(to bottom, #ffffff 0%, #f3f3f3 100%);
-}
-
-/* Custom Amount Input Styling - Section 1 Only */
-#section1 .input-wrapper.hidden {
-    display: none;
-}
-
-#section1 .input-wrapper {
-    margin-top: 10px;
-    width: 100%;
-}
-
-#section1 .input-wrapper input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    font-size: 1em;
-    height: 40px;
-    text-align: right;
-}
-
-/* Helper Text Styling - Section 1 Only */
-#section1 .helper-text {
-    font-size: 0.7rem;
-    color: var(--secondary-text-color);
-    margin-top: 5px;
-    line-height: 1.2;
-    margin-bottom: 10px; /* Add space before the dropdown */
-}
-
-/* Continue with existing code */
-#homeAirport {
-    width: 250px;
-    text-align: left;
-    margin-left: auto;
 
 .slider-container {
     flex: 0 0 250px;
@@ -293,6 +217,32 @@ h1 {
     text-align: right;
 }
 
+#flightSpend, #hotelSpend, #otherSpend {
+    width: 250px;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1em;
+    height: 40px;
+    background: linear-gradient(to bottom, #ffffff 0%, #f3f3f3 100%);
+}
+
+/* Custom Amount Input Styling */
+.input-wrapper.hidden {
+    display: none;
+}
+
+.input-wrapper input {
+    width: 250px;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1em;
+    height: 40px;
+    text-align: right;
+    margin-top: 10px;
+}
+
 .input-wrapper input[type="text"] {
     text-align: right;
 }
@@ -304,14 +254,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 input[type="number"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    font-size: 1em;
-    height: 40px;
-    box-sizing: border-box;
-    text-align: right;
+    -moz-appearance: textfield;
 }
 
 .button-container {
@@ -698,8 +641,8 @@ select.credit-select option {
 }
 
 .input-group {
-    width: 250px;
-    margin-left: auto;
+    width: 100%;
+    margin-top: 10px;
 }
 
 #section2 .slider-labels span.selected {
