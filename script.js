@@ -26,7 +26,12 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             customTravelFrequency.classList.add('hidden');
             customTravelInput.required = false;
-            updateSpendingBasedOnTravel(); // This updates flight/hotel spend
+            // Force update spending values regardless of their current state
+            const flightSpend = document.getElementById('flightSpend');
+            const hotelSpend = document.getElementById('hotelSpend');
+            flightSpend.value = '';  // Clear current value
+            hotelSpend.value = '';   // Clear current value
+            updateSpendingBasedOnTravel(); // This will now always update
             updateAllExplanationTexts();
         }
     });
