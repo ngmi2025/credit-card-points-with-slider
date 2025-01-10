@@ -44,9 +44,22 @@
             <div class="section" id="section1">
                 <h2>Travel Profile</h2>
                 <div class="question-group">
-                    <label for="travelFrequency">How many times do you travel per year?</label>
+                    <label for="travelFrequency">How often do you fly?</label>
                     <div class="input-wrapper">
-                        <input type="text" id="travelFrequency" inputmode="numeric" placeholder="Enter number of trips" required>
+                        <select id="travelFrequency" required>
+                            <option value="">Select frequency</option>
+                            <option value="2">Occasionally (1-3 trips/year)</option>
+                            <option value="5">Regularly (4-6 trips/year)</option>
+                            <option value="10">Frequently (7-12 trips/year)</option>
+                            <option value="15">Very frequently (13+ trips/year)</option>
+                            <option value="custom">Custom number of trips</option>
+                        </select>
+                        <div id="customTravelFrequency" class="input-wrapper hidden">
+                            <input type="text" 
+                                   id="customTravelInput"
+                                   inputmode="numeric"
+                                   placeholder="Enter number of trips">
+                        </div>
                     </div>
                 </div>
                 <div class="question-group">
