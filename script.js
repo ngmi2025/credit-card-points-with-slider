@@ -38,9 +38,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     document.getElementById('customTravelInput').addEventListener('input', function() {
         this.value = this.value.replace(/[^\d]/g, '');
-    });
-    
-    document.getElementById('customTravelInput').addEventListener('blur', function() {
         updateSpendingBasedOnTravel();
         updateAllExplanationTexts();
     });
@@ -59,6 +56,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const flightSpend = document.getElementById('flightSpend');
         const hotelSpend = document.getElementById('hotelSpend');
     
+        // Always clear existing values to force update
+        flightSpend.value = '';
+        hotelSpend.value = '';
+    
         let spendValue;
         if (travelFrequency <= 3) {
             spendValue = "2000";  // Occasionally (1-3 trips/year)
@@ -66,16 +67,13 @@ document.addEventListener('DOMContentLoaded', function() {
             spendValue = "4000";  // Regularly (4-6 trips/year)
         } else if (travelFrequency <= 12) {
             spendValue = "7500";  // Frequently (7-12 trips/year)
-        } else {
+        } else if (travelFrequency > 12) {  // Changed this condition
             spendValue = "10000"; // Very frequently (13+ trips/year)
         }
     
-        if (!flightSpend.value) {
-            flightSpend.value = spendValue;
-        }
-        if (!hotelSpend.value) {
-            hotelSpend.value = spendValue;
-        }
+        // Always set the values, don't check if they're empty
+        flightSpend.value = spendValue;
+        hotelSpend.value = spendValue;
     }
 
     // Add event listeners for travel frequency
