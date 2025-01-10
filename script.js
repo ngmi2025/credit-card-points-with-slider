@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
         flightSpend.value = spendValue;
         hotelSpend.value = spendValue;
     }
-    
+
     // Add event listeners for travel frequency
     document.getElementById('travelFrequency').addEventListener('change', updateSpendingBasedOnTravel);
     document.getElementById('travelFrequency').addEventListener('blur', updateSpendingBasedOnTravel);
@@ -391,12 +391,6 @@ function getComplementarySuggestions(points) {
     // Move the existing label into the title container
     const existingLabel = travelFrequencyGroup.querySelector('label');
     titleContainer.appendChild(existingLabel);
-    
-    // Add the disclaimer span
-    const disclaimer = document.createElement('span');
-    disclaimer.className = 'disclaimer';
-    disclaimer.innerHTML = 'Count each round-trip as one trip (e.g., NYC to LA and back = one trip).';
-    titleContainer.appendChild(disclaimer);
     
     // Insert the title container at the start of the question group
     travelFrequencyGroup.insertBefore(titleContainer, travelFrequencyGroup.firstChild);
