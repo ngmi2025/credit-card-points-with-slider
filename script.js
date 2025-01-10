@@ -283,6 +283,7 @@ if (!welcomeBonusContainer) {
         alert('There was an error calculating your points. Please try again.');
         throw error;
     }
+}
     
 const earnedPointSuggestions = [
     {
