@@ -1,930 +1,1208 @@
-:root {
-    --primary-color: #0077be;
-    --secondary-color: #F6941F;
-    --text-color: #333;
-    --secondary-text-color: #808080;
-    --background-color: #fff;
-    --border-color: #e0e0e0;
-    --error-color: #d32f2f;
-    --success-color: #3EB564;
-}
-
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    line-height: 1.6;
-    color: var(--text-color);
-    background-color: #f0f0f0;
-    margin: 0;
-    padding: 0;
-}
-
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: var(--background-color);
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    border-radius: 5px;
-}
-
-h1, h2 {
-    color: var(--primary-color);
-}
-
-h1 {
-    text-align: center;
-    font-size: 2.5em;
-    margin-bottom: 20px;
-}
-
-/* Common styles for all major sections */
-.savings-summary,
-.yearly-breakdown,
-.card-details {
-    background-color: #f9f9f9;
-    border-radius: 12px;
-    padding: 30px;
-    margin-bottom: 40px;
-    border: 2px solid #e0e0e0;
-}
-
-/* Common heading styles */
-.savings-summary h3,
-.yearly-breakdown h3,
-.card-details h3 {
-    color: var(--text-color);
-    font-size: 20px;
-    margin-bottom: 20px;
-    font-weight: 600;
-}
-
-/* Common breakdown item styles */
-.breakdown-item,
-.savings-item {
-    margin-bottom: 20px;
-    padding: 15px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-    display: block;
-    animation: fadeIn 0.5s ease-out;
-}
-
-.intro {
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 1.1em;
-    color: var(--secondary-text-color);
-}
-
-.section {
-    background-color: var(--background-color);
-    padding: 30px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    box-shadow: 
-        0 -2px 8px rgba(0,0,0,0.2),  /* Stronger top shadow */
-        0 2px 8px rgba(0,0,0,0.15);  /* Existing shadow for sides/bottom */
-}
-
-.section h2 {
-    color: var(--primary-color);
-    font-size: 28px;
-    margin-top: 0; /* Remove top margin */
-    margin-bottom: 15px; /* Keep bottom spacing */
-}
-
-.question-group:last-child {
-    border-bottom: none;
-}
-
-.question-group label {
-    flex: 1;
-    margin-right: 20px;
-}
-
-.question-group {
-    display: flex;
-    justify-content: space-between;
-    align-items: center; /* Aligns radio buttons and slider vertically */
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.input-wrapper {
-    flex: 0 0 250px; /* Fixed width for input fields */
-    text-align: right; /* Aligns input text to the right */
-}
-
-.input-group {
-    flex: 0 0 250px; /* Fixed width for dropdowns */
-    text-align: left; /* Aligns dropdowns text to the left */
-}
-
-.input-group select, .input-wrapper input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    font-size: 1em;
-    height: 40px;
-    box-sizing: border-box;
-}
-
-#homeAirport {
-    width: 250px;
-    text-align: left;
-    margin-left: auto;
-    padding: 10px;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    font-size: 0.9em;
-    height: 40px;
-    box-sizing: border-box;
-    background: linear-gradient(to bottom, #ffffff 0%, #f3f3f3 100%); 
-}
-
-#homeAirport option {
-    font-size: 0.9rem;  /* keep the same size for consistency */
-}
-
-#travelFrequency {
-    width: 250px;
-    padding: 10px;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    font-size: 0.9em;
-    height: 40px;
-    background: linear-gradient(to bottom, #ffffff 0%, #f3f3f3 100%);
-}
-
-#travelFrequency option {
-    font-size: 0.9em;  /* Match the size of other dropdown options */
-}
-
-.slider-container {
-    flex: 0 0 250px;
-    width: 250px;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    position: relative;
-    margin-bottom: 35px;
-    padding: 0 10px; /* Add padding to account for the thumb overflow */
-    box-sizing: border-box;
-}
-
-.slider-container input[type="range"] {
-    -webkit-appearance: none;
-    appearance: none;
-    height: 12px; /* Back to thicker track */
-    background: #e0e0e0; /* Lighter grey for track */
-    outline: none;
-    opacity: 1; /* Full opacity */
-    border-radius: 6px;
-    margin: 18px 0 25px 0; /* Top Right Bottom Left */
-    width: 100%;
-    position: relative;
-}
-
-.slider-container input[type="range"]:hover {
-    opacity: 1;
-}
-
-.slider-container input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 24px; /* Slightly larger thumb */
-    height: 24px;
-    background: var(--primary-color);
-    cursor: pointer;
-    border-radius: 50%;
-    margin-top: -6px; /* Centers the thumb: (24px - 8px) / 2 = 8px */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Optional: adds subtle shadow */
-}
-
-.slider-container input[type="range"]::-moz-range-thumb {
-    width: 24px;
-    height: 24px;
-    background: var(--primary-color);
-    cursor: pointer;
-    border-radius: 50%;
-    border: none;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.slider-container input[type="range"]::-moz-range-track {
-    height: 12px;
-    background: #e0e0e0;
-    border-radius: 6px;
-}
-
-.slider-value {
-    margin-top: 5px;
-    font-size: 0.9em;
-    font-weight: bold;
-    color: var(--primary-color);
-}
-
-.input-wrapper input[type="number"],
-#flightSpend,
-#hotelSpend,
-#otherSpend,
-#travelFrequency {
-    text-align: right;
-}
-
-#flightSpend, #hotelSpend, #otherSpend {
-    width: 250px;
-    padding: 10px;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    font-size: 0.9em;
-    height: 40px;
-    background: linear-gradient(to bottom, #ffffff 0%, #f3f3f3 100%);
-}
-
-/* Custom Amount Input Styling */
-.input-wrapper.hidden {
-    display: none;
-}
-
-.input-wrapper input {
-    width: 250px;
-    padding: 10px;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    font-size: 1em;
-    height: 40px;
-    text-align: right;
-    margin-top: 10px;
-}
-
-.input-wrapper input[type="text"] {
-    text-align: right;
-}
-
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-input[type="number"] {
-    -moz-appearance: textfield;
-}
-
-.button-container {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 20px;
-}
-
-.cta-button {
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    padding: 15px 30px;
-    font-size: 1em;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    font-weight: bold;
-    min-width: 150px;
-}
-.cta-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,119,190,0.2);
-}
-.error {
-    border-color: var(--error-color) !important;
-}
-
-.hidden {
-    display: none;
-}
-
-/* Results Section Styling */
-#results {
-    background-color: #f9f9f9;
-    padding: 30px;
-    border-radius: 12px;
-    margin-top: 40px;
-    border: 2px solid #e0e0e0;
-}
-
-#results h2 {
-    color: var(--primary-color);
-    font-size: 28px;
-    margin-bottom: 30px;
-}
-
-#results .result-group {
-    display: flex;
-    flex-direction: row; /* Change to row to align items horizontally */
-    justify-content: space-between; /* Space between title/description and value */
-    align-items: center; /* Vertically center items */
-    margin-bottom: 2rem;
-    padding-bottom: 25px;
-    border-bottom: 1px solid #f0f0f0;
-    position: relative;
-}
-
-#results .result-content {
-    flex: 1; /* Takes up remaining space */
-        margin-right: 20px; /* Add this line to create space between text and value */
-}
-
-#results .result-group:last-child {
-    border-bottom: none;
-}
-
-#results .result-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    color: #333;
-}
-
-#results .result-description {
-    color: var(--secondary-text-color);
-    font-size: 0.75rem;
-    line-height: 1.5;
-    margin-bottom: 8px;
-}
-
-#results .result-value {
-    background-color: #f2f2f2;
-    border-radius: 4px;
-    padding: 12px 15px;
-    font-size: 1.1rem;
-    font-weight: 700;
-    text-align: right;
-    width: 250px;
-    height: 40px;
-    border: 1px solid #e0e0e0;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end; /* Add this line */
-    margin-left: auto; /* Add this line */
-}
-
-#results .button-container {
-    display: flex;
-    justify-content: flex-end; /* Align button to the right */
-    width: 100%;
-    margin-top: 2rem;
-}
-
-#results .continue-btn {
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 15px 30px;
-    font-size: 1em;
-    font-weight: bold;
-    cursor: pointer;
-    text-transform: uppercase;
-    min-width: 150px; /* Match CALCULATE POINTS button width */
-    transition: all 0.3s ease;
-}
-
-#results .continue-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,119,190,0.2);
-}
-
-.disclaimer a {
-    color: var(--secondary-text-color); /* Matches the text color for consistency */
-    text-decoration: underline; /* Indicates it's a link */
-}
-
-.disclaimer a:hover {
-    color: var(--primary-color); /* Adds a hover effect for better UX */
-    text-decoration: none; /* Optionally remove underline on hover */
-}
-
-.disclaimer {
-    font-size: 0.7rem; /* Matches the smaller text size */
-    color: var(--secondary-text-color); /* Grey text */
-    line-height: 1.2; /* Compact spacing */
-    margin-top: 5px; /* Adds spacing between radio buttons and disclaimer */
-    display: block; /* Stacks disclaimer under the radio buttons */
-    text-align: left; /* Aligns disclaimer to the left */
-}
-
-.subheading {
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 20px;
-}
-
-.back-link {
-    display: inline-block;
-    margin-bottom: 15px; /* Reduced from 20px */
-    color: var(--primary-color);
-    text-decoration: none;
-   font-weight: 600; /* Slightly reduced from bold */
-    font-size: 0.8em; /* Make text smaller */
-}
-
-.back-link:hover {
-    text-decoration: underline;
-}
-
-.question-title {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.question-description {
-    display: block;
-    font-size: 0.9em;
-    color: var(--secondary-text-color);
-    margin-bottom: 10px;
-}
-.credit-note {
-    display: block;
-    font-size: 0.8em;
-    color: var(--secondary-text-color);
-    font-weight: normal;
-    margin-top: 2px;
-}
-
-.value-breakdown {
-    font-size: 0.7rem; /* Matches disclaimer text size */
-    color: var(--secondary-text-color); /* Matches disclaimer text color */
-    line-height: 1.2; /* Matches disclaimer line height */
-    margin-top: 5px; /* Consistent spacing with the disclaimer */
-    display: flex; /* Aligns breakdown values horizontally */
-    justify-content: flex-end; /* Keeps values aligned to the right */
-    gap: 20px; /* Adds spacing between values */
-}
-
-.value-breakdown div {
-    display: inline-flex; /* Align text and values horizontally */
-    align-items: center; /* Vertically align items */
-}
-
-/* Optional: Add some spacing between the text and the value */
-.value-breakdown span {
-    margin-left: 4px; /* Adds spacing between labels and values */
-}
-
-.title-container {
-    flex: 1; /* Occupies remaining space */
-    margin-right: 20px; /* Spacing between title and slider */
-    text-align: left; /* Aligns content to the left */
-}
-/* Final Valuation Section Styling */
-#section4 {
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 2px 15px rgba(0,0,0,0.08);
-    width: 100%;
-    box-sizing: border-box;
-}
-
-#section4 h2 {
-    color: var(--primary-color);
-    font-size: 28px;
-    margin-bottom: 30px;
-    border-bottom: 2px solid #f0f0f0;
-    padding-bottom: 15px;
-}
-
-#section4 .savings-value, #section4 .breakdown-value {
-    background-color: #f2f2f2;
-    border-radius: 4px;
-    padding: 12px 15px;
-    font-size: 1.1rem;
-    font-weight: 700;
-    text-align: right;
-    width: 250px;
-    height: 40px;
-    border: 1px solid #e0e0e0;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    margin-left: auto;
-}
-
-#section4 .savings-value.positive {
-    color: var(--success-color);
-}
-
-#section4 .savings-value.negative {
-    color: var(--error-color);
-}
-
-/* Change these styles to be scoped to #section4 */
-#section4 .savings-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-}
-
-#section4 .savings-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
-}
-
-#section4 .savings-label {
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--text-color);
-}
-
-#section4 .breakdown-value.positive {
-    color: var(--success-color);
-}
-
-#section4 .breakdown-value.negative {
-    color: var(--error-color);
-}
-#section4 .breakdown-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-#section4 .breakdown-label {
-    font-weight: 600;
-    color: var(--text-color);
-}
-
-.card-details {
-    position: relative; /* For the :before pseudo-element */
-    border: 1px solid var(--border-color);
-}
-
-.card-details:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 4px;
-    background-color: #f0f0f0;
-    border-radius: 2px;
-}
-
-.card-details a {
-    color: var(--primary-color);
-    text-decoration: none;
-    font-weight: 600;
-    padding-bottom: 2px;
-    border-bottom: 2px solid transparent;
-    transition: border-color 0.2s ease;
-}
-
-.card-details a:hover {
-    border-bottom-color: var(--primary-color);
-}
-
-.detail-item {
-    padding: 15px;
-    border-bottom: 1px solid #f0f0f0;
-    display: block;
-}
-
-.detail-item:last-child {
-    border-bottom: none;
-}
-
-.calculation-note {
-    color: var(--secondary-text-color);
-    font-size: 0.8em;
-    margin-top: 10px;
-    line-height: 1.5;
-    padding: 12px;
-    background-color: #f8f9fa;
-    border-left: 3px solid var(--border-color);
-    border-radius: 0 6px 6px 0;
-}
-
-.apply-now-btn {
-    background-color: var(--success-color);
-    color: white;
-    border: none;
-    padding: 15px 30px;
-    font-size: 18px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    font-weight: bold;
-    margin-top: 30px;
-    width: auto;
-    max-width: 300px;
-    display: block;
-    margin-left: auto;
-}
-
-.apply-now-btn:hover {
-    background-color: #34a853;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(62,181,100,0.2);
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(5px);
+document.addEventListener('DOMContentLoaded', function() {
+    // 1. Constants
+    const WELCOME_BONUS = 80000;
+    const POINT_VALUE = 0.022;
+    const ANNUAL_FEE = 595;
+    const MINIMUM_POINTS_FOR_SUGGESTION = 15000;
+
+    function getTravelFrequency() {
+        const travelSelect = document.getElementById('travelFrequency');
+        const customInput = document.getElementById('customTravelInput');
+        
+        if (travelSelect.value === 'custom') {
+            return parseInt(customInput.value) || 0;
+        }
+        return parseInt(travelSelect.value) || 0;
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+
+    document.getElementById('travelFrequency').addEventListener('change', function() {
+        const customTravelFrequency = document.getElementById('customTravelFrequency');
+        const customTravelInput = customTravelFrequency.querySelector('input');
+        
+        if (this.value === 'custom') {
+            customTravelFrequency.classList.remove('hidden');
+            customTravelInput.required = true;
+            customTravelInput.focus();
+        } else {
+            customTravelFrequency.classList.add('hidden');
+            customTravelInput.required = false;
+            // Force update spending values regardless of their current state
+            const flightSpend = document.getElementById('flightSpend');
+            const hotelSpend = document.getElementById('hotelSpend');
+            flightSpend.value = '';  // Clear current value
+            hotelSpend.value = '';   // Clear current value
+            updateSpendingBasedOnTravel(); // This will now always update
+            updateAllExplanationTexts();
+        }
+    });
+    
+    document.getElementById('customTravelInput').addEventListener('input', function() {
+        this.value = this.value.replace(/[^\d]/g, '');
+        updateSpendingBasedOnTravel();
+        updateAllExplanationTexts();
+    });
+
+    function updateSpendingBasedOnTravel() {
+        const travelSelect = document.getElementById('travelFrequency');
+        const customInput = document.getElementById('customTravelInput');
+        let travelFrequency;
+        
+        if (travelSelect.value === 'custom') {
+            travelFrequency = parseInt(customInput.value) || 0;
+        } else {
+            travelFrequency = parseInt(travelSelect.value) || 0;
+        }
+    
+        const flightSpend = document.getElementById('flightSpend');
+        const hotelSpend = document.getElementById('hotelSpend');
+    
+        // Always clear existing values to force update
+        flightSpend.value = '';
+        hotelSpend.value = '';
+    
+        let spendValue;
+        if (travelFrequency <= 3) {
+            spendValue = "2000";  // Occasionally (1-3 trips/year)
+        } else if (travelFrequency <= 6) {
+            spendValue = "4000";  // Regularly (4-6 trips/year)
+        } else if (travelFrequency >= 7) {  // Changed from <= 12 to >= 7
+            spendValue = "7500";  // Frequently (7+ trips/year)
+        }
+    
+        // Always set the values, don't check if they're empty
+        flightSpend.value = spendValue;
+        hotelSpend.value = spendValue;
     }
-}
-select.credit-select {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 12px;
-    background-color: white;
-}
 
-select.credit-select option {
-    font-size: 12px;
-}
+    // Add event listeners for travel frequency
+    document.getElementById('travelFrequency').addEventListener('change', updateSpendingBasedOnTravel);
+    document.getElementById('travelFrequency').addEventListener('blur', updateSpendingBasedOnTravel);
 
-.input-group {
-    width: 100%;
-    margin-top: 10px;
-}
+    // Flight spend handler
+    document.getElementById('flightSpend').addEventListener('change', function() {
+        const customFlightSpend = document.getElementById('customFlightSpend');
+        const customFlightInput = customFlightSpend.querySelector('input');
+        
+        if (this.value === 'custom') {
+            customFlightSpend.classList.remove('hidden');
+            customFlightInput.required = true;
+            customFlightInput.focus();
+        } else {
+            customFlightSpend.classList.add('hidden');
+            customFlightInput.required = false;
+        }
+    });
 
-#section2 .slider-labels span.selected {
-    font-weight: bold;
-    color: var(--primary-color);
-}
+    // Add currency formatting for flight custom input
+    document.getElementById('customFlightInput').addEventListener('blur', function() {
+        let value = this.value.replace(/[^\d]/g, '');
+        if (value) {
+            value = parseInt(value, 10);
+            this.value = '$' + value.toLocaleString('en-US');
+        } else {
+            this.value = '$0';
+        }
+    });
 
-.progress-bar {
-    display: flex;
-    justify-content: space-between;
-    margin: 10px 0 20px; /* Added more bottom margin to match image */
-    padding: 0;  /* Remove padding */
-    position: relative;
-    width: 100%;  /* Full width */
-    max-width: 100%;  /* Remove max-width restriction */
-}
+    // Add input validation for flight custom input
+    document.getElementById('customFlightInput').addEventListener('input', function() {
+        this.value = this.value.replace(/[^\d]/g, '');
+    });
 
-.progress-bar .step {
-    flex: 1;
-    text-align: center;
-    position: relative;
-    padding: 0 10px;
-    min-width: 70px; /* Slightly larger to accommodate the wider spacing */
-}
+    // Hotel spend handler
+    document.getElementById('hotelSpend').addEventListener('change', function() {
+        const customHotelSpend = document.getElementById('customHotelSpend');
+        const customHotelInput = customHotelSpend.querySelector('input');
+        
+        if (this.value === 'custom') {
+            customHotelSpend.classList.remove('hidden');
+            customHotelInput.required = true;
+            customHotelInput.focus();
+        } else {
+            customHotelSpend.classList.add('hidden');
+            customHotelInput.required = false;
+        }
+    });
 
-.progress-bar .step:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    top: 14px;
-    left: calc(50% + 14px);
-    width: calc(100% - 20px); /* Wider line */
-    height: 2px;
-    background: #e0e0e0;
-    z-index: 1;
-    transition: background 2s ease;
+    // Add currency formatting for hotel custom input
+    document.getElementById('customHotelInput').addEventListener('blur', function() {
+        let value = this.value.replace(/[^\d]/g, '');
+        if (value) {
+            value = parseInt(value, 10);
+            this.value = '$' + value.toLocaleString('en-US');
+        } else {
+            this.value = '$0';
+        }
+    });
 
-}
+    // Add input validation for hotel custom input
+    document.getElementById('customHotelInput').addEventListener('input', function() {
+        this.value = this.value.replace(/[^\d]/g, '');
+    });
 
-.progress-bar .step.completed:not(:last-child)::after {
-    background: var(--primary-color);
-}
+    // Other spend handler
+    document.getElementById('otherSpend').addEventListener('change', function() {
+        const customOtherSpend = document.getElementById('customOtherSpend');
+        const customOtherInput = customOtherSpend.querySelector('input');
+        
+        if (this.value === 'custom') {
+            customOtherSpend.classList.remove('hidden');
+            customOtherInput.required = true;
+            customOtherInput.focus();
+        } else {
+            customOtherSpend.classList.add('hidden');
+            customOtherInput.required = false;
+        }
+    });
 
-.progress-bar .step .icon {
-    width: 28px; /* Smaller icon container */
-    height: 28px; /* Smaller icon container */
-    background: white;
-    border: 2px solid #e0e0e0;
-    border-radius: 50%;
-    padding: 2px; /* Reduced padding */
-    margin: 0 auto;
-    position: relative;
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+    // Add currency formatting for other custom input
+    document.getElementById('customOtherInput').addEventListener('blur', function() {
+        let value = this.value.replace(/[^\d]/g, '');
+        if (value) {
+            value = parseInt(value, 10);
+            this.value = '$' + value.toLocaleString('en-US');
+        } else {
+            this.value = '$0';
+        }
+    });
 
-.progress-bar .step.active .icon {
-    border-color: var(--primary-color);
-    background: white;
-}
+    // Add input validation for other custom input
+    document.getElementById('customOtherInput').addEventListener('input', function() {
+        this.value = this.value.replace(/[^\d]/g, '');
+    });
+});
 
-.progress-bar .step.active .icon .material-icons {
-    color: var(--primary-color);
-}
+  // Points Calculation for Section 1
+function calculatePoints() {
+    try {
+        // Parse input values
+        const flightSpend = parseFloat(document.getElementById('flightSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
+        const hotelSpend = parseFloat(document.getElementById('hotelSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
+        const otherSpend = parseFloat(document.getElementById('otherSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
 
-.progress-bar .step.completed .icon {
-    border-color: var(--primary-color);
-    background: var(--primary-color);
-}
-.progress-bar .step.completed .icon .material-icons {
-    color: white; /* White icon when background is blue */
-}
+        // Cap flight spend at $500,000
+        const cappedFlightSpend = Math.min(flightSpend, 500000);
+        const uncappedFlightSpend = Math.max(0, flightSpend - 500000);
 
-.progress-bar .step .icon .material-icons {
-    font-size: 16px;
-    color: #e0e0e0;
-}
+        // Calculate points: 5x on capped flight spend, 1x on uncapped amount
+        const travelPoints = (cappedFlightSpend + hotelSpend) * 5;
+        const otherPoints = otherSpend + uncappedFlightSpend;
+        const totalPoints = travelPoints + otherPoints;
+        const totalValuation = (WELCOME_BONUS + totalPoints) * POINT_VALUE;
 
-.progress-bar .step .label {
-    position: static;
-    display: block;
-    width: auto;
-    height: auto;
-    margin-top: 6px;
-    font-size: 11px;  /* Made even smaller */
-    color: var(--secondary-text-color);
-    letter-spacing: 0.5px;     /* Optional: improves readability of small text */
-}
+        // Debug logging
+        console.log('Calculation values:', {
+            flightSpend,
+            hotelSpend,
+            otherSpend,
+            cappedFlightSpend,
+            uncappedFlightSpend,
+            travelPoints,
+            otherPoints,
+            totalPoints,
+            totalValuation
+        });
 
-.progress-bar .step.active .label {
-    color: var(--primary-color);
-    font-weight: 600;
-}
-.pre-selection-notice {
-    background-color: #f8f9fa;  /* Light gray background */
-    border: 1px solid #e9ecef;  /* Subtle border */
-    border-radius: 4px;         /* Rounded corners */
-    padding: 15px;              /* Spacing inside the box */
-    margin: 20px 0;             /* Spacing above/below */
-}
+        // Verify all required elements exist
+        const elements = {
+            totalPointsValue: document.getElementById('totalPointsValue'),
+            welcomeBonusValue: document.getElementById('welcomeBonusValue'),
+            valuationValue: document.getElementById('valuationValue'),
+            results: document.getElementById('results')
+        };
 
-.pre-selection-notice p {
-    margin: 0;                  /* Remove default paragraph margin */
-    font-size: 0.75rem;         /* Slightly smaller than regular text */
-    line-height: 1.5;           /* Comfortable line height */
-    color: #6c757d;            /* Softer text color */
-    transition: background-color 0.3s ease;
+        // Check if any elements are missing
+        const missingElements = Object.entries(elements)
+            .filter(([key, element]) => !element)
+            .map(([key]) => key);
 
-}
-.pre-selection-notice.updated {
-    background-color: #f0f7ff;  /* Subtle highlight color */
-}
+        if (missingElements.length > 0) {
+            throw new Error(`Missing required elements: ${missingElements.join(', ')}`);
+        }
 
-.perks-selection-notice {
-    background-color: #f8f9fa;
-    border: 1px solid #e9ecef;
-    border-radius: 4px;
-    padding: 15px;
-    margin: 20px 0;
-}
+        // Update values
+        elements.totalPointsValue.textContent = Math.round(totalPoints).toLocaleString() + ' points';
+        elements.welcomeBonusValue.textContent = WELCOME_BONUS.toLocaleString() + ' points';
+        elements.valuationValue.textContent = '$' + Math.round(totalValuation).toLocaleString();
 
-.perks-selection-notice p {
-    margin: 0;
-    font-size: 0.75rem;
-    line-height: 1.5;
-    color: #6c757d;
-    transition: background-color 0.3s ease;
-}
-
-.perks-selection-notice.updated {
-    background-color: #f0f7ff;
-}
-/* Custom Airport Input Styles */
-#customHomeAirport {
-    margin-top: 10px;
-     display: block;
-    width: 100%;    
-}
-
-#customHomeAirport input {
-    width: 100%;
-    padding: 8px 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-}
-
-#customHomeAirport input:focus {
-    outline: none;
-    border-color: #695BE9; /* Your primary color */
-    box-shadow: 0 0 0 2px rgba(105, 91, 233, 0.1); /* Subtle focus ring */
-}
-
-#customHomeAirport input::placeholder {
-    color: #999;
-}
-
-/* Error state */
-#customHomeAirport input:invalid {
-    border-color: #dc3545;
-}
-
-/* Hidden state */
-.hidden {
-    display: none !important;
-}
-#valuationValue {
-    background-color: #E7F6E7 !important; /* Added !important to ensure it applies */
-    color: #2E8B57;
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-weight: 600;
-    font-size: 1.3em;
-}
-
-.points-suggestion {
-    display: inline;
-    color: var(--text-color);
-    font-weight: 600;
-    font-size: 0.75rem; /* Match the size of result-description */
-    margin-left: 4px; /* Add a small space between description and suggestion */
-    animation: suggestionFade 0.3s ease-out;
-}
-
-/* Optional: Add a subtle fade-in animation when suggestions update */
-@keyframes suggestionFade {
-    from {
-        opacity: 0;
-        transform: translateY(-5px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+        // Get complementary suggestions
+        const suggestions = getComplementarySuggestions(totalPoints);
+        
+// Update Total Points Earned suggestion
+const earnedPointsContainer = document.getElementById('totalPointsValue').parentElement.querySelector('.points-suggestion');
+if (suggestions.earnedSuggestion && totalPoints >= MINIMUM_POINTS_FOR_SUGGESTION) {
+    if (earnedPointsContainer) {
+        earnedPointsContainer.textContent = suggestions.earnedSuggestion;
     }
 }
 
-.points-suggestion {
-    animation: suggestionFade 0.3s ease-out;
+// Update Welcome Bonus suggestion
+const welcomeBonusContainer = document.querySelector('.welcome-bonus .points-suggestion');
+if (!welcomeBonusContainer) {
+    console.warn('Welcome bonus container not found');
+} else {
+    welcomeBonusContainer.textContent = suggestions.welcomeSuggestion;
+}
+        // Show results
+        elements.results.classList.remove('hidden');
+        console.log('Results displayed successfully');
+
+        return {
+            totalPoints,
+            totalValuation
+        };
+
+    } catch (error) {
+        console.error('Error in calculatePoints:', error);
+        alert('There was an error calculating your points. Please try again.');
+        throw error;
+    }
 }
     
-.slider-container .slider-labels {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    position: relative;
-    bottom: 0;
+const earnedPointSuggestions = [
+    {
+        min: 15000,
+        max: 20000,
+        suggestions: [
+            { text: "That's enough for a one-way flight to any major US city!", category: "FLIGHTS" },
+            { text: "That's enough for a luxury hotel night through Fine Hotels & Resorts!", category: "HOTELS" },
+            { text: "That's enough for multiple premium dining experiences through Resy!", category: "EXPERIENCES" }
+        ]
+    },
+    {
+        min: 20001,
+        max: 40000,
+        suggestions: [
+            { text: "That's enough for a round-trip flight anywhere in the continental US!", category: "FLIGHTS" },
+            { text: "That's enough for two nights at a 5-star hotel in Miami or LA!", category: "HOTELS" },
+            { text: "That's enough for multiple spa treatments at luxury resorts!", category: "EXPERIENCES" }
+        ]
+    },
+    {
+        min: 40001,
+        max: 60000,
+        suggestions: [
+            { text: "That's enough for a round-trip flight to Hawaii!", category: "FLIGHTS" },
+            { text: "That's enough for three nights at a beachfront resort in Mexico!", category: "HOTELS" },
+            { text: "That's enough for a weekend of luxury experiences including dining and spa!", category: "EXPERIENCES" }
+        ]
+    },
+    {
+        min: 60001,
+        max: 80000,
+        suggestions: [
+            { text: "That's enough for a round-trip flight to Europe!", category: "FLIGHTS" },
+            { text: "That's enough for a 4-night luxury hotel stay in Paris or London!", category: "HOTELS" },
+            { text: "That's enough for multiple domestic weekend getaways!", category: "EXPERIENCES" }
+        ]
+    },
+    {
+        min: 80001,
+        max: 120000,
+        suggestions: [
+            { text: "That's enough for a business class flight to Europe!", category: "FLIGHTS" },
+            { text: "That's enough for a 5-night stay at a luxury resort in Bora Bora!", category: "HOTELS" },
+            { text: "That's enough for multiple romantic getaways with luxury perks!", category: "EXPERIENCES" }
+        ]
+    },
+    {
+        min: 120001,
+        max: 160000,
+        suggestions: [
+            { text: "That's enough for a first class flight to Asia!", category: "FLIGHTS" },
+            { text: "That's enough for a week at top hotels in multiple European cities!", category: "HOTELS" },
+            { text: "That's enough for multiple luxury vacations with VIP experiences!", category: "EXPERIENCES" }
+        ]
+    },
+    {
+        min: 160001,
+        max: 200000,
+        suggestions: [
+            { text: "That's enough for two business class tickets to anywhere in the world!", category: "FLIGHTS" },
+            { text: "That's enough for 10 nights at luxury hotels across multiple destinations!", category: "HOTELS" },
+            { text: "That's enough for a year of premium travel experiences!", category: "EXPERIENCES" }
+        ]
+    },
+    {
+        min: 200001,
+        max: Infinity,
+        suggestions: [
+            { text: "That's enough for multiple first class international flights!", category: "FLIGHTS" },
+            { text: "That's enough for two weeks at the world's most exclusive resorts!", category: "HOTELS" },
+            { text: "That's enough for unlimited luxury travel possibilities!", category: "EXPERIENCES" }
+        ]
+    }
+];
+
+const welcomeBonusSuggestions = [
+    { text: "That's enough for 2 round-trip flights from the US to the Caribbean!", category: "FLIGHTS" },
+    { text: "That's enough for a round-trip flight to Europe!", category: "FLIGHTS" },
+    { text: "That's enough for multiple domestic round-trip flights!", category: "FLIGHTS" },
+    
+    { text: "That's enough for 4 nights at a luxury resort through Fine Hotels & Resorts!", category: "HOTELS" },
+    { text: "That's enough for a week of 5-star hotel stays!", category: "HOTELS" },
+    { text: "That's enough for multiple weekend escapes at luxury hotels!", category: "HOTELS" },
+    
+    { text: "That's enough for multiple luxury weekend adventures!", category: "EXPERIENCES" },
+    { text: "That's enough for a year of premium dining and entertainment!", category: "EXPERIENCES" },
+    { text: "That's enough for several VIP travel experiences!", category: "EXPERIENCES" }
+];
+
+function getComplementarySuggestions(points) {
+    if (points < MINIMUM_POINTS_FOR_SUGGESTION) {
+        return {
+            earnedSuggestion: "",
+            welcomeSuggestion: welcomeBonusSuggestions[
+                Math.floor(Math.random() * welcomeBonusSuggestions.length)
+            ].text
+        };
+    }
+
+    let earnedOptions = [];
+    for (let range of earnedPointSuggestions) {
+        if (points >= range.min && points <= range.max) {
+            earnedOptions = range.suggestions;
+            break;
+        }
+    }
+    
+    const earnedSuggestion = earnedOptions[Math.floor(Math.random() * earnedOptions.length)];
+    
+    const availableWelcomeSuggestions = welcomeBonusSuggestions.filter(
+        suggestion => suggestion.category !== earnedSuggestion.category
+    );
+    
+    const welcomeSuggestion = availableWelcomeSuggestions[
+        Math.floor(Math.random() * availableWelcomeSuggestions.length)
+    ];
+    
+    return {
+        earnedSuggestion: earnedSuggestion.text,
+        welcomeSuggestion: welcomeSuggestion.text
+    };
+}
+    
+    const INTERNATIONAL_HUBS = [
+    'JFK', 'LAX', 'ORD', 'MIA', 'SFO', 'EWR', 'IAD', 
+    'BOS', 'SEA', 'ATL', 'DFW', 'IAH', 'DEN'
+];
+
+        const airportNames = {
+        'ATL': 'Atlanta',
+        'BOS': 'Boston',
+        'CLT': 'Charlotte',
+        'DEN': 'Denver',
+        'DFW': 'Dallas/Fort Worth',
+        'DTW': 'Detroit',
+        'EWR': 'Newark',
+        'IAD': 'Washington Dulles',
+        'IAH': 'Houston',
+        'JFK': 'New York JFK',
+        'LAX': 'Los Angeles',
+        'LGA': 'New York LaGuardia',
+        'MIA': 'Miami',
+        'ORD': 'Chicago',
+        'PHL': 'Philadelphia',
+        'PHX': 'Phoenix',
+        'SEA': 'Seattle',
+        'SFO': 'San Francisco'
+    };
+
+        updateProgressBar('section1');
+    
+document.getElementById('homeAirport').addEventListener('change', function() {
+    const customHomeAirport = document.getElementById('customHomeAirport');
+    const customAirportInput = customHomeAirport.querySelector('input');
+    
+    if (this.value === 'custom') {
+        customHomeAirport.classList.remove('hidden');
+        customAirportInput.required = true;
+        customAirportInput.focus();
+    } else {
+        customHomeAirport.classList.add('hidden');
+        customAirportInput.required = false;
+    }
+});
+
+// Add validation for the custom airport input
+const customAirportInput = document.querySelector('#customHomeAirport input');
+if (customAirportInput) {
+    customAirportInput.addEventListener('input', function() {
+        this.value = this.value.replace(/[^A-Za-z\s]/g, ''); // Only letters and spaces
+            updateAllExplanationTexts();
+    });
+}
+    
+    function updateSliderLabel(sliderId) {
+    const slider = document.getElementById(sliderId);
+    const labels = slider.parentElement.querySelector('.slider-labels').children;
+    const value = parseInt(slider.value);
+    const section = slider.closest('section');
+    
+    // Remove classes from all labels
+    Array.from(labels).forEach(label => {
+        label.classList.remove('selected', 'primary-color');
+    });
+
+    if (section && section.id === 'section3') {
+        // For section 3, adjust the index to match the 1-5 value range
+        const selectedIndex = value - 1;  // Convert 1-5 to 0-4 for label index
+        if (selectedIndex >= 0 && selectedIndex < labels.length) {
+            labels[selectedIndex].classList.add('selected', 'primary-color');
+        }
+    } else {
+        // Section 2 stays the same (0-4 range)
+        if (value >= 0 && value < labels.length) {
+            labels[value].classList.add('selected');
+        }
+    }
+}
+    function formatCurrency(input) {
+        let value = input.value.replace(/[^0-9.-]+/g, '');
+        if (value) {
+            value = parseInt(value, 10).toLocaleString('en-US');
+        }
+        input.value = value ? '$' + value : '';
+    }
+
+    function hideAllSections() {
+        document.querySelectorAll('.section').forEach(section => {
+    section.classList.add('hidden');
+});
+    }
+
+hideAllSections();
+document.getElementById('section1').classList.remove('hidden');
+
+// Update the mapping in preSelectPerkValues
+function preSelectPerkValues() {
+    try {
+        console.log('Starting preSelectPerkValues');
+        const travelFrequency = parseInt(document.getElementById('travelFrequency').value) || 0;
+        const hotelSpend = parseFloat(document.getElementById('hotelSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
+        const homeAirport = document.getElementById('homeAirport').value;
+
+        // Centurion Lounge airports
+        const centurionAirports = ['ATL', 'DEN', 'DFW', 'IAH', 'JFK', 'LAX', 'LGA', 'MIA', 'PHL', 'PHX', 'SEA', 'SFO'];
+        const otherLoungeAirports = ['BOS', 'CLT', 'DTW', 'EWR', 'IAD', 'ORD'];
+
+        // Map the values to the new scale (1=Never, 2=Rarely, 3=Sometimes, 4=Often, 5=Always)
+        let loungeValue = 1; // Default to Never
+        if (travelFrequency >= 13) {
+            loungeValue = 5; // Always (Very frequent)
+        } else if (travelFrequency >= 7) {
+            loungeValue = 4; // Often (Frequent)
+        } else if (travelFrequency >= 4) {
+            loungeValue = 3; // Sometimes (Regular)
+        } else if (travelFrequency >= 1) {
+            loungeValue = 2; // Rarely (Occasional)
+        }
+
+        // Partner Elite Status
+        let statusValue = 1; // Never
+        if (hotelSpend > 5000) {
+            statusValue = 5; // Always
+        } else if (hotelSpend > 3500) {
+            statusValue = 4; // Often
+        } else if (hotelSpend >= 2000) {
+            statusValue = 3; // Sometimes
+        } else if (hotelSpend >= 1000) {
+            statusValue = 2; // Rarely
+        }
+
+        // FHR Access
+        let fhrValue = 1; // Never
+        if (hotelSpend > 7500) {
+            fhrValue = 5; // Always
+        } else if (hotelSpend > 5000) {
+            fhrValue = 4; // Often
+        } else if (hotelSpend >= 3000) {
+            fhrValue = 3; // Sometimes
+        } else if (hotelSpend >= 1500) {
+            fhrValue = 2; // Rarely
+        }
+
+        // Card Protections
+        let protectionValue = 1; // Never
+        if (travelFrequency > 8) {
+            protectionValue = 5; // Always
+        } else if (travelFrequency > 6) {
+            protectionValue = 4; // Often
+        } else if (travelFrequency >= 4) {
+            protectionValue = 3; // Sometimes
+        } else if (travelFrequency >= 2) {
+            protectionValue = 2; // Rarely
+        }
+
+        // If it's a custom airport, use more conservative values
+        if (homeAirport === 'custom') {
+            loungeValue = Math.min(loungeValue, 3); // Cap at "Sometimes"
+            statusValue = Math.min(statusValue, 3); // Cap at "Sometimes"
+            fhrValue = Math.min(fhrValue, 3); // Cap at "Sometimes"
+            protectionValue = Math.min(protectionValue, 3); // Cap at "Sometimes"
+        }
+
+        // Debug logging
+        console.log('Pre-selection values:', {
+            travelFrequency,
+            hotelSpend,
+            homeAirport,
+            loungeValue,
+            statusValue,
+            fhrValue,
+            protectionValue
+        });
+
+        // Set the values
+        document.getElementById('loungeAccess').value = loungeValue;
+        document.getElementById('partnerStatus').value = statusValue;
+        document.getElementById('fhrAndIap').value = fhrValue;
+        document.getElementById('cardProtections').value = protectionValue;
+
+        // Update the slider labels
+        ['loungeAccess', 'partnerStatus', 'fhrAndIap', 'cardProtections'].forEach(id => {
+            updateSliderLabel(id);
+        });
+
+        updatePerksExplanationText();
+
+    } catch (error) {
+        console.error("Error in preSelectPerkValues:", error);
+    }
 }
 
-.slider-container .slider-labels span {
-    font-size: 0.8em;
-    color: var(--secondary-text-color);
-    white-space: nowrap;
+function getTravelFrequency() {
+    const travelSelect = document.getElementById('travelFrequency');
+    const customInput = document.getElementById('customTravelInput');
+    
+    if (travelSelect.value === 'custom') {
+        return parseInt(customInput.value) || 0;
+    }
+    return parseInt(travelSelect.value) || 0;
 }
 
-/* Position each label individually */
-.slider-container .slider-labels span:nth-child(1) {
-    text-align: left;
-    margin-left: 0;
+function preSelectBenefitsValues() {
+    try {
+        // Get values from Section 1
+        const travelFrequency = parseInt(document.getElementById('travelFrequency').value) || 0;
+        const hotelSpend = parseFloat(document.getElementById('hotelSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
+        const homeAirport = document.getElementById('homeAirport').value;
+
+     const globalEntryValue = calculateGlobalEntryCredit(homeAirport, travelFrequency);
+const globalEntrySelect = document.getElementById('globalEntryCredit');
+if (globalEntrySelect) {
+    globalEntrySelect.value = globalEntryValue.toString();
 }
 
-.slider-container .slider-labels span:nth-child(2) {
-    text-align: center;
-    transform: translateX(-15%); /* Reduced from -25% to move it right */
+        // Define airport categories
+        const majorUrbanAirports = ['JFK', 'LGA', 'EWR', 'LAX', 'SFO', 'ORD', 'MIA', 'BOS'];
+        const midTierAirports = ['DEN', 'DFW', 'IAH', 'SEA', 'PHX', 'DTW', 'PHL'];
+        const luxuryMarketAirports = ['JFK', 'LGA', 'EWR', 'LAX', 'SFO', 'MIA'];
+        const nycAirports = ['JFK', 'LGA', 'EWR'];
+        const equinoxMarkets = ['BOS', 'MIA', 'SFO', 'LAX'];
+        const clearAirports = ['ATL', 'BOS', 'DEN', 'DFW', 'IAH', 'JFK', 'LAX', 'LGA', 'MIA', 'ORD', 'PHX', 'SEA', 'SFO'];
+        const urbanAirports = ['JFK', 'LGA', 'EWR', 'LAX', 'SFO', 'BOS', 'MIA'];
+
+        // Set values for each credit
+        const creditValues = {
+            // 1. Airline Fee Credit
+            airlineCredit: travelFrequency > 6 ? 4 : (travelFrequency >= 3 ? 2 : 1),
+
+            // 2. Uber Cash
+            uberCredit: majorUrbanAirports.includes(homeAirport) ? 4 : 
+                       (midTierAirports.includes(homeAirport) ? 2 : 1),
+
+            // 3. Saks Credit
+              saksCredit: (() => {
+        const otherSpend = parseFloat(document.getElementById('otherSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
+        
+        if (otherSpend > 5000 || luxuryMarketAirports.includes(homeAirport)) {
+            return 4;  // High likelihood of using full credit
+        } else if (otherSpend > 2000 || majorUrbanAirports.includes(homeAirport)) {
+            return 2;  // Medium likelihood
+        }
+        return 1;  // Lower likelihood but still possible due to online shopping
+    })(),
+    
+            // 4. Equinox Credit
+            equinoxCredit: nycAirports.includes(homeAirport) ? 4 :
+                          (equinoxMarkets.includes(homeAirport) ? 2 : 1),
+
+            // 5. CLEAR Credit
+            clearCredit: (clearAirports.includes(homeAirport) && travelFrequency > 6) ? 4 :
+                        (clearAirports.includes(homeAirport) && travelFrequency >= 3) ? 2 : 1,
+            
+            // 7. Entertainment Credit
+            entertainmentCredit: 2, // Default to medium
+
+            // 8. Walmart+ Credit
+            walmartCredit: !urbanAirports.includes(homeAirport) ? 4 :
+                          (midTierAirports.includes(homeAirport) ? 2 : 1),
+
+            // 9. Hotel Credit
+            hotelCredit: hotelSpend > 5000 ? 4 :
+                        (hotelSpend >= 2000 ? 2 : 1),
+
+            // 10. SoulCycle Credit
+            soulCycleCredit: urbanAirports.includes(homeAirport) ? 4 :
+                            (midTierAirports.includes(homeAirport) ? 2 : 1)
+        };
+
+           if (homeAirport === 'custom') {
+            // Cap all values at 2 ("Rarely") for custom airports
+            Object.keys(creditValues).forEach(key => {
+                creditValues[key] = Math.min(creditValues[key], 2);
+            });
+            
+            // Special handling for specific credits that should be even more conservative
+            creditValues.equinoxCredit = 1;  // Set to "Never" for custom airports
+            creditValues.soulCycleCredit = 1; // Set to "Never" for custom airports
+            creditValues.clearCredit = 1;     // Set to "Never" for custom airports
+            
+            // Set Global Entry to TSA PreCheck value for custom airports
+            if (globalEntrySelect && travelFrequency >= 3) {
+                globalEntrySelect.value = "85";
+            }
+        }
+
+        // Debug logging
+        console.log('Pre-selection values for benefits:', {
+            travelFrequency,
+            hotelSpend,
+            homeAirport,
+            creditValues,
+            globalEntryValue: globalEntrySelect?.value
+        });
+
+        // Set the values and update labels
+        Object.entries(creditValues).forEach(([id, value]) => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.value = value;
+                updateSliderLabel(id);
+            }
+        });
+        
+        updateExplanationText();
+        
+    } catch (error) {
+        console.error("Error in preSelectBenefitsValues:", error);
+        // Set default values as fallback
+        const creditIds = [
+            'airlineCredit', 'uberCredit', 'saksCredit', 'equinoxCredit',
+            'clearCredit', 'entertainmentCredit', 'walmartCredit', 
+            'hotelCredit', 'soulCycleCredit'
+        ];
+        creditIds.forEach(id => {
+            const element = document.getElementById(id);
+            if (element) {
+                element.value = 1;
+                updateSliderLabel(id);
+            }
+        });
+        // Set default for Global Entry dropdown
+        const globalEntrySelect = document.getElementById('globalEntryCredit');
+        if (globalEntrySelect) {
+            globalEntrySelect.value = "0";
+        }
+    }
 }
 
-.slider-container .slider-labels span:nth-child(3) {
-    text-align: center;
+function updateExplanationText() {
+    try {
+        const travelFrequencyElement = document.getElementById('travelFrequency');
+        const travelFrequency = parseInt(travelFrequencyElement?.value) || 0;
+
+        const hotelSpendElement = document.getElementById('hotelSpend');
+        const hotelSpend = parseFloat(hotelSpendElement?.value?.replace(/[$,]/g, '')) || 0;
+
+        const homeAirportElement = document.getElementById('homeAirport');
+        const homeAirport = homeAirportElement?.value || 'none';
+        const customAirportInput = document.querySelector('#customHomeAirport input');
+        
+        // Get full airport name or use code if not found
+        let airportDisplay;
+        if (homeAirport === 'custom' && customAirportInput?.value) {
+            airportDisplay = customAirportInput.value.toUpperCase();
+        } else if (homeAirport !== 'none') {
+            airportDisplay = `${airportNames[homeAirport] || homeAirport} (${homeAirport})`;
+        } else {
+            airportDisplay = 'none';
+        }
+
+        const explanationText = document.querySelector('.pre-selection-notice p');
+        if (!explanationText) {
+            console.error('Explanation text element not found');
+            return;
+        }
+
+        // Format hotel spend
+        const formattedHotelSpend = hotelSpend ? `$${hotelSpend.toLocaleString()}` : '$0';
+
+        // Build base travel pattern text
+        const travelPattern = `Based on your travel patterns (${travelFrequency} trip${travelFrequency !== 1 ? 's' : ''} per year${hotelSpend > 0 ? `, ${formattedHotelSpend} hotel spend` : ''})`;
+
+        // Build the text based on airport selection status
+        let text;
+        if (!homeAirport || homeAirport === 'none') {
+            text = `${travelPattern}, we've pre-selected suggested values for how much of each credit you might use yearly. <strong>These suggestions reflect typical usage patterns, but you should adjust them to match your expected usage.</strong>`;
+        } else if (homeAirport === 'custom') {
+            text = `${travelPattern} and home airport of ${customAirportInput?.value || 'not specified'}, we've pre-selected conservative values for each credit. <strong>Since this is a custom airport location, we've taken a more conservative approach - please adjust these values based on your expected usage and local availability of these benefits.</strong>`;
+        } else {
+            text = `${travelPattern} and home airport of ${airportDisplay}, we've pre-selected suggested values for how much of each credit you might use yearly. <strong>These suggestions reflect typical usage patterns for similar travelers, but you should adjust them to match your expected usage.</strong>`;
+        }
+
+        explanationText.innerHTML = text;
+
+    } catch (error) {
+        console.error('Error in updateExplanationText:', error);
+    }
+}
+    function refreshExplanationText() {
+    console.log('refreshExplanationText called');
+    const notice = document.querySelector('.pre-selection-notice');
+    console.log('notice element:', notice);
+    if (notice) {
+        updateExplanationText();
+        notice.classList.add('updated');
+        setTimeout(() => {
+            notice.classList.remove('updated');
+        }, 1000);
+    }
+}
+        function updateAllExplanationTexts() {
+    console.log('Updating all explanation texts');
+    refreshExplanationText();
+    updatePerksExplanationText();
 }
 
-.slider-container .slider-labels span:nth-child(4) {
-    text-align: center;
-    transform: translateX(15%); /* Reduced from 25% to move it left */
+    // Calculate Section 2 Value
+function calculateSection2Value(isFirstYear = true) {
+    // Define all credits with their annual values
+    const regularCredits = [
+        { id: 'airlineCredit', value: 200, steps: 5 },      // Annual
+        { id: 'uberCredit', value: 200, steps: 5 },         // Monthly ($15 + $20 Dec)
+        { id: 'saksCredit', value: 100, steps: 5 },         // Semi-annual ($50 × 2)
+        { id: 'equinoxCredit', value: 300, steps: 5 },      // Annual
+        { id: 'clearCredit', value: 199, steps: 5 },        // Annual
+        { id: 'entertainmentCredit', value: 240, steps: 5 }, // Monthly ($20)
+        { id: 'walmartCredit', value: 155, steps: 5 },      // Monthly ($12.95)
+        { id: 'hotelCredit', value: 200, steps: 5 }         // Annual
+    ];
+
+    // First year only credits
+    const firstYearCredits = [
+        { id: 'soulCycleCredit', value: 300, steps: 5 }     // One-time
+    ];
+
+    // Calculate regular credits
+    let total = regularCredits.reduce((sum, credit) => {
+        const sliderValue = parseInt(document.getElementById(credit.id)?.value || 0);
+        // Convert slider value (0-4) to percentage (0, 0.25, 0.50, 0.75, 1.0)
+        const percentage = sliderValue / 4;
+        const creditValue = credit.value * percentage;
+        
+        console.log(`${credit.id}:`, {
+            value: credit.value,
+            sliderValue,
+            percentage,
+            creditValue
+        });
+        
+        return sum + creditValue;
+    }, 0);
+
+    // Add first year only credits
+    if (isFirstYear) {
+        // Add Global Entry/TSA PreCheck
+        const globalEntryValue = parseInt(document.getElementById('globalEntryCredit').value) || 0;
+        total += globalEntryValue;
+
+        // Add other first-year-only credits
+        firstYearCredits.forEach(credit => {
+            const sliderValue = parseInt(document.getElementById(credit.id)?.value || 0);
+            const percentage = sliderValue / 4;
+            total += credit.value * percentage;
+        });
+    }
+
+    return Math.round(total);
 }
 
-.slider-container .slider-labels span:nth-child(5) {
-    text-align: right;
-    margin-right: 0;
+function calculateGlobalEntryCredit(homeAirport, tripsPerYear) {
+    try {
+        const airport = homeAirport.toUpperCase();
+        
+        // Log the inputs for debugging
+        console.log('Calculating Global Entry credit:', {
+            homeAirport,
+            airport,
+            tripsPerYear
+        });
+        
+        // For custom airports, default to TSA PreCheck if frequent enough
+        if (homeAirport === 'custom') {
+            return tripsPerYear >= 3 ? 85 : 0;
+        }
+        
+        // For international hubs
+        if (INTERNATIONAL_HUBS.includes(airport)) {
+            if (tripsPerYear >= 3) {
+                return 120; // Global Entry
+            }
+        }
+        
+        // For all other airports
+        if (tripsPerYear >= 6) {
+            return 85; // TSA PreCheck
+        } else if (tripsPerYear >= 3) {
+            return 85; // TSA PreCheck
+        }
+        
+        return 0; // Not enough travel frequency
+    } catch (error) {
+        console.error('Error in calculateGlobalEntryCredit:', error);
+        return 0; // Default to no credit if there's an error
+    }
 }
 
-.slider-container .slider-labels span.selected {
-    color: var(--primary-color);
-    font-weight: bold;
-}
-/* Section 3 specific slider styles */
-#section3 .slider-container .slider-labels span {
-    font-size: 0.7em;
-    color: var(--secondary-text-color);
-    white-space: nowrap;
+function updatePerksExplanationText() {
+    try {
+        const perksNotice = document.querySelector('.perks-selection-notice p');
+        if (!perksNotice) return;
+
+        const homeAirport = document.getElementById('homeAirport').value;
+        const travelFrequency = getTravelFrequency();        const hotelSpend = parseFloat(document.getElementById('hotelSpend').value.replace(/[$,]/g, '')) || 0;
+        const customAirportInput = document.querySelector('#customHomeAirport input');
+
+        // Define airport amenities
+        const airportAmenities = {
+            centurionLounges: ['ATL', 'DEN', 'DFW', 'IAH', 'JFK', 'LAX', 'LGA', 'MIA', 'PHL', 'PHX', 'SEA', 'SFO'],
+            clearLanes: ['ATL', 'BOS', 'DEN', 'DFW', 'IAH', 'JFK', 'LAX', 'LGA', 'MIA', 'ORD', 'PHX', 'SEA', 'SFO'],
+            escapeLounges: ['BOS', 'CLT', 'MSP', 'OAK', 'PHL', 'PHX', 'RNO', 'SAC']
+        };
+
+        // Format hotel spend
+        const formattedHotelSpend = hotelSpend ? `$${hotelSpend.toLocaleString()}` : '$0';
+
+        // Build available amenities text
+        let amenitiesText = '';
+        if (homeAirport === 'custom') {
+            amenitiesText = "We're unable to confirm specific lounge availability at your selected airport. Please check the American Express Global Lounge Collection for available lounges.";
+        } else if (!homeAirport || homeAirport === 'none') {
+            amenitiesText = "Without a selected home airport, we can't provide specific lounge availability information.";
+        } else {
+            const availableAmenities = [];
+            
+            if (airportAmenities.centurionLounges.includes(homeAirport)) {
+                availableAmenities.push("Centurion Lounge");
+            }
+            if (airportAmenities.clearLanes.includes(homeAirport)) {
+                availableAmenities.push("CLEAR security lanes");
+            }
+            if (airportAmenities.escapeLounges.includes(homeAirport)) {
+                availableAmenities.push("Escape Lounge");
+            }
+            availableAmenities.push("Priority Pass lounges");
+
+            if (availableAmenities.length === 1) {
+                amenitiesText = `you'll have access to ${availableAmenities[0]}`;
+            } else if (availableAmenities.length === 2) {
+                amenitiesText = `you'll have access to both ${availableAmenities[0]} and ${availableAmenities[1]}`;
+            } else {
+                const lastAmenity = availableAmenities.pop();
+                amenitiesText = `you'll have access to ${availableAmenities.join(", ")} and ${lastAmenity}`;
+            }
+        }
+
+        // Build the complete text based on airport selection status
+        let text;
+        if (!homeAirport || homeAirport === 'none') {
+            text = `${amenitiesText} Based on your travel frequency (${travelFrequency} trip${travelFrequency !== 1 ? 's' : ''} per year) and hotel spend (${formattedHotelSpend}), we've pre-selected suggested values for each perk. <strong>Please adjust these based on your local airport's lounge availability and how often you expect to use each benefit.</strong>`;
+        } else if (homeAirport === 'custom') {
+            text = `For travelers using ${customAirportInput?.value || 'your airport'}, we're unable to provide specific lounge information. We recommend checking the <a href="https://global.americanexpress.com/lounge-access/the-platinum-card?locale=en-CA" target="_blank">American Express Global Lounge Collection</a> for available lounges at your airport. Based on your travel frequency (${travelFrequency} trip${travelFrequency !== 1 ? 's' : ''} per year) and hotel spend (${formattedHotelSpend}), we've pre-selected conservative values for each perk. <strong>Please adjust these based on the actual lounge availability and how often you expect to use each benefit.</strong>`;
+        } else {
+            text = `With ${airportNames[homeAirport] || homeAirport} (${homeAirport}) as your home airport, ${amenitiesText}. Combined with your travel frequency (${travelFrequency} trip${travelFrequency !== 1 ? 's' : ''} per year) and hotel spend (${formattedHotelSpend}), we've pre-selected values for each perk based on typical usage patterns. <strong>These suggestions are based on typical usage patterns for similar travelers, but you should adjust them based on how often you're likely to take advantage of them.</strong>`;
+        }
+
+        perksNotice.innerHTML = text;
+
+    } catch (error) {
+        console.error('Error in updatePerksExplanationText:', error);
+    }
 }
 
-#section3 .slider-container .slider-labels span:nth-child(2) {
-    text-align: center;
-    transform: translateX(-10%);
+// Add this single event listener for section 3 transition
+document.getElementById('continueToSection3Btn').addEventListener('click', function() {
+    console.log('Continue to Section 3 clicked');
+    nextSection('section2', 'section3');
+    updateProgressBar('section3');
+    setTimeout(() => {
+        preSelectPerkValues();
+        console.log('Perks pre-selected');
+    }, 100);
+});
+
+// Update the input listeners to use updateAllExplanationTexts
+['travelFrequency', 'homeAirport'].forEach(id => {
+    document.getElementById(id).addEventListener('change', updateAllExplanationTexts);
+});
+
+document.getElementById('hotelSpend').addEventListener('blur', updateAllExplanationTexts);
+    
+function calculateSection3Value() {
+    const travelFrequency = parseInt(document.getElementById('travelFrequency').value.replace(/[^ -\u007F]+/g, '')) || 0;
+
+    const perks = [
+        { id: 'loungeAccess', valuePerUse: 50, steps: 5 },
+        { id: 'partnerStatus', valuePerUse: 40, steps: 5 },
+        { id: 'fhrAndIap', valuePerUse: 100, steps: 5 }
+    ];
+
+    let total = perks.reduce((sum, perk) => {
+        const sliderValue = parseInt(document.getElementById(perk.id).value);
+        
+        // Convert slider values 1-5 to percentages
+        const percentages = {
+            1: 0,    // Never = 0%
+            2: 0.25, // Rarely = 25%
+            3: 0.50, // Sometimes = 50%
+            4: 0.75, // Often = 75%
+            5: 1.00  // Always = 100%
+        };
+        
+        const percentage = percentages[sliderValue] || 0;
+        const perkValue = travelFrequency * perk.valuePerUse * percentage;
+        
+        console.log(`${perk.id}:`, {
+            travelFrequency,
+            valuePerUse: perk.valuePerUse,
+            sliderValue,
+            percentage,
+            perkValue
+        });
+        
+        return sum + perkValue;
+    }, 0);
+
+    return Math.round(total);
 }
 
-#section3 .slider-container .slider-labels span:nth-child(4) {
-    text-align: center;
-    transform: translateX(10%);
+function calculateFinalValuation() {
+    console.log("Starting final valuation calculation");
+    
+    const travelFrequency = parseInt(document.getElementById('travelFrequency').value.replace(/[^\d.-]/g, ''));
+    console.log("Travel Frequency:", travelFrequency);
+    
+    if (!travelFrequency) {
+        alert('Please select how often you travel');
+        nextSection('section4', 'section1');
+        return;
+    }
+
+    // Get points value with error checking
+    const totalPointsElement = document.getElementById('totalPointsValue');
+    if (!totalPointsElement) {
+        console.error("Could not find totalPointsValue element");
+        return;
+    }
+    
+    const totalPoints = parseInt(totalPointsElement.textContent.replace(/[^\d.-]/g, '')) || 0;
+    console.log("Total Points:", totalPoints);
+    
+    const pointsValue = totalPoints * POINT_VALUE;
+    const section2Value = calculateSection2Value();
+    const section3Value = calculateSection3Value();
+
+    console.log({
+        pointsValue,
+        section2Value,
+        section3Value
+    });
+
+    // Debug logging
+    console.log({
+        points: {
+            totalPoints,
+            pointsValue
+        },
+        credits: {
+            section2Value
+        },
+        perks: {
+            section3Value,
+            travelFrequency,
+            loungeValue: parseInt(document.getElementById('loungeAccess').value),
+            statusValue: parseInt(document.getElementById('partnerStatus').value),
+            fhrValue: parseInt(document.getElementById('fhrAndIap').value),
+        }
+    });
+
+    const yearlyValue = pointsValue + section2Value + section3Value;
+    const signupBonusValue = WELCOME_BONUS * POINT_VALUE;
+    const firstYearValue = yearlyValue + signupBonusValue - ANNUAL_FEE;
+    const secondYearValue = yearlyValue - ANNUAL_FEE;
+
+    console.log({
+        yearlyValue,
+        signupBonusValue,
+        firstYearValue,
+        secondYearValue
+    });
+
+    // Helper function to update values with proper classes
+    function updateValueWithClass(elementId, value) {
+        const element = document.getElementById(elementId);
+        if (element) {
+            element.textContent = '$' + Math.round(value).toLocaleString();
+            element.classList.remove('positive', 'negative');
+            element.classList.add(value >= 0 ? 'positive' : 'negative');
+        }
+    }
+
+    // Update values with color classes
+    updateValueWithClass('firstYearSavings', firstYearValue);
+    updateValueWithClass('secondYearSavings', secondYearValue);
+    updateValueWithClass('firstYearValue', firstYearValue);
+    updateValueWithClass('secondYearValue', secondYearValue);
+
+    // Update other values that don't need color coding
+    document.getElementById('annualFee').textContent = '$' + ANNUAL_FEE.toLocaleString();
+    document.getElementById('signupBonusValue').textContent = '$' + Math.round(signupBonusValue).toLocaleString();
+    document.getElementById('pointsSpendingValue').textContent = Math.round(pointsValue).toLocaleString();
+    document.getElementById('pointsSpendingValueSecondYear').textContent = Math.round(pointsValue).toLocaleString();
+document.getElementById('cardBenefitsValue').textContent = Math.round(section2Value).toLocaleString();
+document.getElementById('cardBenefitsValueSecondYear').textContent = Math.round(section2Value).toLocaleString();
+document.getElementById('travelPerksValue').textContent = Math.round(section3Value).toLocaleString();
+document.getElementById('travelPerksValueSecondYear').textContent = Math.round(section3Value).toLocaleString();
+        document.getElementById('signupBonusBreakdown').textContent = Math.round(signupBonusValue).toLocaleString();
+    // Show section 4
+    hideAllSections();
+    document.getElementById('section4').classList.remove('hidden');
+    updateProgressBar('section4');
+    window.scrollTo(0, 0);
+}
+     function updateProgressBar(currentSection) {
+    // Remove all active and completed classes
+    document.querySelectorAll('.progress-bar .step').forEach(step => {
+        step.classList.remove('active', 'completed');
+    });
+
+    const steps = document.querySelectorAll('.progress-bar .step');
+    const currentIndex = parseInt(currentSection.replace('section', '')) - 1;
+
+    // Mark previous steps as completed
+    for(let i = 0; i < currentIndex; i++) {
+        steps[i].classList.add('completed');
+    }
+
+    // Mark current step as active
+    steps[currentIndex].classList.add('active');
+
+    // Remove any classes from future steps
+    for(let i = currentIndex + 1; i < steps.length; i++) {
+        steps[i].classList.remove('completed', 'active');
+    }
 }
 
-#section3 .slider-container .slider-labels span.selected {
-    color: var(--primary-color);
-    font-weight: bold;
+    function nextSection(currentSectionId, nextSectionId) {
+        hideAllSections();
+document.getElementById(nextSectionId).classList.remove('hidden');
+if (nextSectionId !== 'section1') {
+    document.getElementById('results').classList.add('hidden');
 }
+        window.scrollTo(0, 0);
+    }
+
+// Find these existing event listeners and update them:
+document.getElementById('calculatePointsBtn').addEventListener('click', function(e) {
+    e.preventDefault(); // Prevent any default form submission
+    
+    const travelFrequency = document.getElementById('travelFrequency').value;
+
+    // Validate travel frequency
+    if (!travelFrequency || travelFrequency === '0') {
+        document.getElementById('travelFrequency').classList.add('error');
+        alert('Please enter how many times you travel per year');
+        return;
+    }
+
+    document.getElementById('travelFrequency').classList.remove('error');
+    
+    try {
+        calculatePoints(); // Calculate the points
+        
+        // Make sure the results section exists and is visible
+        const resultsSection = document.getElementById('results');
+        if (resultsSection) {
+            resultsSection.classList.remove('hidden');
+            
+            // Scroll to results section
+            resultsSection.scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
+            
+            // Update progress bar
+            updateProgressBar('section1');
+        } else {
+            console.error('Results section not found');
+        }
+    } catch (error) {
+        console.error("Error calculating points:", error);
+        alert('There was an error calculating your points. Please try again.');
+    }
+});
+
+const continueBtn = document.getElementById('continueBtn');
+if (!continueBtn) {
+    console.error('Continue button not found');
+} else {
+    continueBtn.addEventListener('click', function() {
+        const travelFrequency = getTravelFrequency();
+    
+        if (!travelFrequency) {
+            document.getElementById('travelFrequency').classList.add('error');
+            alert('Please select how often you travel');
+            return;
+        }
+
+        calculatePoints(); // Calculate points before moving to next section
+        nextSection('section1', 'section2');
+        updateProgressBar('section2'); 
+        preSelectBenefitsValues();
+    });
+}
+document.getElementById('backToSection1').addEventListener('click', function(e) {
+    e.preventDefault();
+    nextSection('section2', 'section1');
+    updateProgressBar('section1');  
+});
+
+document.getElementById('backToSection2').addEventListener('click', function(e) {
+    e.preventDefault();
+    nextSection('section3', 'section2');
+    updateProgressBar('section2'); 
+});
+
+const calculateValuationBtn = document.getElementById('calculateValuationBtn');
+if (calculateValuationBtn) {
+    calculateValuationBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        console.log("Calculate Valuation button clicked");
+        calculateFinalValuation();
+        updateProgressBar('section4'); 
+    });
+} else {
+    console.error("Calculate Valuation button not found");
+}
+
+document.getElementById('backToSection3').addEventListener('click', function(e) {
+    e.preventDefault();
+    nextSection('section4', 'section3');
+    updateProgressBar('section3');
+});
+
+document.querySelectorAll('input[type="range"]').forEach(slider => {
+    slider.addEventListener('input', () => updateSliderLabel(slider.id));
+});
