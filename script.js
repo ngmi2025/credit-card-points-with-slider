@@ -65,17 +65,15 @@ document.addEventListener('DOMContentLoaded', function() {
             spendValue = "2000";  // Occasionally (1-3 trips/year)
         } else if (travelFrequency <= 6) {
             spendValue = "4000";  // Regularly (4-6 trips/year)
-        } else if (travelFrequency <= 12) {
-            spendValue = "7500";  // Frequently (7-12 trips/year)
-        } else if (travelFrequency > 12) {  // Changed this condition
-            spendValue = "10000"; // Very frequently (13+ trips/year)
+        } else if (travelFrequency >= 7) {  // Changed from <= 12 to >= 7
+            spendValue = "7500";  // Frequently (7+ trips/year)
         }
     
         // Always set the values, don't check if they're empty
         flightSpend.value = spendValue;
         hotelSpend.value = spendValue;
     }
-
+    
     // Add event listeners for travel frequency
     document.getElementById('travelFrequency').addEventListener('change', updateSpendingBasedOnTravel);
     document.getElementById('travelFrequency').addEventListener('blur', updateSpendingBasedOnTravel);
