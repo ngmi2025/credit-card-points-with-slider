@@ -1,11 +1,11 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // 1. Constants
-    const WELCOME_BONUS = 80000;
-    const POINT_VALUE = 0.022;
-    const ANNUAL_FEE = 595;
-    const MINIMUM_POINTS_FOR_SUGGESTION = 15000;
+const WELCOME_BONUS = 80000;
+const POINT_VALUE = 0.022;
+const ANNUAL_FEE = 595;
+const MINIMUM_POINTS_FOR_SUGGESTION = 15000;
 
-    // Add this code back with console.log
+
+document.addEventListener('DOMContentLoaded', function() {
+
     const travelFrequencyGroup = document.getElementById('travelFrequency').closest('.question-group');
     console.log('travelFrequencyGroup:', travelFrequencyGroup);
     
