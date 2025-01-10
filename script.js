@@ -5,21 +5,22 @@ document.addEventListener('DOMContentLoaded', function() {
     const ANNUAL_FEE = 595;
     const MINIMUM_POINTS_FOR_SUGGESTION = 15000;
 
-     // Add this code back
-     const travelFrequencyGroup = document.getElementById('travelFrequency').closest('.question-group');
+    // Add this code back with console.log
+    const travelFrequencyGroup = document.getElementById('travelFrequency').closest('.question-group');
+    console.log('travelFrequencyGroup:', travelFrequencyGroup);
     
-     // Create title container
-     const titleContainer = document.createElement('div');
-     titleContainer.className = 'title-container';
-     
-     // Move the existing label into the title container
-     const existingLabel = travelFrequencyGroup.querySelector('label');
-     titleContainer.appendChild(existingLabel);
-     
-     // Insert the title container at the start of the question group
-     travelFrequencyGroup.insertBefore(titleContainer, travelFrequencyGroup.firstChild);
- 
+    // Create title container
+    const titleContainer = document.createElement('div');
+    titleContainer.className = 'title-container';
+    
+    // Move the existing label into the title container
+    const existingLabel = travelFrequencyGroup.querySelector('label');
+    titleContainer.appendChild(existingLabel);
+    
+    // Insert the title container at the start of the question group
+    travelFrequencyGroup.insertBefore(titleContainer, travelFrequencyGroup.firstChild);
 
+    
     function getTravelFrequency() {
         const travelSelect = document.getElementById('travelFrequency');
         const customInput = document.getElementById('customTravelInput');
