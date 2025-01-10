@@ -97,13 +97,12 @@ h1 {
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
-    margin-bottom: 25px; 
-    padding-bottom: 20px;
+    margin-bottom: 15px;  /* Changed from 25px */
+    padding-bottom: 0;    /* Changed from 20px */
     border-bottom: 1px solid var(--border-color);
     display: flex;
     flex-direction: column;
 }
-
 .question-group:last-child {
     border-bottom: none;
 }
@@ -127,13 +126,14 @@ h1 {
 .input-wrapper input[type="text"] {
     width: 100%;
     max-width: 100%;
-    padding: 10px;
+    padding: 10px 15px;  /* Changed from just 10px */
     border: 1px solid var(--border-color);
     border-radius: 5px;
     font-size: 16px;
     height: 48px;
     box-sizing: border-box;
-    color: var(--text-color) !important;  /* Add this line */
+    color: #333 !important;
+    margin: 0;  /* Add this line */
 }
 
 select, 
@@ -558,8 +558,10 @@ select.credit-select option {
 
 .input-group {
     width: 100%;
-    margin-top: 10px;
+    margin-top: 0;  /* Changed from 10px */
+    margin-bottom: 30px;  /* Add this line */
 }
+
 .slider-labels span.selected {
     font-weight: bold;
     color: var(--primary-color);
