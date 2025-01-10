@@ -914,3 +914,6 @@ select.credit-select option {
     color: var(--primary-color);
     font-weight: bold;
 }
+#travelFrequency option {
+    font-size: 14px;  /* or whatever size matches your other dropdowns */
+}
