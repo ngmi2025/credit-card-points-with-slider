@@ -149,8 +149,18 @@ h1 {
     font-size: 0.9rem;  /* keep the same size for consistency */
 }
 
+#travelFrequency {
+    width: 250px;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 0.9em;
+    height: 40px;
+    background: linear-gradient(to bottom, #ffffff 0%, #f3f3f3 100%);
+}
+
 #travelFrequency option {
-    font-size: 0.9rem;
+    font-size: 0.9em;  /* Match the size of other dropdown options */
 }
 
 .slider-container {
