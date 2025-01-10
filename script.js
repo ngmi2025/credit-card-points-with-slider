@@ -5,7 +5,6 @@ const MINIMUM_POINTS_FOR_SUGGESTION = 15000;
 
 
 document.addEventListener('DOMContentLoaded', function() {
-
     const travelFrequencyGroup = document.getElementById('travelFrequency').closest('.question-group');
     console.log('travelFrequencyGroup:', travelFrequencyGroup);
     
@@ -17,9 +16,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const existingLabel = travelFrequencyGroup.querySelector('label');
     titleContainer.appendChild(existingLabel);
     
+    // Add the disclaimer text (add this part)
+    const disclaimer = document.createElement('span');
+    disclaimer.className = 'disclaimer';
+    disclaimer.textContent = 'Count each round-trip as one trip (e.g., NYC to LA and back = one trip).';
+    titleContainer.appendChild(disclaimer);
+    
     // Insert the title container at the start of the question group
     travelFrequencyGroup.insertBefore(titleContainer, travelFrequencyGroup.firstChild);
-
 
     function getTravelFrequency() {
         const travelSelect = document.getElementById('travelFrequency');
