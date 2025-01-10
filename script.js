@@ -26,8 +26,8 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             customTravelFrequency.classList.add('hidden');
             customTravelInput.required = false;
-            updateSpendingBasedOnTravel();
-            updateAllExplanationTexts(); // Ensure explanations update
+            updateSpendingBasedOnTravel(); // This updates flight/hotel spend
+            updateAllExplanationTexts();
         }
     });
     
