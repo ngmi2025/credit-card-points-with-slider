@@ -915,5 +915,5 @@ select.credit-select option {
     font-weight: bold;
 }
 #travelFrequency option {
-    font-size: 14px;  /* or whatever size matches your other dropdowns */
+    font-size: 12px;  /* or whatever size matches your other dropdowns */
 }
