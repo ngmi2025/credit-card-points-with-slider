@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Insert the title container at the start of the question group
     travelFrequencyGroup.insertBefore(titleContainer, travelFrequencyGroup.firstChild);
 
-    
+
     function getTravelFrequency() {
         const travelSelect = document.getElementById('travelFrequency');
         const customInput = document.getElementById('customTravelInput');
@@ -196,6 +196,8 @@ function calculatePoints() {
         const hotelSpend = parseFloat(document.getElementById('hotelSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
         const otherSpend = parseFloat(document.getElementById('otherSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
 
+        console.log('Parsed values:', { flightSpend, hotelSpend, otherSpend });
+
         // Cap flight spend at $500,000
         const cappedFlightSpend = Math.min(flightSpend, 500000);
         const uncappedFlightSpend = Math.max(0, flightSpend - 500000);
@@ -269,11 +271,18 @@ if (!welcomeBonusContainer) {
         };
 
     } catch (error) {
-        console.error('Error in calculatePoints:', error);
+        console.error('Detailed error:', {
+            message: error.message,
+            stack: error.stack,
+            values: {
+                flightSpend: document.getElementById('flightSpend')?.value,
+                hotelSpend: document.getElementById('hotelSpend')?.value,
+                otherSpend: document.getElementById('otherSpend')?.value
+            }
+        });
         alert('There was an error calculating your points. Please try again.');
         throw error;
     }
-}
     
 const earnedPointSuggestions = [
     {
