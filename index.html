@@ -42,13 +42,8 @@
         <div id="calculator">
             <div class="section" id="section1">
                 <h2>Travel Profile</h2>
-                <div class="question-group" id="travelFrequency-group">
-                    <div class="title-container">
-                        <label for="travelFrequency">How often do you fly?</label>
-                        <span class="disclaimer">
-                            Count each round-trip as one trip (e.g., NYC to LA and back = one trip).
-                        </span>
-                    </div>
+                <div class="question-group">
+                    <label for="travelFrequency">How often do you fly?</label>
                     <div class="input-group">
                         <select id="travelFrequency" required>
                             <option value="">Select frequency</option>
@@ -56,7 +51,7 @@
                             <option value="5">Regularly (4-6 trips/year)</option>
                             <option value="10">Frequently (7-12 trips/year)</option>
                             <option value="15">Very frequently (13+ trips/year)</option>
-                            <option value="custom">Custom (specifc # of trips)</option>
+                            <option value="custom">Custom (specific # of trips)</option>
                         </select>
                         <div id="customTravelFrequency" class="input-wrapper hidden">
                             <input type="text" 
