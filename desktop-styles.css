@@ -149,6 +149,10 @@ h1 {
     font-size: 0.9rem;  /* keep the same size for consistency */
 }
 
+#travelFrequency option {
+    font-size: 0.9rem;
+}
+
 .slider-container {
     flex: 0 0 250px;
     width: 250px;
@@ -913,7 +917,4 @@ select.credit-select option {
 #section3 .slider-container .slider-labels span.selected {
     color: var(--primary-color);
     font-weight: bold;
-}
-#travelFrequency option {
-    font-size: 12px;  /* or whatever size matches your other dropdowns */
 }
