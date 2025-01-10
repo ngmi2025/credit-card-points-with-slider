@@ -937,22 +937,3 @@ select.credit-select option {
     color: var(--primary-color);
     font-weight: bold;
 }
-/* Specific styles for the travel frequency question */
-#travelFrequency-group {
-    display: block !important;  /* Override the flex display */
-}
-
-#travelFrequency-group .title-container {
-    margin-bottom: 4px;
-}
-
-#travelFrequency-group .disclaimer {
-    display: block;
-    margin: 4px 0 12px 0;
-    font-size: 0.7rem;
-    color: var(--secondary-text-color);
-}
-
-#travelFrequency-group .input-group {
-    margin-top: 0;
-}
