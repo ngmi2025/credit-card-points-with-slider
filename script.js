@@ -5,37 +5,71 @@ document.addEventListener('DOMContentLoaded', function() {
     const ANNUAL_FEE = 595;
     const MINIMUM_POINTS_FOR_SUGGESTION = 15000;
 
+    function getTravelFrequency() {
+        const travelSelect = document.getElementById('travelFrequency');
+        const customInput = document.getElementById('customTravelInput');
+        
+        if (travelSelect.value === 'custom') {
+            return parseInt(customInput.value) || 0;
+        }
+        return parseInt(travelSelect.value) || 0;
+    }
+
+    document.getElementById('travelFrequency').addEventListener('change', function() {
+        const customTravelFrequency = document.getElementById('customTravelFrequency');
+        const customTravelInput = customTravelFrequency.querySelector('input');
+        
+        if (this.value === 'custom') {
+            customTravelFrequency.classList.remove('hidden');
+            customTravelInput.required = true;
+            customTravelInput.focus();
+        } else {
+            customTravelFrequency.classList.add('hidden');
+            customTravelInput.required = false;
+            updateSpendingBasedOnTravel();
+            updateAllExplanationTexts(); // Ensure explanations update
+        }
+    });
+    
+    document.getElementById('customTravelInput').addEventListener('input', function() {
+        this.value = this.value.replace(/[^\d]/g, '');
+    });
+    
+    document.getElementById('customTravelInput').addEventListener('blur', function() {
+        updateSpendingBasedOnTravel();
+        updateAllExplanationTexts();
+    });
+
     function updateSpendingBasedOnTravel() {
-        const travelFrequency = parseInt(document.getElementById('travelFrequency').value) || 0;
+        const travelSelect = document.getElementById('travelFrequency');
+        const customInput = document.getElementById('customTravelInput');
+        let travelFrequency;
+        
+        if (travelSelect.value === 'custom') {
+            travelFrequency = parseInt(customInput.value) || 0;
+        } else {
+            travelFrequency = parseInt(travelSelect.value) || 0;
+        }
+    
         const flightSpend = document.getElementById('flightSpend');
         const hotelSpend = document.getElementById('hotelSpend');
-        
-        console.log('Travel frequency:', travelFrequency); // Debug log
-        console.log('Found flight spend element:', !!flightSpend); // Debug log
-        console.log('Found hotel spend element:', !!hotelSpend); // Debug log
     
-        // Set default values based on travel frequency
         let spendValue;
-        if (travelFrequency <= 1) {
-            spendValue = "0";
-        } else if (travelFrequency <= 4) {
-            spendValue = "2000";
-        } else if (travelFrequency <= 8) {
-            spendValue = "4000";
+        if (travelFrequency <= 3) {
+            spendValue = "2000";  // Occasionally (1-3 trips/year)
+        } else if (travelFrequency <= 6) {
+            spendValue = "4000";  // Regularly (4-6 trips/year)
+        } else if (travelFrequency <= 12) {
+            spendValue = "7500";  // Frequently (7-12 trips/year)
         } else {
-            spendValue = "7500";
+            spendValue = "10000"; // Very frequently (13+ trips/year)
         }
-        
-        console.log('Selected spend value:', spendValue); // Debug log
     
-        // Only update if no value is already selected
         if (!flightSpend.value) {
             flightSpend.value = spendValue;
-            console.log('Updated flight spend to:', spendValue); // Debug log
         }
         if (!hotelSpend.value) {
             hotelSpend.value = spendValue;
-            console.log('Updated hotel spend to:', spendValue); // Debug log
         }
     }
 
@@ -471,14 +505,14 @@ function preSelectPerkValues() {
 
         // Map the values to the new scale (1=Never, 2=Rarely, 3=Sometimes, 4=Often, 5=Always)
         let loungeValue = 1; // Default to Never
-        if (centurionAirports.includes(homeAirport) && travelFrequency > 6) {
-            loungeValue = 5; // Always
-        } else if (centurionAirports.includes(homeAirport) && travelFrequency >= 3) {
-            loungeValue = 4; // Often
-        } else if (otherLoungeAirports.includes(homeAirport) && travelFrequency > 6) {
-            loungeValue = 3; // Sometimes
-        } else if (otherLoungeAirports.includes(homeAirport) && travelFrequency >= 3) {
-            loungeValue = 2; // Rarely
+        if (travelFrequency >= 13) {
+            loungeValue = 5; // Always (Very frequent)
+        } else if (travelFrequency >= 7) {
+            loungeValue = 4; // Often (Frequent)
+        } else if (travelFrequency >= 4) {
+            loungeValue = 3; // Sometimes (Regular)
+        } else if (travelFrequency >= 1) {
+            loungeValue = 2; // Rarely (Occasional)
         }
 
         // Partner Elite Status
@@ -552,6 +586,16 @@ function preSelectPerkValues() {
     } catch (error) {
         console.error("Error in preSelectPerkValues:", error);
     }
+}
+
+function getTravelFrequency() {
+    const travelSelect = document.getElementById('travelFrequency');
+    const customInput = document.getElementById('customTravelInput');
+    
+    if (travelSelect.value === 'custom') {
+        return parseInt(customInput.value) || 0;
+    }
+    return parseInt(travelSelect.value) || 0;
 }
 
 function preSelectBenefitsValues() {
@@ -680,6 +724,7 @@ if (globalEntrySelect) {
         }
     }
 }
+
 function updateExplanationText() {
     try {
         const travelFrequencyElement = document.getElementById('travelFrequency');
@@ -844,8 +889,7 @@ function updatePerksExplanationText() {
         if (!perksNotice) return;
 
         const homeAirport = document.getElementById('homeAirport').value;
-        const travelFrequency = parseInt(document.getElementById('travelFrequency').value) || 0;
-        const hotelSpend = parseFloat(document.getElementById('hotelSpend').value.replace(/[$,]/g, '')) || 0;
+        const travelFrequency = getTravelFrequency();        const hotelSpend = parseFloat(document.getElementById('hotelSpend').value.replace(/[$,]/g, '')) || 0;
         const customAirportInput = document.querySelector('#customHomeAirport input');
 
         // Define airport amenities
@@ -968,7 +1012,7 @@ function calculateFinalValuation() {
     console.log("Travel Frequency:", travelFrequency);
     
     if (!travelFrequency) {
-        alert('Please enter your travel frequency in section 1');
+        alert('Please select how often you travel');
         nextSection('section4', 'section1');
         return;
     }
@@ -1132,12 +1176,11 @@ if (!continueBtn) {
     console.error('Continue button not found');
 } else {
     continueBtn.addEventListener('click', function() {
-        console.log('Continue button clicked'); // Debug log
-        const travelFrequency = document.getElementById('travelFrequency').value;
-
-        if (!travelFrequency || travelFrequency === '0') {
+        const travelFrequency = getTravelFrequency();
+    
+        if (!travelFrequency) {
             document.getElementById('travelFrequency').classList.add('error');
-            alert('Please enter how many times you travel per year');
+            alert('Please select how often you travel');
             return;
         }
 
@@ -1180,11 +1223,3 @@ document.getElementById('backToSection3').addEventListener('click', function(e) 
 document.querySelectorAll('input[type="range"]').forEach(slider => {
     slider.addEventListener('input', () => updateSliderLabel(slider.id));
 });
-
-// Update travel frequency listeners
-document.getElementById('travelFrequency').addEventListener('blur', function() {
-    let value = this.value.replace(/[^ -\u007F]+/g, '');
-    if (value === '') value = '0';
-    value = Math.max(0, parseInt(value));
-    this.value = value;
-}); // Remove the extra } here
