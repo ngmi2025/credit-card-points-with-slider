@@ -76,12 +76,13 @@ h1 {
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
-    margin-bottom: 10px;  /* Changed from 25px */
-    padding-bottom: 0;    /* Changed from 20px */
+    margin-bottom: 10px;
+    padding-bottom: 0;
     border-bottom: 1px solid var(--border-color);
     display: flex;
     flex-direction: column;
 }
+
 .question-group:last-child {
     border-bottom: none;
 }
@@ -99,6 +100,8 @@ h1 {
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
+    margin-top: 0;
+    margin-bottom: 5px;
 }
 
 .input-group select, 
@@ -503,11 +506,6 @@ select {
         position: relative;
     }
 
-    .question-group {
-        margin-bottom: 20px;
-        padding-bottom: 15px;
-    }
-
     .progress-bar .step {
         min-width: auto;
         padding: 0 8px;
@@ -540,12 +538,6 @@ select {
 /* Error State */
 .error {
     border-color: var(--error-color) !important;
-}
-
-.input-group {
-    width: 100%;
-    margin-top: 0;  /* Changed from 10px */
-    margin-bottom: 5px;  /* Add this line */
 }
 
 .slider-labels span.selected {
