@@ -1,20 +1,3 @@
-/* Temporary debugging styles - add at the top of your file */
-.section { 
-    background: rgba(255,0,0,0.1) !important; 
-}
-.question-group { 
-    background: rgba(0,0,255,0.1) !important; 
-}
-.title-container { 
-    background: rgba(0,255,0,0.1) !important; 
-}
-.input-group { 
-    background: rgba(128,0,128,0.1) !important; 
-}
-.disclaimer { 
-    background: rgba(255,165,0,0.1) !important; 
-}
-
 * {
     -webkit-text-size-adjust: 100%;
     box-sizing: border-box;
