@@ -84,12 +84,12 @@ h1 {
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
-    margin-bottom: 5px;
-    padding-bottom: 10px;
+    margin-bottom: 24px;
+    padding-bottom: 0px;
     border-bottom: 1px solid var(--border-color);
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 12px;
     flex: 0 !important;
 }
 
@@ -156,7 +156,7 @@ h1 {
     padding: 10px 15px;
     border: 1px solid var(--border-color);
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 16px !important;  /* Standardize size */
     box-sizing: border-box;
     margin: 0;
 }
@@ -695,15 +695,17 @@ select {
 }
 .question-title {
     display: block;
+    font-size: 16px;  /* Standardize size */
     font-weight: bold;
     margin-bottom: 5px;
 }
 
 .question-description {
     display: block;
+    font-size: 14px;  /* Standardize size */
     font-size: 0.9em;
     color: var(--secondary-text-color);
-    margin-bottom: 5px;
+    margin-bottom: 12px;
 }
 .progress-bar .step .label {
     position: static;
