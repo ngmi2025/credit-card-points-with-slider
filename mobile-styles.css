@@ -994,5 +994,6 @@ select {
 /* Global rule for all dropdowns */
 select, select option {
     background-color: #f0f0f0 !important;
+    background-image: none !important;
     color: #333 !important;
 }
