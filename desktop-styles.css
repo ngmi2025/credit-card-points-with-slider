@@ -13,7 +13,7 @@
     --text-color: #333;
     --secondary-text-color: #808080;
     --background-color: #fff;
-    --border-color: #e0e0e0;
+    --border-color: #e0e0e0;f
     --error-color: #d32f2f;
     --success-color: #3EB564;
 }
@@ -148,7 +148,7 @@ h1 {
     padding: 10px;
     border: 1px solid var(--border-color);
     border-radius: 5px;
-    font-size: 0.9em;
+    font-size: 0.8em;
     height: 40px;
     box-sizing: border-box;
     background: linear-gradient(to bottom, #ffffff 0%, #f3f3f3 100%); 
@@ -163,13 +163,13 @@ h1 {
     padding: 10px;
     border: 1px solid var(--border-color);
     border-radius: 5px;
-    font-size: 0.9em;
+    font-size: 0.8em;
     height: 40px;
     background: linear-gradient(to bottom, #ffffff 0%, #f3f3f3 100%);
 }
 
 #travelFrequency option {
-    font-size: 0.9em;  /* Match the size of other dropdown options */
+    font-size: 0.8em;  /* Match the size of other dropdown options */
 }
 
 .slider-container {
