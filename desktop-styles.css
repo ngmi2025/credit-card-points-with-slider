@@ -236,11 +236,7 @@ h1 {
     color: var(--primary-color);
 }
 
-.input-wrapper input[type="number"],
-#flightSpend,
-#hotelSpend,
-#otherSpend,
-#travelFrequency {
+.input-wrapper input[type="number"] {
     text-align: right;
 }
 
