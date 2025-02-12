@@ -983,3 +983,16 @@ select:focus {
 .points-suggestion {
     animation: suggestionFade 0.3s ease-out;
 }
+
+/* Remove native styling and enforce our custom background */
+select {
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+}
+
+/* Global rule for all dropdowns */
+select, select option {
+    background-color: #f0f0f0 !important;
+    color: #333 !important;
+}
