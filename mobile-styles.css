@@ -154,7 +154,7 @@ h1 {
     width: 100% !important;
     height: 48px !important;
     color: #333 !important;
-    background-color: #fff;
+    background-color: #f0f0f0 !important;
     padding: 10px 15px;
     border: 1px solid var(--border-color);
     border-radius: 5px;
