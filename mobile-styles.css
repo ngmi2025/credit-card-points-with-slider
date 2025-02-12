@@ -168,7 +168,7 @@ select option,
 #travelFrequency,
 #homeAirport {
     color: #333 !important;
-    background-color: #fff;
+    background-color: #f0f0f0 !important;
 }
 
 /* Slider Styling */
