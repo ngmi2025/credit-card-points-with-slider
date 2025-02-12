@@ -150,7 +150,11 @@ h1 {
 
 .input-group select,
 #travelFrequency,
-#homeAirport {
+#homeAirport,
+#flightSpend,
+#hotelSpend,
+#otherSpend,
+.credit-select {
     width: 100% !important;
     height: 48px !important;
     color: #333 !important;
