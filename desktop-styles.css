@@ -366,15 +366,15 @@ input[type="number"] {
     padding: 12px 15px;
     font-size: 1.1rem;
     font-weight: 700;
-    text-align: right;
+    text-align: left;        /* Change this to left */
     width: 250px;
     height: 40px;
     border: 1px solid #e0e0e0;
     box-sizing: border-box;
     display: flex;
     align-items: center;
-    justify-content: flex-end; /* Add this line */
-    margin-left: auto; /* Add this line */
+    justify-content: flex-start; /* Change this from flex-end to flex-start */
+    margin-left: 0;              /* Remove the auto margin that pushes it right */
 }
 
 #results .button-container {
