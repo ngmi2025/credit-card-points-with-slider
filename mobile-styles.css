@@ -180,6 +180,7 @@ select option,
     position: relative;
     padding: 10px 16px;
     width: 100%;
+    margin-bottom: 0;
 }
 
 .slider-container input[type="range"] {
@@ -223,6 +224,7 @@ input[type="range"]::-webkit-slider-runnable-track {
     justify-content: space-between;
     margin-top: 10px;
     /* Critical: ensure labels align with slider points */
+    margin-bottom: 0;
     padding: 0 16px; /* Half the width of the slider thumb */
 }
 
