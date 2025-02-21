@@ -181,6 +181,7 @@ select option,
     padding: 10px 16px;
     width: 100%;
     margin-bottom: 0;
+    height: auto; 
 }
 
 .slider-container input[type="range"] {
@@ -349,11 +350,12 @@ input[type="range"]::-webkit-slider-runnable-track {
 
 /* Section 2 - Card Benefits */
 #section2 .question-group {
-    margin-bottom: 5px;
-    padding-bottom: 5px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
 }
 
 #section2 .slider-container {
+    height: 80px;
     padding: 5px 16px;
 }
 
@@ -367,27 +369,6 @@ input[type="range"]::-webkit-slider-runnable-track {
 
 #section2 .title-container {
     margin-bottom: 2px;
-}
-
-/* Temporary debug styling - add this temporarily */
-#section2 .question-group {
-    border: 1px solid red;
-}
-
-#section2 .slider-container {
-    border: 1px solid blue;
-}
-
-#section2 .title-container {
-    border: 1px solid green;
-}
-
-#section2 .disclaimer {
-    border: 1px solid purple;
-}
-
-#section2 .slider-labels {
-    border: 1px solid orange;
 }
 
 /* Section 4 - Final Valuation */
