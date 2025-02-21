@@ -178,7 +178,7 @@ select option,
 /* Slider Styling */
 .slider-container {
     position: relative;
-    padding: 20px 16px;
+    padding: 10px 16px;
     width: 100%;
 }
 
