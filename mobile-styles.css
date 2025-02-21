@@ -369,6 +369,27 @@ input[type="range"]::-webkit-slider-runnable-track {
     margin-bottom: 2px;
 }
 
+/* Temporary debug styling - add this temporarily */
+#section2 .question-group {
+    border: 1px solid red;
+}
+
+#section2 .slider-container {
+    border: 1px solid blue;
+}
+
+#section2 .title-container {
+    border: 1px solid green;
+}
+
+#section2 .disclaimer {
+    border: 1px solid purple;
+}
+
+#section2 .slider-labels {
+    border: 1px solid orange;
+}
+
 /* Section 4 - Final Valuation */
 #section4 {
     background-color: #fff;
