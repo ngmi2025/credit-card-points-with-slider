@@ -347,6 +347,28 @@ input[type="range"]::-webkit-slider-runnable-track {
     margin-top: 10px;
 }
 
+/* Section 2 - Card Benefits */
+#section2 .question-group {
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+}
+
+#section2 .slider-container {
+    padding: 5px 16px;
+}
+
+#section2 .slider-labels {
+    margin-top: 5px;
+}
+
+#section2 .disclaimer {
+    margin-bottom: 8px;
+}
+
+#section2 .title-container {
+    margin-bottom: 2px;
+}
+
 /* Section 4 - Final Valuation */
 #section4 {
     background-color: #fff;
