@@ -370,7 +370,7 @@ select option,
     position: absolute;
     left: 8px; /* Compensate for thumb overflow on left */
     right: 8px; /* Compensate for thumb overflow on right */
-    bottom: -0.25em; /* Reduce gap between slider track and labels (adjust as needed, e.g., 0, -0.1em) */
+    bottom: -0.1em; /* Reduce gap further (adjust as needed, e.g., 0, -0.05em) */
     margin: 0;
     padding: 0;
     display: flex;
