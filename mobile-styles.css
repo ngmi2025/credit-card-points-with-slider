@@ -291,7 +291,10 @@ select option,
 /* ========================= */
 @media screen and (max-width: 991px) {
   /* Section 2 - Travel Frequency Sliders */
-  #section2 .slider-container {
+   #section2 {
+    margin: 8px 0;  /* Add this new line here */
+  }
+    #section2 .slider-container {
     min-height: 70px;
     position: relative;
     width: 100%;
@@ -399,7 +402,11 @@ select option,
   }
 
   /* Section 3 - Credit Card Perks Sliders */
-  #section3 .slider-container {
+ #section3 {
+    margin: 8px 0;  /* Add this new line here */
+  }
+    
+    #section3 .slider-container {
     min-height: 70px;
     position: relative;
     width: 100%;
