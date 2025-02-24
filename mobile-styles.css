@@ -230,23 +230,17 @@ select option,
         border: none;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
-
-    /* Slider Labels */
-    .slider-labels {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 10px;
-        margin-bottom: 0;
-        padding: 0 16px;
+    .slider-container {
+        flex: 0 1 auto;
+        width: 100%;
     }
 
-    .slider-labels span {
-        position: relative;
-        text-align: center;
-        width: 40px;
-        margin: 0 -20px;
-        font-size: 0.75rem;
-        color: #6c757d;
+    .slider-container input[type="range"] {
+        width: 100% !important;
+        margin: 0;
+        padding: 0;
+        -webkit-appearance: none;
+        appearance: none;
     }
 }
 
@@ -362,47 +356,73 @@ select option,
 
 /* Section 2 - Card Benefits */
 
-#section2 .slider-container .slider-labels {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr); /* 5 labels, equally spaced */
-  margin-top: 12px;    /* Slightly bigger gap above labels */
-  margin-bottom: 0;
-  padding: 0;     /* Horizontal padding for alignment */
-}
-
-#section2 .slider-container .slider-labels span {
-  margin: 0;           /* Remove negative margins */
-  width: 100%;         /* Fill each grid cell */
-  text-align: center;  /* Center the text in each cell */
-  /* “.selected” highlight is handled elsewhere */
-}
-    
+/* Question Group & General Container Settings */
 #section2 .question-group {
-  margin-bottom: 24px;  /* Extra space after each question group */
-  padding-bottom: 20px; /* Increases space before the bottom border (if any) */
-  gap: 8px;             /* Gap between elements inside the group (if used) */
+  margin-bottom: 24px;     /* Extra space after each question group */
+  padding-bottom: 20px;    /* Increases space before the bottom border */
+  gap: 8px;                /* Gap between elements inside the group */
 }
 
+/* Slider Container – common to all, desktop & mobile */
 #section2 .slider-container {
-  height: 60px;          /* If you still need a fixed height, keep it */
-  padding: 0 16px;        /* Narrower horizontal padding */
-  margin-bottom: 16px;   /* Smaller gap before next question */
+  height: 60px;            /* Fixed height (adjust if needed) */
+  padding: 0 16px;         /* Horizontal padding */
   box-sizing: border-box;
+  position: relative;      /* Required for absolutely positioned labels */
+  min-height: 70px;        /* Ensure enough space for the labels */
+  margin-bottom: 24px;     /* Space below the slider */
 }
 
+/* Range Input – make sure it fills the container */
 #section2 .slider-container input[type="range"] {
-  width: 100% !important; /* Fill the container’s width */
-  margin: 0;              /* Remove extra horizontal margins */
+  width: 100% !important;  /* Fill the container’s width */
+  margin: 0;               /* Remove any extra horizontal margins */
 }
 
+/* Disclaimer & Title Container */
 #section2 .disclaimer {
   margin-bottom: 4px;
   margin-top: 0;
 }
 
 #section2 .title-container {
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
+
+/* ====================================================== */
+/* Mobile-Only: Absolute Positioning for Slider Labels    */
+/* Applies only on screens max-width: 991px               */
+/* ====================================================== */
+@media screen and (max-width: 991px) {
+  /* Remove any previous grid or flex rules for slider-labels */
+  #section2 .slider-container .slider-labels {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1.2em;   /* Adjust vertical offset as needed */
+    height: 0;        /* We only need to position the labels horizontally */
+    margin: 0;
+    padding: 0;
+    display: block;
+  }
+  
+  /* Position each label so its center aligns with the slider’s tick */
+  #section2 .slider-container .slider-labels span {
+    position: absolute;
+    transform: translateX(-50%);  /* Centers the label at its left offset */
+    white-space: nowrap;          /* Prevent wrapping of numbers */
+    font-size: 0.75rem;
+    color: #6c757d;
+  }
+  
+  /* Place 5 labels at exact percentages along the track */
+  #section2 .slider-container .slider-labels span:nth-child(1) { left: 0%; }
+  #section2 .slider-container .slider-labels span:nth-child(2) { left: 25%; }
+  #section2 .slider-container .slider-labels span:nth-child(3) { left: 50%; }
+  #section2 .slider-container .slider-labels span:nth-child(4) { left: 75%; }
+  #section2 .slider-container .slider-labels span:nth-child(5) { left: 100%; }
+}
+
 
 /* Section 4 - Final Valuation */
 #section4 {
