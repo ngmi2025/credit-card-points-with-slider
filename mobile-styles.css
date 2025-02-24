@@ -182,6 +182,10 @@ select option,
     width: 100%;
     margin-bottom: 0;
     height: auto; 
+    min-height: 60px;  /* Add this */
+    display: flex;     /* Add this */
+    flex-direction: column;  /* Add this */
+    justify-content: center;  /* Add this */
 }
 
 .slider-container input[type="range"] {
