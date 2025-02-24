@@ -354,43 +354,6 @@ select option,
     margin-top: 10px;
 }
 
-/* ============================== */
-/* SECTION 2 - BASE MOBILE RULES  */
-/* ============================== */
-
-/* ========================= */
-/* SECTION 2 - BASE MOBILE   */
-/* (Applies to all devices unless overridden) */
-/* ========================= */
-
-#section2 .question-group {
-  margin-bottom: 24px;   /* Extra space after each question group */
-  padding-bottom: 20px;  /* Extra space before bottom border */
-  gap: 8px;              /* Gap between items in the group */
-}
-
-#section2 .slider-container {
-  position: relative;    /* Needed if labels are absolutely positioned */
-  box-sizing: border-box;
-  padding: 0 16px;       /* Horizontal padding so thumb doesn't hit edges */
-  margin-bottom: 16px;   /* Default gap before next question group */
-  min-height: 60px;      /* Enough space for slider track */
-}
-
-#section2 .slider-container input[type="range"] {
-  width: 100% !important;
-  margin: 0;
-}
-
-#section2 .disclaimer {
-  margin-bottom: 4px;
-  margin-top: 0;
-}
-
-#section2 .title-container {
-  margin-bottom: 0;
-}
-
 /* ========================= */
 /* SECTION 2 - MOBILE-ONLY   */
 /* (max-width: 991px)        */
@@ -398,50 +361,93 @@ select option,
 @media screen and (max-width: 991px) {
   /* 1) Increase gap after slider */
   #section2 .slider-container {
-    min-height: 70px;    /* If labels overlap, increase to 80px */
+    min-height: 70px;    /* Space for labels and thicker track */
     margin-bottom: 32px; /* Bigger gap before next question group */
   }
 
-  /* 2) Labels closer to slider track */
+  /* 2) Labels closer to slider track with alignment fixes */
   #section2 .slider-container .slider-labels {
     position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -0.5em;      /* Move labels up or down relative to the track */
+    left: 8px; /* Compensate for thumb overflow on left */
+    right: 8px; /* Compensate for thumb overflow on right */
+    bottom: -0.25em; /* Reduce gap between slider track and labels (adjust as needed, e.g., 0, -0.1em) */
     margin: 0;
     padding: 0;
-    display: block;
-    height: 0;           /* We only need horizontal positioning */
+    display: flex;
+    justify-content: space-between; /* Fallback for older browsers */
   }
 
   #section2 .slider-container .slider-labels span {
     position: absolute;
-    transform: translateX(-50%);  /* Centers label horizontally */
+    transform: translateX(-50%);
     white-space: nowrap;
     font-size: 0.8rem;
     color: #6c757d;
   }
 
-  /* 3) (Optional) Exact positions for 5 labels: 0%, 25%, 50%, 75%, 100% */
-  #section2 .slider-container .slider-labels span:nth-child(1) { left: 0%;   }
-  #section2 .slider-container .slider-labels span:nth-child(2) { left: 25%;  }
-  #section2 .slider-container .slider-labels span:nth-child(3) { left: 50%;  }
-  #section2 .slider-container .slider-labels span:nth-child(4) { left: 75%;  }
+  /* 3) Exact positions for labels: 0%, 25%, 50%, 75%, 100% */
+  #section2 .slider-container .slider-labels span:nth-child(1) { left: 0%; }
+  #section2 .slider-container .slider-labels span:nth-child(2) { left: 25%; }
+  #section2 .slider-container .slider-labels span:nth-child(3) { left: 50%; }
+  #section2 .slider-container .slider-labels span:nth-child(4) { left: 75%; }
   #section2 .slider-container .slider-labels span:nth-child(5) { left: 100%; }
 
-  /* 4) Thicker slider track (6px) on mobile */
-  #section2 .slider-container input[type="range"]::-webkit-slider-runnable-track {
-    height: 6px;
-    background: #ddd;
-    border-radius: 3px;
+  /* 4) Thicker slider track (6px) on mobile with normalized positioning */
+  #section2 .slider-container input[type="range"] {
+    width: 100% !important;
+    margin: 0;
+    padding: 0;
+    -webkit-appearance: none;
+    appearance: none;
   }
-  #section2 .slider-container input[type="range"]::-moz-range-track {
+
+  #section2 .slider-container input[type="range"]::-webkit-slider-runnable-track {
+    width: 100%;
     height: 6px;
     background: #ddd;
     border-radius: 3px;
+    padding: 0; /* Remove any implicit padding */
+    box-sizing: border-box;
+  }
+
+  #section2 .slider-container input[type="range"]::-moz-range-track {
+    width: 100%;
+    height: 6px;
+    background: #ddd;
+    border-radius: 3px;
+    padding: 0;
+  }
+
+  #section2 .slider-container input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #006fcf;
+    cursor: pointer;
+    margin-top: -5px; /* Aligns thumb center with 6px track */
+    position: relative;
+    z-index: 2;
+  }
+
+  #section2 .slider-container input[type="range"]::-moz-range-thumb {
+    width: 16px; /* Match Webkit for consistency */
+    height: 16px;
+    background: var(--primary-color);
+    cursor: pointer;
+    border-radius: 50%;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  /* Ensure other question-group spacing remains intact */
+  #section2 .question-group {
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    gap: 8px;
   }
 }
-
 
 /* Section 4 - Final Valuation */
 #section4 {
