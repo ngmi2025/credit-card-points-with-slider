@@ -178,7 +178,8 @@ select option,
 /* Slider Styling */
 .slider-container {
     position: relative;
-    padding: 10px 16px;
+    padding: 0px 16px;
+    box-sizing: border-box;
     width: 100%;
     margin-bottom: 0;
     height: auto; 
@@ -194,58 +195,59 @@ select option,
         width: auto;    /* Freed from 250px width */
     }
 
-.slider-container input[type="range"] {
-    width: calc(100% - 32px); /* Subtract the padding to align with labels */
-    margin: 0 16px; /* Add margin to center the slider */
-    padding: 0;
-    -webkit-appearance: none;
-    appearance: none;
-}
+    .slider-container input[type="range"] {
+        width: 100% !important; /* Fill the container’s width */
+        margin: 0;              /* Remove extra horizontal margins */
+        padding: 0;
+        -webkit-appearance: none;
+        appearance: none;
+    }
 
-.slider-container input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: #006fcf;
-    cursor: pointer;
-    margin-top: -6px; /* Center the dot on the track */
-}
+    .slider-container input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: #006fcf;
+        cursor: pointer;
+        margin-top: -6px; /* Center the dot on the track */
+    }
 
-input[type="range"]::-webkit-slider-runnable-track {
-    width: 100%;
-    height: 4px;
-    background: #ddd;
-    border-radius: 2px;
-}
+    input[type="range"]::-webkit-slider-runnable-track {
+        width: 100%;
+        height: 4px;
+        background: #ddd;
+        border-radius: 2px;
+    }
 
-.slider-container input[type="range"]::-moz-range-thumb {
-    width: 24px;
-    height: 24px;
-    background: var(--primary-color);
-    cursor: pointer;
-    border-radius: 50%;
-    border: none;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-/* Slider Labels */
-.slider-labels {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-    /* Critical: ensure labels align with slider points */
-    margin-bottom: 0;
-    padding: 0 16px; /* Half the width of the slider thumb */
-}
+    .slider-container input[type="range"]::-moz-range-thumb {
+        width: 24px;
+        height: 24px;
+        background: var(--primary-color);
+        cursor: pointer;
+        border-radius: 50%;
+        border: none;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
 
-.slider-labels span {
-    position: relative;
-    text-align: center;
-    width: 40px;
-    margin: 0 -20px;
-    font-size: 0.75rem;  /* Match section 3's font size */
-    color: #6c757d;      /* Match section 3's color */
+    /* Slider Labels */
+    .slider-labels {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+        margin-bottom: 0;
+        padding: 0 16px;
+    }
+
+    .slider-labels span {
+        position: relative;
+        text-align: center;
+        width: 40px;
+        margin: 0 -20px;
+        font-size: 0.75rem;
+        color: #6c757d;
+    }
 }
 
 /* Button Styling */
@@ -365,7 +367,7 @@ input[type="range"]::-webkit-slider-runnable-track {
   grid-template-columns: repeat(5, 1fr); /* 5 labels, equally spaced */
   margin-top: 12px;    /* Slightly bigger gap above labels */
   margin-bottom: 0;
-  padding: 0 16px;     /* Horizontal padding for alignment */
+  padding: 0;     /* Horizontal padding for alignment */
 }
 
 #section2 .slider-container .slider-labels span {
@@ -383,7 +385,7 @@ input[type="range"]::-webkit-slider-runnable-track {
 
 #section2 .slider-container {
   height: 60px;          /* If you still need a fixed height, keep it */
-  padding: 0 8px;        /* Narrower horizontal padding */
+  padding: 0 16px;        /* Narrower horizontal padding */
   margin-bottom: 16px;   /* Smaller gap before next question */
   box-sizing: border-box;
 }
