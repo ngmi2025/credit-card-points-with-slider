@@ -173,16 +173,21 @@ h1 {
 }
 
 .slider-container {
-    flex: 0 0 250px;
-    width: 250px;
     display: flex;
     flex-direction: column;
     align-items: stretch;
     position: relative;
     margin-bottom: 35px;
-    padding: 0 10px; /* Add padding to account for the thumb overflow */
+    padding: 0 10px;
     box-sizing: border-box;
 }
+
+@media screen and (min-width: 992px) {
+    .slider-container {
+        /* Apply the fixed size only on larger screens */
+        flex: 0 0 250px;
+        width: 250px;
+    }
 
 .slider-container input[type="range"] {
     -webkit-appearance: none;
