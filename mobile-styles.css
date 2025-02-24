@@ -365,87 +365,87 @@ select option,
     margin-bottom: 32px; /* Bigger gap before next question group */
   }
 
-  /* 2) Labels closer to slider track with alignment fixes */
+  /* 2) Labels closer to slider track with alignment fixes and higher specificity */
   #section2 .slider-container .slider-labels {
-    position: absolute;
-    left: 8px; /* Compensate for thumb overflow on left */
-    right: 8px; /* Compensate for thumb overflow on right */
-    bottom: -0.1em; /* Reduce gap further (adjust as needed, e.g., 0, -0.05em) */
-    margin: 0;
-    padding: 0;
-    display: flex;
+    position: absolute !important; /* Force this rule to override others */
+    left: 8px !important; /* Compensate for thumb overflow on left */
+    right: 8px !important; /* Compensate for thumb overflow on right */
+    bottom: 0 !important; /* Try setting to 0 to eliminate the gap completely (adjust as needed, e.g., -0.05em) */
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
     justify-content: space-between; /* Fallback for older browsers */
   }
 
   #section2 .slider-container .slider-labels span {
-    position: absolute;
-    transform: translateX(-50%);
-    white-space: nowrap;
-    font-size: 0.8rem;
-    color: #6c757d;
+    position: absolute !important;
+    transform: translateX(-50%) !important;
+    white-space: nowrap !important;
+    font-size: 0.8rem !important;
+    color: #6c757d !important;
   }
 
   /* 3) Exact positions for labels: 0%, 25%, 50%, 75%, 100% */
-  #section2 .slider-container .slider-labels span:nth-child(1) { left: 0%; }
-  #section2 .slider-container .slider-labels span:nth-child(2) { left: 25%; }
-  #section2 .slider-container .slider-labels span:nth-child(3) { left: 50%; }
-  #section2 .slider-container .slider-labels span:nth-child(4) { left: 75%; }
-  #section2 .slider-container .slider-labels span:nth-child(5) { left: 100%; }
+  #section2 .slider-container .slider-labels span:nth-child(1) { left: 0% !important; }
+  #section2 .slider-container .slider-labels span:nth-child(2) { left: 25% !important; }
+  #section2 .slider-container .slider-labels span:nth-child(3) { left: 50% !important; }
+  #section2 .slider-container .slider-labels span:nth-child(4) { left: 75% !important; }
+  #section2 .slider-container .slider-labels span:nth-child(5) { left: 100% !important; }
 
   /* 4) Thicker slider track (6px) on mobile with normalized positioning */
   #section2 .slider-container input[type="range"] {
     width: 100% !important;
-    margin: 0;
-    padding: 0;
-    -webkit-appearance: none;
-    appearance: none;
+    margin: 0 !important;
+    padding: 0 !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
   }
 
   #section2 .slider-container input[type="range"]::-webkit-slider-runnable-track {
-    width: 100%;
-    height: 6px;
-    background: #ddd;
-    border-radius: 3px;
-    padding: 0; /* Remove any implicit padding */
-    box-sizing: border-box;
+    width: 100% !important;
+    height: 6px !important;
+    background: #ddd !important;
+    border-radius: 3px !important;
+    padding: 0 !important; /* Remove any implicit padding */
+    box-sizing: border-box !important;
   }
 
   #section2 .slider-container input[type="range"]::-moz-range-track {
-    width: 100%;
-    height: 6px;
-    background: #ddd;
-    border-radius: 3px;
-    padding: 0;
+    width: 100% !important;
+    height: 6px !important;
+    background: #ddd !important;
+    border-radius: 3px !important;
+    padding: 0 !important;
   }
 
   #section2 .slider-container input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: #006fcf;
-    cursor: pointer;
-    margin-top: -5px; /* Aligns thumb center with 6px track */
-    position: relative;
-    z-index: 2;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    width: 16px !important;
+    height: 16px !important;
+    border-radius: 50% !important;
+    background: #006fcf !important;
+    cursor: pointer !important;
+    margin-top: -5px !important; /* Aligns thumb center with 6px track */
+    position: relative !important;
+    z-index: 2 !important;
   }
 
   #section2 .slider-container input[type="range"]::-moz-range-thumb {
-    width: 16px; /* Match Webkit for consistency */
-    height: 16px;
-    background: var(--primary-color);
-    cursor: pointer;
-    border-radius: 50%;
-    border: none;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    width: 16px !important; /* Match Webkit for consistency */
+    height: 16px !important;
+    background: var(--primary-color) !important;
+    cursor: pointer !important;
+    border-radius: 50% !important;
+    border: none !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
   }
 
   /* Ensure other question-group spacing remains intact */
   #section2 .question-group {
-    margin-bottom: 24px;
-    padding-bottom: 20px;
-    gap: 8px;
+    margin-bottom: 24px !important;
+    padding-bottom: 20px !important;
+    gap: 8px !important;
   }
 }
 
