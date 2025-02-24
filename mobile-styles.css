@@ -108,7 +108,7 @@ h1 {
 }
 
 .question-group .question-description {
-    margin-bottom: 8px;
+    margin-bottom: 16px;
     font-size: 14px;
     color: var(--secondary-text-color);
 }
@@ -297,6 +297,7 @@ select option,
     width: 100%;
     padding: 0 16px;
     box-sizing: border-box;
+    margin-bottom: 24px; 
   }
 
   #section2 .slider-container .slider-labels {
@@ -388,8 +389,8 @@ select option,
   }
 
   #section2 .question-group {
-    margin-bottom: 24px !important;
-    padding-bottom: 20px !important;
+    margin-bottom: 16px !important;
+    padding-bottom: 16px !important;
     gap: 8px !important;
   }
 
