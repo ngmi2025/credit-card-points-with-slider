@@ -216,7 +216,7 @@ select option,
 
     input[type="range"]::-webkit-slider-runnable-track {
         width: 100%;
-        height: 4px;
+        height: 6px;
         background: #ddd;
         border-radius: 2px;
     }
