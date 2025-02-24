@@ -297,7 +297,11 @@ select option,
     width: 100%;
     padding: 0 16px;
     box-sizing: border-box;
-    margin-bottom: 24px; 
+    margin-bottom: 0px; 
+  }
+
+      #section2 .question-group .question-description {
+    margin-bottom: 24px !important;  /* Add this inside the media query */
   }
 
   #section2 .slider-container .slider-labels {
@@ -389,9 +393,9 @@ select option,
   }
 
   #section2 .question-group {
-    margin-bottom: 16px !important;
-    padding-bottom: 16px !important;
-    gap: 8px !important;
+    margin-bottom: 32px !important;
+    padding-bottom: 0px !important;
+    gap: 20px !important;
   }
 
   /* Section 3 - Credit Card Perks Sliders */
