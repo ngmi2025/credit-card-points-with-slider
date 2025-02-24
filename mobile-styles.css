@@ -391,20 +391,20 @@ select option,
     margin-left: 0 !important;
   }
 
-  #section2 .slider-container .slider-labels span:nth-child(2) {
+#section2 .slider-container .slider-labels span:nth-child(2) {
     text-align: center !important;
-    transform: translateX(-15%) !important;
-  }
+    transform: translateX(-25%) !important;  /* Changed from -15% to -25% */
+}
 
   #section2 .slider-container .slider-labels span:nth-child(3) {
     text-align: center !important;
   }
 
-  #section2 .slider-container .slider-labels span:nth-child(4) {
+#section2 .slider-container .slider-labels span:nth-child(4) {
     text-align: center !important;
-    transform: translateX(15%) !important;
-  }
-
+    transform: translateX(25%) !important;  /* Changed from 15% to 25% */
+}
+    
   #section2 .slider-container .slider-labels span:nth-child(5) {
     text-align: right !important;
     margin-right: 0 !important;
