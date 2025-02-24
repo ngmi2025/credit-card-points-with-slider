@@ -393,10 +393,6 @@ input[type="range"]::-webkit-slider-runnable-track {
   margin: 0;              /* Remove extra horizontal margins */
 }
 
-#section2 .slider-labels {
-  margin-top: 4px;      /* If you prefer a smaller top margin for the labels */
-}
-
 #section2 .disclaimer {
   margin-bottom: 4px;
   margin-top: 0;
