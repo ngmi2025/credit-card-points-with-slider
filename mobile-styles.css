@@ -352,7 +352,7 @@ input[type="range"]::-webkit-slider-runnable-track {
 #section2 .question-group {
     margin-bottom: 0px;
     padding-bottom: 0px;
-    gap: 4px;
+    gap: 8px;
 }
 
 #section2 .slider-container {
