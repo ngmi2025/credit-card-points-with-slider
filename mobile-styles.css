@@ -175,75 +175,6 @@ select option,
     background-color: #f0f0f0 !important;
 }
 
-/* Slider Styling */
-.slider-container {
-    position: relative;
-    padding: 0px 16px;
-    box-sizing: border-box;
-    width: 100%;
-    margin-bottom: 0;
-    height: auto; 
-    min-height: 60px;  /* Add this */
-    display: flex;     /* Add this */
-    flex-direction: column;  /* Add this */
-    justify-content: center;  /* Add this */
-}
-
-@media screen and (max-width: 991px) {
-    .slider-container {
-        flex: 0 1 auto;
-        width: 100%;
-    }
-
-    .slider-container input[type="range"] {
-        width: 100% !important; /* Fill the container’s width */
-        margin: 0;              /* Remove extra horizontal margins */
-        padding: 0;
-        -webkit-appearance: none;
-        appearance: none;
-    }
-
-    .slider-container input[type="range"]::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        appearance: none;
-        width: 16px;
-        height: 16px;
-        border-radius: 50%;
-        background: #006fcf;
-        cursor: pointer;
-        margin-top: -6px; /* Center the dot on the track */
-    }
-
-    input[type="range"]::-webkit-slider-runnable-track {
-        width: 100%;
-        height: 6px;
-        background: #ddd;
-        border-radius: 2px;
-    }
-
-    .slider-container input[type="range"]::-moz-range-thumb {
-        width: 24px;
-        height: 24px;
-        background: var(--primary-color);
-        cursor: pointer;
-        border-radius: 50%;
-        border: none;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    .slider-container {
-        flex: 0 1 auto;
-        width: 100%;
-    }
-
-    .slider-container input[type="range"] {
-        width: 100% !important;
-        margin: 0;
-        padding: 0;
-        -webkit-appearance: none;
-        appearance: none;
-    }
-}
-
 /* Button Styling */
 .button-container {
     margin-top: 20px;
@@ -355,30 +286,28 @@ select option,
 }
 
 /* ========================= */
-/* SECTION 2 - MOBILE-ONLY   */
+/* SECTION 2 & 3 MOBILE-ONLY */
 /* (max-width: 991px)        */
 /* ========================= */
 @media screen and (max-width: 991px) {
-  /* 1) Slider container basics */
+  /* Section 2 - Travel Frequency Sliders */
   #section2 .slider-container {
-    min-height: 70px;    /* Space for labels and track */
+    min-height: 70px;
     position: relative;
     width: 100%;
     padding: 0 16px;
     box-sizing: border-box;
   }
 
-  /* 2) Labels styling with grid layout */
   #section2 .slider-container .slider-labels {
     display: grid !important;
     grid-template-columns: repeat(5, 1fr) !important;
     width: 100% !important;
     padding: 0 !important;
-    margin: 8px 0 0 0 !important;  /* Small gap after slider */
+    margin: 8px 0 0 0 !important;
     position: relative !important;
   }
 
-  /* 3) Individual label positioning */
   #section2 .slider-container .slider-labels span {
     position: relative !important;
     white-space: nowrap !important;
@@ -391,26 +320,25 @@ select option,
     margin-left: 0 !important;
   }
 
-#section2 .slider-container .slider-labels span:nth-child(2) {
+  #section2 .slider-container .slider-labels span:nth-child(2) {
     text-align: center !important;
-    transform: translateX(-25%) !important;  /* Changed from -15% to -25% */
-}
+    transform: translateX(-25%) !important;
+  }
 
   #section2 .slider-container .slider-labels span:nth-child(3) {
     text-align: center !important;
   }
 
-#section2 .slider-container .slider-labels span:nth-child(4) {
+  #section2 .slider-container .slider-labels span:nth-child(4) {
     text-align: center !important;
-    transform: translateX(25%) !important;  /* Changed from 15% to 25% */
-}
+    transform: translateX(25%) !important;
+  }
     
   #section2 .slider-container .slider-labels span:nth-child(5) {
     text-align: right !important;
     margin-right: 0 !important;
   }
 
-  /* 4) Slider input styling */
   #section2 .slider-container input[type="range"] {
     width: 100% !important;
     margin: 0 !important;
@@ -459,8 +387,110 @@ select option,
     box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
   }
 
-  /* 5) Question group spacing */
   #section2 .question-group {
+    margin-bottom: 24px !important;
+    padding-bottom: 20px !important;
+    gap: 8px !important;
+  }
+
+  /* Section 3 - Credit Card Perks Sliders */
+  #section3 .slider-container {
+    min-height: 70px;
+    position: relative;
+    width: 100%;
+    padding: 0 16px;
+    box-sizing: border-box;
+  }
+
+  #section3 .slider-container .slider-labels {
+    display: grid !important;
+    grid-template-columns: repeat(5, 1fr) !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 8px 0 0 0 !important;
+    position: relative !important;
+  }
+
+  #section3 .slider-container .slider-labels span {
+    position: relative !important;
+    white-space: nowrap !important;
+    font-size: 0.8rem !important;
+    color: #6c757d !important;
+  }
+
+  #section3 .slider-container .slider-labels span:nth-child(1) {
+    text-align: left !important;
+    margin-left: 0 !important;
+  }
+
+  #section3 .slider-container .slider-labels span:nth-child(2) {
+    text-align: center !important;
+    transform: translateX(-25%) !important;
+  }
+
+  #section3 .slider-container .slider-labels span:nth-child(3) {
+    text-align: center !important;
+  }
+
+  #section3 .slider-container .slider-labels span:nth-child(4) {
+    text-align: center !important;
+    transform: translateX(25%) !important;
+  }
+
+  #section3 .slider-container .slider-labels span:nth-child(5) {
+    text-align: right !important;
+    margin-right: 0 !important;
+  }
+
+  #section3 .slider-container input[type="range"] {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+  }
+
+  #section3 .slider-container input[type="range"]::-webkit-slider-runnable-track {
+    width: 100% !important;
+    height: 6px !important;
+    background: #ddd !important;
+    border-radius: 3px !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  #section3 .slider-container input[type="range"]::-moz-range-track {
+    width: 100% !important;
+    height: 6px !important;
+    background: #ddd !important;
+    border-radius: 3px !important;
+    padding: 0 !important;
+  }
+
+  #section3 .slider-container input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    width: 16px !important;
+    height: 16px !important;
+    border-radius: 50% !important;
+    background: #006fcf !important;
+    cursor: pointer !important;
+    margin-top: -5px !important;
+    position: relative !important;
+    z-index: 2 !important;
+  }
+
+  #section3 .slider-container input[type="range"]::-moz-range-thumb {
+    width: 16px !important;
+    height: 16px !important;
+    background: var(--primary-color) !important;
+    cursor: pointer !important;
+    border-radius: 50% !important;
+    border: none !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+  }
+
+  #section3 .question-group {
     margin-bottom: 24px !important;
     padding-bottom: 20px !important;
     gap: 8px !important;
@@ -700,14 +730,7 @@ select {
     font-weight: bold;
     color: var(--primary-color);
 }
-#section3 .slider-labels span:nth-child(3) {
-    transform: translateX(-5px); /* Small adjustment to center "sometimes" */
-}
 
-#section3 .slider-labels span {
-    font-size: 0.75rem;
-    color: #6c757d;
-}
 /* Progress Bar - Mobile Styles */
 .progress-bar {
     display: flex;
