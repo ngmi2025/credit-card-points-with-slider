@@ -191,8 +191,8 @@ select option,
 
 @media screen and (max-width: 991px) {
     .slider-container {
-        flex: 0 1 auto; /* Let it shrink or grow */
-        width: auto;    /* Freed from 250px width */
+        flex: 0 1 auto;
+        width: 100%;
     }
 
     .slider-container input[type="range"] {
