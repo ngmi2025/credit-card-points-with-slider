@@ -359,39 +359,58 @@ select option,
 /* (max-width: 991px)        */
 /* ========================= */
 @media screen and (max-width: 991px) {
-  /* 1) Increase gap after slider */
+  /* 1) Slider container basics */
   #section2 .slider-container {
-    min-height: 70px;    /* Space for labels and thicker track */
+    min-height: 70px;    /* Space for labels and track */
+    position: relative;
+    width: 100%;
+    padding: 0 16px;
+    box-sizing: border-box;
   }
 
-  /* 2) Labels closer to slider track with alignment fixes and higher specificity */
+  /* 2) Labels styling with grid layout */
   #section2 .slider-container .slider-labels {
-    position: absolute !important; /* Force this rule to override others */
-    left: 8px !important; /* Compensate for thumb overflow on left */
-    right: 8px !important; /* Compensate for thumb overflow on right */
-    bottom: -8px !important; /* Try setting to 0 to eliminate the gap completely (adjust as needed, e.g., -0.05em) */
-    margin: 0 !important;
+    display: grid !important;
+    grid-template-columns: repeat(5, 1fr) !important;
+    width: 100% !important;
     padding: 0 !important;
-    display: flex !important;
-    justify-content: space-between; /* Fallback for older browsers */
+    margin: 8px 0 0 0 !important;  /* Small gap after slider */
+    position: relative !important;
   }
 
+  /* 3) Individual label positioning */
   #section2 .slider-container .slider-labels span {
-    position: absolute !important;
-    transform: translateX(-50%) !important;
+    position: relative !important;
     white-space: nowrap !important;
     font-size: 0.8rem !important;
     color: #6c757d !important;
   }
 
-  /* 3) Exact positions for labels: 0%, 25%, 50%, 75%, 100% */
-  #section2 .slider-container .slider-labels span:nth-child(1) { left: 0% !important; }
-  #section2 .slider-container .slider-labels span:nth-child(2) { left: 25% !important; }
-  #section2 .slider-container .slider-labels span:nth-child(3) { left: 50% !important; }
-  #section2 .slider-container .slider-labels span:nth-child(4) { left: 75% !important; }
-  #section2 .slider-container .slider-labels span:nth-child(5) { left: 100% !important; }
+  #section2 .slider-container .slider-labels span:nth-child(1) {
+    text-align: left !important;
+    margin-left: 0 !important;
+  }
 
-  /* 4) Thicker slider track (6px) on mobile with normalized positioning */
+  #section2 .slider-container .slider-labels span:nth-child(2) {
+    text-align: center !important;
+    transform: translateX(-15%) !important;
+  }
+
+  #section2 .slider-container .slider-labels span:nth-child(3) {
+    text-align: center !important;
+  }
+
+  #section2 .slider-container .slider-labels span:nth-child(4) {
+    text-align: center !important;
+    transform: translateX(15%) !important;
+  }
+
+  #section2 .slider-container .slider-labels span:nth-child(5) {
+    text-align: right !important;
+    margin-right: 0 !important;
+  }
+
+  /* 4) Slider input styling */
   #section2 .slider-container input[type="range"] {
     width: 100% !important;
     margin: 0 !important;
@@ -405,7 +424,7 @@ select option,
     height: 6px !important;
     background: #ddd !important;
     border-radius: 3px !important;
-    padding: 0 !important; /* Remove any implicit padding */
+    padding: 0 !important;
     box-sizing: border-box !important;
   }
 
@@ -425,13 +444,13 @@ select option,
     border-radius: 50% !important;
     background: #006fcf !important;
     cursor: pointer !important;
-    margin-top: -5px !important; /* Aligns thumb center with 6px track */
+    margin-top: -5px !important;
     position: relative !important;
     z-index: 2 !important;
   }
 
   #section2 .slider-container input[type="range"]::-moz-range-thumb {
-    width: 16px !important; /* Match Webkit for consistency */
+    width: 16px !important;
     height: 16px !important;
     background: var(--primary-color) !important;
     cursor: pointer !important;
@@ -440,14 +459,13 @@ select option,
     box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
   }
 
-  /* Ensure other question-group spacing remains intact */
+  /* 5) Question group spacing */
   #section2 .question-group {
     margin-bottom: 24px !important;
     padding-bottom: 20px !important;
     gap: 8px !important;
   }
 }
-
 /* Section 4 - Final Valuation */
 #section4 {
     background-color: #fff;
