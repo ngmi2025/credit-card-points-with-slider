@@ -358,7 +358,11 @@ select option,
 /* SECTION 2 - BASE MOBILE RULES  */
 /* ============================== */
 
-/* Question Group & General Container Settings */
+/* ========================= */
+/* SECTION 2 - BASE MOBILE   */
+/* (Applies to all devices unless overridden) */
+/* ========================= */
+
 #section2 .question-group {
   margin-bottom: 24px;   /* Extra space after each question group */
   padding-bottom: 20px;  /* Extra space before bottom border */
@@ -366,17 +370,14 @@ select option,
 }
 
 #section2 .slider-container {
-  /* Core slider container styles */
-  position: relative;   /* Needed for absolutely positioned labels */
+  position: relative;    /* Needed if labels are absolutely positioned */
   box-sizing: border-box;
-  padding: 0 16px;      /* Horizontal padding so thumb doesn't hit edges */
-  margin-bottom: 16px;  /* Space before next question group */
-  min-height: 60px;     /* Enough space for the slider track */
-  /* Remove any fixed height if present to allow dynamic sizing */
+  padding: 0 16px;       /* Horizontal padding so thumb doesn't hit edges */
+  margin-bottom: 16px;   /* Default gap before next question group */
+  min-height: 60px;      /* Enough space for slider track */
 }
 
 #section2 .slider-container input[type="range"] {
-  /* Ensure the slider fills its container */
   width: 100% !important;
   margin: 0;
 }
@@ -390,52 +391,50 @@ select option,
   margin-bottom: 0;
 }
 
-/* ============================== */
-/* SECTION 2 - MOBILE-ONLY RULES  */
-/* (Exact Label Alignment & Thicker Track) */
-/* ============================== */
+/* ========================= */
+/* SECTION 2 - MOBILE-ONLY   */
+/* (max-width: 991px)        */
+/* ========================= */
 @media screen and (max-width: 991px) {
-  /* Increase container height a bit to accommodate labels */
+  /* 1) Increase gap after slider */
   #section2 .slider-container {
-    min-height: 70px;    /* Increase if labels overlap */
-    margin-bottom: 20px; /* Extra space before the next question */
+    min-height: 70px;    /* If labels overlap, increase to 80px */
+    margin-bottom: 32px; /* Bigger gap before next question group */
   }
 
-  /* Absolutely position the slider labels container */
+  /* 2) Labels closer to slider track */
   #section2 .slider-container .slider-labels {
     position: absolute;
     left: 0;
     right: 0;
-    bottom: -1em;   /* Adjust vertical offset as needed */
-    height: 0;
+    bottom: -0.5em;      /* Move labels up or down relative to the track */
     margin: 0;
     padding: 0;
     display: block;
+    height: 0;           /* We only need horizontal positioning */
   }
 
-  /* Each label is centered at a fixed percentage along the track */
   #section2 .slider-container .slider-labels span {
     position: absolute;
-    transform: translateX(-50%);  /* Centers label on its left offset */
-    white-space: nowrap;          /* Prevent wrapping */
-    font-size: 0.8rem;            /* Adjust for readability */
+    transform: translateX(-50%);  /* Centers label horizontally */
+    white-space: nowrap;
+    font-size: 0.8rem;
     color: #6c757d;
   }
 
-  /* Position labels at exact percentages: 0%, 25%, 50%, 75%, 100% */
-  #section2 .slider-container .slider-labels span:nth-child(1) { left: 0%; }
-  #section2 .slider-container .slider-labels span:nth-child(2) { left: 25%; }
-  #section2 .slider-container .slider-labels span:nth-child(3) { left: 50%; }
-  #section2 .slider-container .slider-labels span:nth-child(4) { left: 75%; }
+  /* 3) (Optional) Exact positions for 5 labels: 0%, 25%, 50%, 75%, 100% */
+  #section2 .slider-container .slider-labels span:nth-child(1) { left: 0%;   }
+  #section2 .slider-container .slider-labels span:nth-child(2) { left: 25%;  }
+  #section2 .slider-container .slider-labels span:nth-child(3) { left: 50%;  }
+  #section2 .slider-container .slider-labels span:nth-child(4) { left: 75%;  }
   #section2 .slider-container .slider-labels span:nth-child(5) { left: 100%; }
 
-  /* Make the slider track thicker (6px) */
+  /* 4) Thicker slider track (6px) on mobile */
   #section2 .slider-container input[type="range"]::-webkit-slider-runnable-track {
     height: 6px;
     background: #ddd;
     border-radius: 3px;
   }
-  
   #section2 .slider-container input[type="range"]::-moz-range-track {
     height: 6px;
     background: #ddd;
