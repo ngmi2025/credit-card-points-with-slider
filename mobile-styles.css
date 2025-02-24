@@ -405,6 +405,10 @@ select option,
     width: 100%;
     padding: 0 16px;
     box-sizing: border-box;
+    margin-bottom: 0px; 
+  }
+      #section3 .question-group .question-description {
+    margin-bottom: 24px !important;
   }
 
   #section3 .slider-container .slider-labels {
@@ -496,9 +500,9 @@ select option,
   }
 
   #section3 .question-group {
-    margin-bottom: 24px !important;
-    padding-bottom: 20px !important;
-    gap: 8px !important;
+    margin-bottom: 32px !important;
+    padding-bottom: 0px !important;
+    gap: 20px !important;
   }
 }
 /* Section 4 - Final Valuation */
