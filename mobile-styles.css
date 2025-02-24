@@ -354,32 +354,33 @@ select option,
     margin-top: 10px;
 }
 
-/* Section 2 - Card Benefits */
+/* ============================== */
+/* SECTION 2 - BASE MOBILE RULES  */
+/* ============================== */
 
 /* Question Group & General Container Settings */
 #section2 .question-group {
-  margin-bottom: 24px;     /* Extra space after each question group */
-  padding-bottom: 20px;    /* Increases space before the bottom border */
-  gap: 8px;                /* Gap between elements inside the group */
+  margin-bottom: 24px;   /* Extra space after each question group */
+  padding-bottom: 20px;  /* Extra space before bottom border */
+  gap: 8px;              /* Gap between items in the group */
 }
 
-/* Slider Container – common to all, desktop & mobile */
 #section2 .slider-container {
-  height: 60px;            /* Fixed height (adjust if needed) */
-  padding: 0 16px;         /* Horizontal padding */
+  /* Core slider container styles */
+  position: relative;   /* Needed for absolutely positioned labels */
   box-sizing: border-box;
-  position: relative;      /* Required for absolutely positioned labels */
-  min-height: 70px;        /* Ensure enough space for the labels */
-  margin-bottom: 24px;     /* Space below the slider */
+  padding: 0 16px;      /* Horizontal padding so thumb doesn't hit edges */
+  margin-bottom: 16px;  /* Space before next question group */
+  min-height: 60px;     /* Enough space for the slider track */
+  /* Remove any fixed height if present to allow dynamic sizing */
 }
 
-/* Range Input – make sure it fills the container */
 #section2 .slider-container input[type="range"] {
-  width: 100% !important;  /* Fill the container’s width */
-  margin: 0;               /* Remove any extra horizontal margins */
+  /* Ensure the slider fills its container */
+  width: 100% !important;
+  margin: 0;
 }
 
-/* Disclaimer & Title Container */
 #section2 .disclaimer {
   margin-bottom: 4px;
   margin-top: 0;
@@ -389,38 +390,57 @@ select option,
   margin-bottom: 0;
 }
 
-/* ====================================================== */
-/* Mobile-Only: Absolute Positioning for Slider Labels    */
-/* Applies only on screens max-width: 991px               */
-/* ====================================================== */
+/* ============================== */
+/* SECTION 2 - MOBILE-ONLY RULES  */
+/* (Exact Label Alignment & Thicker Track) */
+/* ============================== */
 @media screen and (max-width: 991px) {
-  /* Remove any previous grid or flex rules for slider-labels */
+  /* Increase container height a bit to accommodate labels */
+  #section2 .slider-container {
+    min-height: 70px;    /* Increase if labels overlap */
+    margin-bottom: 20px; /* Extra space before the next question */
+  }
+
+  /* Absolutely position the slider labels container */
   #section2 .slider-container .slider-labels {
     position: absolute;
     left: 0;
     right: 0;
-    bottom: -1.2em;   /* Adjust vertical offset as needed */
-    height: 0;        /* We only need to position the labels horizontally */
+    bottom: -1em;   /* Adjust vertical offset as needed */
+    height: 0;
     margin: 0;
     padding: 0;
     display: block;
   }
-  
-  /* Position each label so its center aligns with the slider’s tick */
+
+  /* Each label is centered at a fixed percentage along the track */
   #section2 .slider-container .slider-labels span {
     position: absolute;
-    transform: translateX(-50%);  /* Centers the label at its left offset */
-    white-space: nowrap;          /* Prevent wrapping of numbers */
-    font-size: 0.75rem;
+    transform: translateX(-50%);  /* Centers label on its left offset */
+    white-space: nowrap;          /* Prevent wrapping */
+    font-size: 0.8rem;            /* Adjust for readability */
     color: #6c757d;
   }
-  
-  /* Place 5 labels at exact percentages along the track */
+
+  /* Position labels at exact percentages: 0%, 25%, 50%, 75%, 100% */
   #section2 .slider-container .slider-labels span:nth-child(1) { left: 0%; }
   #section2 .slider-container .slider-labels span:nth-child(2) { left: 25%; }
   #section2 .slider-container .slider-labels span:nth-child(3) { left: 50%; }
   #section2 .slider-container .slider-labels span:nth-child(4) { left: 75%; }
   #section2 .slider-container .slider-labels span:nth-child(5) { left: 100%; }
+
+  /* Make the slider track thicker (6px) */
+  #section2 .slider-container input[type="range"]::-webkit-slider-runnable-track {
+    height: 6px;
+    background: #ddd;
+    border-radius: 3px;
+  }
+  
+  #section2 .slider-container input[type="range"]::-moz-range-track {
+    height: 6px;
+    background: #ddd;
+    border-radius: 3px;
+  }
 }
 
 
