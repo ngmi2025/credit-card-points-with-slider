@@ -362,7 +362,6 @@ select option,
   /* 1) Increase gap after slider */
   #section2 .slider-container {
     min-height: 70px;    /* Space for labels and thicker track */
-    margin-bottom: 32px; /* Bigger gap before next question group */
   }
 
   /* 2) Labels closer to slider track with alignment fixes and higher specificity */
@@ -370,7 +369,7 @@ select option,
     position: absolute !important; /* Force this rule to override others */
     left: 8px !important; /* Compensate for thumb overflow on left */
     right: 8px !important; /* Compensate for thumb overflow on right */
-    bottom: 0 !important; /* Try setting to 0 to eliminate the gap completely (adjust as needed, e.g., -0.05em) */
+    bottom: -8px !important; /* Try setting to 0 to eliminate the gap completely (adjust as needed, e.g., -0.05em) */
     margin: 0 !important;
     padding: 0 !important;
     display: flex !important;
