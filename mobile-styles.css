@@ -188,6 +188,12 @@ select option,
     justify-content: center;  /* Add this */
 }
 
+@media screen and (max-width: 991px) {
+    .slider-container {
+        flex: 0 1 auto; /* Let it shrink or grow */
+        width: auto;    /* Freed from 250px width */
+    }
+
 .slider-container input[type="range"] {
     width: calc(100% - 32px); /* Subtract the padding to align with labels */
     margin: 0 16px; /* Add margin to center the slider */
@@ -353,28 +359,45 @@ input[type="range"]::-webkit-slider-runnable-track {
 }
 
 /* Section 2 - Card Benefits */
+
+#section2 .slider-container .slider-labels {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 labels, equally spaced */
+  margin-top: 12px;    /* Slightly bigger gap above labels */
+  margin-bottom: 0;
+  padding: 0 16px;     /* Horizontal padding for alignment */
+}
+
+#section2 .slider-container .slider-labels span {
+  margin: 0;           /* Remove negative margins */
+  width: 100%;         /* Fill each grid cell */
+  text-align: center;  /* Center the text in each cell */
+  /* “.selected” highlight is handled elsewhere */
+}
+    
 #section2 .question-group {
-    margin-bottom: 0px;
-    padding-bottom: 0px;
-    gap: 8px;
+  margin-bottom: 24px;  /* Extra space after each question group */
+  padding-bottom: 20px; /* Increases space before the bottom border (if any) */
+  gap: 8px;             /* Gap between elements inside the group (if used) */
 }
 
 #section2 .slider-container {
-    height: 60px;
-    padding: 0px 16px;
+  height: 60px;         /* Keep slider container height (if needed) */
+  padding: 0 16px;      /* Horizontal padding */
+  margin-bottom: 20px;  /* Extra space before the next question */
 }
 
 #section2 .slider-labels {
-    margin-top: 4px;
+  margin-top: 4px;      /* If you prefer a smaller top margin for the labels */
 }
 
 #section2 .disclaimer {
-    margin-bottom: 4px;
-    margin-top: 0;
+  margin-bottom: 4px;
+  margin-top: 0;
 }
 
 #section2 .title-container {
-    margin-bottom: 0px;
+  margin-bottom: 0px;
 }
 
 /* Section 4 - Final Valuation */
