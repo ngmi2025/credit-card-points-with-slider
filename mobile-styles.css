@@ -352,23 +352,25 @@ input[type="range"]::-webkit-slider-runnable-track {
 #section2 .question-group {
     margin-bottom: 0px;
     padding-bottom: 0px;
+    gap: 4px;
 }
 
 #section2 .slider-container {
-    height: 80px;
-    padding: 5px 16px;
+    height: 60px;
+    padding: 0px 16px;
 }
 
 #section2 .slider-labels {
-    margin-top: 5px;
+    margin-top: 4px;
 }
 
 #section2 .disclaimer {
-    margin-bottom: 8px;
+    margin-bottom: 4px;
+    margin-top: 0;
 }
 
 #section2 .title-container {
-    margin-bottom: 2px;
+    margin-bottom: 0px;
 }
 
 /* Section 4 - Final Valuation */
