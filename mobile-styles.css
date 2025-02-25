@@ -84,7 +84,7 @@ h1 {
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
-    margin-bottom: 10px;
+    margin-bottom: 32px;
     padding-bottom: 10px;
     border-bottom: 1px solid var(--border-color);
     display: flex;
@@ -290,7 +290,12 @@ select option,
 /* (max-width: 991px)        */
 /* ========================= */
 @media screen and (max-width: 991px) {
-  /* Section 2 - Travel Frequency Sliders */
+  /* Fix this block - remove the nested section2 styles */
+  #section2 h2, #section3 h2 {
+    margin-bottom: 12px !important;
+  }
+    
+    /* Section 2 - Travel Frequency Sliders */
    #section2 {
     margin: 8px 0;  /* Add this new line here */
   }
@@ -830,10 +835,6 @@ select {
 .pre-selection-notice.updated, .perks-selection-notice.updated {
     background-color: #f0f7ff;
 }
-#customHomeAirport {
-    margin-top: 10px;
-    width: 100%;
-}
 
 #customHomeAirport.hidden {
     display: none;
@@ -860,6 +861,12 @@ select {
 #customAirportInput {
     text-transform: none !important;
 }
+
+#customTripsInput, #customHomeAirport {
+    margin-top: 16px !important;
+    width: 100%;
+}
+
 .question-title {
     display: block;
     font-size: 16px;  /* Standardize size */
@@ -1120,12 +1127,13 @@ select:focus {
     color: #333;
 }
 .points-suggestion {
-    color: #000;       /* Black text */
-    font-weight: bold;  /* Bold text */
+    color: #000;
+    font-weight: bold;
     margin-top: 8px;
     font-size: 0.9em;
     line-height: 1.4;
     transition: opacity 0.3s ease;
+    animation: suggestionFade 0.3s ease-out;
 }
 
 /* Optional: Add a subtle fade-in animation when suggestions update */
@@ -1138,10 +1146,6 @@ select:focus {
         opacity: 1;
         transform: translateY(0);
     }
-}
-
-.points-suggestion {
-    animation: suggestionFade 0.3s ease-out;
 }
 
 /* Remove native styling and enforce our custom background */
