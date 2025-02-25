@@ -300,7 +300,7 @@ select option,
     margin: 8px 0;  /* Add this new line here */
   }
     #section2 .slider-container {
-    min-height: 70px;
+    min-height: 50px;
     position: relative;
     width: 100%;
     padding: 0 16px;
@@ -648,7 +648,7 @@ select option,
 
 /* Title Container */
 .title-container {
-    margin-bottom: 4px;
+    margin-bottom: 12px;
 }
 
 /* Card Details */
