@@ -420,7 +420,7 @@ const earnedPointSuggestions = [
         min: 800001,
         max: 1000000,
         suggestions: [
-            { text: "That's enough for a family of four to fly first class to Europe!", category: "FLIGHTS" },
+            { text: "That's enough for two people to fly first class round-trip to Asia!", category: "FLIGHTS" }, // Fixed from family of four
             { text: "That's enough for a month of luxury hotel stays worldwide!", category: "HOTELS" },
             { text: "That's enough for multiple ultra-luxury vacation packages!", category: "EXPERIENCES" }
         ]
@@ -429,7 +429,7 @@ const earnedPointSuggestions = [
         min: 1000001,
         max: Infinity,
         suggestions: [
-            { text: "That's enough for multiple first class trips for the whole family!", category: "FLIGHTS" },
+            { text: "That's enough for a family of four to fly first class to Europe!", category: "FLIGHTS" }, // Moved here
             { text: "That's enough for extended stays in the world's finest suites!", category: "HOTELS" },
             { text: "That's enough for a year of luxury travel experiences!", category: "EXPERIENCES" }
         ]
