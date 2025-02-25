@@ -196,9 +196,9 @@ document.addEventListener('DOMContentLoaded', function() {
 function calculatePoints() {
     try {
         // Parse input values
-        const flightSpend = parseFloat(document.getElementById('flightSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
-        const hotelSpend = parseFloat(document.getElementById('hotelSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
-        const otherSpend = parseFloat(document.getElementById('otherSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
+        const flightSpend = (parseFloat(document.getElementById('flightSpend').value.replace(/[^0-9.-]+/g, '')) || 0) * 12;
+        const hotelSpend = (parseFloat(document.getElementById('hotelSpend').value.replace(/[^0-9.-]+/g, '')) || 0) * 12;
+        const otherSpend = (parseFloat(document.getElementById('otherSpend').value.replace(/[^0-9.-]+/g, '')) || 0) * 12;
 
         console.log('Parsed values:', { flightSpend, hotelSpend, otherSpend });
 
