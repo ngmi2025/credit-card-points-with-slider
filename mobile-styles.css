@@ -855,13 +855,21 @@ select {
     text-transform: none !important;
 }
 
-#customTravelFrequency, #customHomeAirport {
+#customTravelFrequency, 
+#customHomeAirport, 
+#customFlightSpend,
+#customHotelSpend,
+#customOtherSpend {
     margin-top: 12px !important;
     margin-bottom: 0 !important;
     width: 100%;
 }
 
-#customTripsInput, #customHomeAirport {
+#customTripsInput, 
+#customHomeAirport,
+#customFlightSpendInput,
+#customHotelSpendInput,
+#customOtherSpendInput {
     margin-top: 12px !important;
     margin-bottom: 0 !important;
     width: 100%;
