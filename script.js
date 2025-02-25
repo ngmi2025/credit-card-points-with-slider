@@ -192,7 +192,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-  // Points Calculation for Section 1
+// Points Calculation for Section 1
 function calculatePoints() {
     try {
         let flightSpend, hotelSpend, otherSpend;
@@ -200,28 +200,40 @@ function calculatePoints() {
         // Handle flight spend - check if custom
         if (document.getElementById('flightSpend').value === 'custom') {
             flightSpend = parseFloat(document.getElementById('customFlightInput').value.replace(/[^0-9.-]+/g, '')) || 0;
+            console.log('Custom flight spend:', flightSpend);
         } else {
             flightSpend = parseFloat(document.getElementById('flightSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
+            console.log('Standard flight spend:', flightSpend);
         }
 
         // Handle hotel spend - check if custom
         if (document.getElementById('hotelSpend').value === 'custom') {
             hotelSpend = parseFloat(document.getElementById('customHotelInput').value.replace(/[^0-9.-]+/g, '')) || 0;
+            console.log('Custom hotel spend:', hotelSpend);
         } else {
             hotelSpend = parseFloat(document.getElementById('hotelSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
+            console.log('Standard hotel spend:', hotelSpend);
         }
 
         // Handle other spend - check if custom
         if (document.getElementById('otherSpend').value === 'custom') {
             otherSpend = parseFloat(document.getElementById('customOtherInput').value.replace(/[^0-9.-]+/g, '')) || 0;
+            console.log('Custom other spend:', otherSpend);
         } else {
             otherSpend = parseFloat(document.getElementById('otherSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
+            console.log('Standard other spend:', otherSpend);
         }
 
         // Multiply all values by 12 for annual spend
         flightSpend *= 12;
         hotelSpend *= 12;
         otherSpend *= 12;
+
+        console.log('Annual values:', {
+            flightSpend,
+            hotelSpend,
+            otherSpend
+        });
 
         console.log('Parsed values:', { flightSpend, hotelSpend, otherSpend });
 
