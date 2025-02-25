@@ -108,7 +108,7 @@ h1 {
 }
 
 .question-group .question-description {
-    margin-bottom: 16px;
+    margin-bottom: 12px;
     font-size: 14px;
     color: var(--secondary-text-color);
 }
@@ -120,12 +120,6 @@ h1 {
     box-sizing: border-box;
     margin-top: 0 !important;
     margin-bottom: 0px !important;
-}
-
-.input-group #customTripsInput,
-.input-group #customHomeAirport {
-    margin-top: 24px !important;
-    width: 100%;
 }
 
 .section .input-group {
@@ -314,10 +308,6 @@ select option,
     margin-bottom: 0px; 
   }
 
-      #section2 .question-group .question-description {
-    margin-bottom: 24px !important;  /* Add this inside the media query */
-  }
-
   #section2 .slider-container .slider-labels {
     display: grid !important;
     grid-template-columns: repeat(5, 1fr) !important;
@@ -424,9 +414,6 @@ select option,
     padding: 0 16px;
     box-sizing: border-box;
     margin-bottom: 0px; 
-  }
-      #section3 .question-group .question-description {
-    margin-bottom: 24px !important;
   }
 
   #section3 .slider-container .slider-labels {
@@ -869,7 +856,7 @@ select {
 }
 
 #customTripsInput, #customHomeAirport {
-    margin-top: 16px !important;
+    margin-top: 12px !important;
     margin-bottom: 0 !important;
     width: 100%;
 }
