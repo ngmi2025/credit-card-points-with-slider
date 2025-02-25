@@ -389,13 +389,49 @@ const earnedPointSuggestions = [
             { text: "That's enough for a year of premium travel experiences!", category: "EXPERIENCES" }
         ]
     },
-    {
+   {
         min: 200001,
+        max: 400000,
+        suggestions: [
+            { text: "That's enough for a first class round-trip to Asia or two to Europe!", category: "FLIGHTS" },
+            { text: "That's enough for a week at luxury hotels in major cities!", category: "HOTELS" },
+            { text: "That's enough for multiple premium vacation packages!", category: "EXPERIENCES" }
+        ]
+    },
+    {
+        min: 400001,
+        max: 600000,
+        suggestions: [
+            { text: "That's enough for two first class round-trips to Asia!", category: "FLIGHTS" },
+            { text: "That's enough for 10 nights at Fine Hotels & Resorts properties!", category: "HOTELS" },
+            { text: "That's enough for several luxury vacation packages with VIP perks!", category: "EXPERIENCES" }
+        ]
+    },
+    {
+        min: 600001,
+        max: 800000,
+        suggestions: [
+            { text: "That's enough for three first class international round-trips!", category: "FLIGHTS" },
+            { text: "That's enough for two weeks in presidential suites!", category: "HOTELS" },
+            { text: "That's enough for multiple luxury family vacations!", category: "EXPERIENCES" }
+        ]
+    },
+    {
+        min: 800001,
+        max: 1000000,
+        suggestions: [
+            { text: "That's enough for a family of four to fly first class to Europe!", category: "FLIGHTS" },
+            { text: "That's enough for a month of luxury hotel stays worldwide!", category: "HOTELS" },
+            { text: "That's enough for multiple ultra-luxury vacation packages!", category: "EXPERIENCES" }
+        ]
+    },
+    {
+        min: 1000001,
         max: Infinity,
         suggestions: [
-            { text: "That's enough for multiple first class international flights!", category: "FLIGHTS" },
-            { text: "That's enough for two weeks at the world's most exclusive resorts!", category: "HOTELS" },
-            { text: "That's enough for unlimited luxury travel possibilities!", category: "EXPERIENCES" }
+            { text: "That's enough for multiple first class trips for the whole family!", category: "FLIGHTS" },
+            { text: "That's enough for extended stays in the world's finest suites!", category: "HOTELS" },
+            { text: "That's enough for a year of luxury travel experiences!", category: "EXPERIENCES" }
         ]
     }
 ];
