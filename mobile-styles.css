@@ -855,6 +855,12 @@ select {
     text-transform: none !important;
 }
 
+#customTravelFrequency, #customHomeAirport {
+    margin-top: 12px !important;
+    margin-bottom: 0 !important;
+    width: 100%;
+}
+
 #customTripsInput, #customHomeAirport {
     margin-top: 12px !important;
     margin-bottom: 0 !important;
