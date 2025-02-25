@@ -195,10 +195,33 @@ document.addEventListener('DOMContentLoaded', function() {
   // Points Calculation for Section 1
 function calculatePoints() {
     try {
-        // Parse input values
-        const flightSpend = (parseFloat(document.getElementById('flightSpend').value.replace(/[^0-9.-]+/g, '')) || 0) * 12;
-        const hotelSpend = (parseFloat(document.getElementById('hotelSpend').value.replace(/[^0-9.-]+/g, '')) || 0) * 12;
-        const otherSpend = (parseFloat(document.getElementById('otherSpend').value.replace(/[^0-9.-]+/g, '')) || 0) * 12;
+        let flightSpend, hotelSpend, otherSpend;
+
+        // Handle flight spend - check if custom
+        if (document.getElementById('flightSpend').value === 'custom') {
+            flightSpend = parseFloat(document.getElementById('customFlightInput').value.replace(/[^0-9.-]+/g, '')) || 0;
+        } else {
+            flightSpend = parseFloat(document.getElementById('flightSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
+        }
+
+        // Handle hotel spend - check if custom
+        if (document.getElementById('hotelSpend').value === 'custom') {
+            hotelSpend = parseFloat(document.getElementById('customHotelInput').value.replace(/[^0-9.-]+/g, '')) || 0;
+        } else {
+            hotelSpend = parseFloat(document.getElementById('hotelSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
+        }
+
+        // Handle other spend - check if custom
+        if (document.getElementById('otherSpend').value === 'custom') {
+            otherSpend = parseFloat(document.getElementById('customOtherInput').value.replace(/[^0-9.-]+/g, '')) || 0;
+        } else {
+            otherSpend = parseFloat(document.getElementById('otherSpend').value.replace(/[^0-9.-]+/g, '')) || 0;
+        }
+
+        // Multiply all values by 12 for annual spend
+        flightSpend *= 12;
+        hotelSpend *= 12;
+        otherSpend *= 12;
 
         console.log('Parsed values:', { flightSpend, hotelSpend, otherSpend });
 
@@ -250,21 +273,22 @@ function calculatePoints() {
         // Get complementary suggestions
         const suggestions = getComplementarySuggestions(totalPoints);
         
-// Update Total Points Earned suggestion
-const earnedPointsContainer = document.getElementById('totalPointsValue').parentElement.querySelector('.points-suggestion');
-if (suggestions.earnedSuggestion && totalPoints >= MINIMUM_POINTS_FOR_SUGGESTION) {
-    if (earnedPointsContainer) {
-        earnedPointsContainer.textContent = suggestions.earnedSuggestion;
-    }
-}
+        // Update Total Points Earned suggestion
+        const earnedPointsContainer = document.getElementById('totalPointsValue').parentElement.querySelector('.points-suggestion');
+        if (suggestions.earnedSuggestion && totalPoints >= MINIMUM_POINTS_FOR_SUGGESTION) {
+            if (earnedPointsContainer) {
+                earnedPointsContainer.textContent = suggestions.earnedSuggestion;
+            }
+        }
 
-// Update Welcome Bonus suggestion
-const welcomeBonusContainer = document.querySelector('.welcome-bonus .points-suggestion');
-if (!welcomeBonusContainer) {
-    console.warn('Welcome bonus container not found');
-} else {
-    welcomeBonusContainer.textContent = suggestions.welcomeSuggestion;
-}
+        // Update Welcome Bonus suggestion
+        const welcomeBonusContainer = document.querySelector('.welcome-bonus .points-suggestion');
+        if (!welcomeBonusContainer) {
+            console.warn('Welcome bonus container not found');
+        } else {
+            welcomeBonusContainer.textContent = suggestions.welcomeSuggestion;
+        }
+
         // Show results
         elements.results.classList.remove('hidden');
         console.log('Results displayed successfully');
