@@ -330,7 +330,7 @@ const earnedPointSuggestions = [
         min: 15000,
         max: 20000,
         suggestions: [
-            { text: "That's enough for a one-way flight to any major US city!", category: "FLIGHTS" },
+            { text: "That's enough for a one-way domestic flight!", category: "FLIGHTS" },
             { text: "That's enough for a luxury hotel night through Fine Hotels & Resorts!", category: "HOTELS" },
             { text: "That's enough for multiple premium dining experiences through Resy!", category: "EXPERIENCES" }
         ]
@@ -339,8 +339,8 @@ const earnedPointSuggestions = [
         min: 20001,
         max: 40000,
         suggestions: [
-            { text: "That's enough for a round-trip flight anywhere in the continental US!", category: "FLIGHTS" },
-            { text: "That's enough for two nights at a 5-star hotel in Miami or LA!", category: "HOTELS" },
+            { text: "That's enough for a domestic round-trip flight!", category: "FLIGHTS" },
+            { text: "That's enough for two nights at a 5-star hotel!", category: "HOTELS" },
             { text: "That's enough for multiple spa treatments at luxury resorts!", category: "EXPERIENCES" }
         ]
     },
@@ -349,16 +349,16 @@ const earnedPointSuggestions = [
         max: 60000,
         suggestions: [
             { text: "That's enough for a round-trip flight to Hawaii!", category: "FLIGHTS" },
-            { text: "That's enough for three nights at a beachfront resort in Mexico!", category: "HOTELS" },
-            { text: "That's enough for a weekend of luxury experiences including dining and spa!", category: "EXPERIENCES" }
+            { text: "That's enough for three nights at a beachfront resort!", category: "HOTELS" },
+            { text: "That's enough for a weekend of luxury experiences!", category: "EXPERIENCES" }
         ]
     },
     {
         min: 60001,
         max: 80000,
         suggestions: [
-            { text: "That's enough for a round-trip flight to Europe!", category: "FLIGHTS" },
-            { text: "That's enough for a 4-night luxury hotel stay in Paris or London!", category: "HOTELS" },
+            { text: "That's enough for a business class one-way to Europe!", category: "FLIGHTS" },
+            { text: "That's enough for four nights at a luxury hotel!", category: "HOTELS" },
             { text: "That's enough for multiple domestic weekend getaways!", category: "EXPERIENCES" }
         ]
     },
@@ -366,35 +366,26 @@ const earnedPointSuggestions = [
         min: 80001,
         max: 120000,
         suggestions: [
-            { text: "That's enough for a business class flight to Europe!", category: "FLIGHTS" },
-            { text: "That's enough for a 5-night stay at a luxury resort in Bora Bora!", category: "HOTELS" },
-            { text: "That's enough for multiple romantic getaways with luxury perks!", category: "EXPERIENCES" }
+            { text: "That's enough for a round-trip business class flight to Europe!", category: "FLIGHTS" },
+            { text: "That's enough for a 5-night stay at a luxury resort!", category: "HOTELS" },
+            { text: "That's enough for multiple romantic getaways!", category: "EXPERIENCES" }
         ]
     },
     {
         min: 120001,
-        max: 160000,
+        max: 200000,
         suggestions: [
-            { text: "That's enough for a first class flight to Asia!", category: "FLIGHTS" },
-            { text: "That's enough for a week at top hotels in multiple European cities!", category: "HOTELS" },
-            { text: "That's enough for multiple luxury vacations with VIP experiences!", category: "EXPERIENCES" }
+            { text: "That's enough for a round-trip first class flight to Europe!", category: "FLIGHTS" },
+            { text: "That's enough for a week at top hotels in multiple cities!", category: "HOTELS" },
+            { text: "That's enough for multiple luxury vacations!", category: "EXPERIENCES" }
         ]
     },
     {
-        min: 160001,
-        max: 200000,
-        suggestions: [
-            { text: "That's enough for two business class tickets to anywhere in the world!", category: "FLIGHTS" },
-            { text: "That's enough for 10 nights at luxury hotels across multiple destinations!", category: "HOTELS" },
-            { text: "That's enough for a year of premium travel experiences!", category: "EXPERIENCES" }
-        ]
-    },
-   {
         min: 200001,
         max: 400000,
         suggestions: [
-            { text: "That's enough for a first class round-trip to Asia or two to Europe!", category: "FLIGHTS" },
-            { text: "That's enough for a week at luxury hotels in major cities!", category: "HOTELS" },
+            { text: "That's enough for a round-trip first class flight to Asia!", category: "FLIGHTS" },
+            { text: "That's enough for 10 nights at luxury hotels!", category: "HOTELS" },
             { text: "That's enough for multiple premium vacation packages!", category: "EXPERIENCES" }
         ]
     },
@@ -402,26 +393,17 @@ const earnedPointSuggestions = [
         min: 400001,
         max: 600000,
         suggestions: [
-            { text: "That's enough for two first class round-trips to Asia!", category: "FLIGHTS" },
-            { text: "That's enough for 10 nights at Fine Hotels & Resorts properties!", category: "HOTELS" },
-            { text: "That's enough for several luxury vacation packages with VIP perks!", category: "EXPERIENCES" }
+            { text: "That's enough for two round-trip first class flights to Europe!", category: "FLIGHTS" },
+            { text: "That's enough for two weeks at Fine Hotels & Resorts properties!", category: "HOTELS" },
+            { text: "That's enough for several luxury vacation packages!", category: "EXPERIENCES" }
         ]
     },
     {
         min: 600001,
-        max: 800000,
-        suggestions: [
-            { text: "That's enough for three first class international round-trips!", category: "FLIGHTS" },
-            { text: "That's enough for two weeks in presidential suites!", category: "HOTELS" },
-            { text: "That's enough for multiple luxury family vacations!", category: "EXPERIENCES" }
-        ]
-    },
-    {
-        min: 800001,
         max: 1000000,
         suggestions: [
-            { text: "That's enough for two people to fly first class round-trip to Asia!", category: "FLIGHTS" }, // Fixed from family of four
-            { text: "That's enough for a month of luxury hotel stays worldwide!", category: "HOTELS" },
+            { text: "That's enough for two round-trip first class flights to Asia!", category: "FLIGHTS" },
+            { text: "That's enough for a month of luxury hotel stays!", category: "HOTELS" },
             { text: "That's enough for multiple ultra-luxury vacation packages!", category: "EXPERIENCES" }
         ]
     },
@@ -429,7 +411,7 @@ const earnedPointSuggestions = [
         min: 1000001,
         max: Infinity,
         suggestions: [
-            { text: "That's enough for a family of four to fly first class to Europe!", category: "FLIGHTS" }, // Moved here
+            { text: "That's enough for a family of four to fly first class to Europe!", category: "FLIGHTS" },
             { text: "That's enough for extended stays in the world's finest suites!", category: "HOTELS" },
             { text: "That's enough for a year of luxury travel experiences!", category: "EXPERIENCES" }
         ]
