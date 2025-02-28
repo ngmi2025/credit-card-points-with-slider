@@ -1307,7 +1307,7 @@ document.getElementById('backToSection3').addEventListener('click', function(e) 
 document.querySelectorAll('input[type="range"]').forEach(slider => {
     slider.addEventListener('input', () => updateSliderLabel(slider.id));
 });
-// Add this function to create confetti effect
+
 // Basic confetti function that should work on both desktop and mobile
 function showConfetti() {
     // Check if confetti is available
@@ -1316,31 +1316,18 @@ function showConfetti() {
         return;
     }
     
-    // Reset any existing confetti
-    confetti.reset();
+    // Create a canvas element for the confetti if it doesn't exist
+    if (!document.querySelector('canvas[data-confetti]')) {
+        const canvas = document.createElement('canvas');
+        canvas.setAttribute('data-confetti', 'true');
+        document.body.appendChild(canvas);
+    }
     
-    // Simple confetti with default settings
+    // Use the simplest confetti call possible
     confetti({
         particleCount: 100,
         spread: 70,
-        origin: { y: 0.6 }
+        origin: { y: 0.6 },
+        disableForReducedMotion: true
     });
-    
-    // Add a second burst after a short delay
-    setTimeout(() => {
-        confetti({
-            particleCount: 50,
-            spread: 100,
-            origin: { y: 0.6 }
-        });
-    }, 250);
-}
-
-// In calculateFinalValuation function, update the confetti call:
-if (firstYearValue > 0 && secondYearValue > 0) {
-    // Simple delay before triggering confetti
-    setTimeout(() => {
-        console.log("Triggering confetti");
-        showConfetti();
-    }, 500);
 }
