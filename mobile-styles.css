@@ -1179,3 +1179,36 @@ canvas[data-confetti] {
     pointer-events: none !important;
     z-index: 9999 !important;
 }
+/* Mobile Card Snapshot Styling */
+.card-snapshot {
+    margin: 30px 0 20px;
+    padding: 20px;
+}
+
+.card-snapshot-content {
+    flex-direction: column;
+}
+
+.card-image-container {
+    flex: 0 0 100%;
+    padding-right: 0;
+    margin-bottom: 20px;
+    max-width: 250px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card-title {
+    font-size: 1.3rem;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.card-info-item {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.card-description {
+    text-align: center;
+}
