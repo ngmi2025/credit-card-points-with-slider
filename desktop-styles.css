@@ -956,3 +956,71 @@ canvas[data-confetti] {
     pointer-events: none !important;
     z-index: 9999 !important;
 }
+/* Card Snapshot Styling */
+.card-snapshot {
+    margin: 40px 0 20px;
+    padding: 25px;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    border: 1px solid #e0e0e0;
+}
+
+.card-snapshot-content {
+    display: flex;
+    align-items: center;
+}
+
+.card-image-container {
+    flex: 0 0 35%;
+    padding-right: 25px;
+}
+
+.card-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.card-details {
+    flex: 1;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.card-info {
+    margin-bottom: 15px;
+}
+
+.card-info-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+}
+
+.card-info-item:last-child {
+    border-bottom: none;
+}
+
+.info-label {
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.info-value {
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.card-description {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--secondary-text-color);
+}
