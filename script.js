@@ -1140,6 +1140,8 @@ function calculateFinalValuation() {
             element.textContent = '$' + Math.round(value).toLocaleString();
             element.classList.remove('positive', 'negative');
             element.classList.add(value >= 0 ? 'positive' : 'negative');
+        } else {
+            console.error(`Element with ID '${elementId}' not found`);
         }
     }
 
@@ -1149,29 +1151,91 @@ function calculateFinalValuation() {
     updateValueWithClass('firstYearValue', firstYearValue);
     updateValueWithClass('secondYearValue', secondYearValue);
 
-    // Update other values that don't need color coding
-    document.getElementById('annualFee').textContent = '$' + ANNUAL_FEE.toLocaleString();
-    document.getElementById('signupBonusValue').textContent = '$' + Math.round(signupBonusValue).toLocaleString();
-    document.getElementById('pointsSpendingValue').textContent = Math.round(pointsValue).toLocaleString();
-    document.getElementById('pointsSpendingValueSecondYear').textContent = Math.round(pointsValue).toLocaleString();
-    document.getElementById('cardBenefitsValue').textContent = Math.round(section2Value).toLocaleString();
-    document.getElementById('cardBenefitsValueSecondYear').textContent = Math.round(section2Value).toLocaleString();
-    document.getElementById('travelPerksValue').textContent = Math.round(section3Value).toLocaleString();
-    document.getElementById('travelPerksValueSecondYear').textContent = Math.round(section3Value).toLocaleString();
-    document.getElementById('signupBonusBreakdown').textContent = Math.round(signupBonusValue).toLocaleString();
+    // Update other values that don't need color coding - WITH ERROR CHECKING
+    const annualFeeElement = document.getElementById('annualFee');
+    if (annualFeeElement) {
+        annualFeeElement.textContent = '$' + ANNUAL_FEE.toLocaleString();
+    } else {
+        console.error("Element with ID 'annualFee' not found");
+    }
+    
+    const signupBonusValueElement = document.getElementById('signupBonusValue');
+    if (signupBonusValueElement) {
+        signupBonusValueElement.textContent = '$' + Math.round(signupBonusValue).toLocaleString();
+    } else {
+        console.error("Element with ID 'signupBonusValue' not found");
+    }
+    
+    const pointsSpendingValueElement = document.getElementById('pointsSpendingValue');
+    if (pointsSpendingValueElement) {
+        pointsSpendingValueElement.textContent = Math.round(pointsValue).toLocaleString();
+    } else {
+        console.error("Element with ID 'pointsSpendingValue' not found");
+    }
+    
+    const pointsSpendingValueSecondYearElement = document.getElementById('pointsSpendingValueSecondYear');
+    if (pointsSpendingValueSecondYearElement) {
+        pointsSpendingValueSecondYearElement.textContent = Math.round(pointsValue).toLocaleString();
+    } else {
+        console.error("Element with ID 'pointsSpendingValueSecondYear' not found");
+    }
+    
+    const cardBenefitsValueElement = document.getElementById('cardBenefitsValue');
+    if (cardBenefitsValueElement) {
+        cardBenefitsValueElement.textContent = Math.round(section2Value).toLocaleString();
+    } else {
+        console.error("Element with ID 'cardBenefitsValue' not found");
+    }
+    
+    const cardBenefitsValueSecondYearElement = document.getElementById('cardBenefitsValueSecondYear');
+    if (cardBenefitsValueSecondYearElement) {
+        cardBenefitsValueSecondYearElement.textContent = Math.round(section2Value).toLocaleString();
+    } else {
+        console.error("Element with ID 'cardBenefitsValueSecondYear' not found");
+    }
+    
+    const travelPerksValueElement = document.getElementById('travelPerksValue');
+    if (travelPerksValueElement) {
+        travelPerksValueElement.textContent = Math.round(section3Value).toLocaleString();
+    } else {
+        console.error("Element with ID 'travelPerksValue' not found");
+    }
+    
+    const travelPerksValueSecondYearElement = document.getElementById('travelPerksValueSecondYear');
+    if (travelPerksValueSecondYearElement) {
+        travelPerksValueSecondYearElement.textContent = Math.round(section3Value).toLocaleString();
+    } else {
+        console.error("Element with ID 'travelPerksValueSecondYear' not found");
+    }
+    
+    const signupBonusBreakdownElement = document.getElementById('signupBonusBreakdown');
+    if (signupBonusBreakdownElement) {
+        signupBonusBreakdownElement.textContent = Math.round(signupBonusValue).toLocaleString();
+    } else {
+        console.error("Element with ID 'signupBonusBreakdown' not found");
+    }
     
     // Show section 4
     hideAllSections();
-    document.getElementById('section4').classList.remove('hidden');
-    updateProgressBar('section4');
-    window.scrollTo(0, 0);
+    const section4Element = document.getElementById('section4');
+    if (section4Element) {
+        section4Element.classList.remove('hidden');
+        updateProgressBar('section4');
+        window.scrollTo(0, 0);
+    } else {
+        console.error("Element with ID 'section4' not found");
+    }
     
     // Trigger confetti if both first year and second year values are positive
     if (firstYearValue > 0 && secondYearValue > 0) {
+        console.log("Confetti condition met:", { firstYearValue, secondYearValue });
         // Add a small delay to ensure the section is visible before showing confetti
         setTimeout(() => {
+            console.log("Triggering confetti after timeout");
             showConfetti();
-        }, 1000);
+        }, 500);
+    } else {
+        console.log("Confetti condition NOT met:", { firstYearValue, secondYearValue });
     }
 }
      function updateProgressBar(currentSection) {
