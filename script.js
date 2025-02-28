@@ -1154,16 +1154,25 @@ function calculateFinalValuation() {
     document.getElementById('signupBonusValue').textContent = '$' + Math.round(signupBonusValue).toLocaleString();
     document.getElementById('pointsSpendingValue').textContent = Math.round(pointsValue).toLocaleString();
     document.getElementById('pointsSpendingValueSecondYear').textContent = Math.round(pointsValue).toLocaleString();
-document.getElementById('cardBenefitsValue').textContent = Math.round(section2Value).toLocaleString();
-document.getElementById('cardBenefitsValueSecondYear').textContent = Math.round(section2Value).toLocaleString();
-document.getElementById('travelPerksValue').textContent = Math.round(section3Value).toLocaleString();
-document.getElementById('travelPerksValueSecondYear').textContent = Math.round(section3Value).toLocaleString();
-        document.getElementById('signupBonusBreakdown').textContent = Math.round(signupBonusValue).toLocaleString();
+    document.getElementById('cardBenefitsValue').textContent = Math.round(section2Value).toLocaleString();
+    document.getElementById('cardBenefitsValueSecondYear').textContent = Math.round(section2Value).toLocaleString();
+    document.getElementById('travelPerksValue').textContent = Math.round(section3Value).toLocaleString();
+    document.getElementById('travelPerksValueSecondYear').textContent = Math.round(section3Value).toLocaleString();
+    document.getElementById('signupBonusBreakdown').textContent = Math.round(signupBonusValue).toLocaleString();
+    
     // Show section 4
     hideAllSections();
     document.getElementById('section4').classList.remove('hidden');
     updateProgressBar('section4');
     window.scrollTo(0, 0);
+    
+    // Trigger confetti if both first year and second year values are positive
+    if (firstYearValue > 0 && secondYearValue > 0) {
+        // Add a small delay to ensure the section is visible before showing confetti
+        setTimeout(() => {
+            showConfetti();
+        }, 500);
+    }
 }
      function updateProgressBar(currentSection) {
     // Remove all active and completed classes
