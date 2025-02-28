@@ -1198,6 +1198,15 @@ canvas[data-confetti] {
     margin-right: auto;
 }
 
+.card-rating {
+    margin: 15px 0;
+}
+
+.apply-now-btn {
+    padding: 15px;
+    font-size: 1.2rem;
+}
+
 .card-title {
     font-size: 1.3rem;
     text-align: center;
@@ -1211,4 +1220,8 @@ canvas[data-confetti] {
 
 .card-description {
     text-align: center;
+}
+
+.tooltip-text {
+    width: 200px;
 }
