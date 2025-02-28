@@ -958,7 +958,7 @@ canvas[data-confetti] {
 }
 /* Card Snapshot Styling */
 .card-snapshot {
-    margin: 40px 0 20px;
+    margin: 0px 0 20px;
     padding: 25px 25px 15px; /* Reduced bottom padding */
     background-color: #f9f9f9;
     border-radius: 12px;
