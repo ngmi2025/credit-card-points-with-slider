@@ -946,3 +946,13 @@ select.credit-select option {
 #customOtherSpend input {
     font-size: 14px;
 }
+/* Confetti container - ensures confetti appears above all content */
+canvas[data-confetti] {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    pointer-events: none !important;
+    z-index: 9999 !important;
+}
