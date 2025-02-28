@@ -959,7 +959,7 @@ canvas[data-confetti] {
 /* Card Snapshot Styling */
 .card-snapshot {
     margin: 40px 0 20px;
-    padding: 25px;
+    padding: 25px 25px 15px; /* Reduced bottom padding */
     background-color: #f9f9f9;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
@@ -968,7 +968,7 @@ canvas[data-confetti] {
 
 .card-snapshot-content {
     display: flex;
-    align-items: flex-start;
+    align-items: center; /* Changed from flex-start to center */
 }
 
 .card-image-container {
@@ -1033,7 +1033,6 @@ canvas[data-confetti] {
     display: block;
     width: 100%;
     padding: 12px 20px;
-    background-color: var(--primary-color);
     color: white;
     text-align: center;
     border: none;
@@ -1045,13 +1044,12 @@ canvas[data-confetti] {
     margin-bottom: 8px;
 }
 
-.apply-now-btn:hover {
-    background-color: #005BAA;
+.apply-now-btn.green-btn {
+    background-color: var(--success-color);
 }
 
-.secure-icon {
-    margin-left: 5px;
-    font-size: 0.9rem;
+.apply-now-btn.green-btn:hover {
+    background-color: #35a058; /* Darker green on hover */
 }
 
 .secure-note {
