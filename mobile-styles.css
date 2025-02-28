@@ -1429,11 +1429,11 @@ canvas[data-confetti] {
         border-left: 3px solid var(--border-color);
         border-radius: 0 6px 6px 0;
     }
-    .valuation-explanation {
-      font-size: 0.85rem;
-      color: var(--secondary-text-color);
-      margin: 8px 0 16px 0;
-      line-height: 1.4;
-      padding: 0 5px;
+.valuation-explanation {
+  font-size: 0.8rem; /* Even smaller text for mobile */
+  color: var(--secondary-text-color);
+  margin: 8px 0 20px 0; /* Increased bottom margin to 20px */
+  line-height: 1.4;
+  padding: 0 5px;
     }
 }
