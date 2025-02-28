@@ -1311,11 +1311,20 @@ document.querySelectorAll('input[type="range"]').forEach(slider => {
 function showConfetti() {
     const duration = 3000;
     const animationEnd = Date.now() + duration;
-    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+    const defaults = { 
+        startVelocity: 30, 
+        spread: 360, 
+        ticks: 60, 
+        zIndex: 999999, /* Match the CSS z-index */
+        disableForReducedMotion: true /* Accessibility improvement */
+    };
 
     function randomInRange(min, max) {
         return Math.random() * (max - min) + min;
     }
+
+    // Clear any existing confetti first
+    confetti.reset();
 
     const interval = setInterval(function() {
         const timeLeft = animationEnd - Date.now();
@@ -1326,16 +1335,16 @@ function showConfetti() {
 
         const particleCount = 50 * (timeLeft / duration);
         
-        // Create confetti from both sides
+        // Create confetti from both sides with mobile-friendly origins
         confetti({
             ...defaults,
             particleCount,
-            origin: { x: randomInRange(0.1, 0.3), y: randomInRange(0.5, 0.7) }
+            origin: { x: randomInRange(0.1, 0.3), y: Math.min(0.5, window.innerHeight / window.innerWidth) }
         });
         confetti({
             ...defaults,
             particleCount,
-            origin: { x: randomInRange(0.7, 0.9), y: randomInRange(0.5, 0.7) }
+            origin: { x: randomInRange(0.7, 0.9), y: Math.min(0.5, window.innerHeight / window.innerWidth) }
         });
     }, 250);
 }
