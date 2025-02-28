@@ -62,38 +62,37 @@ document.addEventListener('DOMContentLoaded', function() {
         updateAllExplanationTexts();
     });
 
-    function updateSpendingBasedOnTravel() {
-        const travelSelect = document.getElementById('travelFrequency');
-        const customInput = document.getElementById('customTravelInput');
-        let travelFrequency;
-        
-        if (travelSelect.value === 'custom') {
-            travelFrequency = parseInt(customInput.value) || 0;
-        } else {
-            travelFrequency = parseInt(travelSelect.value) || 0;
-        }
+   function updateSpendingBasedOnTravel() {
+    const travelSelect = document.getElementById('travelFrequency');
+    const customInput = document.getElementById('customTravelInput');
+    let travelFrequency;
     
-        const flightSpend = document.getElementById('flightSpend');
-        const hotelSpend = document.getElementById('hotelSpend');
-    
-        // Always clear existing values to force update
-        flightSpend.value = '';
-        hotelSpend.value = '';
-    
-        let spendValue;
-        if (travelFrequency <= 3) {
-            spendValue = "2000";  // Occasionally (1-3 trips/year)
-        } else if (travelFrequency <= 6) {
-            spendValue = "4000";  // Regularly (4-6 trips/year)
-        } else if (travelFrequency >= 7) {  // Changed from <= 12 to >= 7
-            spendValue = "7500";  // Frequently (7+ trips/year)
-        }
-    
-        // Always set the values, don't check if they're empty
-        flightSpend.value = spendValue;
-        hotelSpend.value = spendValue;
+    if (travelSelect.value === 'custom') {
+        travelFrequency = parseInt(customInput.value) || 0;
+    } else {
+        travelFrequency = parseInt(travelSelect.value) || 0;
     }
 
+    const flightSpend = document.getElementById('flightSpend');
+    const hotelSpend = document.getElementById('hotelSpend');
+
+    // Always clear existing values to force update
+    flightSpend.value = '';
+    hotelSpend.value = '';
+
+    let spendValue;
+    if (travelFrequency <= 3) {
+        spendValue = "500";  // Occasionally (1-3 trips/year)
+    } else if (travelFrequency <= 6) {
+        spendValue = "1000";  // Regularly (4-6 trips/year)
+    } else if (travelFrequency >= 7) {  // Changed from <= 12 to >= 7
+        spendValue = "2000";  // Frequently (7+ trips/year)
+    }
+
+    // Always set the values, don't check if they're empty
+    flightSpend.value = spendValue;
+    hotelSpend.value = spendValue;
+}
     // Add event listeners for travel frequency
     document.getElementById('travelFrequency').addEventListener('change', updateSpendingBasedOnTravel);
     document.getElementById('travelFrequency').addEventListener('blur', updateSpendingBasedOnTravel);
