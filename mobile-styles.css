@@ -1169,7 +1169,7 @@ select, select option {
     background-image: none !important;
     color: #333 !important;
 }
-/* Confetti container - ensures confetti appears above all content */
+/* Basic confetti styling that should work on all devices */
 canvas[data-confetti] {
     position: fixed !important;
     top: 0 !important;
@@ -1177,8 +1177,7 @@ canvas[data-confetti] {
     width: 100% !important;
     height: 100% !important;
     pointer-events: none !important;
-    z-index: 9999999 !important; /* Even higher z-index */
-    transform: translateZ(0) !important; /* Force hardware acceleration */
+    z-index: 9999 !important;
 }
 
 /* Make sure no other elements have a higher z-index */
