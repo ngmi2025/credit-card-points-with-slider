@@ -1179,77 +1179,142 @@ canvas[data-confetti] {
     pointer-events: none !important;
     z-index: 9999 !important;
 }
-/* Mobile Card Snapshot Styling for Section 4 */
+/* Mobile Card Snapshot Styling */
 @media screen and (max-width: 767px) {
-    /* Card snapshot in section 4 */
-    #section4 .card-snapshot {
+    /* Card snapshot container */
+    .card-snapshot {
         margin: 20px 0;
-        padding: 20px;
-        border-radius: 8px;
+        padding: 25px;  /* Equal padding on all sides */
+        background-color: #f9f9f9;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        border: 1px solid #e0e0e0;
     }
     
-    /* Card details in section 4 */
-    #section4 .card-details {
-        padding: 15px;
+    /* Card content layout */
+    .card-snapshot-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    /* Card image container */
+    .card-image-container {
+        flex: 0 0 100%;
+        padding-right: 0;
         margin-bottom: 20px;
+        max-width: 250px;
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    /* Card image */
+    .card-image {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        margin-bottom: 15px;
+    }
+    
+    /* Rating stars */
+    .card-rating {
+        margin: 15px 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    /* Apply button */
+    .apply-now-btn {
+        display: block;
+        width: 100%;
+        padding: 12px 20px;
+        color: white;
         text-align: center;
+        border: none;
+        border-radius: 6px;
+        font-weight: 700;
+        text-decoration: none;
+        font-size: 1.1rem;
+        background-color: var(--success-color);
+        margin-bottom: 8px;
+    }
+    
+    /* Secure site note */
+    .secure-note {
+        text-align: center;
+        font-size: 0.8rem;
+        color: var(--secondary-text-color);
+        margin: 0;
+    }
+    
+    /* Card details section */
+    .card-details {
+        flex: 1;
+        text-align: center;
+        padding: 20px;
+        margin-top: 10px;
+        margin-bottom: 0;
+        background-color: #f9f9f9;
+        border-radius: 12px;
+        border: 1px solid #e0e0e0;
     }
     
     /* Card title */
-    #section4 .card-title {
-        font-size: 1.2rem;
+    .card-title {
+        font-size: 1.3rem;
+        color: var(--primary-color);
         margin-top: 0;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+    
+    /* Card info container */
+    .card-info {
         margin-bottom: 15px;
     }
     
     /* Card info items */
-    #section4 .card-info-item {
+    .card-info-item {
         display: flex;
         justify-content: space-between;
-        padding: 8px 0;
+        align-items: center;
         margin-bottom: 8px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .card-info-item:last-child {
+        border-bottom: none;
+    }
+    
+    /* Info labels and values */
+    .info-label {
+        flex: 1;
+        font-weight: 600;
+        color: var(--text-color);
+        text-align: left;
+    }
+    
+    .info-value {
+        font-weight: 700;
+        text-align: right;
     }
     
     /* Card description */
-    #section4 .card-description {
-        font-size: 0.85rem;
-        line-height: 1.4;
+    .card-description {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        color: var(--secondary-text-color);
+        text-align: center;
         margin: 0;
         padding: 0;
     }
-    
-    /* Apply now button */
-    #section4 .apply-now-btn {
-        width: 100%;
-        margin-top: 15px;
-        margin-bottom: 5px;
-    }
-    
-    /* Secure note */
-    #section4 .secure-note {
-        font-size: 0.7rem;
-    }
-    
-    /* Yearly breakdown and savings summary */
-    #section4 .yearly-breakdown,
-    #section4 .savings-summary {
-        padding: 15px;
-    }
-    
-    /* First and second year values */
-    #section4 .breakdown-value,
-    #section4 .savings-value {
-        font-size: 1.3rem;
-    }
-    
-    /* Calculation notes */
-    #section4 .calculation-note {
-        font-size: 0.75rem;
-        padding: 10px;
-        margin: 10px 0;
-    }
 }
-
 .tooltip-text {
     width: 200px;
 }
