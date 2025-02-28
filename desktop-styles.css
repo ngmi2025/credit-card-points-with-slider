@@ -946,7 +946,6 @@ select.credit-select option {
 #customOtherSpend input {
     font-size: 14px;
 }
-/* Confetti container - ensures confetti appears above all content */
 canvas[data-confetti] {
     position: fixed !important;
     top: 0 !important;
