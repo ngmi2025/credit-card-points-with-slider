@@ -956,6 +956,12 @@ canvas[data-confetti] {
     pointer-events: none !important;
     z-index: 9999 !important;
 }
+
+/* Make sure no other elements have a higher z-index */
+.section, .container, #section4, .card-snapshot, .yearly-breakdown {
+    position: relative;
+    z-index: 1;
+}
 /* Card Snapshot Styling */
 .card-snapshot {
     margin: 0px 0 20px;
