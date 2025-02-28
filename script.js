@@ -1171,7 +1171,7 @@ function calculateFinalValuation() {
         // Add a small delay to ensure the section is visible before showing confetti
         setTimeout(() => {
             showConfetti();
-        }, 500);
+        }, 1000);
     }
 }
      function updateProgressBar(currentSection) {
