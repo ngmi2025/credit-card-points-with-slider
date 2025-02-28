@@ -68,9 +68,9 @@ h1 {
 }
 
 .valuation-explanation {
-  font-size: 0.9rem;
+  font-size: 0.85rem; /* Smaller text */
   color: var(--secondary-text-color);
-  margin: 10px 0 20px 0;
+  margin: 10px 0 25px 0; /* Increased bottom margin to 25px */
   line-height: 1.5;
   padding: 0 5px;
 }
