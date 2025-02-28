@@ -1310,24 +1310,35 @@ document.querySelectorAll('input[type="range"]').forEach(slider => {
 
 // Basic confetti function that should work on both desktop and mobile
 function showConfetti() {
+    console.log("Showing confetti");
+    
     // Check if confetti is available
     if (typeof confetti !== 'function') {
         console.error('Confetti library not loaded');
         return;
     }
     
-    // Create a canvas element for the confetti if it doesn't exist
-    if (!document.querySelector('canvas[data-confetti]')) {
-        const canvas = document.createElement('canvas');
-        canvas.setAttribute('data-confetti', 'true');
-        document.body.appendChild(canvas);
+    try {
+        // Create a canvas element for the confetti if it doesn't exist
+        let canvas = document.querySelector('canvas[data-confetti]');
+        if (!canvas) {
+            canvas = document.createElement('canvas');
+            canvas.setAttribute('data-confetti', 'true');
+            document.body.appendChild(canvas);
+        }
+        
+        // Use simple confetti parameters that work well on all devices
+        confetti({
+            particleCount: 150,
+            spread: 70,
+            origin: { y: 0.3 },
+            gravity: 1.2,
+            zIndex: 9999,
+            disableForReducedMotion: true
+        });
+        
+        console.log("Confetti launched successfully");
+    } catch (error) {
+        console.error("Error showing confetti:", error);
     }
-    
-    // Use the simplest confetti call possible
-    confetti({
-        particleCount: 100,
-        spread: 70,
-        origin: { y: 0.6 },
-        disableForReducedMotion: true
-    });
 }
