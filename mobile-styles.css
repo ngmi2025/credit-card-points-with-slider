@@ -1179,47 +1179,75 @@ canvas[data-confetti] {
     pointer-events: none !important;
     z-index: 9999 !important;
 }
-/* Mobile Card Snapshot Styling */
-.card-snapshot {
-    margin: 30px 0 20px;
-    padding: 20px 20px 15px; /* Reduced bottom padding */
-}
-
-.card-snapshot-content {
-    flex-direction: column;
-}
-
-.card-image-container {
-    flex: 0 0 100%;
-    padding-right: 0;
-    margin-bottom: 20px;
-    max-width: 250px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.card-rating {
-    margin: 15px 0;
-}
-
-.apply-now-btn {
-    padding: 15px;
-    font-size: 1.2rem;
-}
-
-.card-title {
-    font-size: 1.3rem;
-    text-align: center;
-    margin-top: 10px;
-}
-
-.card-info-item {
-    padding-bottom: 10px;
-    margin-bottom: 10px;
-}
-
-.card-description {
-    text-align: center;
+/* Mobile Card Snapshot Styling for Section 4 */
+@media screen and (max-width: 767px) {
+    /* Card snapshot in section 4 */
+    #section4 .card-snapshot {
+        margin: 20px 0;
+        padding: 20px;
+        border-radius: 8px;
+    }
+    
+    /* Card details in section 4 */
+    #section4 .card-details {
+        padding: 15px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    
+    /* Card title */
+    #section4 .card-title {
+        font-size: 1.2rem;
+        margin-top: 0;
+        margin-bottom: 15px;
+    }
+    
+    /* Card info items */
+    #section4 .card-info-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+        margin-bottom: 8px;
+    }
+    
+    /* Card description */
+    #section4 .card-description {
+        font-size: 0.85rem;
+        line-height: 1.4;
+        margin: 0;
+        padding: 0;
+    }
+    
+    /* Apply now button */
+    #section4 .apply-now-btn {
+        width: 100%;
+        margin-top: 15px;
+        margin-bottom: 5px;
+    }
+    
+    /* Secure note */
+    #section4 .secure-note {
+        font-size: 0.7rem;
+    }
+    
+    /* Yearly breakdown and savings summary */
+    #section4 .yearly-breakdown,
+    #section4 .savings-summary {
+        padding: 15px;
+    }
+    
+    /* First and second year values */
+    #section4 .breakdown-value,
+    #section4 .savings-value {
+        font-size: 1.3rem;
+    }
+    
+    /* Calculation notes */
+    #section4 .calculation-note {
+        font-size: 0.75rem;
+        padding: 10px;
+        margin: 10px 0;
+    }
 }
 
 .tooltip-text {
