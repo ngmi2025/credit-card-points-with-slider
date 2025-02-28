@@ -1397,7 +1397,7 @@ canvas[data-confetti] {
     
     /* Yearly breakdown section */
     .yearly-breakdown {
-        background-color: #fff;
+        background-color: #f9f9f9;
         border-radius: 12px;
         padding: 20px;
         margin-bottom: 20px;
