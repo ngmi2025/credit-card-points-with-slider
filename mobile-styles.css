@@ -1177,7 +1177,8 @@ canvas[data-confetti] {
     width: 100% !important;
     height: 100% !important;
     pointer-events: none !important;
-    z-index: 9999 !important;
+    z-index: 999999 !important; /* Extremely high z-index to ensure it's above everything */
+    transform: translateZ(0) !important; /* Force hardware acceleration */
 }
 /* Mobile Card Snapshot Styling */
 @media screen and (max-width: 767px) {
