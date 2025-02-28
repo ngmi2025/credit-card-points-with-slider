@@ -1169,7 +1169,7 @@ select, select option {
     background-image: none !important;
     color: #333 !important;
 }
-/* Basic confetti styling that should work on all devices */
+
 canvas[data-confetti] {
     position: fixed !important;
     top: 0 !important;
