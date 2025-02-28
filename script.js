@@ -1282,13 +1282,22 @@ if (calculateValuationBtn) {
     calculateValuationBtn.addEventListener('click', function(e) {
         e.preventDefault();
         console.log("Calculate Valuation button clicked");
-        calculateFinalValuation();
-        updateProgressBar('section4'); 
+        
+        try {
+            calculateFinalValuation();
+            // Add this line to explicitly transition from section3 to section4
+            nextSection('section3', 'section4');
+            updateProgressBar('section4');
+        } catch (error) {
+            console.error("Error in calculate valuation:", error);
+            // Still try to show section 4 even if there's an error
+            nextSection('section3', 'section4');
+            updateProgressBar('section4');
+        }
     });
 } else {
     console.error("Calculate Valuation button not found");
 }
-
 document.getElementById('backToSection3').addEventListener('click', function(e) {
     e.preventDefault();
     nextSection('section4', 'section3');
