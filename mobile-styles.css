@@ -1182,7 +1182,7 @@ canvas[data-confetti] {
 /* Mobile Card Snapshot Styling */
 .card-snapshot {
     margin: 30px 0 20px;
-    padding: 20px;
+    padding: 20px 20px 15px; /* Reduced bottom padding */
 }
 
 .card-snapshot-content {
