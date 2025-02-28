@@ -1309,42 +1309,51 @@ document.querySelectorAll('input[type="range"]').forEach(slider => {
 });
 // Add this function to create confetti effect
 function showConfetti() {
+    // First check if confetti is available
+    if (typeof confetti !== 'function') {
+        console.error('Confetti library not loaded');
+        return;
+    }
+    
+    // Reset any existing confetti
+    confetti.reset();
+    
     const duration = 3000;
     const animationEnd = Date.now() + duration;
     const defaults = { 
         startVelocity: 30, 
         spread: 360, 
         ticks: 60, 
-        zIndex: 999999, /* Match the CSS z-index */
-        disableForReducedMotion: true /* Accessibility improvement */
+        zIndex: 999999,
+        disableForReducedMotion: true
     };
 
     function randomInRange(min, max) {
         return Math.random() * (max - min) + min;
     }
 
-    // Clear any existing confetti first
-    confetti.reset();
+    // Use requestAnimationFrame to ensure the DOM is ready
+    requestAnimationFrame(() => {
+        const interval = setInterval(function() {
+            const timeLeft = animationEnd - Date.now();
 
-    const interval = setInterval(function() {
-        const timeLeft = animationEnd - Date.now();
+            if (timeLeft <= 0) {
+                return clearInterval(interval);
+            }
 
-        if (timeLeft <= 0) {
-            return clearInterval(interval);
-        }
-
-        const particleCount = 50 * (timeLeft / duration);
-        
-        // Create confetti from both sides with mobile-friendly origins
-        confetti({
-            ...defaults,
-            particleCount,
-            origin: { x: randomInRange(0.1, 0.3), y: Math.min(0.5, window.innerHeight / window.innerWidth) }
-        });
-        confetti({
-            ...defaults,
-            particleCount,
-            origin: { x: randomInRange(0.7, 0.9), y: Math.min(0.5, window.innerHeight / window.innerWidth) }
-        });
-    }, 250);
+            const particleCount = 30 * (timeLeft / duration);
+            
+            // Mobile-friendly origins with lower y-value
+            confetti({
+                ...defaults,
+                particleCount,
+                origin: { x: randomInRange(0.1, 0.3), y: 0.1 }
+            });
+            confetti({
+                ...defaults,
+                particleCount,
+                origin: { x: randomInRange(0.7, 0.9), y: 0.1 }
+            });
+        }, 250);
+    });
 }
