@@ -80,13 +80,13 @@ document.addEventListener('DOMContentLoaded', function() {
     flightSpend.value = '';
     hotelSpend.value = '';
 
-    let spendValue;
+       let spendValue;
     if (travelFrequency <= 3) {
-        spendValue = "500";  // Occasionally (1-3 trips/year)
+        spendValue = "250";  // Occasionally (1-3 trips/year)
     } else if (travelFrequency <= 6) {
-        spendValue = "1000";  // Regularly (4-6 trips/year)
-    } else if (travelFrequency >= 7) {  // Changed from <= 12 to >= 7
-        spendValue = "2000";  // Frequently (7+ trips/year)
+        spendValue = "500";  // Regularly (4-6 trips/year)
+    } else if (travelFrequency >= 7) {
+        spendValue = "1000";  // Frequently (7+ trips/year)
     }
 
     // Always set the values, don't check if they're empty
