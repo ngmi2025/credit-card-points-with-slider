@@ -1310,7 +1310,7 @@ document.querySelectorAll('input[type="range"]').forEach(slider => {
 
 // Basic confetti function that should work on both desktop and mobile
 function showConfetti() {
-    console.log("Showing confetti");
+    console.log("showConfetti function called");
     
     // Check if confetti is available
     if (typeof confetti !== 'function') {
@@ -1322,12 +1322,22 @@ function showConfetti() {
         // Create a canvas element for the confetti if it doesn't exist
         let canvas = document.querySelector('canvas[data-confetti]');
         if (!canvas) {
+            console.log("Creating new confetti canvas");
             canvas = document.createElement('canvas');
             canvas.setAttribute('data-confetti', 'true');
             document.body.appendChild(canvas);
+            console.log("Canvas created:", canvas);
+        } else {
+            console.log("Using existing confetti canvas");
         }
         
+        // Log canvas styles to verify positioning
+        const computedStyle = window.getComputedStyle(canvas);
+        console.log("Canvas position:", computedStyle.position);
+        console.log("Canvas z-index:", computedStyle.zIndex);
+        
         // Use simple confetti parameters that work well on all devices
+        console.log("Launching confetti");
         confetti({
             particleCount: 150,
             spread: 70,
